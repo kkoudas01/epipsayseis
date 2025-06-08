@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8">
+  <title>Επιψαύσεις - Βυζαντινή Έκδοση</title>
+  <link rel="icon" href="myIcon.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cardo:wght@400;700&family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+        margin: 0;
+        background: #1a0a0a url('https://www.transparenttextures.com/patterns/old-wall.png');
+        overflow-x: hidden;
+        min-height: 100vh;
+        font-family: 'Cardo', serif;
+        color: #e8d8b0;
+    }
+
+    /* Styling για τον τίτλο */
+    .title-container {
+        text-align: center;
+        margin-top: 30px;
+        margin-bottom: 30px;
+    }
+
+    .title-container h1 {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 2.8em;
+        color: #d4af37;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        margin: 0;
+        padding: 0;
+        letter-spacing: 2px;
+        position: relative;
+        display: inline-block;
+    }
+
+    .container {
+        position: relative;
+        width: 100%;
+        height: 350px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 30px;
+    }
+
+    .central-circle {
+        width: 120px;
+        height: 120px;
+        background: rgba(26, 10, 10, 0.8);
+        border-radius: 50%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-weight: bold;
+        box-shadow: 
+            0 0 15px rgba(212, 175, 55, 0.5),
+            inset 0 0 10px rgba(212, 175, 55, 0.3);
+        position: relative;
+        z-index: 2;
+        border: 2px solid #d4af37;
+        transition: transform 0.3s ease;
+        text-align: center;
+        overflow: hidden;
+        color: inherit;
+    }
+
+    .central-circle.can-reset {
+        cursor: pointer;
+    }
+
+    #central-image {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+    }
+
+    #main-label-text {
+        position: relative;
+        z-index: 2;
+        padding: 5px;
+        box-sizing: border-box;
+        max-width: 100%;
+        word-break: break-word;
+        color: #d4af37;
+        font-family: 'Cinzel Decorative', serif;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+        display: none;
+    }
+
+    .donut-chart-container {
+        position: absolute;
+        width: 340px;
+        height: 340px;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1;
+    }
+
+    .donut-chart {
+        width: 100%;
+        height: 100%;
+    }
+
+    .donut-arc:focus,
+    .dropdown button:focus,
+    .book-list a:focus {
+        outline: none;
+    }
+
+    .donut-arc {
+        stroke: #d4af37;
+        stroke-width: 2;
+        cursor: pointer;
+        transition: fill 0.3s ease, opacity 0.3s ease, stroke 0.3s ease;
+        opacity: 1;
+    }
+
+    .donut-arc:hover {
+        stroke: #f1e5ac;
+        stroke-width: 3;
+    }
+
+    .donut-arc.selected {
+        stroke: #f1e5ac;
+        stroke-width: 3;
+    }
+
+    .donut-label {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 16px;
+        font-weight: bold;
+        fill: #e8d8b0;
+        text-anchor: middle;
+        dominant-baseline: middle;
+        pointer-events: none;
+        user-select: none;
+        text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
+    }
+
+    .dropdowns-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        transition: opacity 0.3s ease, transform 0.3s ease;
+        position: relative;
+        width: 100%;
+        padding-bottom: 30px;
+        min-height: 150px;
+    }
+
+    .dropdown-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+    }
+
+    .dropdown {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        align-items: center;
+    }
+
+    .dropdown button {
+        background: rgba(26, 10, 10, 0.8);
+        border: none;
+        padding: 12px;
+        border-radius: 5px;
+        width: 180px;
+        box-shadow: 
+            0 0 10px rgba(212, 175, 55, 0.3),
+            inset 2px 2px 5px rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        font-weight: bold;
+        border: 1px solid #d4af37;
+        transition: all 0.3s ease;
+        color: #e8d8b0;
+        font-family: 'Cardo', serif;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .dropdown button:hover {
+        background: rgba(42, 20, 20, 0.9);
+        box-shadow: 
+            0 0 15px rgba(212, 175, 55, 0.5),
+            inset 2px 2px 5px rgba(255, 255, 255, 0.2);
+        border-color: #f1e5ac;
+    }
+
+    .dropdown button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+        transition: 0.5s;
+    }
+
+    .dropdown button:hover::before {
+        left: 100%;
+    }
+
+    /* --- CSS ΓΙΑ ΤΑ POPUPS (Βυζαντινό στυλ) --- */
+    .popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 85%;
+        max-width: 650px;
+        max-height: 85vh;
+        background: rgba(26, 10, 10, 0.95);
+        border: 2px solid #d4af37;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.3);
+        border-radius: 5px;
+        overflow-y: auto;
+        z-index: 1000;
+        padding: 20px 30px;
+        color: #e8d8b0;
+        font-family: 'Cardo', serif;
+        box-sizing: border-box;
+    }
+
+    .popup::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('https://www.transparenttextures.com/patterns/parchment.png');
+        opacity: 0.1;
+        pointer-events: none;
+    }
+
+    .close-btn {
+        background: none;
+        border: none;
+        color: #d4af37;
+        font-size: 1.8em;
+        position: absolute;
+        top: 15px;
+        right: 20px;
+        cursor: pointer;
+        line-height: 1;
+        padding: 0 5px;
+        transition: color 0.3s ease, transform 0.3s ease;
+        z-index: 1001;
+        font-family: Arial, sans-serif;
+    }
+
+    .close-btn:hover {
+        color: #f1e5ac;
+        transform: scale(1.1);
+    }
+
+    /* --- Στυλ για το Info Popup --- */
+    #info-popup .popup-image {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        float: right;
+        margin: 0 0 15px 15px;
+        border-radius: 5px;
+        border: 2px solid #d4af37;
+    }
+
+    #info-popup p {
+        margin-bottom: 15px;
+        line-height: 1.6;
+        text-align: justify;
+        text-indent: 2em;
+    }
+
+    #info-popup p:first-of-type {
+        clear: none;
+        text-indent: 0;
+    }
+
+    #info-popup p:first-of-type::first-letter {
+        font-family: 'Cinzel Decorative', serif;
+        font-size: 2em;
+        color: #d4af37;
+        float: left;
+        margin-right: 5px;
+        line-height: 0.8;
+    }
+
+    #info-popup a {
+        color: #d4af37;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(212, 175, 55, 0.5);
+        transition: color 0.3s ease;
+    }
+
+    #info-popup a:hover {
+        color: #f1e5ac;
+        border-bottom-color: #f1e5ac;
+    }
+
+    /* --- ΚΑΝΟΝΕΣ CSS ΓΙΑ ΤΗ ΛΙΣΤΑ LINKS (Βυζαντινό στυλ) --- */
+    .book-list {
+        list-style: none;
+        padding: 0;
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .book-list li {
+        margin: 25px 0;
+        display: flex;
+        justify-content: center;
+    }
+
+    .book-list a {
+        position: relative;
+        display: block;
+        width: 80%;
+        max-width: 300px;
+        padding: 15px;
+        background: rgba(42, 20, 20, 0.8);
+        color: #e8d8b0;
+        text-align: center;
+        text-decoration: none;
+        font-size: 1.1em;
+        font-family: 'Cardo', serif;
+        border: 1px solid #d4af37;
+        transition: all 0.3s ease;
+        box-shadow: 
+            0 0 10px rgba(212, 175, 55, 0.2),
+            inset 0 0 5px rgba(212, 175, 55, 0.1);
+        overflow: hidden;
+        cursor: pointer;
+    }
+
+    .book-list a:hover {
+        background: rgba(212, 175, 55, 0.2);
+        color: #f1e5ac;
+        border-color: #f1e5ac;
+        box-shadow: 
+            0 0 15px rgba(212, 175, 55, 0.4),
+            inset 0 0 10px rgba(212, 175, 55, 0.2);
+        transform: translateY(-3px);
+    }
+
+    /* Μήνυμα όταν δεν υπάρχουν σύνδεσμοι */
+    .book-list .no-links-message {
+        color: #a08b6b;
+        font-size: 1em;
+        text-align: center;
+        padding: 20px;
+        font-style: italic;
+    }
+
+    /* Στυλ για τα pgfornament στοιχεία */
+    .pgf-ornament {
+        fill: #d4af37;
+        stroke: #d4af37;
+        stroke-width: 0.5;
+        opacity: 0.7;
+    }
+
+    .title-ornament {
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+        vertical-align: middle;
+    }
+
+    .link-ornament {
+        width: 16px;
+        height: 16px;
+        vertical-align: middle;
+        margin: 0 5px;
+    }
+
+    .divider-ornament {
+        width: 100%;
+        height: 30px;
+        margin: 20px 0;
+    }
+
+    .corner-ornament {
+        position: fixed;
+        width: 80px;
+        height: 80px;
+        z-index: -1;
+        opacity: 0.6;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Διακοσμητικά στοιχεία στις γωνίες (pgfornament) -->
+  <svg class="corner-ornament top-left" viewBox="0 0 100 100">
+      <!-- pgfornament 88 - Βυζαντινό γωνιακό στοιχείο -->
+      <path class="pgf-ornament" d="M0,0 L100,0 L100,20 C70,20 70,40 50,40 C30,40 30,20 0,20 Z"/>
+  </svg>
+  
+  <svg class="corner-ornament top-right" viewBox="0 0 100 100">
+      <!-- pgfornament 88 - Περιστρεφόμενο -->
+      <path class="pgf-ornament" transform="rotate(90 50 50)" d="M0,0 L100,0 L100,20 C70,20 70,40 50,40 C30,40 30,20 0,20 Z"/>
+  </svg>
+  
+  <svg class="corner-ornament bottom-left" viewBox="0 0 100 100">
+      <!-- pgfornament 88 - Περιστρεφόμενο -->
+      <path class="pgf-ornament" transform="rotate(270 50 50)" d="M0,0 L100,0 L100,20 C70,20 70,40 50,40 C30,40 30,20 0,20 Z"/>
+  </svg>
+  
+  <svg class="corner-ornament bottom-right" viewBox="0 0 100 100">
+      <!-- pgfornament 88 - Περιστρεφόμενο -->
+      <path class="pgf-ornament" transform="rotate(180 50 50)" d="M0,0 L100,0 L100,20 C70,20 70,40 50,40 C30,40 30,20 0,20 Z"/>
+  </svg>
+
+  <div class="title-container">
+    <svg class="title-ornament" viewBox="0 0 100 100">
+        <!-- pgfornament 61 - Διακοσμητικό για τίτλους -->
+        <path class="pgf-ornament" d="M50,0 L60,20 L80,20 L65,35 L75,55 L50,45 L25,55 L35,35 L20,20 L40,20 Z"/>
+    </svg>
+    <h1>Επιψαύσεις</h1>
+    <svg class="title-ornament" viewBox="0 0 100 100">
+        <!-- pgfornament 61 - Διακοσμητικό για τίτλους -->
+        <path class="pgf-ornament" d="M50,0 L60,20 L80,20 L65,35 L75,55 L50,45 L25,55 L35,35 L20,20 L40,20 Z"/>
+    </svg>
+  </div>
+
+  <!-- Διακοσμητικός διαχωριστής με pgfornament -->
+  <svg class="divider-ornament" viewBox="0 0 500 30" preserveAspectRatio="none">
+      <!-- pgfornament 62 - Διακοσμητική γραμμή -->
+      <path class="pgf-ornament" d="M0,15 Q125,30 250,15 Q375,0 500,15" fill="none" stroke-width="1.5"/>
+      <path class="pgf-ornament" d="M0,15 Q125,0 250,15 Q375,30 500,15" fill="none" stroke-width="1.5"/>
+  </svg>
+
+  <div class="container">
+    <div class="central-circle" id="main-label">
+        <img id="central-image" src="wolf.png" alt="Wolf Image">
+        <span id="main-label-text"></span>
+    </div>
+
+    <div class="donut-chart-container">
+        <svg class="donut-chart" viewBox="0 0 340 340" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <pattern id="byzantine-pattern" patternUnits="userSpaceOnUse" width="100" height="100">
+                    <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.3"/>
+                    <path d="M0,0 L100,100 M0,100 L100,0" stroke="#d4af37" stroke-width="1" opacity="0.2"/>
+                </pattern>
+            </defs>
+        </svg>
+    </div>
+  </div>
+
+  <div class="dropdowns-container">
+    <div class="dropdowns" id="dropdowns"></div>
+  </div>
+
+  <div class="popup" id="info-popup">
+      <button class="close-btn" onclick="closePopup('info-popup')">✖</button>
+      <img src="info_image.jpg" class="popup-image" alt="Info Image">
+      <p>Τα μαθηματικά παρέχουν ισχυρά εργαλεία για τη μελέτη του φυσικού και κοινωνικού μας περιβάλλοντος. Δυστυχώς, κάποιες φορές αυτά τα εργαλεία  μπορεί
+        να είναι απρόσιτα στους μη μυημένους ή έστω αρκετά κουραστικά σε βαθμό που ο αναγνώστης να αναλώνεται στην «πάλη» με αυτά κι όχι σε αυτό που περιγράφουν.
+        Σε μια προσπάθεια να εξομαλύνουμε τη διαδικασία και να κάνουμε πιο φιλικούς στον αναγνώστη τους καρπούς των μαθηματικών, απευθυνθήκαμε στη γλώσσα Wolfram.</p>
+      <p>Η γλώσσα Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να απαιτούσαν δυσθεώρητο κόπο και χρόνο,
+           μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα πρόβλημα κι αυτή στο λύνει. Συνεπώς 
+           βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων, χωρίς να αποτελεί ανασταλτικό παράγοντα η 
+           περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από μέρους μας (όπως λ.χ. η επίλυση μιας 
+           περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
+      <p>Ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ 
+          θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a href="https://wljs.io/">WLJS Notebook</a>, 
+          το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του Wolfram Mathematica. Σε πολλά σημεία υστερεί του
+           Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του  WLJS Notebook σε τυχούσες απορίες στο 
+           <a href="https://github.com/JerryI/wolfram-js-frontend/issues">github</a> τα ελαττώνει στο ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης, 
+           δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε με το Wolfram Mathematica, καταφέρνουμε και
+            με το WLJS Notebook.</p>
+      <p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός 
+          στη μέση εκπαίδευση στην Κέρκυρα.</p>
+  </div>
+
+  <div class="popup" id="links-popup">
+      <button class="close-btn" onclick="closePopup('links-popup')">✖</button>
+      <ul class="book-list" id="links-list-container">
+      </ul>
+  </div>
+
+  <script>
+    const subjectsData = {
+        'Επιστήμες': { 
+            topics: ['Μαθηματικά', 'Φυσική', 'Κοινωνικές επιστήμες'], 
+            color: 'rgba(212, 175, 55, 0.2)', 
+            hoverColor: 'rgba(212, 175, 55, 0.3)', 
+            selectedColor: 'rgba(212, 175, 55, 0.4)', 
+            startAngle: 0, 
+            endAngle: 120 
+        },
+        'Εκπαίδευση': { 
+            topics: ['Εξισώσεις', 'Ανισώσεις'], 
+            color: 'rgba(212, 175, 55, 0.2)', 
+            hoverColor: 'rgba(212, 175, 55, 0.3)', 
+            selectedColor: 'rgba(212, 175, 55, 0.4)', 
+            startAngle: 120, 
+            endAngle: 240 
+        },
+        'Πληροφορίες': { 
+            topics: [], 
+            color: 'rgba(212, 175, 55, 0.2)', 
+            hoverColor: 'rgba(212, 175, 55, 0.3)', 
+            selectedColor: 'rgba(212, 175, 55, 0.4)', 
+            startAngle: 240, 
+            endAngle: 360 
+        }
+    };
+
+    const links = {
+        'Εξισώσεις': [ 
+            { text: 'Γραμμικές Εξισώσεις', url: '#' }, 
+            { text: 'Δευτεροβάθμιες Εξισώσεις', url: '#' } 
+        ],
+        'Ανισώσεις': [ 
+            { text: 'Γραμμικές Ανισώσεις', url: '#' } 
+        ],
+        'Μαθηματικά': [ 
+            { text: 'Αντίστροφο προβλήματος Frobenius-Perron', url: 'FrobeniusPerron.html' },  
+            { text: 'Σφαίρες Dandelin', url: '#' } 
+        ],
+        'Φυσική': [ 
+            { text: 'Εξίσωση θερμότητας', url: '#' }, 
+            { text: 'Ανάλυση σήματος', url: '#' } 
+        ],
+        'Κοινωνικές επιστήμες': [ 
+            { text: 'Εξέλιξη πολιτικών σχηματισμών', url: 'aristeradaxia.html' }, 
+            { text: 'Black-Scoles', url: 'BlackScoles.html' }, 
+            { text: 'Κούρσα εξοπλισμών', url: 'exoplismoiW4SCI.html' },
+            { text: 'Τα Ασαφή Σύνολα ξεκαθαρίζουν τις ασαφείς έννοιες!', url: 'fuzzySocSci.html' },
+            { text: 'Εξέλιξη κατανομής πολιτικού φάσματος', url: 'politicsDistW4SCI.html' },
+            { text: 'Εξέλιξη πολιτικού σχηματισμού', url: 'PosoiParamenoyn.html' },
+            { text: 'Ταξική Συνείδηση', url: 'aristeradaxia.html' }
+        ]
+    };
+
+    // --- DOM Elements ---
+    const centralCircle = document.getElementById('main-label');
+    const centralImage = document.getElementById('central-image');
+    const centralLabelText = document.getElementById('main-label-text');
+    const dropdownsContainer = document.getElementById('dropdowns');
+    const svgContainer = document.querySelector('.donut-chart');
+    const infoPopup = document.getElementById('info-popup');
+    const linksPopup = document.getElementById('links-popup');
+    const linksListContainer = document.getElementById('links-list-container');
+
+    // --- SVG Donut Chart Settings ---
+    const cx = 170;
+    const cy = 170;
+    const outerRadius = 160;
+    const innerRadius = 60;
+    const labelRadius = (outerRadius + innerRadius) / 2;
+
+    let currentlySelectedArc = null;
+
+    // --- Helper Functions ---
+    function polarToCartesian(centerX, centerY, radius, angleInDegrees) {
+        const angleInRadians = (angleInDegrees - 90) * Math.PI / 180.0;
+        return { 
+            x: centerX + (radius * Math.cos(angleInRadians)), 
+            y: centerY + (radius * Math.sin(angleInRadians)) 
+        };
+    }
+
+    function describeDonutSegment(x, y, outerR, innerR, startAngle, endAngle) {
+        const startOuter = polarToCartesian(x, y, outerR, endAngle);
+        const endOuter = polarToCartesian(x, y, outerR, startAngle);
+        const startInner = polarToCartesian(x, y, innerR, endAngle);
+        const endInner = polarToCartesian(x, y, innerR, startAngle);
+        const largeArcFlag = endAngle - startAngle <= 180 ? "0" : "1";
+        
+        if (endAngle - startAngle >= 359.99) { 
+            endAngle = startAngle + 359.99; 
+            const adjustedStartOuter = polarToCartesian(x, y, outerR, endAngle); 
+            const d = [
+                "M", adjustedStartOuter.x, adjustedStartOuter.y, 
+                "A", outerR, outerR, 0, largeArcFlag, 0, endOuter.x, endOuter.y, 
+                "L", endInner.x, endInner.y, 
+                "A", innerR, innerR, 0, largeArcFlag, 1, startInner.x, startInner.y, 
+                "Z"
+            ].join(" "); 
+            return d; 
+        } 
+        
+        const d = [
+            "M", startOuter.x, startOuter.y, 
+            "A", outerR, outerR, 0, largeArcFlag, 0, endOuter.x, endOuter.y, 
+            "L", endInner.x, endInner.y, 
+            "A", innerR, innerR, 0, largeArcFlag, 1, startInner.x, startInner.y, 
+            "Z"
+        ].join(" "); 
+        return d;
+    }
+
+    // --- Function to Create the Donut Chart ---
+    function createDonutChart() {
+        svgContainer.querySelectorAll('.donut-arc, .donut-label').forEach(el => el.remove());
+        
+        Object.keys(subjectsData).forEach(subject => {
+            const data = subjectsData[subject];
+            const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+            path.setAttribute("d", describeDonutSegment(cx, cy, outerRadius, innerRadius, data.startAngle, data.endAngle));
+            path.setAttribute("fill", data.color);
+            path.setAttribute("class", "donut-arc");
+            path.dataset.subject = subject;
+            
+            const midAngle = data.startAngle + (data.endAngle - data.startAngle) / 2;
+            const labelPos = polarToCartesian(cx, cy, labelRadius, midAngle);
+            
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", labelPos.x);
+            text.setAttribute("y", labelPos.y);
+            text.setAttribute("class", "donut-label");
+            text.textContent = subject;
+            
+            path.addEventListener('mouseenter', () => { 
+                if (path !== currentlySelectedArc) { 
+                    path.style.fill = data.hoverColor; 
+                } 
+            });
+            
+            path.addEventListener('mouseleave', () => { 
+                if (path !== currentlySelectedArc) { 
+                    path.style.fill = data.color; 
+                } else { 
+                    path.style.fill = data.selectedColor; 
+                } 
+            });
+            
+            path.addEventListener('click', handleArcClick);
+            
+            svgContainer.appendChild(path);
+            svgContainer.appendChild(text);
+        });
+    }
+
+    // --- Event Handlers & Popup Functions ---
+    function closePopup(id) {
+        const popup = document.getElementById(id);
+        if (popup) {
+            popup.style.display = 'none';
+        }
+    }
+
+    function showLinksPopup(topic) {
+        if (!linksPopup || !linksListContainer) {
+            console.error("Links popup or container not found!");
+            return;
+        }
+
+        linksListContainer.innerHTML = '';
+
+        if (links[topic] && links[topic].length > 0) {
+            links[topic].forEach(link => {
+                const listItem = document.createElement('li');
+                const anchor = document.createElement('a');
+                anchor.href = link.url || '#';
+                
+                // Προσθήκη ornament πριν από τον σύνδεσμο
+                const ornamentBefore = document.createElement('span');
+                ornamentBefore.innerHTML = `
+                    <svg class="link-ornament" viewBox="0 0 100 100">
+                        <!-- pgfornament 7 - Μικρό διακοσμητικό -->
+                        <path class="pgf-ornament" d="M50,0 L60,40 L100,50 L60,60 L50,100 L40,60 L0,50 L40,40 Z"/>
+                    </svg>
+                `;
+                
+                // Προσθήκη ornament μετά από τον σύνδεσμο
+                const ornamentAfter = document.createElement('span');
+                ornamentAfter.innerHTML = `
+                    <svg class="link-ornament" viewBox="0 0 100 100">
+                        <!-- pgfornament 7 - Μικρό διακοσμητικό -->
+                        <path class="pgf-ornament" d="M50,0 L60,40 L100,50 L60,60 L50,100 L40,60 L0,50 L40,40 Z"/>
+                    </svg>
+                `;
+                
+                const linkText = document.createElement('span');
+                linkText.textContent = link.text;
+                
+                anchor.appendChild(ornamentBefore);
+                anchor.appendChild(linkText);
+                anchor.appendChild(ornamentAfter);
+
+                if (link.url && !link.url.startsWith('#')) {
+                    anchor.target = "_blank";
+                    anchor.rel = "noopener noreferrer";
+                }
+
+                if (anchor.getAttribute('href') === '#') {
+                    anchor.addEventListener('click', (e) => e.preventDefault());
+                }
+
+                listItem.appendChild(anchor);
+                linksListContainer.appendChild(listItem);
+            });
+        } else {
+            const noLinksMsg = document.createElement('li');
+            noLinksMsg.textContent = "Δεν υπάρχουν διαθέσιμοι σύνδεσμοι για αυτή την ενότητα.";
+            noLinksMsg.className = 'no-links-message';
+            linksListContainer.appendChild(noLinksMsg);
+        }
+
+        linksPopup.style.display = 'block';
+    }
+
+    function handleArcClick(event) {
+        event.stopPropagation();
+        const clickedArc = event.target;
+        const subject = clickedArc.dataset.subject;
+
+        if (clickedArc === currentlySelectedArc) {
+            if (subject !== 'Πληροφορίες') closePopup('links-popup');
+            return;
+        }
+
+        closePopup('info-popup');
+        closePopup('links-popup');
+        dropdownsContainer.innerHTML = '';
+
+        if (currentlySelectedArc) {
+            resetArcState(currentlySelectedArc);
+        }
+
+        selectArc(clickedArc, subject);
+
+        if (subject === 'Πληροφορίες') {
+            if (infoPopup) {
+                infoPopup.style.display = 'block';
+            }
+        } else {
+            createDropdownMenu(subject);
+        }
+    }
+
+    // --- State Management Functions ---
+    function selectArc(arc, subject) {
+        const data = subjectsData[subject];
+        centralImage.style.display = 'none';
+        centralLabelText.innerText = subject;
+        centralLabelText.style.display = 'block';
+        centralCircle.classList.add('can-reset');
+        arc.style.fill = data.selectedColor;
+        arc.classList.add('selected');
+        currentlySelectedArc = arc;
+    }
+
+    function resetArcState(arc) {
+        if (arc) {
+            const subject = arc.dataset.subject;
+            const data = subjectsData[subject];
+            arc.style.fill = data.color;
+            arc.classList.remove('selected');
+        }
+    }
+
+    function resetToDefaultState() {
+        if (currentlySelectedArc) {
+            resetArcState(currentlySelectedArc);
+            currentlySelectedArc = null;
+        }
+        centralImage.style.display = 'block';
+        centralLabelText.innerText = '';
+        centralLabelText.style.display = 'none';
+        centralCircle.classList.remove('can-reset');
+        dropdownsContainer.innerHTML = '';
+
+        closePopup('info-popup');
+        closePopup('links-popup');
+
+        centralCircle.style.transform = 'scale(0.9)';
+        setTimeout(() => { centralCircle.style.transform = ''; }, 300);
+    }
+
+    // --- Event Listeners ---
+    centralCircle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (centralCircle.classList.contains('can-reset')) { 
+            resetToDefaultState(); 
+        }
+    });
+
+    document.body.addEventListener('click', (e) => {
+        const isClickInsideInteractiveArea =
+            centralCircle.contains(e.target) ||
+            svgContainer.contains(e.target) ||
+            dropdownsContainer.contains(e.target) ||
+            infoPopup.contains(e.target) ||
+            linksPopup.contains(e.target);
+
+        if (!isClickInsideInteractiveArea) {
+            if (infoPopup.style.display === 'block' ||
+                linksPopup.style.display === 'block' ||
+                currentlySelectedArc) {
+                    resetToDefaultState();
+            }
+        }
+    });
+
+    // --- Dropdown Functions ---
+    function createDropdownMenu(subject) {
+        dropdownsContainer.innerHTML = '';
+
+        const container = document.createElement('div');
+        container.className = 'dropdown-container';
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'dropdown';
+
+        if (subjectsData[subject] && subjectsData[subject].topics) {
+            subjectsData[subject].topics.forEach(topic => {
+                const topicButton = document.createElement('button');
+                topicButton.innerText = topic;
+                topicButton.dataset.topic = topic;
+
+                topicButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closePopup('info-popup');
+                    closePopup('links-popup');
+                    showLinksPopup(topic);
+                    e.target.style.transform = 'translateX(5px)';
+                    setTimeout(() => { e.target.style.transform = ''; }, 200);
+                });
+
+                dropdown.appendChild(topicButton);
+            });
+        }
+
+        container.appendChild(dropdown);
+        dropdownsContainer.appendChild(container);
+
+        dropdownsContainer.style.opacity = '0';
+        dropdownsContainer.style.transform = 'translateY(-10px)';
+        requestAnimationFrame(() => { 
+            requestAnimationFrame(() => {
+                dropdownsContainer.style.opacity = '1';
+                dropdownsContainer.style.transform = 'translateY(0)';
+            });
+        });
+    }
+
+    // --- Initialization ---
+    createDonutChart();
+    resetToDefaultState();
+  </script>
+</body>
+</html>
