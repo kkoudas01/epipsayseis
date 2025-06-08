@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Χορεύοντας με τον Λύκο</title>
+
+        <!-- Εικονίδιο καρτέλας. Να βάλω κάτι άλλο-->
+
+    <link rel="icon" href="myIcon.png" type="image/png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1 class="title">Χορεύοντας με τον Λύκο</h1>
+
+
+
+
+    <!-- Container για τα icons -->
+    <div class="icons-container">
+        <div class="icon" id="info-icon">
+            <img src="your_info_icon.png" class="icon-img" alt="Info">
+        </div>
+        <div class="icon" id="books-icon">
+            <img src="your_books_icon.png" class="icon-img" alt="Books">
+        </div>
+    </div>
+
+    <div class="circle">
+        <img src="wolf_wireframe.png" alt="Wolf Wireframe" class="wolf-img">
+    </div>
+
+    <!-- Popups -->
+    <div class="popup" id="info-popup">
+        <button class="close-btn" onclick="closePopup('info-popup')">✖</button>
+        <img src="info_image.jpg" class="popup-image" alt="Info Image">
+        <p> Τα μαθηματικά παρέχουν ισχυρά εργαλεία για τη μελέτη του φυσικού και κοινωνικού μας περιβάλλοντος. Δυστυχώς, κάποιες φορές αυτά τα εργαλεία  μπορεί
+            να είναι απρόσιτα στους μη μυημένους ή έστω αρκετά κουραστικά σε βαθμό που ο αναγνώστης να αναλώνεται στην «πάλη» με αυτά κι όχι σε αυτό που περιγράφουν.
+            Σε μια προσπάθεια να εξομαλύνουμε τη διαδικασία και να κάνουμε πιο φιλικούς στον αναγνώστη τους καρπούς των μαθηματικών, απευθυνθήκαμε στη γλώσσα Wolfram.</p>
+            <p> Η γλώσσα Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να απαιτούσαν δυσθεώρητο κόπο και χρόνο,
+                 μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα πρόβλημα κι αυτή στο λύνει. Συνεπώς 
+                 βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων, χωρίς να αποτελεί ανασταλτικό παράγοντα η 
+                 περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από μέρους μας (όπως λ.χ. η επίλυση μιας 
+                 περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
+            <p> Ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ 
+                θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a href="https://wljs.io/">WLJS Notebook</a>, 
+                το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του Wolfram Mathematica. Σε πολλά σημεία υστερεί του
+                 Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του  WLJS Notebook σε τυχούσες απορίες στο 
+                 <a href="https://github.com/JerryI/wolfram-js-frontend/issues">github</a> τα ελαττώνει στο ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης, 
+                 δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε με το Wolfram Mathematica, καταφέρνουμε και
+                  με το WLJS Notebook.</p>
+            <p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός στη μέση εκπαίδευση στην Κέρκυρα.</p>
+        </p>
+    </div>
+
+    <div class="popup" id="books-popup">
+        <button class="close-btn" onclick="closePopup('books-popup')">✖</button>
+        <ul class="book-list">
+            <li><a href="FrobeniusPerron.html">Αντίστροφο προβλήματος Frobenius-Perron</a></li>
+            <li><a href="aristeradaxia.html">Εξέλιξη πολιτικών σχηματισμών</a></li>
+            <li><a href="BlackScoles.html">Black-Scoles</a></li>
+            <li><a href="exoplismoiW4SCI.html">Κούρσα εξοπλισμών</a></li>
+            <li><a href="fuzzySocSci.html">Τα Ασαφή Σύνολα ξεκαθαρίζουν τις ασαφείς έννοιες!</a></li>
+            <li><a href="politicsDistW4SCI.html">Εξέλιξη κατανομής πολιτικού φάσματος</a></li>
+            <li><a href="PosoiParamenoyn.html">Εξέλιξη πολιτικού σχηματισμού</a></li>
+            <li><a href="TaxikiSyneidisi.html">Ταξική Συνείδηση</a></li>
+        </ul>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

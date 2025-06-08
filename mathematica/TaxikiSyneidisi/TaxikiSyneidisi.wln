@@ -1,0 +1,468 @@
+<|"Notebook" -> <|"Controller" -> "a82c93d6-5800-4e0a-a5ea-373497d70889", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$609], "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "45f4df1d-3850-454d-be5a-5a73a1be99b5", "Objects" -> <||>, 
+   "Path" -> "C:\\Users\\kkoud\\Documents\\ArxeiaKostas\\eggrafa\\Arxeia1\\ma\
+thematica\\TaxikiSyneidisi\\TaxikiSyneidisi.wln", 
+   "PublicFields" -> {"Properties"}, "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, "\[CapitalTau]\
+\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[CapitalSigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\
+\[Eta]", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$614]]}|>, 
+ "Cells" -> {<|"Data" -> ".html\n\n<style>\n.admonition.info \
+{\n\tbackground-color: cyan;\n\tborder-left: 5px solid darkcyan;\n\tpadding: \
+10px;\n\tborder-radius: 8px;\n\tdisplay: flex;\n\tflex-direction: \
+column;\n\tfont-family: Arial, sans-serif;\n\tmax-width: \
+400px;\n}\n</style>\n\n<style>\n.admonition.warning {\n\tbackground-color: \
+red;\n\tborder-left: 5px solid darkred;\n\tpadding: 10px;\n\tborder-radius: \
+8px;\n\tdisplay: flex;\n\tflex-direction: column;\n\tfont-family: Arial, \
+sans-serif;\n\tmax-width: 400px;\n\tcolor: white;\n}\n</style>\n", 
+    "Display" -> "codemirror", "Hash" -> 
+     "3b545cd0-324c-49a0-bb4a-7977499fac84", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> "\n<style>\n.admonition.info {\n\tbackground-color: \
+cyan;\n\tborder-left: 5px solid darkcyan;\n\tpadding: 10px;\n\tborder-radius: \
+8px;\n\tdisplay: flex;\n\tflex-direction: column;\n\tfont-family: Arial, \
+sans-serif;\n\tmax-width: 400px;\n}\n</style>\n\n<style>\n.admonition.warning \
+{\n\tbackground-color: red;\n\tborder-left: 5px solid darkred;\n\tpadding: \
+10px;\n\tborder-radius: 8px;\n\tdisplay: flex;\n\tflex-direction: \
+column;\n\tfont-family: Arial, sans-serif;\n\tmax-width: 400px;\n\tcolor: \
+white;\n}\n</style>\n", "Display" -> "html", 
+    "Hash" -> "b67496ab-dd27-4629-a0a0-a41f084ec0b6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> ".md # \[CapitalTau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[CapitalSigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\
+\[Eta]\n\n:::info\n\[CapitalSigma]\[Upsilon]\[Gamma]\[Gamma]\[Rho]\[Alpha]\
+\[CurlyPhi]\:03ae: *\[CapitalKappa]\:03ce\[Sigma]\[Tau]\[Alpha]\[FinalSigma] \
+\[CapitalKappa]\[Omicron]\:03cd\[Delta]\[Alpha]\[FinalSigma]*\n\n\
+\[CapitalUpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\:03af\[Eta]\[Sigma]\[Eta] \
+\[Mu]\:03ad\[Sigma]\[Omega] \
+\[Gamma]\[Lambda]\:03ce\[Sigma]\[Sigma]\[Alpha]\[FinalSigma] Wolfram \
+\[Sigma]\[Tau]\[Omicron] [WLJS \
+Notebook](https://jerryi.github.io/wljs-docs/).\n:::\n\n:::warning\n\:26a0\
+\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
+\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
+\:26a0\:fe0f\n:::\n\n\[CapitalSigma]\[Tau]\[Eta]\[Nu] \
+\[Pi]\[Alpha]\[Rho]\[Omicron]\:03cd\[Sigma]\[Alpha] \
+\[CurlyEpsilon]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \[Theta]\[Alpha] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\
+\[Iota]\:03ae\[Sigma]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Mu]\[Iota]\[Alpha] \
+\[Alpha]\[Pi]\[Lambda]\[Omicron]\[Pi]\[Omicron]\[Iota]\[Eta]\[Mu]\:03ad\[Nu]\
+\[Eta] \[CurlyEpsilon]\[Kappa]\[Delta]\[Omicron]\[Chi]\:03ae \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Lambda]\[Alpha]\[Sigma]\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Mu]\[Alpha]\[Rho]\[Xi]\[Iota]\[Sigma]\[Tau]\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\[Upsilon] \
+\[Sigma]\[Chi]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03ac \[Mu]\[CurlyEpsilon] \
+\[Tau]\[Eta]\[Nu] \[Pi]\:03ac\[Lambda]\[Eta] \[Tau]\[Omega]\[Nu] \
+\[Tau]\:03ac\[Xi]\[CurlyEpsilon]\[Omega]\[Nu]. \[CapitalTheta]\[Alpha] \
+\[CurlyEpsilon]\[Mu]\[Pi]\[Lambda]\[Alpha]\[Kappa]\[Omicron]\:03cd\[Nu] \
+\[Tau]\[Rho]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Pi]\[Alpha]\[Rho]\:03ac\[Mu]\[CurlyEpsilon]\[Tau]\[Rho]\[Omicron]\[Iota]:\n\
+\n- \[Tau]\[Omicron] \[Mu]\:03ad\[Sigma]\[Omicron] \
+\[CurlyEpsilon]\[Pi]\:03af\[Pi]\[CurlyEpsilon]\[Delta]\[Omicron] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd (`MTS`) \
+\[Sigma]\[CurlyEpsilon] \[Sigma]\[Chi]\:03ad\[Sigma]\[Eta] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Eta]\[Nu] \[Pi]\[Lambda]\:03ae\[Rho]\[Eta] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta],\n- \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[CurlyEpsilon]\[Pi]\:03af \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] (`KK`),\n- \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] (`DE`) \
+\[Kappa]\[Alpha]\[Iota]\n- \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu] \
+(`GINI`).\n \n \:038c\[Lambda]\[Alpha] \[Tau]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Pi]\:03ac\[Nu]\[Omega] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Kappa]\[Alpha]\[Iota] \
+\[Mu]\[Pi]\[Omicron]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Nu]\[Alpha] \
+\[Delta]\[CurlyEpsilon]\[Chi]\[Tau]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Alpha] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota]:\n\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \[Mu]\:03ad\[Sigma]\[Omicron] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\[CurlyEpsilon]\[Pi]\:03af\[Pi]\
+\[CurlyEpsilon]\[Delta]\[Omicron] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd:\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma],\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Beta]\[Omicron]\[Lambda]\:03ae\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+(\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \:03ae \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma]) \
+\[CurlyEpsilon]\[Nu]\[Tau]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\
+\[Alpha]\[Iota] \[Alpha]\[Pi]\:03cc \[Tau]\[Iota]\[FinalSigma] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\:03cc\[Tau]\[Eta]\[Tau]\[CurlyEpsilon]\
+\[FinalSigma].\n- \:038c\[Sigma]\[Omicron]\[Nu] \
+\[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma]:\n    - \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron]\[Upsilon] \
+\:03ae\[Delta]\[Eta] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Omicron]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ad\[Theta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma],\n    - \[Tau]\[Eta]\[FinalSigma] \
+\:03ad\[Nu]\[Tau]\[Alpha]\[Sigma]\[Eta]\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu],\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon]:\n    - \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \:03ae\[Delta]\[Eta] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Omicron]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ad\[Theta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma], \
+\:03cc\[Tau]\[Alpha]\[Nu] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Omicron]\[Lambda]\:03cd \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ac\[Lambda]\[Eta] \[Eta] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta],\n   \
+ - \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\:03ad\[Nu]\[Tau]\[Alpha]\[Sigma]\[Eta]\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu].\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu]:\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],", "Display" -> "codemirror", 
+    "Hash" -> "f1193c0a-74de-491d-a9a8-a2ecbebff749", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> "# \[CapitalTau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[CapitalSigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\
+\[Eta]\n\n:::info\n\[CapitalSigma]\[Upsilon]\[Gamma]\[Gamma]\[Rho]\[Alpha]\
+\[CurlyPhi]\:03ae: *\[CapitalKappa]\:03ce\[Sigma]\[Tau]\[Alpha]\[FinalSigma] \
+\[CapitalKappa]\[Omicron]\:03cd\[Delta]\[Alpha]\[FinalSigma]*\n\n\
+\[CapitalUpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\:03af\[Eta]\[Sigma]\[Eta] \
+\[Mu]\:03ad\[Sigma]\[Omega] \
+\[Gamma]\[Lambda]\:03ce\[Sigma]\[Sigma]\[Alpha]\[FinalSigma] Wolfram \
+\[Sigma]\[Tau]\[Omicron] [WLJS \
+Notebook](https://jerryi.github.io/wljs-docs/).\n:::\n\n:::warning\n\:26a0\
+\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
+\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
+\:26a0\:fe0f\n:::\n\n\[CapitalSigma]\[Tau]\[Eta]\[Nu] \
+\[Pi]\[Alpha]\[Rho]\[Omicron]\:03cd\[Sigma]\[Alpha] \
+\[CurlyEpsilon]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \[Theta]\[Alpha] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\
+\[Iota]\:03ae\[Sigma]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Mu]\[Iota]\[Alpha] \
+\[Alpha]\[Pi]\[Lambda]\[Omicron]\[Pi]\[Omicron]\[Iota]\[Eta]\[Mu]\:03ad\[Nu]\
+\[Eta] \[CurlyEpsilon]\[Kappa]\[Delta]\[Omicron]\[Chi]\:03ae \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Lambda]\[Alpha]\[Sigma]\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Mu]\[Alpha]\[Rho]\[Xi]\[Iota]\[Sigma]\[Tau]\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\[Upsilon] \
+\[Sigma]\[Chi]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03ac \[Mu]\[CurlyEpsilon] \
+\[Tau]\[Eta]\[Nu] \[Pi]\:03ac\[Lambda]\[Eta] \[Tau]\[Omega]\[Nu] \
+\[Tau]\:03ac\[Xi]\[CurlyEpsilon]\[Omega]\[Nu]. \[CapitalTheta]\[Alpha] \
+\[CurlyEpsilon]\[Mu]\[Pi]\[Lambda]\[Alpha]\[Kappa]\[Omicron]\:03cd\[Nu] \
+\[Tau]\[Rho]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Pi]\[Alpha]\[Rho]\:03ac\[Mu]\[CurlyEpsilon]\[Tau]\[Rho]\[Omicron]\[Iota]:\n\
+\n- \[Tau]\[Omicron] \[Mu]\:03ad\[Sigma]\[Omicron] \
+\[CurlyEpsilon]\[Pi]\:03af\[Pi]\[CurlyEpsilon]\[Delta]\[Omicron] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd (`MTS`) \
+\[Sigma]\[CurlyEpsilon] \[Sigma]\[Chi]\:03ad\[Sigma]\[Eta] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Eta]\[Nu] \[Pi]\[Lambda]\:03ae\[Rho]\[Eta] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta],\n- \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[CurlyEpsilon]\[Pi]\:03af \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] (`KK`),\n- \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] (`DE`) \
+\[Kappa]\[Alpha]\[Iota]\n- \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu] \
+(`GINI`).\n \n \:038c\[Lambda]\[Alpha] \[Tau]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Pi]\:03ac\[Nu]\[Omega] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Kappa]\[Alpha]\[Iota] \
+\[Mu]\[Pi]\[Omicron]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Nu]\[Alpha] \
+\[Delta]\[CurlyEpsilon]\[Chi]\[Tau]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Alpha] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota]:\n\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \[Mu]\:03ad\[Sigma]\[Omicron] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\[CurlyEpsilon]\[Pi]\:03af\[Pi]\
+\[CurlyEpsilon]\[Delta]\[Omicron] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd:\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma],\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Beta]\[Omicron]\[Lambda]\:03ae\
+\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+(\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \:03ae \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma]) \
+\[CurlyEpsilon]\[Nu]\[Tau]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\
+\[Alpha]\[Iota] \[Alpha]\[Pi]\:03cc \[Tau]\[Iota]\[FinalSigma] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\:03cc\[Tau]\[Eta]\[Tau]\[CurlyEpsilon]\
+\[FinalSigma].\n- \:038c\[Sigma]\[Omicron]\[Nu] \
+\[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma]:\n    - \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron]\[Upsilon] \
+\:03ae\[Delta]\[Eta] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Omicron]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ad\[Theta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta]\
+\[FinalSigma],\n    - \[Tau]\[Eta]\[FinalSigma] \
+\:03ad\[Nu]\[Tau]\[Alpha]\[Sigma]\[Eta]\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu],\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon]:\n    - \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \:03ae\[Delta]\[Eta] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Omicron]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ad\[Theta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma], \
+\:03cc\[Tau]\[Alpha]\[Nu] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Omicron]\[Lambda]\:03cd \
+\[Mu]\[CurlyEpsilon]\[Gamma]\:03ac\[Lambda]\[Eta] \[Eta] \
+\[Tau]\[Alpha]\[Xi]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\:03af\[Delta]\[Eta]\[Sigma]\[Eta],\n   \
+ - \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\:03ad\[Nu]\[Tau]\[Alpha]\[Sigma]\[Eta]\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu].\n- \
+\:038c\[Sigma]\[Omicron]\[Nu] \[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\:03ac \
+\[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Nu]\[Iota]\[Sigma]\[Omicron]\[Tau]\:03ae\[Tau]\[Omega]\[Nu]:\n    - \
+\[Omicron] \[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Theta]\[Omega]\[Rho]\:03af\[Omicron]\
+\[Upsilon] \[Pi]\[Omicron]\[Upsilon] \:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc \[Gamma]\[Iota]\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Omicron]\[Upsilon]\[Nu]\[Iota]\[Sigma]\[Tau]\
+\[Iota]\[Kappa]\[Omicron]\:03cd \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Nu]\[Eta]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],\n    - \[Tau]\[Omicron] \
+\[Mu]\:03ad\[Gamma]\[CurlyEpsilon]\[Theta]\[Omicron]\[FinalSigma] \
+\[Tau]\[Eta]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\:03ac\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03cc\[FinalSigma] \[Omicron] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\:03ae\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon],", "Display" -> "markdown", 
+    "Hash" -> "6c45a996-1ec4-4e0b-a3a9-fb4583b631b7", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\neqMTS := MTS'[t] == a1 (100-MTS[t])(a2 \
+KK[t]-a3 DE[t])GINI[t]\neqK := KK'[t] == b1 \
+(100-DE[t]-KK[t])KK[t]MTS[t]GINI[t]\neqD := KK'[t] == c1 \
+(100-DE[t]-KK[t])DE[t]GINI[t]-c2 MTS[t]\neqGINI := GINI'[t] == d1 \
+(100-GINI[t])(-d2 KK[t]+d3 DE[t])", "Display" -> "codemirror", 
+    "Hash" -> "d9341637-e917-4298-a393-731e1920f376", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> "eqS := S'[t] == a (100-S[t])KK[t]GINI[t]\neqK := KK'[t] == b \
+(100-KK[t])KK[t]S[t]GINI[t]\neqGINI := GINI'[t] == c \
+(100-GINI[t])/(S[t]KK[t])", "Display" -> "codemirror", 
+    "Hash" -> "20eb11db-ad6c-46c7-bfc6-b0fd8085dff8", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>, 
+   <|"Data" -> 
+     "vS := a (100-s)k g\nvK := b (100-k)k S g\nvG := c (100-g)/(s k)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "862a51d4-3024-4cfa-a553-f6a30fb092f9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "d5fa089c-5f80-4230-81e6-e9ab7f397cba"|>}, 
+ "serializer" -> "jsfn4"|>

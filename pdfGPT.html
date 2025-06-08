@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Αυτό είναι ένα pdf</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'EB Garamond', serif;
+      background-color: #1e1a16;
+      color: #f2e9dc;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      margin-top: 1rem;
+      font-size: 2rem;
+      color: #d4af7f;
+      text-align: center;
+      text-shadow: 1px 1px 1px #000;
+      padding: 0 1rem;
+    }
+
+    .pdf-container {
+      position: relative;
+      width: 80vw;
+      height: 70vh;
+      margin: 2rem 0;
+      border: 8px solid #a67c52;
+      box-shadow: 0 0 20px rgba(0,0,0,0.6);
+      background-color: #fff;
+    }
+
+    iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .ornament {
+      position: absolute;
+      width: 50px;
+      height: 50px;
+      fill: #d4af7f;
+      opacity: 0.8;
+      pointer-events: none;
+    }
+
+    .top-left { top: -25px; left: -25px; transform: rotate(0deg); }
+    .top-right { top: -25px; right: -25px; transform: rotate(90deg); }
+    .bottom-right { bottom: -25px; right: -25px; transform: rotate(180deg); }
+    .bottom-left { bottom: -25px; left: -25px; transform: rotate(270deg); }
+
+    .back-button {
+      background-color: #3c2f2f;
+      color: #f2e9dc;
+      padding: 10px 20px;
+      text-decoration: none;
+      border: 1px solid #a67c52;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      transition: background-color 0.3s;
+    }
+
+    .back-button:hover {
+      background-color: #5b4343;
+    }
+
+    .signature {
+      position: fixed;
+      bottom: 5px;
+      right: 10px;
+      font-size: 0.9rem;
+      color: #a67c52;
+      opacity: 0.7;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .pdf-container {
+        width: 95vw;
+        height: 60vh;
+        border-width: 5px;
+      }
+
+      .ornament {
+        width: 30px;
+        height: 30px;
+      }
+
+      .top-left, .top-right, .bottom-right, .bottom-left {
+        top: -15px;
+        bottom: -15px;
+        left: -15px;
+        right: -15px;
+      }
+
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .signature {
+        font-size: 0.75rem;
+      }
+    }
+
+    @import url('https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap');
+  </style>
+</head>
+<body>
+  <h1>Αυτό είναι ένα pdf</h1>
+
+  <div class="pdf-container">
+    <iframe src="Energia.pdf"></iframe>
+
+    <!-- Ornaments -->
+    <svg class="ornament top-left" viewBox="0 0 100 100">
+      <path d="M10,10 C10,50 50,10 90,90" />
+    </svg>
+    <svg class="ornament top-right" viewBox="0 0 100 100">
+      <path d="M10,10 C10,50 50,10 90,90" />
+    </svg>
+    <svg class="ornament bottom-right" viewBox="0 0 100 100">
+      <path d="M10,10 C10,50 50,10 90,90" />
+    </svg>
+    <svg class="ornament bottom-left" viewBox="0 0 100 100">
+      <path d="M10,10 C10,50 50,10 90,90" />
+    </svg>
+  </div>
+
+  <a class="back-button" href="index.html">Επιστροφή στην αρχική</a>
+
+  <div class="signature">Όνομα Επώνυμο</div>
+</body>
+</html>
