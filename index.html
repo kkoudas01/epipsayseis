@@ -538,7 +538,7 @@
   <script>
     const subjectsData = {
         'Αμπελοφιλοσοφία': { 
-            topics: ['Μαθηματικά', 'Φυσική', 'Βιολογία', 'Κοινωνικές επιστήμες'], 
+            topics: ['Κοινωνικές επιστήμες','Μαθηματικά', 'Φυσική', 'Βιολογία'], 
             color: 'rgba(212, 175, 55, 0.2)', 
             hoverColor: 'rgba(212, 175, 55, 0.3)', 
             selectedColor: 'rgba(212, 175, 55, 0.4)', 
@@ -546,7 +546,7 @@
             endAngle: 240 
         },
         'Πρακτικά': { 
-            topics: ['Γεωμετρία', 'Στατιστική'], 
+            topics: ['Γεωμετρία', 'Στοχαστικά μαθηματικά'], 
             color: 'rgba(212, 175, 55, 0.2)', 
             hoverColor: 'rgba(212, 175, 55, 0.3)', 
             selectedColor: 'rgba(212, 175, 55, 0.4)', 
@@ -563,7 +563,16 @@
         }
     };
 
-    const links = {
+    const links = {        
+        'Κοινωνικές επιστήμες': [ 
+            { text: 'Εξέλιξη πολιτικών σχηματισμών', url: 'aristeradaxia(wljs).html' }, 
+            { text: 'Black-Scoles', url: 'BlackScoles.html' }, 
+            { text: 'Κούρσα εξοπλισμών', url: 'exoplismoi(wljs).html' },
+            { text: 'Τα Ασαφή Σύνολα ξεκαθαρίζουν τις ασαφείς έννοιες!', url: 'fuzzySocSci.html' },
+            { text: 'Εξέλιξη κατανομής πολιτικού φάσματος', url: 'politicsDist(wljs).html' },
+            { text: 'Εξέλιξη πολιτικού σχηματισμού', url: 'PosoiParamenoyn(wljs).html' },
+            { text: 'Ταξική Συνείδηση', url: 'aristeradaxia.html' }
+        ],
         'Γεωμετρία': [ 
             { text: 'Στοιχεία τριγώνου', url: 'stoixeiaTrigonoy.html' }, 
             { text: 'Στοιχεία κύκλου', url: 'stoixeiaKykloy.html' } , 
@@ -571,8 +580,8 @@
             { text: 'Υπολογισμός μήκους τόξου', url: 'toxo.html' } , 
             { text: 'Υπολογιστής Σπειροειδούς Σκάλας', url: 'spiralStairs.html' } 
         ],
-        'Στατιστική': [ 
-            { text: 'Γραμμικές Ανισώσεις', url: '#' } 
+        'Στοχαστικά μαθηματικά': [ 
+            { text: 'Βασική στιατιστική ανάλυση', url: 'continVar.html' } 
         ],
         'Μαθηματικά': [ 
             { text: 'Αντίστροφο προβλήματος Frobenius-Perron', url: 'FrobeniusPerron(wljs).html' },  
@@ -582,19 +591,6 @@
             { text: 'Εξίσωση θερμότητας', url: '#' }, 
             { text: 'Ανάλυση σήματος', url: '#' }, 
             { text: 'Αξιωματική θεμελίωση έργου και κινητικής ενέργειας', url: 'energeia.html' } 
-        ],
-        'Βιολογία': [ 
-            { text: 'Εξίσωση Fisher', url: '#' }, 
-            { text: 'Μοντέλa Lotka-Volterra', url: '#' } 
-        ],
-        'Κοινωνικές επιστήμες': [ 
-            { text: 'Εξέλιξη πολιτικών σχηματισμών', url: 'aristeradaxia(wljs).html' }, 
-            { text: 'Black-Scoles', url: 'BlackScoles.html' }, 
-            { text: 'Κούρσα εξοπλισμών', url: 'exoplismoi(wljs).html' },
-            { text: 'Τα Ασαφή Σύνολα ξεκαθαρίζουν τις ασαφείς έννοιες!', url: 'fuzzySocSci.html' },
-            { text: 'Εξέλιξη κατανομής πολιτικού φάσματος', url: 'politicsDist(wljs).html' },
-            { text: 'Εξέλιξη πολιτικού σχηματισμού', url: 'PosoiParamenoyn(wljs).html' },
-            { text: 'Ταξική Συνείδηση', url: 'aristeradaxia.html' }
         ]
     };
 
