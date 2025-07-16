@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Σε συνάντησα στο ΙΚΑ</title>
-    <!-- Βιβλιοθήκη jStat για στατιστικούς υπολογισμούς (Gamma Distribution) -->
+    <title>Υπολογιστής Αναμονής Ουράς</title>
+    <!-- Βιβλιοθήκη jStat για στατιστικούς υπολογισμούς (Gamma Distribution & Gamma Functions) -->
     <script src="https://cdn.jsdelivr.net/npm/jstat@latest/dist/jstat.min.js"></script>
     <style>
         /* Γενικό στυλ και Dark Theme */
@@ -231,7 +231,7 @@
     <div class="container">
         <h1>Υπολογιστής Αναμονής σε Ουρά</h1>
         <p class="intro">
-            Είσαι στο ταχυδρομείο ή σε κάποια άλλη υπηρεσία με ουρά αναμονής. Σε πόση ώρα αναμένουμε να εξυπηρετηθείς; Χρειάζεται να λείψεις για λίγο. Ποια η πιθανότητα να χάσεις τη σειρά σου; Θέλεις να είσαι σίγουρος ότι δεν θα χάσεις τη σειρά σου. Πόση ώρα πρέπει να λείψεις; Συμπλήρωσε τα κατάλληλα κενά, ώστε να έχεις τις απαντήσεις σε αυτά τα ερωτήματα.
+            Αυτό το εργαλείο σάς βοηθά να υπολογίσετε τον αναμενόμενο χρόνο παραμονής σας σε μια ουρά (π.χ. σε μια δημόσια υπηρεσία) και να εκτιμήσετε τις πιθανότητες να χάσετε τη σειρά σας αν χρειαστεί να απουσιάσετε για λίγο. Απλώς συμπληρώστε τα παρακάτω στοιχεία.
         </p>
 
         <!-- Βασικά Στοιχεία Εισόδου -->
@@ -292,7 +292,7 @@
             <div class="form-section">
                 <div class="form-grid">
                      <div class="form-group">
-                        <label for="probX">Θέλεις να ΜΗ χάσεις τη σειρά σου. Και θέλεις να είσαι σίγουρος γι' αυτό με πιθανότητα μεγαλύτερη από (%):</label>
+                        <label for="probX">Θέλεις να ΜΗ χάσεις τη σειρά σου με πιθανότητα > (%):</label>
                         <input type="number" id="probX" value="90" min="0" max="100">
                     </div>
                 </div>
@@ -307,7 +307,7 @@
 
     <!-- Υπογραφή -->
     <div class="signature">
-        Κώστας Κούδας
+        Created by Gemini
     </div>
 
     <script>
@@ -357,44 +357,73 @@
                 const tMean = tD * (n1 - n0) / n0;
                 outputs.tMean.textContent = tMean.toFixed(2);
 
-                // Παράμετροι για την κατανομή Gamma
-                // shape (alpha) = n1 - n0
-                // scale (beta) = tD / n0. Σημείωση: Ο αρχικός κώδικας είχε tD/n1, που στατιστικά
-                // φαίνεται λιγότερο πιθανό. Η αναμονή για τους επόμενους πελάτες εξαρτάται
-                // από τον ρυθμό εξυπηρέτησης των προηγούμενων (n0), όχι από τον αριθμό του μελλοντικού (n1).
-                // Ωστόσο, ακολουθούμε τον παρεχόμενο κώδικα Mathematica κατά γράμμα.
                 const shape = n1 - n0;
-                const scale = tD / n1; // Όπως στον κώδικα Mathematica
-
-                if (shape <= 0 || scale <= 0 || !isFinite(scale)) {
+                
+                if (shape <= 0) {
                      outputs.prob.textContent = 'N/A';
                      outputs.time.textContent = 'N/A';
                      return;
                 }
-
-                // --- Υπολογισμοί Καρτέλας 1: Εύρεση Πιθανότητας ---
+                
+                // --- Υπολογισμοί Καρτέλας 1: Εύρεση Πιθανότητας (ΝΕΑ ΦΟΡΜΟΥΛΑ) ---
                 const tMin = Number(inputs.tMin.value);
                 const tMax = Number(inputs.tMax.value);
                 
-                if (tMin >= 0 && tMax > tMin) {
-                    // Χρήση της jStat για την αθροιστική συνάρτηση κατανομής (CDF) της Gamma
-                    const cdfMax = jStat.gamma.cdf(tMax, shape, scale);
-                    const cdfMin = jStat.gamma.cdf(tMin, shape, scale);
-                    const prob = 100 * (cdfMax - cdfMin);
-                    outputs.prob.textContent = `${prob.toFixed(2)} %`;
+                if (tMin >= 0 && tMax > tMin && tD > 0) {
+                    // Υλοποίηση της νέας φόρμουλας από το Mathematica
+                    // όπου a = n1-n0 και z = (n1*t)/tD
+                    const a = shape;
+                    const z_max = (n1 * tMax) / tD;
+                    const z_min = (n1 * tMin) / tD;
+
+                    // FIX: Η jStat.gammaq δεν υπάρχει. Χρησιμοποιούμε τον σωστό υπολογισμό.
+                    // Η συνάρτηση jStat.gamma.cdf(x, shape, scale) υπολογίζει την κάτω κανονικοποιημένη ατελή συνάρτηση γάμμα P(shape, x) με scale.
+                    // Για την κανονικοποιημένη (scale=1), η άνω (Q) είναι 1 - P.
+                    // Αυτό αντιστοιχεί στο Gamma[a, z] / Gamma[a] της Mathematica.
+                    const upperRegularizedGamma = (alpha, zValue) => 1 - jStat.gamma.cdf(zValue, alpha, 1);
+
+                    const gamma_q_a_zmax = upperRegularizedGamma(a, z_max);
+                    const gamma_q_a_zmin = upperRegularizedGamma(a, z_min);
+
+                    // Για τον όρο Gamma[a+1, z] / Gamma[a], χρησιμοποιούμε την ιδιότητα:
+                    // Gamma[a+1, z] = a * Gamma[a, z] + z^a * exp(-z)
+                    // Διαιρώντας με Gamma[a], παίρνουμε:
+                    // a * (Gamma[a, z] / Gamma[a]) + (z^a * exp(-z)) / Gamma[a]
+                    const gammafn_a = jStat.gammafn(a);
+
+                    const term_zmax = (Math.pow(z_max, a) * Math.exp(-z_max)) / gammafn_a;
+                    const term_zmin = (Math.pow(z_min, a) * Math.exp(-z_min)) / gammafn_a;
+                    
+                    const gamma_div_a1_zmax = a * gamma_q_a_zmax + term_zmax;
+                    const gamma_div_a1_zmin = a * gamma_q_a_zmin + term_zmin;
+
+                    // Τώρα συνθέτουμε τον αριθμητή και τον παρονομαστή της αρχικής φόρμουλας,
+                    // διαιρώντας και τους δύο με τον κοινό όρο Gamma[a].
+                    const numerator = (n1 * (tMax - tMin))
+                                    - (n1 * tMax * gamma_q_a_zmax)
+                                    + (n1 * tMin * gamma_q_a_zmin)
+                                    + (tD * gamma_div_a1_zmax)
+                                    - (tD * gamma_div_a1_zmin);
+
+                    const denominator = n1 * (tMax - tMin);
+
+                    if (denominator !== 0 && isFinite(numerator)) {
+                        const prob = 100 * (numerator / denominator);
+                        outputs.prob.textContent = `${prob.toFixed(2)} %`;
+                    } else {
+                        outputs.prob.textContent = 'N/A';
+                    }
                 } else {
                     outputs.prob.textContent = 'Μη έγκυρος χρόνος';
                 }
 
 
                 // --- Υπολογισμοί Καρτέλας 2: Εύρεση Χρόνου ---
+                // Η λογική εδώ παραμένει η ίδια, χρησιμοποιώντας την αρχική κατανομή Gamma.
                 const probX = Number(inputs.probX.value);
+                const scale = tD / n1; // Όπως στον αρχικό κώδικα Mathematica
 
-                if (probX > 0 && probX < 100) {
-                    // Χρήση της jStat για την αντίστροφη CDF (Quantile/Percent Point Function)
-                    // Θέλουμε η πιθανότητα να ΜΗ χάσουμε να είναι > probX,
-                    // άρα η πιθανότητα να χάσουμε είναι < (1 - probX/100).
-                    // Βρίσκουμε τον χρόνο που αντιστοιχεί σε αυτή την πιθανότητα.
+                if (probX > 0 && probX < 100 && scale > 0 && isFinite(scale)) {
                     const probabilityThreshold = 1 - (probX / 100);
                     const time = jStat.gamma.inv(probabilityThreshold, shape, scale);
                     outputs.time.textContent = `${time.toFixed(2)}`;
@@ -404,13 +433,11 @@
             }
 
             // Προσθήκη event listener σε όλα τα πεδία εισόδου
-            // Κάθε φορά που αλλάζει μια τιμή, εκτελείται ξανά ο υπολογισμός
             Object.values(inputs).forEach(input => {
                 input.addEventListener('input', calculate);
             });
 
             // Εκτέλεση του υπολογισμού μία φορά κατά τη φόρτωση της σελίδας
-            // για να εμφανιστούν τα αρχικά αποτελέσματα
             calculate();
         });
 
