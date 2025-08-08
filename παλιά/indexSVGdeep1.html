@@ -82,14 +82,15 @@
         cursor: pointer;
     }
 
+    /* Προσαρμογή για το SVG στο κέντρο */
     #central-svg {
         display: block;
         width: 100%;
         height: 100%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.8);
+        position: absolute; /* Διατηρείται για layering */
+        top: 50%; /* Κεντράρισμα κάθετα */
+        left: 50%; /* Κεντράρισμα οριζόντια */
+        transform: translate(-50%, -50%) scale(0.8); /* Μεταφράζει και μετά σμικρύνει για κεντράρισμα */
         z-index: 1;
     }
 
@@ -104,11 +105,6 @@
         font-family: 'Cinzel Decorative', serif;
         text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7);
         display: none;
-        /* Added for centering the new SVG */
-        width: 100%;
-        height: 100%;
-        justify-content: center;
-        align-items: center;
     }
 
     .donut-chart-container {
@@ -150,7 +146,6 @@
         stroke-width: 3;
     }
 
-    /* This class is now unused as we use SVGs, but kept for reference */
     .donut-label {
         font-family: 'Cinzel Decorative', serif;
         font-size: 16px;
@@ -172,8 +167,6 @@
         width: 100%;
         padding-bottom: 30px;
         min-height: 150px;
-        opacity: 0; /* Start hidden */
-        transform: translateY(20px);
     }
 
     .dropdown-container {
@@ -479,23 +472,30 @@
 
   <div class="container">
     <div class="central-circle" id="main-label">
-        <!-- Το προεπιλεγμένο SVG παραμένει εδώ -->
+        <!-- Αντικατάσταση εικόνας με SVG -->
         <svg id="central-svg" viewBox="0 0 400 400" preserveAspectRatio="xMidYMid meet">
+            <!-- Εδώ εφαρμόζουμε τον μετασχηματισμό για να κεντράρουμε το περιεχόμενο του SVG -->
             <g transform="translate(137.5625, -77.73435)">
                 <path d="M116.5781 365.4844 Q103.5 378.7031 90.9062 384.0469 Q78.3281 389.3906 60.75 389.3906 Q35.4375 389.3906 21.8594 376.875 Q8.2969 364.3594 8.2969 344.9531 Q8.2969 320.625 33.1875 308.6719 Q12.375 297.1406 12.375 276.4688 Q12.375 258.0469 25.7969 245.6719 Q39.2344 233.2969 61.875 233.2969 Q91.6875 233.2969 111.2344 253.4062 L93.0938 268.0312 Q76.6406 255.0938 60.75 255.0938 Q50.3438 255.0938 43.7344 261.2812 Q37.125 267.4688 37.125 275.9062 Q37.125 283.2188 42.8125 289.2656 Q48.5156 295.3125 54.9844 296.9375 Q61.4531 298.5469 77.2031 298.5469 L77.2031 319.3594 Q50.625 319.3594 42.75 327.1719 Q34.875 334.9688 34.875 344.6719 Q34.875 354.0938 42.6094 361.2031 Q50.3438 368.2969 61.3125 368.2969 Q82.9688 368.2969 98.4375 349.875 L116.5781 365.4844 ZM52.4531 212.7656 Q64.2656 203.7656 64.2656 194.625 Q64.2656 191.6719 58.0781 188.5781 Q48.9375 184.0781 48.9375 177.6094 Q48.9375 173.1094 52.3125 169.5938 Q55.6875 166.0781 61.0312 166.0781 Q67.9219 166.0781 73.2656 172.0625 Q78.6094 178.0312 78.6094 186.0469 Q78.6094 205.5938 58.5 219.0938 L52.4531 212.7656 Z" 
                     fill="#702963" stroke="#ffbf00" stroke-width="3" stroke-linecap="square" stroke-miterlimit="10" stroke-linejoin="miter"/>
             </g>
         </svg>
-        <!-- Αυτό το span θα φιλοξενεί το SVG του επιλεγμένου αντικειμένου -->
         <span id="main-label-text"></span>
     </div>
 
     <div class="donut-chart-container">
-        <svg class="donut-chart" viewBox="0 0 340 340" preserveAspectRatio="xMidYMid meet"></svg>
+        <svg class="donut-chart" viewBox="0 0 340 340" preserveAspectRatio="xMidYMid meet">
+            <defs>
+                <pattern id="byzantine-pattern" patternUnits="userSpaceOnUse" width="100" height="100">
+                    <path d="M0,0 L100,0 L100,100 L0,100 Z" fill="none" stroke="#d4af37" stroke-width="2" opacity="0.3"/>
+                    <path d="M0,0 L100,100 M0,100 L100,0" stroke="#d4af37" stroke-width="1" opacity="0.2"/>
+                </pattern>
+            </defs>
+        </svg>
     </div>
   </div>
 
-  <div class="dropdowns-container" id="dropdowns-container">
+  <div class="dropdowns-container">
     <div class="dropdowns" id="dropdowns"></div>
   </div>
 
@@ -509,32 +509,32 @@
         να αυτοματοποιήσουμε τη μαθηματική διαδικασία ή έστω να την παρακάμψουμε.</p>
         
        <p> Αυτοματοποιημένους υπολογισμούς ο αναγνώστης μπορεί να βρει στην καρτέλα «Πρακρικά». 
-         Εκεί δεν θα χρειαστούν καθόλου μαθηματικά, παρά μόνο ο αναγνώστης να έχει στο κεφάλι του το πρόβλημα που θέλει να λύσει.
-         Φυσικά, παρέχοντας στο λογισμικό τις κατάλληλες πληροφορίες-μετρήσεις.</p>
-         
-         <p> Όσον αφορά τη μερική παράκαμψη των μαθηματικών, εκεί χρησιμοποιήσαμε τη γλώσσα Wolfram. Η γλώσσα Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να απαιτούσαν δυσθεώρητο κόπο και χρόνο,
-           μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα πρόβλημα κι αυτή στο λύνει. Συνεπώς 
-           βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων, χωρίς να αποτελεί ανασταλτικό παράγοντα η 
-           περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από μέρους μας (όπως λ.χ. η επίλυση μιας 
-           περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
-     
-     <p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός 
-           στη μέση εκπαίδευση στην Κέρκυρα. <img src="info_image.jpg" class="popup-image" alt="Info Image" onerror="this.onerror=null; this.src='https://placehold.co/100x100/1a0a0a/d4af37?text=K.K.'"> 
-           Προσπαθώ να κρατήσω μια επαφή με όλες τις επιστήμες και
-           ειδικότερα με τα μαθηματικά, τα οποία και σπούδασα. Άλλες σελίδες που διαχειρίζομαι είναι:
-           <li><a href="https://arkoudakafe.pages.dev/">Αρκούδα καφέ</a>, μια σελίδα με εκπαιδευτικό υλικό,</li>
-           <li><a href="https://kkoudas01.github.io/r4social/index.html">Στοχαστικά Μαθηματικά χωρίς… μαθηματικά για κοινωνικούς επιστήμονες με τη συνδρομή της R</a>, μια σελίδα εκμάθυνσης της γλώσσας R εξειδικευμένης στις ανάγκες των κοινωνικών επιστημόνων, καθώς και κάποιες κοινωνικές μελέτες με τη χρήση της.</li>
-           <li><a href="https://www.youtube.com/@kostaskoudas4193">Η σελίδα μου στο YouTube</a>, περιέχει εκπαιδευτικό υλικό σε μορφή βίντεο.</li>
-            </p>
-     
+          Εκεί δεν θα χρειαστούν καθόλου μαθηματικά, παρά μόνο ο αναγνώστης να έχει στο κεφάλι του το πρόβλημα που θέλει να λύσει.
+          Φυσικά, παρέχοντας στο λογισμικό τις κατάλληλες πληροφορίες-μετρήσεις.</p>
+          
+          <p> Όσον αφορά τη μερική παράκαμψη των μαθηματικών, εκεί χρησιμοποιήσαμε τη γλώσσα Wolfram. Η γλώσσα Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να απαιτούσαν δυσθεώρητο κόπο και χρόνο,
+            μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα πρόβλημα κι αυτή στο λύνει. Συνεπώς 
+            βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων, χωρίς να αποτελεί ανασταλτικό παράγοντα η 
+            περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από μέρους μας (όπως λ.χ. η επίλυση μιας 
+            περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
+      
+      <p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός 
+            στη μέση εκπαίδευση στην Κέρκυρα. <img src="info_image.jpg" class="popup-image" alt="Info Image"> 
+            Προσπαθώ να κρατήσω μια επαφή με όλες τις επιστήμες και
+            ειδικότερα με τα μαθηματικά, τα οποία και σπούδασα. Άλλες σελίδες που διαχειρίζομαι είναι:
+            <li><a href="https://arkoudakafe.pages.dev/">Αρκούδα καφέ</a>, μια σελίδα με εκπαιδευτικό υλικό,</li>
+            <li><a href="https://kkoudas01.github.io/r4social/index.html">Στοχαστικά Μαθηματικά χωρίς… μαθηματικά για κοινωνικούς επιστήμονες με τη συνδρομή της R</a>, μια σελίδα εκμάθυνσης της γλώσσας R εξειδικευμένης στις ανάγκες των κοινωνικών επιστημόνων, καθώς και κάποιες κοινωνικές μελέτες με τη χρήση της.</li>
+            <li><a href="https://www.youtube.com/@kostaskoudas4193">Η σελίδα μου στο YouTube</a>, περιέχει εκπαιδευτικό υλικό σε μορφή βίντεο.</li>
+             </p>
+      
 
-     <p>Υ.Γ.:Ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ 
-           θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a href="https://wljs.io/">WLJS Notebook</a>, 
-           το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του Wolfram Mathematica. Σε πολλά σημεία υστερεί του
-           Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του  WLJS Notebook σε τυχούσες απορίες στο 
-           <a href="https://github.com/JerryI/wolfram-js-frontend/issues">github</a> τα ελαττώνει στο ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης, 
-           δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε με το Wolfram Mathematica, καταφέρνουμε και
-            με το WLJS Notebook.</p>
+      <p>Υ.Γ.:Ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ 
+          θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a href="https://wljs.io/">WLJS Notebook</a>, 
+          το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του Wolfram Mathematica. Σε πολλά σημεία υστερεί του
+          Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του  WLJS Notebook σε τυχούσες απορίες στο 
+          <a href="https://github.com/JerryI/wolfram-js-frontend/issues">github</a> τα ελαττώνει στο ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης, 
+          δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε με το Wolfram Mathematica, καταφέρνουμε και
+           με το WLJS Notebook.</p>
   </div>
 
   <div class="popup" id="links-popup">
@@ -544,16 +544,14 @@
   </div>
 
   <script>
-    // --- Data Objects ---
     const subjectsData = {
         'Αμπελοφιλοσοφία': { 
-            topics: ['Κοινωνικές επιστήμες','Μαθηματικά', 'Φυσική'], 
+            topics: ['Κοινωνικές επιστήμες','Μαθηματικά', 'Φυσική', 'Βιολογία'], 
             color: 'rgba(212, 175, 55, 0.2)', 
             hoverColor: 'rgba(212, 175, 55, 0.3)', 
             selectedColor: 'rgba(212, 175, 55, 0.4)', 
             startAngle: 120, 
-            endAngle: 240,
-            svgContent: `<svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 298.935 298.935"><g><path fill="#e8d8b0" d="m149.468,77.394c-44.435,0-73.694,25.159-80.457,80.457-4.127,33.746-15.998,88.94-20.955,111.298-1.243,5.607 1.945,11.256 7.394,13.073l48.379,16.136c3.303,1.102 6.93,0.608 9.819-1.336 2.889-1.944 4.711-5.119 4.934-8.594l4.251-66.347c0.293-4.568-2.218-8.856-6.345-10.837l-31.892-15.306c-4.189-2.01-5.955-7.035-3.944-11.224l7.592-15.82c0.965-2.012 2.69-3.557 4.795-4.297 2.105-0.74 4.418-0.613 6.429,0.353l32.174,15.442c3.892,1.868 6.367,5.802 6.367,10.119v41.797c0,0.839 0.262,1.658 0.75,2.341l7.43,10.401c0.756,1.059 1.977,1.687 3.278,1.687 1.301,0 2.521-0.628 3.278-1.687l7.43-10.401c0.488-0.683 0.75-1.502 0.75-2.341v-41.798c0-4.317 2.476-8.251 6.368-10.119l32.174-15.442c2.011-0.965 4.324-1.092 6.429-0.353 2.105,0.74 3.83,2.285 4.795,4.297l7.593,15.82c2.01,4.189 0.244,9.214-3.944,11.224l-31.892,15.306c-4.127,1.981-6.637,6.269-6.345,10.837l4.251,66.347c0.223,3.475 2.045,6.649 4.934,8.594 2.888,1.944 6.516,2.438 9.819,1.336l48.379-16.136c5.459-1.821 8.639-7.455 7.394-13.073-4.956-22.359-16.828-77.552-20.955-111.298-6.763-55.297-36.022-80.456-80.457-80.456z"/><path fill="#e8d8b0" d="m259.957,43.655c-38.229-35.915-89.823-49.669-138.289-41.264-0.95,0.165-1.624,1.012-1.567,1.975l.875,14.836c0.01,0.168-0.107,0.318-0.273,0.348-0.166,0.031-0.328-0.067-0.379-0.228l-4.511-14.337c-0.277-0.881-1.151-1.432-2.066-1.305-5.355,0.742-8.924,1.306-14.283,3.693-0.785,0.35-1.235,1.186-1.097,2.034l4.069,24.987c0.066,0.404-0.132,0.805-0.493,0.998-0.361,0.193-0.804,0.136-1.104-0.143l-20.075-18.659c-0.573-0.533-1.416-0.658-2.119-0.315-14.207,6.92-27.602,16.047-39.666,27.38-0.976,0.917-1.54,2.19-1.562,3.53-0.021,1.34 0.501,2.63 1.449,3.578l34.041,34.041c1.87,1.87 4.881,1.935 6.834,0.152 39.382-35.976 100.072-35.976 139.454,0 1.955,1.786 4.962,1.721 6.834-0.152l34.041-34.041c0.947-0.947 1.468-2.239 1.447-3.578-0.021-1.34-0.584-2.613-1.56-3.53z"/></g></svg>`
+            endAngle: 240 
         },
         'Πρακτικά': { 
             topics: ['Γεωμετρία', 'Στοχαστικά μαθηματικά', 'Θεωρία Αριθμών', 'Βιολογία'], 
@@ -561,8 +559,7 @@
             hoverColor: 'rgba(212, 175, 55, 0.3)', 
             selectedColor: 'rgba(212, 175, 55, 0.4)', 
             startAngle: 0, 
-            endAngle: 120,
-            svgContent: `<svg fill="#e8d8b0" width="800px" height="800px" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M3.135 6.89c.933-.725 1.707-.225 2.74.971.116.135.272-.023.361-.1.088-.078 1.451-1.305 1.518-1.361.066-.059.146-.169.041-.292a36.238 36.238 0 0 1-.743-.951c-1.808-2.365 4.946-3.969 3.909-3.994-.528-.014-2.646-.039-2.963-.004-1.283.135-2.894 1.334-3.705 1.893-1.061.726-1.457 1.152-1.522 1.211-.3.262-.048.867-.592 1.344-.575.503-.934.122-1.267.414-.165.146-.627.492-.759.607-.133.117-.157.314-.021.471 0 0 1.264 1.396 1.37 1.52.105.122.391.228.567.071.177-.156.632-.553.708-.623.078-.066-.05-.861.358-1.177zm5.708.517c-.12-.139-.269-.143-.397-.029L7.012 8.63a.289.289 0 0 0-.027.4l8.294 9.439c.194.223.53.246.751.053l.97-.813a.54.54 0 0 0 .052-.758L8.843 7.407zM19.902 3.39c-.074-.494-.33-.391-.463-.182-.133.211-.721 1.102-.963 1.506-.24.4-.832 1.191-1.934.41-1.148-.811-.749-1.377-.549-1.758.201-.383.818-1.457.907-1.59.089-.135-.015-.527-.371-.363-.357.164-2.523 1.025-2.823 2.26-.307 1.256.257 2.379-.85 3.494l-1.343 1.4 1.349 1.566 1.654-1.57c.394-.396 1.236-.781 1.998-.607 1.633.369 2.524-.244 3.061-1.258.482-.906.402-2.814.327-3.308zM2.739 17.053a.538.538 0 0 0 0 .758l.951.93c.208.209.538.121.746-.088l4.907-4.824-1.503-1.714-5.101 4.938z"/></svg>`
+            endAngle: 120 
         },
         'Πληροφορίες': { 
             topics: [], 
@@ -570,12 +567,7 @@
             hoverColor: 'rgba(212, 175, 55, 0.3)', 
             selectedColor: 'rgba(212, 175, 55, 0.4)', 
             startAngle: 240, 
-            endAngle: 360,
-            svgContent: `<svg width="800px" height="800px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<rect width="24" height="24" fill="none"/>
-<path d="M12 6.90909C10.8999 5.50893 9.20406 4.10877 5.00119 4.00602C4.72513 3.99928 4.5 4.22351 4.5 4.49965C4.5 6.54813 4.5 14.3034 4.5 16.597C4.5 16.8731 4.72515 17.09 5.00114 17.099C9.20405 17.2364 10.8999 19.0998 12 20.5M12 6.90909C13.1001 5.50893 14.7959 4.10877 18.9988 4.00602C19.2749 3.99928 19.5 4.21847 19.5 4.49461C19.5 6.78447 19.5 14.3064 19.5 16.5963C19.5 16.8724 19.2749 17.09 18.9989 17.099C14.796 17.2364 13.1001 19.0998 12 20.5M12 6.90909L12 20.5" stroke="#e8d8b0" stroke-linejoin="round"/>
-<path d="M19.2353 6H21.5C21.7761 6 22 6.22386 22 6.5V19.539C22 19.9436 21.5233 20.2124 21.1535 20.0481C20.3584 19.6948 19.0315 19.2632 17.2941 19.2632C14.3529 19.2632 12 21 12 21C12 21 9.64706 19.2632 6.70588 19.2632C4.96845 19.2632 3.64156 19.6948 2.84647 20.0481C2.47668 20.2124 2 19.9436 2 19.539V6.5C2 6.22386 2.22386 6 2.5 6H4.76471" stroke="#e8d8b0" stroke-linejoin="round"/>
-</svg>`
+            endAngle: 360 
         }
     };
 
@@ -621,8 +613,7 @@
     const centralCircle = document.getElementById('main-label');
     const centralSvg = document.getElementById('central-svg');
     const centralLabelText = document.getElementById('main-label-text');
-    const dropdownsContainer = document.getElementById('dropdowns-container');
-    const dropdownsDiv = document.getElementById('dropdowns');
+    const dropdownsContainer = document.getElementById('dropdowns');
     const svgContainer = document.querySelector('.donut-chart');
     const infoPopup = document.getElementById('info-popup');
     const linksPopup = document.getElementById('links-popup');
@@ -678,7 +669,7 @@
 
     // --- Function to Create the Donut Chart ---
     function createDonutChart() {
-        svgContainer.innerHTML = ''; // Clear previous chart elements
+        svgContainer.querySelectorAll('.donut-arc, .donut-label').forEach(el => el.remove());
         
         Object.keys(subjectsData).forEach(subject => {
             const data = subjectsData[subject];
@@ -691,25 +682,12 @@
             const midAngle = data.startAngle + (data.endAngle - data.startAngle) / 2;
             const labelPos = polarToCartesian(cx, cy, labelRadius, midAngle);
             
-            // --- NEW: Use foreignObject to embed SVG icons instead of text ---
-            const iconSize = 45; // The size of the container for the icon
-            const foreignObject = document.createElementNS('http://www.w3.org/2000/svg', 'foreignObject');
-            foreignObject.setAttribute('x', labelPos.x - iconSize / 2);
-            foreignObject.setAttribute('y', labelPos.y - iconSize / 2);
-            foreignObject.setAttribute('width', iconSize);
-            foreignObject.setAttribute('height', iconSize);
-            foreignObject.style.pointerEvents = 'none'; // Make it non-interactive
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", labelPos.x);
+            text.setAttribute("y", labelPos.y);
+            text.setAttribute("class", "donut-label");
+            text.textContent = subject;
             
-            // The container div is necessary for innerHTML to work reliably
-            const div = document.createElement('div');
-            div.innerHTML = data.svgContent;
-            const svgIcon = div.firstChild;
-            svgIcon.style.width = '100%';
-            svgIcon.style.height = '100%';
-
-            foreignObject.appendChild(svgIcon);
-            // --- END NEW ---
-
             path.addEventListener('mouseenter', () => {    
                 if (path !== currentlySelectedArc) {    
                     path.style.fill = data.hoverColor;    
@@ -727,11 +705,11 @@
             path.addEventListener('click', handleArcClick);
             
             svgContainer.appendChild(path);
-            svgContainer.appendChild(foreignObject); // Add the icon
+            svgContainer.appendChild(text);
         });
     }
 
-    // --- Popup and UI Functions ---
+    // --- Event Handlers & Popup Functions ---
     function closePopup(id) {
         const popup = document.getElementById(id);
         if (popup) {
@@ -776,117 +754,144 @@
         linksPopup.style.display = 'block';
     }
 
-    function createDropdowns(subject) {
-        dropdownsDiv.innerHTML = '';
-        const dropdownContent = document.createElement('div');
-        dropdownContent.className = 'dropdown';
+    function handleArcClick(event) {
+        event.stopPropagation();
+        const clickedArc = event.target;
+        const subject = clickedArc.dataset.subject;
 
-        const topics = subjectsData[subject].topics;
-        topics.forEach(topic => {
-            const button = document.createElement('button');
-            button.textContent = topic;
-            button.onclick = () => showLinksPopup(topic);
-            dropdownContent.appendChild(button);
-        });
-        dropdownsDiv.appendChild(dropdownContent);
+        if (clickedArc === currentlySelectedArc) {
+            if (subject !== 'Πληροφορίες') closePopup('links-popup');
+            return;
+        }
+
+        closePopup('info-popup');
+        closePopup('links-popup');
+        dropdownsContainer.innerHTML = '';
+
+        if (currentlySelectedArc) {
+            resetArcState(currentlySelectedArc);
+        }
+
+        selectArc(clickedArc, subject);
+
+        if (subject === 'Πληροφορίες') {
+            if (infoPopup) {
+                infoPopup.style.display = 'block';
+            }
+        } else {
+            createDropdownMenu(subject);
+        }
     }
 
-    function updateCentralCircle(subject) {
+    // --- State Management Functions ---
+    function selectArc(arc, subject) {
         const data = subjectsData[subject];
-
-        // Hide the default content
         centralSvg.style.display = 'none';
-
-        // Prepare and show the subject's SVG content
-        centralLabelText.innerHTML = data.svgContent;
-        const newSvgElement = centralLabelText.querySelector('svg');
-        if (newSvgElement) {
-            newSvgElement.style.width = '80%';
-            newSvgElement.style.height = '80%';
-            // Override colors for the central display to make it stand out
-            newSvgElement.querySelectorAll('[fill]').forEach(el => el.setAttribute('fill', '#d4af37'));
-            newSvgElement.querySelectorAll('[stroke]').forEach(el => el.setAttribute('stroke', '#d4af37'));
-        }
-        centralLabelText.style.display = 'flex';
-
+        centralLabelText.innerText = subject;
+        centralLabelText.style.display = 'block';
         centralCircle.classList.add('can-reset');
+        arc.style.fill = data.selectedColor;
+        arc.classList.add('selected');
+        currentlySelectedArc = arc;
+    }
+
+    function resetArcState(arc) {
+        if (arc) {
+            const subject = arc.dataset.subject;
+            const data = subjectsData[subject];
+            arc.style.fill = data.color;
+            arc.classList.remove('selected');
+        }
     }
 
     function resetToDefaultState() {
         if (currentlySelectedArc) {
-            const oldSubject = currentlySelectedArc.dataset.subject;
-            currentlySelectedArc.style.fill = subjectsData[oldSubject].color;
-            currentlySelectedArc.classList.remove('selected');
+            resetArcState(currentlySelectedArc);
             currentlySelectedArc = null;
         }
-        
-        // Hide the subject content
-        centralLabelText.style.display = 'none';
-        centralLabelText.innerHTML = '';
-
-        // Show the default content
         centralSvg.style.display = 'block';
-
+        centralLabelText.innerText = '';
+        centralLabelText.style.display = 'none';
         centralCircle.classList.remove('can-reset');
+        dropdownsContainer.innerHTML = '';
 
-        // Hide dropdowns with animation
-        dropdownsContainer.style.opacity = 0;
-        dropdownsContainer.style.transform = 'translateY(20px)';
-        setTimeout(() => {
-            if (!currentlySelectedArc) { // Check again in case of rapid clicks
-                dropdownsDiv.innerHTML = '';
-            }
-        }, 300); // Match transition duration
+        closePopup('info-popup');
+        closePopup('links-popup');
+
+        centralCircle.style.transform = 'scale(0.9)';
+        setTimeout(() => { centralCircle.style.transform = ''; }, 300);
     }
 
-    // --- Main Event Handlers ---
-    function handleArcClick(event) {
-        const path = event.currentTarget;
-        const subject = path.dataset.subject;
-        const data = subjectsData[subject];
-
-        // The 'Πληροφορίες' case opens a popup directly without selection
-        if (subject === 'Πληροφορίες') {
-            infoPopup.style.display = 'block';
-            resetToDefaultState(); // Reset selection if any
-            return;
-        }
-
-        // Handle selection logic
-        if (currentlySelectedArc === path) {
-            // Deselect if clicking the same arc again
-            resetToDefaultState();
-        } else {
-            // Deselect previous arc if one was selected
-            if (currentlySelectedArc) {
-                const oldSubject = currentlySelectedArc.dataset.subject;
-                currentlySelectedArc.style.fill = subjectsData[oldSubject].color;
-                currentlySelectedArc.classList.remove('selected');
-            }
-
-            // Select new arc
-            currentlySelectedArc = path;
-            path.style.fill = data.selectedColor;
-            path.classList.add('selected');
-
-            // Update UI
-            updateCentralCircle(subject);
-            createDropdowns(subject);
-            dropdownsContainer.style.opacity = 1;
-            dropdownsContainer.style.transform = 'translateY(0)';
-        }
-    }
-
-    // Add event listener for the central circle to act as a reset button
-    centralCircle.addEventListener('click', () => {
-        if (centralCircle.classList.contains('can-reset')) {
-            resetToDefaultState();
+    // --- Event Listeners ---
+    centralCircle.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (centralCircle.classList.contains('can-reset')) {    
+            resetToDefaultState();    
         }
     });
 
-    // --- Initial Call ---
-    document.addEventListener('DOMContentLoaded', createDonutChart);
+    document.body.addEventListener('click', (e) => {
+        const isClickInsideInteractiveArea =
+            centralCircle.contains(e.target) ||
+            svgContainer.contains(e.target) ||
+            dropdownsContainer.contains(e.target) ||
+            infoPopup.contains(e.target) ||
+            linksPopup.contains(e.target);
 
+        if (!isClickInsideInteractiveArea) {
+            if (infoPopup.style.display === 'block' ||
+                linksPopup.style.display === 'block' ||
+                currentlySelectedArc) {
+                    resetToDefaultState();
+            }
+        }
+    });
+
+    // --- Dropdown Functions ---
+    function createDropdownMenu(subject) {
+        dropdownsContainer.innerHTML = '';
+
+        const container = document.createElement('div');
+        container.className = 'dropdown-container';
+
+        const dropdown = document.createElement('div');
+        dropdown.className = 'dropdown';
+
+        if (subjectsData[subject] && subjectsData[subject].topics) {
+            subjectsData[subject].topics.forEach(topic => {
+                const topicButton = document.createElement('button');
+                topicButton.innerText = topic;
+                topicButton.dataset.topic = topic;
+
+                topicButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closePopup('info-popup');
+                    closePopup('links-popup');
+                    showLinksPopup(topic);
+                    e.target.style.transform = 'translateX(5px)';
+                    setTimeout(() => { e.target.style.transform = ''; }, 200);
+                });
+
+                dropdown.appendChild(topicButton);
+            });
+        }
+
+        container.appendChild(dropdown);
+        dropdownsContainer.appendChild(container);
+
+        dropdownsContainer.style.opacity = '0';
+        dropdownsContainer.style.transform = 'translateY(-10px)';
+        requestAnimationFrame(() => {    
+            requestAnimationFrame(() => {
+                dropdownsContainer.style.opacity = '1';
+                dropdownsContainer.style.transform = 'translateY(0)';
+            });
+        });
+    }
+
+    // --- Initialization ---
+    createDonutChart();
+    resetToDefaultState();
   </script>
 </body>
 </html>
