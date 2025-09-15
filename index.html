@@ -95,6 +95,10 @@
         #submenu-container {
             position: absolute;
             min-width: 200px;
+             /* --- ΟΙ ΝΕΕΣ ΠΡΟΣΘΗΚΕΣ ΕΙΝΑΙ ΕΔΩ --- */
+    max-width: 50vw;           /* 1. Ορίζει μέγιστο πλάτος (π.χ. 80% της οθόνης) */
+    overflow-wrap: break-word; /* 2. Σπάει το κείμενο για να μην ξεχειλώνει */
+    /* ------------------------------------ */
             padding: 15px;
             background: rgba(255, 255, 255, 0.1);
             border-radius: 15px;
@@ -142,7 +146,7 @@
             margin-top: 0;
             margin-bottom: 10px;
             /* Αλλαγή χρώματος γραμμάτων */
-            color: #ff0000; /* Χρυσό χρώμα */
+            color: #00ff11; /* Χρυσό χρώμα */
             text-align: center;
             font-size: 1.2em;
             width: 100%;
@@ -478,18 +482,7 @@
             menu1: {
                 title: "Αναλύσεις",
                 items: [
-                    { text: "Σύνδεσμος B", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Α", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Γ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Δ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Ε", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Ζ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Η", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Θ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Ι", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Κ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Λ", link: "https://example.com/a" },
-                    { text: "Σύνδεσμος Μ", link: "https://example.com/a" },
+                    { text: "Σύνδεσμος BLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum." },
                 ]
             },
             menu2: {
