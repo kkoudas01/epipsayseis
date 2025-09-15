@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ἐπιψαύσεις</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* ========================================================= */
+        /* ΓΕΝΙΚΟ STYLING & ΣΤΑΤΙΚΟ ΦΟΝΤΟ ΜΕ SVG GRADIENT */
+        /* ========================================================= */
+        body {
+            font-family: "Poppins", sans-serif;
+            color: white;
+            display: flex;
+            height: 100vh;
+            background: #111;
+            overflow: hidden;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            margin: 0;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background-image: linear-gradient(
+                0deg,
+                #382B8C,
+                #746BB0
+            );
+        }
+        
+        .signature {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 12px;
+            text-align: right;
+            font-style: italic;
+        }
+
+        h1, p {
+            margin: 0;
+            text-align: center;
+        }
+
+        /* ========================================================= */
+        /* STYLING SVG MENU */
+        /* ========================================================= */
+        #demo {
+            width: 90vw;
+            height: auto;
+            max-width: 720px;
+            overflow: visible;
+        }
+        #icons path {
+            fill: white;
+        }
+        #icons g {
+            cursor: pointer;
+        }
+        #icons rect {
+            fill: transparent;
+        }
+        .goop {
+            fill: #382B8C;
+        }
+        #main {
+            stroke: none;
+            stroke-width: 1px;
+        }
+        text {
+            font-weight: 700;
+            font-size: 20px;
+            text-transform: uppercase;
+            fill: rgba(0,0,0,0.5);
+        }
+        
+        /* ========================================================= */
+        /* STYLING ΓΙΑ ΤΟ GLASSMORHISM SUBMENU */
+        /* ========================================================= */
+        #submenu-container {
+            position: absolute;
+            min-width: 200px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            z-index: 10;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        #submenu-container.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        #submenu-container h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: white;
+            text-align: center;
+            font-size: 1.2em;
+            width: 100%;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 8px;
+            /* Μαύρο περίγραμμα γύρω από τα γράμματα */
+            text-shadow: 
+                -0.5px -0.5px 0 #000,  
+                0.5px -0.5px 0 #000,
+                -0.5px 0.5px 0 #000,
+                0.5px 0.5px 0 #000;
+        }
+        
+        .menu-item {
+            position: relative;
+            width: 100%;
+        }
+        
+        .menu-link, .submenu-toggle {
+            color: white;
+            text-decoration: none;
+            padding: 8px 12px;
+            margin: 4px 0;
+            width: 100%;
+            text-align: left;
+            border-radius: 8px;
+            transition: background 0.2s ease-in-out;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            cursor: pointer;
+            /* Μαύρο περίγραμμα γύρω από τα γράμματα */
+            text-shadow: 
+                -0.5px -0.5px 0 #000,  
+                0.5px -0.5px 0 #000,
+                -0.5px 0.5px 0 #000,
+                0.5px 0.5px 0 #000;
+        }
+        
+        .menu-link:hover, .submenu-toggle:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+        
+        .submenu-toggle::after {
+            content: "›";
+            margin-left: 8px;
+            font-size: 1.2em;
+            transform: rotate(0deg);
+            transition: transform 0.3s ease;
+            /* Μαύρο περίγραμμα γύρω από το βέλος */
+            text-shadow: 
+                -0.5px -0.5px 0 #000,  
+                0.5px -0.5px 0 #000,
+                -0.5px 0.5px 0 #000,
+                0.5px 0.5px 0 #000;
+        }
+        
+        .submenu-toggle.expanded::after {
+            transform: rotate(90deg);
+        }
+        
+        .submenu {
+            display: none;
+            margin-left: 15px;
+            width: calc(100% - 15px);
+            padding: 5px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            border-left: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .submenu.visible {
+            display: block;
+        }
+        
+        /* ========================================================= */
+        /* ΕΙΚΟΝΑ ΚΑΤΩ ΑΠΟ ΤΟ ΜΕΝΟΥ */
+        /* ========================================================= */
+        .svg-image {
+            margin-top: 40px;
+            max-width: 300px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+        }
+    </style>
+</head>
+<body>
+    <h1>ἐπιψαύσεις</h1>
+    <p>Ψηλαφίζοντας τὴ μορφή, τὴ δομὴ καὶ τὴ λειτουργεία τοῦ κόσμου</p>
+    <svg id="demo" xmlns="http://www.w3.org/2000/svg" width="600" height="200" viewBox="0 0 600 200">
+        <defs>
+            <filter id="gooFilter">
+                <fegaussianblur in="SourceGraphic" stdDeviation="10" result="blur" />
+                <fecolormatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 20 -8" result="goo" />
+                <feblend in="SourceGraphic" in2="goo" operator="atop"/>
+            </filter>
+        </defs>
+        <g filter="url(#gooFilter)">
+            <rect class="jumper goop" x="10" y="72" width="80" height="80" rx="26" ry="26" />
+            <rect class="jumper goop" x="10" y="72" width="80" height="80" rx="26" ry="26" />
+        </g>
+        
+        <g id="icons">
+            <g data-menu-id="menu1">
+                <rect x="15" y="77" width="70" height="70"/>
+                <path d="M34.74,109.29V130h4.91V112.92h6.86V130H65.24V109.29L50,97.32Zm16.74,3.63H61v8.68H51.48Zm-22.54-6.34L50,90l9.09,7.14V90.78h4.54v9.92l7.44,5.85-1.77,2.79L50,94.22,30.7,109.34Z"/>
+            </g>
+            <g data-menu-id="menu2">
+                <rect x="115" y="77" width="70" height="70"/>
+                <path d="M161.13,117.8a8.38,8.38,0,0,0,2.11-.84c-6.74-4.92-1.11-8.9-1-16.11.06-4.43-4.53-9.86-7.39-8.32-1-5.29-19.27-2.11-18.17,7.87A11.11,11.11,0,0,1,139.3,98c-5.68,8.17,5.26,15.21-2.93,19a5.87,5.87,0,0,0,2.36.84c-3.34,1.60-6,3.72-6,5.62V130h34.48v-6.50C167.24,121.57,164.54,119.42,161.13,117.80Zm-19.39-12.87.45-.13v-.46a2.35,2.35,0,0,0-.06-.65c3-1.76,13.66-.14,14.74-4.55a1.10,1.10,0,0,1,.65.49,11.90,11.90,0,0,1,.38,4.71l-.05.46.45.13c.24.07,1.00,0.28,0.84,1.65a3.53,3.53,0,0,1-1.77,2.79l-.36.07-0.09,0.35c-0.80,3.25-3.89,5.89-6.88,5.89s-6.08-2.64-6.88-5.89l-0.09-0.35-0.36-0.07a3.53,3.53,0,0,1-1.77-2.79C140.79,105.21,141.50,105,141.74,104.93Zm2.58,9.28a8.15,8.15,0,0,0,5.68,2.60,7.85,7.85,0,0,0,5-2,2,2,0,0,0,0.42,2,10.24,10.24,0,0,1-5.43,1.62,10.53,10.53,0,0,1-6-2A2.76,2.76,0,0,0,144.32,114.21Zm-2.55,3.64a4.51,4.51,0,0,0,1-0.39l0.44-0.14a11.24,11.24,0,0,0,13.27,0.14h0.05a13.13,13.13,0,0,0,1.65,0.37,13.31,13.31,0,0,1-16.46,0Zm18.06,9.52h-6.55V126h6.55ZM150,112.43a4.42,4.42,0,0,1-2.47-0.69l0.48-0.64a4.11,4.11,0,0,0,4.10,0l0.44,0.66A4.84,4.84,0,0,1,150,112.43Z"/>
+            </g>
+            <g data-menu-id="menu3">
+                <rect x="215" y="77" width="70" height="70"/>
+                <path d="M263.58,103.84c-0.36,0.81-0.73,1.68-1.06,2.51l2.81,1.14v18.42l-13.91-5.62V101.87l4.63,1.87a22.48,22.48,0,0,0-1.58-3.09h0L254,100l-4-1.61-18.18,7.34V130L250,122.66,268.18,130V105.70Zm-15,16.45-13.91,5.62V107.49l13.91-5.62Zm17.11-24.72a5.86,5.86,0,0,0-11.70,0,6.71,6.71,0,0,0,1.10,3.36,91.68,91.68,0,0,1,4.75,10.38,92.42,92.42,0,0,1,4.74-10.38,6.62,6.62,0,0,0,1.11-3.36Zm-5.85,3a11.79,11.79,0,1,1,0.06,0h-0.06ZM237.72,113.40c0.65,0.54,0.65,0.71,0,1.25s-0.76,0.60-1.32,0-0.63-0.71,0-1.26S237.15,112.79,237.72,113.40Zm2.17-2c-0.63,0.55-0.63,0.72,0,1.26s0.75,0.59,1.32,0,0.64-0.71,0-1.25S240.45,110.84,239.89,111.45Zm3.73,1.13c-0.63,0.55-0.63,0.72,0,1.26s0.74,0.59,1.31,0,0.64-0.70,0-1.25S244.18,112,243.62,112.58Zm2.06,3.55c-0.63,0.55-0.63,0.72,0,1.26s0.74,0.59,1.32,0,0.63-0.70,0-1.24S246.24,115.52,245.68,116.13Zm7.48,0.53c-0.63,0.55-0.63,0.72,0,1.26s0.75,0.59,1.32,0,0.64-0.70,0-1.24-0.76-0.63-1.32,0Zm3.86-1.10c-0.63,0.54-0.63,0.72,0,1.25s0.74,0.60,1.32,0,0.64-0.70,0-1.25-0.76-0.56-1.34,0Zm1.92-3.56c-0.63,0.54-0.63,0.72,0,1.25s0.74,0.60,1.32,0,0.63-0.71,0-1.25-0.76-0.62-1.32,0Z"/>
+            </g>
+            <g data-menu-id="menu4">
+                <rect x="315" y="77" width="70" height="70"/>
+                <path d="M372.70,110c0-3-5.34-5-12.33-6,0.34-0.84,0.64-1.65,0.92-2.44a4.63,4.63,0,0,1-1.67-0.47c-0.30,0.87-0.64,1.76-1.00,2.68-1.56-0.17-3.17-0.29-4.80-0.37-0.87-1.35-1.79-2.68-2.73-4,3.81-4.94,7.20-7.72,9-7.72a0.83,0.83,0,0,1,0.46,0.11,1.43,1.43,0,0,1,0.55,0.94,4.41,4.41,0,0,1,1.77,0.12,3.32,3.32,0,0,0-1.45-2.56A2.61,2.61,0,0,0,360,90c-2.69,0-6.45,3.46-10,8-3.57-4.58-7.33-8-10-8a2.56,2.56,0,0,0-1.33,0.34c-1.74,1-2,4-0.76,8.57a43.77,43.77,0,0,0,1.74,5.10c-1,0.13-1.94,0.29-2.85,0.47a4.45,4.45,0,0,1,0.58,1.66c0.94-0.18,1.93-0.34,3-0.48q0.93,2.13,2.07,4.34c-0.76,1.47-1.46,2.93-2.07,4.35-7.16-1-11.29-2.87-11.29-4.35a1.20,1.20,0,0,1,0.33-0.73,4.39,4.39,0,0,1-0.73-1.69A3.19,3.19,0,0,0,327.30,110c0,3,5.34,5,12.33,6a43.77,43.77,0,0,0-1.74,5.10c-1.25,4.60-1,7.56,0.76,8.57A2.55,2.55,0,0,0,340,130c2.69,0,6.45-3.46,10-8,0.41,0.53,0.83,1,1.24,1.54a4.37,4.37,0,0,1,1.19-1.27c-0.45-0.53-0.90-1.09-1.36-1.68,0.94-1.28,1.86-2.61,2.73-4,1.63-0.08,3.24-0.20,4.80-0.37a45.17,45.17,0,0,1,1.84,5.32c1.15,4.25,0.74,6.22,0,6.62a0.83,0.83,0,0,1-0.46,0.11,3,3,0,0,1-1.15-0.29,4.43,4.43,0,0,1-1.17,1.34A5.08,5.08,0,0,0,360,130a2.56,2.56,0,0,0,1.33-0.34c2.60-1.50,1.67-7.13-1-13.67C367.36,115,372.70,113,372.70,110Zm-14.82-4.55c-0.39,0.88-0.82,1.78-1.27,2.69-0.27-0.50-0.55-1-0.83-1.48l-0.86-1.46C355.93,105.27,356.92,105.35,357.88,105.45Zm-6.19-2.11h-3.38c0.56-0.86,1.13-1.68,1.69-2.45,0.56,0.77,1.13,1.59,1.69,2.45Zm-12.13-4.88c-1.15-4.25-0.74-6.22,0-6.62a0.83,0.83,0,0,1,0.46-0.11c1.75,0,5.14,2.78,9,7.72-0.94,1.28-1.86,2.61-2.73,4-1.63,0.08-3.25,0.20-4.80,0.37a44.82,44.82,0,0,1-1.88-5.36Zm2.56,7c1-0.10,1.95-0.18,3-0.25l-0.86,1.46-0.83,1.48c-0.49-0.92-0.92-1.82-1.31-2.70Zm1.27,6.41,0.83,1.48,0.86,1.46q-1.54-0.09-3-0.24c0.43-0.90,0.86-1.80,1.31-2.71ZM340,128.27a0.83,0.83,0,0,1-0.46-0.11c-0.70-0.40-1.11-2.37,0-6.62a45.17,45.17,0,0,1,1.84-5.32c1.55,0.17,3.17,0.29,4.80,0.37,0.87,1.35,1.79,2.68,2.73,4C345.12,125.49,341.73,128.27,340,128.27Zm10-9.16c-0.56-0.77-1.13-1.59-1.69-2.45h3.38c-0.56,0.86-1.13,1.68-1.69,2.45Zm2.83-4.21h-5.66c-0.48-0.78-1-1.59-1.45-2.43s-0.93-1.65-1.37-2.47c0.44,0.82,0.89-1.65,1.37-2.47s1-1.65,1.45-2.42c0.93,0,1.88,0,2.83,0s1.90,0,2.83,0c0.48,0.77,1,1.58,1.45,2.42s0.93,1.65,1.37,2.47c-0.44,0.82-0.89,1.65-1.37,2.47S353.31,114.12,352.83,114.90Zm2.09-0.10,0.86-1.46,0.83-1.48c0.45,0.91,0.88,1.81,1.27,2.70-0.94,0.10-1.88,0.18-3,0.24Zm4.76-0.45c-0.62-1.44-1.32-2.89-2.08-4.35q1.15-2.20,2.08-4.34a45.14,45.14,0,0,1,5.54,1.07c4.24,1.13,5.75,2.47,5.75,3.27,0,1.48-4.13,3.39-11.29,4.35ZM353.63,110a3.63,3.63,0,1,1-3.63-3.63,3.64,3.64,0,0,1,3.63,3.63Zm8-15.50a2.66,2.66,0,1,0,2.66,2.66,2.66,2.66,0,0,0-2.66-2.66Zm-4,31.33a2.66,2.66,0,1,1-2.66-2.66h0a2.66,2.66,0,0,1,2.69,2.63v0Zm-22-19.11a2.66,2.66,0,1,1-2.66-2.66,2.66,2.66,0,0,1,2.66,2.66Z"/>
+            </g>
+            <g data-menu-id="menu5">
+                <rect x="415" y="77" width="70" height="70"/>
+                <path d="M440.14,130a3.72,3.72,0,0,1-3.51-2.56l-5.86-17.52h38.46l-5.86,17.52a3.72,3.72,0,0,1-3.51,2.56Zm16.44-17.43a1.12,1.12,0,0,0-1.11,0.93l-1.93,12.61a1.07,1.07,0,0,0,0.20,0.79,1.16,1.16,0,0,0,0.76,0.45h0.16a1.13,1.13,0,0,0,1.11-0.94l1.93-12.61a1.07,1.07,0,0,0-0.20-0.79,1.17,1.17,0,0,0-0.76-0.44Zm-13.16,0h-0.16a1.17,1.17,0,0,0-0.76,0.44,1.07,1.07,0,0,0-0.20,0.79l1.93,12.61a1.13,1.13,0,0,0,1.11,0.94h0.16a1.16,1.16,0,0,0,0.76-0.45,1.07,1.07,0,0,0,0.20-0.79l-1.93-12.61A1.12,1.12,0,0,0,443.42,112.57Zm19.62,0.16a1.12,1.12,0,0,0-1.09,0.80l-3.59,12.29a1.07,1.07,0,0,0,0.11,0.84,1.10,1.10,0,0,0,0.69,0.50,1.31,1.31,0,0,0,0.28,0,1.13,1.13,0,0,0,1.09-0.81l3.59-12.28a1.07,1.07,0,0,0-0.10-0.82,1.17,1.17,0,0,0-0.70-0.53,1.15,1.15,0,0,0-0.32,0Zm-26.08,0a1.31,1.31,0,0,0-0.28,0,1.19,1.19,0,0,0-0.69,0.51,1.05,1.05,0,0,0-0.11,0.83l3.59,12.30a1.12,1.12,0,0,0,1.09,0.80,1.31,1.31,0,0,0,0.28,0,1.17,1.17,0,0,0,0.70-0.53,1,1,0,0,0,0.10-0.81l-3.59-12.29a1.12,1.12,0,0,0-1.05-0.81Zm13-0.23a1.11,1.11,0,0,0-1.13,1.09h0v12.48a1.13,1.13,0,0,0,2.26,0h0V113.59A1.11,1.11,0,0,0,450,112.50Zm2.40-4.83a3.06,3.06,0,0,0,0.37-0.35l3.50-3.89h13.91a2.12,2.12,0,1,1,0,4.24Zm-22.58,0a2.12,2.12,0,1,1,0-4.24h16.83a4,4,0,0,0-0.25,1.53,3.83,3.83,0,0,0,1.19,2.59l0.14,0.12Zm20.27-0.73a1.68,1.68,0,0,1-1.15-0.45l-0.43-0.41a1.73,1.73,0,0,1-0.10-2.43l10.16-11.28a1.09,1.09,0,0,1,1.57-0.07l1.29,1.20a1.21,1.21,0,0,1,0.36,0.78,1.15,1.15,0,0,1-0.30,0.81l-10.16,11.29a1.69,1.69,0,0,1-1.24,0.56Z"/>
+            </g>
+            <g data-menu-id="menu6">
+                <rect x="515" y="77" width="70" height="70"/>
+                <path d="M558.91,128.14S559.16,130,555,130H537.29c-3.94,0-3.94-1.86-3.94-1.86a0.66,0.66,0,0,1,0.65-0.66h24.26A0.66,0.66,0,0,1,558.91,128.14Zm7.74-13.30a5.54,5.54,0,0,1-5.53,5.53h0a5.45,5.45,0,0,1-3.54-1.29c-1.92,4.55-6.29,7.25-7.08,7.25h-8.74c-1,0-8-4.50-8-11.63v-8a1.85,1.85,0,0,1,1.85-1.84h21a1.86,1.86,0,0,1,1.84,1.84V110a5.56,5.56,0,0,1,8.20,4.82v0Zm-24.54,9h1.71c-1.51-1-4.59-4-4.59-7.68v-5H556v-3.80H536.29v7.32c0,4.94,4.55,8.53,5.82,9.14Zm21.65-9a2.64,2.64,0,0,0-5.28,0h0a2.64,2.64,0,0,0,5.28,0ZM546.92,96c0,2.69-3,4.09-0.62,6.78-0.23-3.13,3-4,3.23-7s-4.69-3.22-5.24-6.52C542.30,92.56,546.92,93.11,546.92,96Z"/>
+            </g>
+        </g>
+        <path id="main" d="" fill="none" stroke-miterlimit="10" />
+    </svg>
+    
+    <!-- 3. ΕΙΚΟΝΑ SVG ΚΑΤΩ ΑΠΟ ΤΟ ΜΕΝΟΥ -->
+    <svg class="svg-image" height="800px" width="800px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+	 viewBox="0 0 25.394 25.394" xml:space="preserve">
+<g>
+	<path style="fill:#cfc5f7;" d="M19.533,21.962c0,0.698-0.088,3.142-2.531,3.142c-1.309,0-1.92-2.182-4.798-2.182
+		c-1.919,0-1.571,0.784-5.147,0.784c-3.578,0-5.672-1.744-5.672-4.361c0-3.142,1.904-2.132,3.839-3.664
+		c2.095-1.658,1.92-2.967,4.538-2.967c2.18,0,3.398,2.981,4.885,3.577C16.828,17.163,19.533,20.13,19.533,21.962z M3.672,11.721
+		c0.057-1.491-0.574-2.754-1.778-2.754C0.631,8.967,0,10.23,0,11.261c0,1.435,0.803,2.811,1.894,2.811
+		C2.984,14.071,3.614,13.213,3.672,11.721z M12.734,10.344c1.09,0,2.524-2.007,2.581-3.499c0.058-1.492-0.114-3.039-1.319-3.039
+		c-1.262,0-3.04,1.892-3.04,3.441C10.956,8.681,11.645,10.344,12.734,10.344z M17.094,14.015c1.605,0,2.582-1.778,2.639-3.27
+		s-0.287-2.754-1.492-2.754c-1.949,0-2.925,1.894-2.925,3.442C15.316,12.867,16.004,14.015,17.094,14.015z M22.198,12.811
+		c-1.95,0-3.097,2.235-3.097,3.785c0,1.435,0.917,2.467,2.008,2.467c1.605,0,2.639-1.605,2.695-3.097
+		C23.861,14.473,23.402,12.811,22.198,12.811z M6.712,10.86c1.09,0,1.95-0.802,1.95-2.295c0-2.523,1.146-5.047-0.057-5.047
+		c-2.41,0-3.787,3.498-3.787,4.531C4.818,9.484,5.621,10.86,6.712,10.86z M2.053,8.109C2.387,8.2,2.699,8.369,2.69,7.897
+		C2.675,7.16,2.751,5.957,2.387,5.926C2.17,5.909,1.563,7.173,1.389,7.801C1.227,8.398,1.668,8.005,2.053,8.109z M8.846,2.325
+		C9.211,2.436,9.55,2.624,9.571,2.177C9.607,1.478,9.776,0.348,9.372,0.29C9.134,0.255,8.367,1.398,8.129,1.977
+		C7.906,2.528,8.425,2.192,8.846,2.325z M15.312,2.739c0.334,0.091,0.653,0.26,0.638-0.213c-0.03-0.849-0.09-2.026-0.453-2.057
+		c-0.216-0.018-0.703,1.064-0.876,1.692C14.458,2.759,14.928,2.634,15.312,2.739z M20.641,5.998
+		c0.334,0.092,0.654,0.261,0.637-0.212c-0.029-0.849-0.23-2.438-0.594-2.467c-0.216-0.018-0.537,1.245-0.795,1.928
+		C19.671,5.825,20.257,5.894,20.641,5.998z M24.822,9.556c-0.216-0.018-0.559,0.865-0.732,1.494
+		c-0.162,0.597,0.281,0.531,0.666,0.636c0.334,0.091,0.653,0.26,0.637-0.212C25.362,10.625,25.186,9.586,24.822,9.556z"/>
+</g>
+</svg>
+
+    <!-- Το glassmorphism μενού επιλογών -->
+    <div id="submenu-container"></div>
+    
+    <!-- 2. ΔΙΑΚΡΙΤΙΚΗ ΥΠΟΓΡΑΦΗ ΚΑΤΩ ΔΕΞΙΑ -->
+    <div class="signature">Κώστας Κούδας</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/MotionPathPlugin.min.js"></script>
+
+    <script>
+        console.clear();
+        gsap.registerPlugin(MotionPathPlugin);
+
+        let targets = gsap.utils.toArray("#icons g");
+        let submenuContainer = document.getElementById("submenu-container");
+
+        let dotCenters = [50, 150, 250, 350, 450, 550];
+        let yCenter = 112;
+        let maxTravel = 500;
+        let minTravel = 100;
+        let mapper = gsap.utils.mapRange(minTravel, maxTravel, 0.5, 1);
+        let anim;
+        let activeDot = -1;
+        let targetDot;
+        let maxDur = 1;
+        let maxArc = 150;
+        let staggers = [0.2, 0.16, 0.135, 0.12, 0.11];
+
+        const submenuContent = {
+            menu1: {
+                title: "Επιλογές Αρχικής",
+                items: [
+                    { text: "Σύνδεσμος B", link: "https://example.com/a" },
+                    { text: "Σύνδεσμος Α", link: "https://example.com/a" },
+                ]
+            },
+            menu2: {
+                title: "Επιλογές Προφίλ",
+                items: [
+                    { text: "Υπο-μενού 2", link: "#" },
+                    { text: "Σύνδεσμος Β", link: "https://example.com/b" },
+                ]
+            },
+            menu3: {
+                title: "Ρυθμίσεις",
+                items: [
+                    { 
+                        text: "Υπο-μενού 3", 
+                        type: "submenu",
+                        items: [
+                            { text: "Επιλογή 3.1", link: "#" },
+                            { text: "Επιλογή 3.2", link: "#" },
+                            { 
+                                text: "Ακόμα πιο βαθιά", 
+                                type: "submenu",
+                                items: [
+                                    { text: "Επιλογή 3.2.1", link: "#" },
+                                    { text: "Επιλογή 3.2.2", link: "#" }
+                                ]
+                            }
+                        ]
+                    },
+                    { text: "Σύνδεσμος Γ", link: "https://example.com/c" },
+                    { 
+                        text: "Άλλο υπο-μενού", 
+                        type: "submenu",
+                        items: [
+                            { text: "Επιλογή Α", link: "#" },
+                            { text: "Επιλογή Β", link: "#" }
+                        ]
+                    }
+                ]
+            },
+            menu4: {
+                title: "Μηνύματα",
+                items: [
+                    { text: "Εισερχόμενα", link: "#" },
+                    { text: "Απεσταλμένα", link: "#" },
+                ]
+            },
+            menu5: {
+                title: "Αγαπημένα",
+                items: [
+                    { text: "Λίστα Α", link: "#" },
+                    { text: "Λίστα Β", link: "#" },
+                ]
+            },
+            menu6: {
+                title: "Πληροφορίες",
+                items: [
+                    { text: "Σχετικά με εμάς", link: "#" },
+                    { text: "Επικοινωνία", link: "#" },
+                ]
+            }
+        };
+
+        targets.forEach((obj, i) => {
+            obj.index = i;
+            obj.addEventListener("click", letsGoo);
+        });
+
+        // Χρήση event delegation για τα toggle buttons
+        submenuContainer.addEventListener('click', function(e) {
+            // Ελέγχουμε αν το κλικ ήταν σε ένα στοιχείο με κλάση 'submenu-toggle'
+            if (e.target.classList.contains('submenu-toggle')) {
+                e.stopPropagation();
+                const submenu = e.target.nextElementSibling;
+                const isVisible = submenu.classList.contains('visible');
+                
+                // Κλείσιμο όλων των υπο-μενου που δεν είναι αυτό
+                document.querySelectorAll('.submenu.visible').forEach(menu => {
+                    if (menu !== submenu && !menu.contains(submenu)) {
+                        menu.classList.remove('visible');
+                        menu.previousElementSibling.classList.remove('expanded');
+                    }
+                });
+                
+                // Άνοιγμα/κλείσιμο του τρέχοντος
+                if (isVisible) {
+                    submenu.classList.remove('visible');
+                    e.target.classList.remove('expanded');
+                } else {
+                    submenu.classList.add('visible');
+                    e.target.classList.add('expanded');
+                }
+            }
+        });
+
+        // Δυναμική τοποθέτηση του submenu κάτω από το κλικαρισμένο εικονίδιο
+        function showSubmenu(dotIndex) {
+            const menuId = targets[dotIndex].dataset.menuId;
+            const content = submenuContent[menuId];
+            
+            let html = `<h3>${content.title}</h3>`;
+            content.items.forEach(item => {
+                if (item.type === "submenu") {
+                    html += `
+                        <div class="menu-item">
+                            <div class="submenu-toggle">${item.text}</div>
+                            <div class="submenu">
+                                ${generateSubmenuItems(item.items)}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `<a href="${item.link}" class="menu-link">${item.text}</a>`;
+                }
+            });
+
+            submenuContainer.innerHTML = html;
+            
+            // Υπολογισμός της θέσης του εικονιδίου
+            const iconRect = targets[dotIndex].getBoundingClientRect();
+            
+            // Τοποθέτηση του submenu κάτω από το κλικαρισμένο εικονίδιο
+            submenuContainer.style.top = `${iconRect.bottom + 20}px`;
+            submenuContainer.style.left = `${iconRect.left + (iconRect.width / 2) - (submenuContainer.offsetWidth / 2)}px`;
+            
+            submenuContainer.classList.add('visible');
+        }
+
+        // Βοηθητική συνάρτηση για δημιουργία υπο-μενου
+        function generateSubmenuItems(items) {
+            let html = '';
+            items.forEach(item => {
+                if (item.type === "submenu") {
+                    html += `
+                        <div class="menu-item">
+                            <div class="submenu-toggle">${item.text}</div>
+                            <div class="submenu">
+                                ${generateSubmenuItems(item.items)}
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    html += `<a href="${item.link}" class="menu-link">${item.text}</a>`;
+                }
+            });
+            return html;
+        }
+
+        function hideSubmenu() {
+            // Κλείσιμο όλων των υπο-μενου πρώτα
+            document.querySelectorAll('.submenu.visible').forEach(menu => {
+                menu.classList.remove('visible');
+            });
+            document.querySelectorAll('.submenu-toggle.expanded').forEach(button => {
+                button.classList.remove('expanded');
+            });
+            
+            // Μετά κλείσιμο του κύριου μενού
+            submenuContainer.classList.remove('visible');
+        }
+
+        function letsGoo() {
+            targetDot = this.index;
+
+            if (targetDot === activeDot) {
+                hideSubmenu();
+                activeDot = -1;
+                return;
+            }
+            
+            // Αρχικά κρύβουμε το μενού για να το εμφανίσουμε στη νέα θέση μετά την κίνηση
+            hideSubmenu();
+
+            if (anim && anim.isActive()) {
+                anim.progress(1);
+            }
+
+            let oldX = (activeDot === -1) ? dotCenters[0] : dotCenters[activeDot];
+            let newX = dotCenters[targetDot];
+            let travel = Math.abs(oldX - newX);
+            let factor = mapper(travel);
+            let newArc = yCenter - maxArc * factor;
+            let dur = maxDur * factor;
+            let newStagger = staggers[travel / 100 - 1] || 0.2;
+            let newPath = `M${oldX},${yCenter} Q${travel / 2 + Math.min(oldX, newX)},${newArc} ${newX},${yCenter}`;
+
+            gsap.set("#main", { attr: { d: newPath } });
+            anim = gsap
+                .timeline({ onComplete: () => {
+                    showSubmenu(targetDot);
+                }})
+                .to(".jumper", {
+                    motionPath: {
+                        path: "#main",
+                        align: "#main",
+                        alignOrigin: [0.5, 0.5]
+                    },
+                    stagger: newStagger,
+                    duration: dur,
+                    ease: "sine.inOut"
+                })
+                .to(
+                    ".jumper",
+                    { duration: dur / 2, attr: { rx: 40, ry: 40 }, yoyo: true, repeat: 1 },
+                    0
+                );
+            
+            activeDot = targetDot;
+        }
+
+        // Κλείσιμο μενού όταν γίνεται κλικ έξω από αυτό
+        document.addEventListener('click', function(e) {
+            if (!submenuContainer.contains(e.target) && !e.target.closest('#icons g')) {
+                hideSubmenu();
+                activeDot = -1;
+            }
+        });
+
+        // Αποτροπή κλεισίματος όταν γίνεται κλικ μέσα στο μενού
+        submenuContainer.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    </script>
+</body>
+</html>
