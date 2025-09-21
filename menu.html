@@ -371,8 +371,13 @@
                 display: block;
             }
             
+            /* Βελτίωση 1: Καλύτερα χρώματα για το mega-menu */
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content {
+                background-color: rgba(0, 0, 0, 0.3); /* Πιο σκούρο φόντο για καλύτερη αντίθεση */
+            }
+            
             nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu{
-                background-color: rgba(255, 255, 255, 0.1);
+                background-color: rgba(255, 255, 255, 0.15); /* Πιο ανοιχτό φόντο για τις στήλες */
                 padding: 15px;
                 margin-bottom: 10px;
                 border-radius: 5px;
@@ -382,7 +387,7 @@
                 font-size: 16px;
                 font-weight: bold;
                 color: #fff;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Πιο έντονο border */
             }
             
             nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu.on .title{ 
@@ -390,7 +395,7 @@
             }
             
             nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a{
-               color: rgba(255, 255, 255, 0.9);
+               color: rgba(255, 255, 255, 0.95); /* Πιο λευκό κείμενο */
                border: none;
                padding: 8px 0;
            }
@@ -398,6 +403,12 @@
            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a:hover {
                color: #fff;
                padding-left: 5px;
+               background-color: rgba(255, 255, 255, 0.1); /* Προσθήκη φόντου στο hover */
+           }
+           
+           /* Βελτίωση 2: Υπο-μενού να ανοίγουν πιο δεξιά */
+           nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu li ul.dropdown-menu {
+               padding-left: 20px; /* Επιπλέον padding για να φαίνονται πιο δεξιά */
            }
         }
         
@@ -602,84 +613,96 @@
     
     <!-- Custom Bootsnav JS -->
     <script>
-    $(document).ready(function() {
-        // Enable dropdown functionality for desktop
-        function setupDesktopMenu() {
-            $('.navbar .dropdown').off('hover');
-            $('.navbar .dropdown').hover(function() {
-                $(this).addClass('on');
-                $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-            }, function() {
-                $(this).removeClass('on');
-                $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-            });
-        }
+$(document).ready(function() {
+    // Enable dropdown functionality for desktop
+    function setupDesktopMenu() {
+        $('.navbar .dropdown').off('hover');
+        $('.navbar .dropdown').hover(function() {
+            $(this).addClass('on');
+            $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+        }, function() {
+            $(this).removeClass('on');
+            $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+        });
+    }
+    
+    // Enable dropdown functionality for mobile
+    function setupMobileMenu() {
+        $('.navbar .dropdown').off('hover');
         
-        // Enable dropdown functionality for mobile
-        function setupMobileMenu() {
-            $('.navbar .dropdown').off('hover');
-            
-            // Αρχικά κλείστε όλα τα dropdowns
-            $('.navbar .dropdown').removeClass('on');
-            $('.navbar .dropdown-menu').hide();
-            
-            // Handle dropdown clicks
-            $('.navbar .dropdown > a').off('click').on('click', function(e) {
-                if ($(window).width() <= 990) {
-                    e.preventDefault();
-                    var $parent = $(this).parent();
-                    
-                    // Close other dropdowns
-                    $parent.siblings('.dropdown.on').removeClass('on').find('.dropdown-menu').slideUp();
-                    
-                    // Toggle this dropdown
-                    $parent.toggleClass('on');
-                    $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
-                    
-                    return false;
-                }
-            });
-            
-            // Handle subdropdown clicks
-            $('.navbar .dropdown .dropdown > a').off('click').on('click', function(e) {
-                if ($(window).width() <= 990) {
-                    e.preventDefault();
-                    var $parent = $(this).parent();
-                    
-                    // Close other subdropdowns at this level
-                    $parent.siblings('.dropdown.on').removeClass('on').find('.dropdown-menu').slideUp();
-                    
-                    // Toggle this subdropdown
-                    $parent.toggleClass('on');
-                    $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
-                    
-                    return false;
-                }
-            });
-        }
+        // Αρχικά κλείστε όλα τα dropdowns
+        $('.navbar .dropdown').removeClass('on');
+        $('.navbar .dropdown-menu').hide();
         
-        // Initialize based on screen size
-        function initMenu() {
-            if ($(window).width() > 990) {
-                setupDesktopMenu();
-            } else {
-                setupMobileMenu();
+        // Handle dropdown clicks
+        $('.navbar .dropdown > a').off('click').on('click', function(e) {
+            if ($(window).width() <= 990) {
+                e.preventDefault();
+                var $parent = $(this).parent();
+                var wasOpen = $parent.hasClass('on');
+                
+                // Close all dropdowns first
+                $('.navbar .dropdown').removeClass('on');
+                $('.navbar .dropdown-menu').slideUp();
+                
+                // If the clicked dropdown was not open, open it
+                if (!wasOpen) {
+                    $parent.addClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
+                }
+                
+                return false;
             }
+        });
+        
+        // Handle subdropdown clicks
+        $('.navbar .dropdown .dropdown > a').off('click').on('click', function(e) {
+            if ($(window).width() <= 990) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling to parent dropdown
+                
+                var $parent = $(this).parent();
+                var wasOpen = $parent.hasClass('on');
+                
+                // Close other subdropdowns at this level
+                $parent.siblings('.dropdown').removeClass('on').find('.dropdown-menu').slideUp();
+                
+                // Toggle this subdropdown
+                if (wasOpen) {
+                    $parent.removeClass('on');
+                    $parent.find('.dropdown-menu').slideUp();
+                } else {
+                    $parent.addClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
+                }
+                
+                return false;
+            }
+        });
+    }
+    
+    // Initialize based on screen size
+    function initMenu() {
+        if ($(window).width() > 990) {
+            setupDesktopMenu();
+        } else {
+            setupMobileMenu();
         }
-        
-        // Initial setup
+    }
+    
+    // Initial setup
+    initMenu();
+    
+    // Handle window resize
+    $(window).resize(function() {
         initMenu();
-        
-        // Handle window resize
-        $(window).resize(function() {
-            initMenu();
-        });
-        
-        // Mobile menu toggle - use Bootstrap's built-in collapse
-        $('.navbar-toggle').click(function() {
-            // This is handled by Bootstrap's collapse plugin
-        });
     });
-    </script>
+    
+    // Mobile menu toggle - use Bootstrap's built-in collapse
+    $('.navbar-toggle').click(function() {
+        // This is handled by Bootstrap's collapse plugin
+    });
+});
+</script>
 </body>
 </html>
