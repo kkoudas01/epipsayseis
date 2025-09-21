@@ -242,15 +242,8 @@
             
             .navbar-header {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-end;
                 width: 100%;
-            }
-            
-            .navbar-brand {
-                color: white !important;
-                font-weight: bold;
-                padding: 15px;
-                font-size: 20px;
             }
             
             .dropdown-menu.megamenu-content {
@@ -315,6 +308,17 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             
+            /* Αρχική κατάσταση - dropdowns κλειστά */
+            nav.navbar.bootsnav ul.nav>li.dropdown > a:after {
+                content: "\f107" !important; /* Βέλος προς τα κάτω */
+                transform: rotate(0deg);
+                transition: transform 0.3s;
+            }
+            
+            nav.navbar.bootsnav ul.nav>li.dropdown.on > a:after {
+                content: "\f106" !important; /* Βέλος προς τα πάνω */
+            }
+            
             nav.navbar.bootsnav.navbar-mobile ul.nav>li>a{
                 text-align: left;
                 padding: 15px;
@@ -339,7 +343,6 @@
             }
             
             nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after{ 
-                content: "\f107";
                 right: 15px;
                 top: 15px;
                 font-size: 18px;
@@ -396,12 +399,6 @@
                color: #fff;
                padding-left: 5px;
            }
-           
-           /* Βελτίωση για submenus σε κινητά */
-           .dropdown-menu .dropdown.on > .dropdown-menu {
-               display: block;
-               margin-left: 15px;
-           }
         }
         
         /* Additional styling for demo page */
@@ -455,7 +452,6 @@
                 <div class="col-md-12">
                     <nav class="navbar navbar-default navbar-mobile bootsnav">
                         <div class="navbar-header">
-                            <a class="navbar-brand" href="#">Brand</a>
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                 <i class="fa fa-bars"></i>
                             </button>
@@ -622,6 +618,10 @@
         // Enable dropdown functionality for mobile
         function setupMobileMenu() {
             $('.navbar .dropdown').off('hover');
+            
+            // Αρχικά κλείστε όλα τα dropdowns
+            $('.navbar .dropdown').removeClass('on');
+            $('.navbar .dropdown-menu').hide();
             
             // Handle dropdown clicks
             $('.navbar .dropdown > a').off('click').on('click', function(e) {
