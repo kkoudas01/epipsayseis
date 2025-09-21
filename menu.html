@@ -240,6 +240,19 @@
                 margin-bottom: 50px;
             }
             
+            .navbar-header {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+            }
+            
+            .navbar-brand {
+                color: white !important;
+                font-weight: bold;
+                padding: 15px;
+                font-size: 20px;
+            }
+            
             .dropdown-menu.megamenu-content {
                 width: 100%;
                 left: 0 !important;
@@ -269,8 +282,8 @@
                 border: 1px solid #fff;
                 border-radius: 4px;
                 padding: 9px 12px;
-                margin-right: 15px;
-                margin-top: 15px;
+                margin: 15px;
+                display: block;
             }
             
             nav.navbar.bootsnav .navbar-toggle .fa-bars {
@@ -279,14 +292,26 @@
             
             nav.navbar.bootsnav.navbar-mobile .navbar-collapse{ 
                 background-color: #6c5ce7; 
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                display: block !important;
+            }
+            
+            nav.navbar.bootsnav.navbar-mobile .navbar-collapse.in {
                 max-height: 80vh;
                 overflow-y: auto;
-                border-top: 1px solid rgba(255, 255, 255, 0.2);
-                margin-top: 10px;
+            }
+            
+            nav.navbar.bootsnav ul.nav{ 
+                margin: 0;
+                width: 100%;
             }
             
             nav.navbar.bootsnav ul.nav>li{ 
-                margin: 0 auto;
+                margin: 0;
+                width: 100%;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
             }
             
@@ -296,6 +321,7 @@
                 border: none;
                 color: #fff;
                 font-size: 16px;
+                width: 100%;
             }
             
             nav.navbar.bootsnav ul.nav>li.dropdown>a{ 
@@ -303,16 +329,13 @@
             }
             
             nav.navbar.bootsnav.navbar-mobile ul.nav>li>a>span:before{
-                height: 150px;
-                width: 150px;
-                top: 50%;
-                transform: translateY(-50%) translateX(-50%) rotate(45deg) scale(0);
+                display: none;
             }
             
             nav.navbar.bootsnav ul.nav > li.on > a > span:before,
             nav.navbar.bootsnav ul.nav > li.active > a > span:before,
             nav.navbar.bootsnav ul.nav > li > a:hover > span:before{
-                transform: translateY(-50%) translateX(-50%) rotate(45deg) scale(1.8);
+                display: none;
             }
             
             nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after{ 
@@ -339,6 +362,10 @@
                 border: 0;
                 box-shadow: none;
                 display: none;
+            }
+            
+            nav.navbar.bootsnav li.dropdown.on > .dropdown-menu {
+                display: block;
             }
             
             nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu{
@@ -368,11 +395,6 @@
            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a:hover {
                color: #fff;
                padding-left: 5px;
-           }
-           
-           /* Βελτίωση για εμφάνιση dropdowns σε κινητά */
-           nav.navbar.bootsnav .dropdown.on > .dropdown-menu {
-               display: block;
            }
            
            /* Βελτίωση για submenus σε κινητά */
@@ -431,12 +453,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
-                    <nav class="navbar navbar-default navbar-mobile bootsnav on">
+                    <nav class="navbar navbar-default navbar-mobile bootsnav">
                         <div class="navbar-header">
+                            <a class="navbar-brand" href="#">Brand</a>
                             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                 <i class="fa fa-bars"></i>
                             </button>
-                            <a class="navbar-brand" href="#">Brand</a>
                         </div>
                         <div class="collapse navbar-collapse" id="navbar-menu">
                             <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
@@ -585,69 +607,77 @@
     <!-- Custom Bootsnav JS -->
     <script>
     $(document).ready(function() {
-        // Enable dropdown functionality
-        $('.navbar .dropdown').hover(function() {
-            if ($(window).width() > 991) {
+        // Enable dropdown functionality for desktop
+        function setupDesktopMenu() {
+            $('.navbar .dropdown').off('hover');
+            $('.navbar .dropdown').hover(function() {
                 $(this).addClass('on');
                 $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-            }
-        }, function() {
-            if ($(window).width() > 991) {
+            }, function() {
                 $(this).removeClass('on');
                 $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-            }
-        });
+            });
+        }
         
-        // Mobile menu toggle
-        $('.navbar-toggle').click(function() {
-            $('.navbar-collapse').slideToggle();
-            $(this).toggleClass('active');
-        });
-        
-        // Mobile dropdown click handler
-        $(document).on('click', '.navbar-mobile .dropdown > a', function(e) {
-            if ($(window).width() <= 990) {
-                e.preventDefault();
-                var $parent = $(this).parent();
-                
-                // Close other dropdowns
-                $parent.siblings('.on').removeClass('on').find('.dropdown-menu').slideUp();
-                
-                // Toggle this dropdown
-                $parent.toggleClass('on');
-                $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
-                
-                // Prevent closing the menu when clicking a dropdown
-                e.stopPropagation();
-            }
-        });
-        
-        // Submenu handling for mobile
-        $(document).on('click', '.navbar-mobile .dropdown .dropdown > a', function(e) {
-            if ($(window).width() <= 990) {
-                e.preventDefault();
-                var $parent = $(this).parent();
-                
-                // Close other subdropdowns at this level
-                $parent.siblings('.on').removeClass('on').find('.dropdown-menu').slideUp();
-                
-                // Toggle this subdropdown
-                $parent.toggleClass('on');
-                $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
-                
-                // Prevent closing the menu when clicking a dropdown
-                e.stopPropagation();
-            }
-        });
-        
-        // Close menu when clicking outside
-        $(document).on('click', function(e) {
-            if ($(window).width() <= 990) {
-                if (!$(e.target).closest('.navbar-collapse').length && $('.navbar-collapse').is(':visible')) {
-                    $('.navbar-collapse').slideUp();
-                    $('.navbar-toggle').removeClass('active');
+        // Enable dropdown functionality for mobile
+        function setupMobileMenu() {
+            $('.navbar .dropdown').off('hover');
+            
+            // Handle dropdown clicks
+            $('.navbar .dropdown > a').off('click').on('click', function(e) {
+                if ($(window).width() <= 990) {
+                    e.preventDefault();
+                    var $parent = $(this).parent();
+                    
+                    // Close other dropdowns
+                    $parent.siblings('.dropdown.on').removeClass('on').find('.dropdown-menu').slideUp();
+                    
+                    // Toggle this dropdown
+                    $parent.toggleClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
+                    
+                    return false;
                 }
+            });
+            
+            // Handle subdropdown clicks
+            $('.navbar .dropdown .dropdown > a').off('click').on('click', function(e) {
+                if ($(window).width() <= 990) {
+                    e.preventDefault();
+                    var $parent = $(this).parent();
+                    
+                    // Close other subdropdowns at this level
+                    $parent.siblings('.dropdown.on').removeClass('on').find('.dropdown-menu').slideUp();
+                    
+                    // Toggle this subdropdown
+                    $parent.toggleClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideToggle();
+                    
+                    return false;
+                }
+            });
+        }
+        
+        // Initialize based on screen size
+        function initMenu() {
+            if ($(window).width() > 990) {
+                setupDesktopMenu();
+            } else {
+                setupMobileMenu();
             }
+        }
+        
+        // Initial setup
+        initMenu();
+        
+        // Handle window resize
+        $(window).resize(function() {
+            initMenu();
+        });
+        
+        // Mobile menu toggle - use Bootstrap's built-in collapse
+        $('.navbar-toggle').click(function() {
+            // This is handled by Bootstrap's collapse plugin
         });
     });
     </script>
