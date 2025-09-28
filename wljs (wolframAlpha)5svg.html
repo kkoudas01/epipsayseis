@@ -6,36 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ἐπιψαύσεις</title>
     <link href="https://fonts.googleapis.com/css2?family=Asap:wght@300;400&display=swap" rel="stylesheet">
-    <style>
-        /*
-        Η κάθε ενότητα οριοθετείται με <section>ΕΔΩ</section>. Χωρίζονται από <hr>
+    <style> 
 
-        Για να κάνω στοιχείο μενού που να ανοίγει μετά νέο μενού επιλογών το εντάσσω σε <li class="has-submenu">ΕΔΩ</li>
-        Μέσα σε αυτό, το υπο-μενού εντάσσεται στο <ul class="submenu"></ul>
-        Μέσα σε αυτό ή και στο αρχικό μενού οι σύνδεσμοι είναι μέσα στο <li data-href="ΣΥΝΕΣΜΟΣ">ΕΔΩ svg και όνομα συνδέσμου</li>
+/*
+Η κάθε ενότητα οριοθετείται με <section>ΕΔΩ</section>. Χωρίζονται από <hr>
 
-        Στα εικονίδια svg πρέπει να προσέξω τα εξής:
-        1) Στο viewBox="0 0 τάδε τάδε" να είναι οι αριθμοί που δίνει το svg που αντιγράφω,
-        2) πολύ πιθανόν να χρειαστεί να βάλω fill="currentColor" δίπλα από το viewBox="0 0 τάδε τάδε"
-        */
+Για να κάνω στοιχείο μενού που να ανοίγει μετά νέο μενού επιλογών το εντάσσω σε <li class="has-submenu">ΕΔΩ</li>
+Μέσα σε αυτό, το υπο-μενού εντάσσεται στο <ul class="submenu"></ul>
+Μέσα σε αυτό ή και στο αρχικό μενού οι σύνδεσμοι είναι μέσα στο <li data-href="ΣΥΝΕΣΜΟΣ">ΕΔΩ svg και όνομα συνδέσμου</li>
+
+Στα εικονίδια svg πρέπει να προσέξω τα εξής:
+1) Στο viewBox="0 0 τάδε τάδε" να είναι οι αριθμοί που δίνει το svg που αντιγράφω,
+2) πολύ πιθανόν να χρειαστεί να βάλω fill="currentColor" δίπλα από το viewBox="0 0 τάδε τάδε"
+*/
         
 
         /* ========================================================= */
         /* ΕΙΚΟΝΑ ΚΑΤΩ ΑΠΟ ΤΟ ΜΕΝΟΥ */
         /* ========================================================= */
-        .signature {
-            position: fixed;
-            bottom: 10px;
-            right: 15px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-            font-style: italic;
-            pointer-events: none;
-        }
+    .signature {
+      position: fixed;     /* σταθερή θέση στην οθόνη */
+      bottom: 10px;        /* απόσταση από το κάτω μέρος */
+      right: 15px;         /* απόσταση από τη δεξιά πλευρά */
+      font-size: 14px;     /* μέγεθος γραμματοσειράς */
+      color: rgba(255, 255, 255, 0.5); /* διακριτικό χρώμα με διαφάνεια */
+      font-style: italic;  /* προαιρετικά: πλάγια */
+      pointer-events: none; /* δεν επηρεάζει κλικ */
+    }
         :root {
-            /* vars */
-            --hue1: 255;
-            --hue2: 222;
+            /* αποχρώσεις σελίδας */
+            --hue1: 180;
+            --hue2: 240;
             --border: 1px;
             --border-color: hsl(var(--hue2), 12%, 20%);
             --radius: 22px;
@@ -51,9 +52,11 @@
         body {
             font-family: 'Asap', sans-serif;
             background: #08090d;
-            background-image: url(https://assets.codepen.io/13471/abstract-light.jpg), linear-gradient(to right in oklab, hsl(var(--hue2) 50% 75%), hsl(var(--hue1) 50% 75%));
-            background-size: cover;
+            /* απόχρωση saturation lightness */
+background-image: url("background.svg"), linear-gradient(to right in oklab, hsl(var(--hue2) 50% 75%), hsl(var(--hue1) 50% 75%));            background-size: cover;
             background-position: center;
+            background-size: contain;
+background-repeat: no-repeat;
             background-blend-mode: hard-light;
             padding: 0;
             min-height: 100svh;
@@ -207,7 +210,7 @@
             opacity: 1;
             pointer-events: auto;
             transition-delay: 0s;
-            filter: blur(0px);
+            filter: blur(0px); 
         }
 
         #menu.open::before,
@@ -277,10 +280,10 @@
             --start: 12%;
             background: conic-gradient(
                 from var(--conic, -45deg) at center in oklch,
-                transparent var(--start,0%), hsl( var(--hue), var(--sat,80%), var(--lit,60%)), transparent  var(--end,50%)
+                transparent var(--start,0%), hsl( var(--hue), var(--sat,80%), var(--lit,60%)), transparent  var(--end,50%) 
             ) border-box;
-            mask:
-                linear-gradient(transparent),
+            mask: 
+                linear-gradient(transparent), 
                 linear-gradient(black);
             mask-repeat: no-repeat;
             mask-clip: padding-box, border-box;
@@ -295,13 +298,13 @@
             mask: none;
         }
 
-        #menu .shine::after {
+        #menu .shine::after { 
             z-index: 2;
             --start: 17%;
             --end: 33%;
             background: conic-gradient(
                 from var(--conic, -45deg) at center in oklch,
-                transparent var(--start,0%), hsl( var(--hue), var(--sat,80%), var(--lit,85%)), transparent var(--end,50%)
+                transparent var(--start,0%), hsl( var(--hue), var(--sat,80%), var(--lit,85%)), transparent var(--end,50%) 
             );
         }
 
@@ -341,7 +344,7 @@
             right: auto;
         }
 
-        #menu .glow::before,
+        #menu .glow::before, 
         #menu .glow::after {
             content: "";
             position: absolute;
@@ -350,10 +353,10 @@
             border-radius: inherit;
             background: conic-gradient(
                 from var(--conic, -45deg) at center in oklch,
-                transparent var(--start,0%), hsl( var(--hue), var(--sat,95%), var(--lit,60%)), transparent  var(--end,50%)
+                transparent var(--start,0%), hsl( var(--hue), var(--sat,95%), var(--lit,60%)), transparent  var(--end,50%) 
             ) border-box;
-            mask:
-                linear-gradient(transparent),
+            mask: 
+                linear-gradient(transparent), 
                 linear-gradient(black);
             mask-repeat: no-repeat;
             mask-clip: padding-box, border-box;
@@ -466,26 +469,28 @@
             padding: 0;
             margin: 0;
         }
-
-        #menu li {
-            position: relative;
-            padding: 0.66em;
-            height: 32px;
-            display: flex;
-            align-items: center;
-            gap: 0.5em;
-            border-radius: calc(var(--radius) * 0.33333);
-            border: 1px solid transparent;
-            transition: all 0.3s ease-in, --item-opacity 0.3s ease-in;
-            background:
-                linear-gradient(
-                    90deg  in oklch,
-                    hsl(var(--hue1) 29% 13% / var(--item-opacity)),
-                    hsl(var(--hue1) 30% 15% / var(--item-opacity)) 24% 32%,
-                    hsl(var(--hue1) 5% 7% / var(--item-opacity))
-                ) border-box;
-            cursor: pointer;
-        }
+#menu li {
+    position: relative;
+    padding: 0.66em;
+    /* ΑΦΑΙΡΕΣΕ ή ΑΛΛΑΞΕ την παρακάτω γραμμή */
+    /* height: 32px; */ 
+    min-height: 32px; /* ΠΡΟΣΘΕΣΕ αυτό */
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    border-radius: calc(var(--radius) * 0.33333);
+    border: 1px solid transparent;
+    transition: all 0.3s ease-in, --item-opacity 0.3s ease-in;
+    background: 
+        linear-gradient(
+            90deg in oklch, 
+            hsl(var(--hue1) 29% 13% / var(--item-opacity)),
+            hsl(var(--hue1) 30% 15% / var(--item-opacity)) 24% 32%, 
+            hsl(var(--hue1) 5% 7% / var(--item-opacity))
+        ) border-box;
+    cursor: pointer;
+    word-break: break-word; /* ΠΡΟΣΘΕΣΕ κι αυτό για σιγουριά */
+}
 
         #menu li::after {
             content: "";
@@ -493,15 +498,15 @@
             inset: 0;
             border-radius: inherit;
             border: inherit;
-            background:
+            background: 
                 linear-gradient(
-                    90deg  in oklch,
+                    90deg  in oklch, 
                     hsl(var(--hue1) 15% 16% / var(--item-opacity)),
-                    hsl(var(--hue1) 40% 24% / var(--item-opacity)) 20% 32%,
+                    hsl(var(--hue1) 40% 24% / var(--item-opacity)) 20% 32%, 
                     hsl(var(--hue1) 2% 12% / var(--item-opacity))
                 ) border-box;
-            mask:
-                linear-gradient(transparent),
+            mask: 
+                linear-gradient(transparent), 
                 linear-gradient(black);
             mask-repeat: no-repeat;
             mask-clip: padding-box, border-box;
@@ -528,20 +533,21 @@
             initial-value: 0;
         }
 
-        #menu svg {
-            stroke-width: 1;
-            height: 20px;
-            stroke: currentColor;
-        }
+      #menu svg {
+    /*fill: currentColor;*/
+    stroke-width: 1;
+    height: 20px;
+    width: 20px;         /* ΠΡΟΣΘΕΣΕ αυτό */
+    flex-shrink: 0;      /* ΠΡΟΣΘΕΣΕ κι αυτό */
+    stroke: currentColor;
+}
 
-        /* --- ΕΝΑΡΞΗ ΔΙΟΡΘΩΜΕΝΗΣ ΠΕΡΙΟΧΗΣ ΓΙΑ ΥΠΟΜΕΝΟΥ --- */
-
-        /* Στυλ για το υπομενού */
+        /* Στυλ για υπομενού */
         .submenu {
             display: none;
             position: absolute;
             left: 100%;
-            top: -1px; /* Μικρή προσαρμογή για τέλεια στοίχιση */
+            top: 0;
             min-width: 250px;
             max-height: 300px;
             overflow-y: auto;
@@ -554,24 +560,8 @@
             z-index: 1001;
         }
 
-        /* Εμφάνιση υπομενού στο hover (λειτουργεί για ΟΛΑ τα επίπεδα) */
-        .has-submenu:hover > .submenu {
+        #menu li.has-submenu:hover > .submenu {
             display: block;
-        }
-
-        /* Βέλος για ΟΛΑ τα στοιχεία με υπομενού (ΕΝΙΑΙΟΣ ΚΑΝΟΝΑΣ) */
-        #menu .has-submenu::after {
-            content: "›";
-            position: absolute;
-            right: 10px;
-            font-size: 1.2em;
-            color: #737985;
-            transition: color 0.1s ease-out;
-        }
-
-        /* Αλλαγή χρώματος στο βελάκι κατά το hover */
-        #menu .has-submenu:hover::after {
-            color: #fff;
         }
 
         /* Στυλ για scrollbar στο υπομενού */
@@ -592,8 +582,13 @@
             background: rgba(255, 255, 255, 0.4);
         }
 
-        /* --- ΤΕΛΟΣ ΔΙΟΡΘΩΜΕΝΗΣ ΠΕΡΙΟΧΗΣ --- */
-
+        /* Βέλος για υπομενού */
+        #menu li.has-submenu::after {
+            content: "›";
+            position: absolute;
+            right: 10px;
+            font-size: 1.2em;
+        }
 
         /* Modal/Popup styles */
         .modal {
@@ -647,84 +642,60 @@
         }
 
         @keyframes glow {
-            0% { opacity: 0; }
-            3% { opacity: 1; }
-            10% { opacity: 0; }
-            12% { opacity: 0.7; }
-            16% { opacity: 0.3; animation-timing-function: var(--ease); }
-            100% { opacity: 1; animation-timing-function: var(--ease); }
+            0% {
+                opacity: 0;
+            }
+            3% {
+                opacity: 1;
+            }
+            10% {
+                opacity: 0;
+            }
+            12% {
+                opacity: 0.7;
+            }
+            16% {
+                opacity: 0.3;
+                animation-timing-function: var(--ease);
+            }
+            100% {
+                opacity: 1;
+                animation-timing-function: var(--ease);
+            }
         }
 
         @keyframes glowoff {
-            to { opacity: 0; }
+            to {
+                opacity: 0;
+            }
         }
 
         @keyframes flash {
-            0% { opacity: 0; --item-opacity: 0; }
-            7% { opacity: 0.5; --item-opacity: 1; }
-            14% { opacity: 0; --item-opacity: 0.5; }
-            21%, 100% { opacity: 1; --item-opacity: 1; }
+            0% {
+                opacity: 0;
+                --item-opacity: 0;
+            }
+            7% {
+                opacity: 0.5;
+                --item-opacity: 1;
+            }
+            14% {
+                opacity: 0;
+                --item-opacity: 0.5;
+            }
+            21%, 100% {
+                opacity: 1;
+                --item-opacity: 1;
+            }
         }
     </style>
-
 </head>
 <body>
-
-<!-- Cyberpunk Menu START -->
-<nav>
-  <ul>
-    <li><a href="index.html" class="glow">Home</a></li>
-    <li>
-      <a href="#" class="menu-toggle">Dropdown ▼</a>
-      <ul class="dropdown">
-        <li><a href="#">Option 1</a></li>
-        <li>
-          <a href="#" class="submenu-toggle">Option 2 ▶</a>
-          <ul class="submenu">
-            <li><a href="#">Sub 2-1</a></li>
-            <li>
-              <a href="#" class="submenu-toggle">Sub 2-2 ▶</a>
-              <ul class="submenu">
-                <li><a href="#">Deep 2-2-1</a></li>
-                <li><a href="#">Deep 2-2-2</a></li>
-              </ul>
-            </li>
-            <li><a href="#">Sub 2-3</a></li>
-          </ul>
-        </li>
-        <li><a href="#">Option 3</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#" class="mega-toggle">Mega Menu ▼</a>
-      <div class="mega-menu">
-        <div class="section">
-          <h3 class="glow">Section A</h3>
-          <a href="#">Link A1</a>
-          <a href="#">Link A2</a>
-        </div>
-        <div class="section">
-          <h3 class="glow">Section B</h3>
-          <a href="#">Link B1</a>
-          <a href="#">Link B2</a>
-        </div>
-        <div class="section">
-          <h3 class="glow">Section C</h3>
-          <a href="#">Link C1</a>
-          <a href="#">Link C2</a>
-        </div>
-      </div>
-    </li>
-    <li><a href="#" id="about-btn" class="glow">About</a></li>
-  </ul>
-</nav>
-<!-- Cyberpunk Menu END -->
-
     <div class="signature">Κώστας</div>
     <main id="app">
         <header>
-            <h1>ἐπιψαύσεις</h1>
-            <p>Ψηλαφίζοντας τὴ μορφή, τὴ δομή καὶ τὴ λειτουργία τοῦ κόσμου χρησιμοποιῶντας τὴ γλῶσσα Wolfram.</p>
+            <h1>σεληνόφως</h1>
+            <p>Εκπαιδευτική ιστοσελίδα.</p>
         </header>
         
         <footer class="dark">
@@ -931,25 +902,54 @@
                                 </svg>
                                 ΜΔΕ 1ου βαθμού
                             </li>
-                            <li class="has-submenu">
-                        <svg xmlns="http://www.w3.org/2000/svg"  fill="currentColor" viewBox="0 0 100 100" stroke-width="1.5" stroke="currentColor" class="size-6">
-  <path d="M10.51782,78.08765l1.76093-.94818a1,1,0,0,0-.94818-1.761l-1.76093.94824a1,1,0,0,0,.94818,1.76093Z"/><path d="M17.56158,74.29486l1.76093-.94818a1,1,0,0,0-.94818-1.761l-1.76093.94825a1,1,0,0,0,.94818,1.76092Z"/><path d="M24.60535,70.50208l1.76092-.94825a1,1,0,1,0-.94818-1.76092l-1.76092.94818a1,1,0,0,0,.94818,1.761Z"/><path d="M87.72113,77.13947l1.76093.94818a1,1,0,0,0,.94818-1.76093l-1.76093-.94824a1,1,0,0,0-.94818,1.761Z"/><path d="M73.63361,69.55383l1.76092.94825a1,1,0,0,0,.94818-1.761l-1.76092-.94818a1,1,0,1,0-.94818,1.76092Z"/><path d="M80.67737,73.34668l1.76092.94818a1,1,0,1,0,.94818-1.76092l-1.76092-.94825a1,1,0,0,0-.94818,1.761Z"/><path d="M34,67h1a1,1,0,0,0,0-2H34a1,1,0,0,0,0,2Z"/><path d="M41,67h1.99994a1,1,0,1,0,0-2H41a1,1,0,0,0,0,2Z"/><path d="M48.99994,67h2a1,1,0,1,0,0-2h-2a1,1,0,0,0,0,2Z"/><path d="M56.99994,67h2a1,1,0,1,0,0-2h-2a1,1,0,0,0,0,2Z"/><path d="M65,67h1a1,1,0,0,0,0-2H65a1,1,0,0,0,0,2Z"/><path d="M30,25a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V26A1,1,0,0,0,30,25Z"/><path d="M30,9a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V10A1,1,0,0,0,30,9Z"/><path d="M30,17a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V18A1,1,0,0,0,30,17Z"/><path d="M70,9a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V10A1,1,0,0,0,70,9Z"/><path d="M70,17a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V18A1,1,0,0,0,70,17Z"/><path d="M70,25a1,1,0,0,0-1,1v2a1,1,0,0,0,2,0V26A1,1,0,0,0,70,25Z"/><path d="M94.51971,19.1665C94.49866,19.14276,70.5,5.14,70.5,5.14A.99332.99332,0,0,0,70,5H30a.99332.99332,0,0,0-.5.14S5.519,19.1369,5.50671,19.14868A.98624.98624,0,0,0,5,20V80a.98742.98742,0,0,0,.5.86L29.42,94.81a.35261.35261,0,0,0,.08.05,1.22257,1.22257,0,0,0,.24.1A.82323.82323,0,0,0,30,95H70a.82323.82323,0,0,0,.26-.04,1.22257,1.22257,0,0,0,.24-.1.35261.35261,0,0,0,.08-.05L94.5,80.86A.98742.98742,0,0,0,95,80V20A.984.984,0,0,0,94.51971,19.1665ZM29,92.26,7,79.43V21.74L29,34.57ZM69,93H31V35H69Zm.73-60H30.27L7.98,20,30.27,7H69.73L92.02,20ZM93,79.43,71,92.26V34.57L93,21.74Z"/>                        </svg>
-                        Μερικές Διαφορικές Εξισώσεις
-                        <ul class="submenu">
-                            <li data-href="inbox.htm">
+                            <li data-href="sent.htm">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859m-19.5.338V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H6.911a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661Z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                                 </svg>
-                                Αυτοματισμοί
+                                Εξίσωση κύματος: γενική και χωριζομένων μεταβλητών (2D πεπερασμένο χωρίο)
                             </li>
                             <li data-href="sent.htm">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
                                 </svg>
-                                ΜΔΕ 1ου βαθμού
+                                Εξίσωση κύματος: χωριζομένων μεταβλητών (3D πεπερασμένο χωρίο)
                             </li>
-                        </ul>
-                    </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Εξίσωση θερμότητας (πεπερασμένο χωρίο)
+                            </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Εξίσωση θερμότητας (άπειρο χωρίο)
+                            </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Εξίσωση θερμότητας (3D χωρίο)
+                            </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Εξίσωση Laplace (καρτεσιανές συντεταγμένες)
+                            </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Εξίσωση Laplace (πολικές συντεταγμένες)
+                            </li>
+                            <li data-href="sent.htm">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 12 3.269 3.125A59.769 59.769 0 0 1 21.485 12 59.768 59.768 0 0 1 3.27 20.875L5.999 12Zm0 0h7.5" />
+                                </svg>
+                                Επίλυση με μετασχηματισμούς
+                            </li>
                         </ul>
                     </li>
                 </ul>
@@ -1047,66 +1047,53 @@
             const h2 = document.getElementById('h2');
             const menu = document.getElementById('menu');
             const aboutPageBtn = document.getElementById('about-page-btn');
-            
-            // --- *** ΣΗΜΑΝΤΙΚΗ ΔΙΟΡΘΩΣΗ *** ---
-            // Το ID του modal στο HTML είναι 'about-page-modal'. Αυτό διορθώνει τη "χαμένη λειτουργία".
-            const aboutModal = document.getElementById('about-page-modal'); 
+            const aboutModal = document.getElementById('about-modal');
             const closeModal = document.querySelector('.close-modal');
 
             // Sliders για τα χρώματα
-            if (h1 && h2) {
-                h1.addEventListener('input', e => root.style.setProperty('--hue1', e.target.value));
-                h2.addEventListener('input', e => root.style.setProperty('--hue2', e.target.value));
-            }
+            h1.addEventListener('input', e => {
+                root.style.setProperty('--hue1', e.target.value);
+            });
+            h2.addEventListener('input', e => {
+                root.style.setProperty('--hue2', e.target.value);
+            });
+
 
             // --- ΛΟΓΙΚΗ ΓΙΑ ΤΗΝ ΑΝΑΖΗΤΗΣΗ WOLFRAM|ALPHA ---
             const searchInput = document.querySelector('#menu input[type="text"]');
-            if (searchInput) {
-                searchInput.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' && searchInput.value.trim() !== '') {
-                        event.preventDefault();
-                        const query = searchInput.value.trim();
-                        const wolframUrl = `https://www.wolframalpha.com/input?i=${encodeURIComponent(query)}`;
-                        window.open(wolframUrl, '_blank', 'noopener,noreferrer');
-                    }
-                });
-            }
 
-            // Λογική για κλικ στα στοιχεία του μενού
-            if (menu) {
-                menu.addEventListener('click', (e) => {
-                    const targetLi = e.target.closest('li');
+            // Event listener για το πάτημα του 'Enter'
+            searchInput.addEventListener('keydown', (event) => {
+                if (event.key === 'Enter' && searchInput.value.trim() !== '') {
+                    event.preventDefault(); // Αποτροπή default συμπεριφοράς
+                    const query = searchInput.value.trim();
+                    const wolframUrl = `https://www.wolframalpha.com/input?i=${encodeURIComponent(query)}`;
                     
-                    if (!targetLi) return; // Αν το κλικ δεν ήταν σε li, έξοδος
+                    // Άνοιγμα σε νέα καρτέλα
+                    window.open(wolframUrl, '_blank');
+                }
+            });
 
-                    // Αν ένα στοιχείο έχει υπομενού, το κλικ δεν πρέπει να οδηγεί σε σύνδεσμο.
-                    if (targetLi.classList.contains('has-submenu')) {
-                        return;
-                    }
+             // Logic for menu items with data-href
+            menu.addEventListener('click', (e) => {
+                const targetLi = e.target.closest('li');
+                if (targetLi && targetLi.dataset.href) {
+                    window.open(targetLi.dataset.href, "_blank", "noopener,noreferrer");
+                }
+            });
 
-                    // Αν έχει data-href, άνοιξε το σύνδεσμο.
-                    if (targetLi.dataset.href) {
-                        window.open(targetLi.dataset.href, "_blank", "noopener,noreferrer");
-                    }
-                });
-            }
+            // Open about modal
+            aboutPageBtn.addEventListener('click', () => {
+                aboutModal.style.display = 'flex';
+                /*menu.classList.remove('open');*/
+            });
 
-            // Άνοιγμα του modal
-            if (aboutPageBtn && aboutModal) {
-                aboutPageBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    aboutModal.style.display = 'flex';
-                });
-            }
+            // Close about modal
+            closeModal.addEventListener('click', () => {
+                aboutModal.style.display = 'none';
+            });
 
-            // Κλείσιμο του modal
-            if (closeModal && aboutModal) {
-                closeModal.addEventListener('click', () => {
-                    aboutModal.style.display = 'none';
-                });
-            }
-
-            // Κλείσιμο του modal με κλικ έξω από αυτό
+            // Close modal if clicked outside
             window.addEventListener('click', (e) => {
                 if (e.target === aboutModal) {
                     aboutModal.style.display = 'none';
