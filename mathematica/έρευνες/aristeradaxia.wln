@@ -1,0 +1,1254 @@
+<|"Notebook" -> <|"Controller" -> "8396cfb3-b883-43dc-80c2-f2e12f1a4dc9", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$285], "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "7e51cf74-4055-452b-b6d2-3b1445f0b63a", 
+   "Objects" -> <|"c12b36e4-b785-418b-bf5b-f427625f9442" -> 
+      <|"Public" -> Hold[Graphics[{{}, Annotation[
+            {{Annotation[{Directive[PointSize[0.011000000000000001], 
+                 RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[
+                  2]], Point[{{1, 0.1}, {2, 0.27899999999999997}, 
+                  {3, 0.4154159}, {4, 0.515075683002719}, {5, 
+                   0.5855302504801034}, {6, 0.6341396329613534}, 
+                  {7, 0.6670983989598468}, {8, 0.6891766917783984}, 
+                  {9, 0.7038449021736568}, {10, 0.7135361571073411}, 
+                  {11, 0.7199155409359216}, {12, 0.7241045941406312}, 
+                  {13, 0.7268509289869481}, {14, 0.7286495158926396}, 
+                  {15, 0.7298266010130539}, {16, 0.7305965940558163}, 
+                  {17, 0.7311001369200573}, {18, 0.731429368515593}, 
+                  {19, 0.7316446026997626}, {20, 0.7317852996938407}, 
+                  {21, 0.7318772672702721}, {22, 0.7319373803815176}, 
+                  {23, 0.7319766714252381}, {24, 0.7320023523891134}, 
+                  {25, 0.732019137520971}, {26, 0.7320301082470823}, 
+                  {27, 0.7320372786596424}, {28, 0.7320419651929725}, 
+                  {29, 0.7320450282740191}, {30, 0.7320470302771442}, 
+                  {31, 0.7320483387679568}, {32, 0.7320491939850728}, 
+                  {33, 0.7320497529466389}, {34, 0.7320501182783876}, 
+                  {35, 0.7320503570555699}, {36, 0.7320505131179372}, 
+                  {37, 0.7320506151187263}, {38, 0.7320506817854106}, 
+                  {39, 0.7320507253580799}, {40, 0.7320507538367348}, 
+                  {41, 0.7320507724500946}, {42, 0.7320507846155977}, 
+                  {43, 0.7320507925668469}, {44, 0.7320507977637026}, 
+                  {45, 0.7320508011603146}, {46, 0.7320508033803059}, 
+                  {47, 0.7320508048312695}, {48, 0.7320508057796046}, 
+                  {49, 0.7320508063994269}, {50, 0.7320508068045365}, 
+                  {51, 0.7320508070693119}}]}, "Charting`Private`Tag#1"]}}, 
+            Association["HighlightElements" -> Association["Label" -> 
+                {"XYLabel"}, "Ball" -> {"IndicatedBall"}], "LayoutOptions" -> 
+              Association["PanelPlotLayout" -> Association[], "PlotRange" -> 
+                {{0, 51}, {0.657618581001349, 0.7320508070693119}}, 
+               "Frame" -> {{False, False}, {False, False}}, "AxesOrigin" -> 
+                {0, 0.657618581001349}, "ImageSize" -> {360, 
+                 360/GoldenRatio}, "Axes" -> {True, True}, "LabelStyle" -> 
+                {}, "AspectRatio" -> GoldenRatio^(-1), "DefaultStyle" -> 
+                {Directive[PointSize[0.011000000000000001], RGBColor[
+                   0.368417, 0.506779, 0.709798], AbsoluteThickness[2]]}, 
+               "HighlightLabelingFunctions" -> Association[
+                 "CoordinatesToolOptions" -> ({Identity[#1[[1]]], Identity[
+                     #1[[2]]]} & ), "ScalingFunctions" -> {{Identity, 
+                    Identity}, {Identity, Identity}}], "Primitives" -> {}, 
+               "GCFlag" -> False], "Meta" -> Association[
+               "DefaultHighlight" -> {"Dynamic", None}, "Index" -> {}, 
+               "Function" -> ListPlot, "GroupHighlight" -> False]], 
+            "DynamicHighlight"], {{}, {}}}, {DisplayFunction -> Identity, 
+           AspectRatio -> GoldenRatio^(-1), Axes -> {True, True}, 
+           AxesLabel -> {None, None}, AxesOrigin -> {0, 0.657618581001349}, 
+           DisplayFunction :> Identity, Frame -> {{False, False}, 
+             {False, False}}, FrameLabel -> {{None, None}, {None, None}}, 
+           FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
+           GridLines -> {None, None}, GridLinesStyle -> 
+            Directive[GrayLevel[0.5, 0.4]], Method -> 
+            {"AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+              Automatic, "DefaultGraphicsInteraction" -> {"Version" -> 1.2, 
+               "TrackMousePosition" -> {True, False}, "Effects" -> 
+                {"Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> 
+                  {"ratio" -> 2}, "Droplines" -> {"freeformCursorMode" -> 
+                    True, "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+             "DefaultMeshStyle" -> AbsolutePointSize[6], 
+             "DefaultPlotStyle" -> {Directive[RGBColor[0.368417, 0.506779, 
+                 0.709798], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.880722, 0.611041, 0.142051], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.560181, 0.691569, 0.194885], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.922526, 0.385626, 
+                 0.209179], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.528488, 0.470624, 0.701351], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.772079, 0.431554, 0.102387], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.363898, 0.618501, 
+                 0.782349], AbsoluteThickness[2]], Directive[RGBColor[1, 
+                 0.75, 0], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.647624, 0.37816, 0.614037], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.571589, 0.586483, 0], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.915, 0.3325, 0.2125], 
+                AbsoluteThickness[2]], Directive[RGBColor[
+                 0.40082222609352647, 0.5220066643438841, 0.85], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.9728288904374106, 
+                 0.621644452187053, 0.07336199581899142], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.736782672705901, 0.358, 
+                 0.5030266573755369], AbsoluteThickness[2]], Directive[
+                RGBColor[0.28026441037696703, 0.715, 0.4292089322474965], 
+                AbsoluteThickness[2]]}, "DomainPadding" -> Scaled[0.02], 
+             "PointSizeFunction" -> "SmallPointSize", "RangePadding" -> 
+              Scaled[0.05], "OptimizePlotMarkers" -> True, 
+             "IncludeHighlighting" -> "CurrentPoint", "HighlightStyle" -> 
+              Automatic, "OptimizePlotMarkers" -> True, 
+             "CoordinatesToolOptions" -> {"DisplayFunction" -> 
+                ({Identity[#1[[1]]], Identity[#1[[2]]]} & ), 
+               "CopiedValueFunction" -> ({Identity[#1[[1]]], Identity[
+                   #1[[2]]]} & )}}, PlotLabel -> "\[CapitalPi]\[Omicron]\
+\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ac\[FinalSigma]", 
+           PlotRange -> {{0, 51}, {0.657618581001349, 0.7320508070693119}}, 
+           PlotRangeClipping -> True, PlotRangePadding -> 
+            {{Scaled[0.02], Scaled[0.02]}, {Scaled[0.05], Scaled[0.05]}}, 
+           Ticks -> {Automatic, Automatic}}]]|>, 
+     "c062893b-cd56-4673-a1e6-b00892b19b91" -> 
+      <|"Public" -> Hold[Graphics[{{}, Annotation[
+            {{Annotation[{Directive[PointSize[0.011000000000000001], 
+                 RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[
+                  2]], Point[{{1, 0.9}, {2, 0.7210000000000001}, 
+                  {3, 0.5845841}, {4, 0.4849243169972811}, 
+                  {5, 0.41446974951989657}, {6, 0.36586036703864655}, 
+                  {7, 0.3329016010401533}, {8, 0.31082330822160176}, 
+                  {9, 0.29615509782634314}, {10, 0.286463842892659}, 
+                  {11, 0.2800844590640784}, {12, 0.27589540585936884}, 
+                  {13, 0.27314907101305186}, {14, 0.27135048410736046}, 
+                  {15, 0.2701733989869462}, {16, 0.2694034059441837}, 
+                  {17, 0.2688998630799429}, {18, 0.2685706314844069}, 
+                  {19, 0.26835539730023755}, {20, 0.26821470030615935}, 
+                  {21, 0.2681227327297279}, {22, 0.2680626196184825}, 
+                  {23, 0.2680233285747618}, {24, 0.26799764761088657}, 
+                  {25, 0.26798086247902886}, {26, 0.26796989175291774}, 
+                  {27, 0.2679627213403577}, {28, 0.2679580348070277}, 
+                  {29, 0.26795497172598104}, {30, 0.26795296972285576}, 
+                  {31, 0.2679516612320433}, {32, 0.26795080601492716}, 
+                  {33, 0.26795024705336123}, {34, 0.26794988172161244}, 
+                  {35, 0.2679496429444301}, {36, 0.2679494868820628}, 
+                  {37, 0.2679493848812738}, {38, 0.26794931821458956}, 
+                  {39, 0.2679492746419201}, {40, 0.2679492461632652}, 
+                  {41, 0.26794922754990536}, {42, 0.2679492153844023}, 
+                  {43, 0.2679492074331531}, {44, 0.2679492022362973}, 
+                  {45, 0.2679491988396852}, {46, 0.2679491966196941}, 
+                  {47, 0.2679491951687304}, {48, 0.2679491942203953}, 
+                  {49, 0.2679491936005731}, {50, 0.2679491931954636}, 
+                  {51, 0.26794919293068814}}]}, "Charting`Private`Tag#1"]}}, 
+            Association["HighlightElements" -> Association["Label" -> 
+                {"XYLabel"}, "Ball" -> {"IndicatedBall"}], "LayoutOptions" -> 
+              Association["PanelPlotLayout" -> Association[], "PlotRange" -> 
+                {{0, 51}, {0.26403170734816456, 0.33846393341612824}}, 
+               "Frame" -> {{False, False}, {False, False}}, "AxesOrigin" -> 
+                {0, 0.26403170734816456}, "ImageSize" -> {360, 
+                 360/GoldenRatio}, "Axes" -> {True, True}, "LabelStyle" -> 
+                {}, "AspectRatio" -> GoldenRatio^(-1), "DefaultStyle" -> 
+                {Directive[PointSize[0.011000000000000001], RGBColor[
+                   0.368417, 0.506779, 0.709798], AbsoluteThickness[2]]}, 
+               "HighlightLabelingFunctions" -> Association[
+                 "CoordinatesToolOptions" -> ({Identity[#1[[1]]], Identity[
+                     #1[[2]]]} & ), "ScalingFunctions" -> {{Identity, 
+                    Identity}, {Identity, Identity}}], "Primitives" -> {}, 
+               "GCFlag" -> False], "Meta" -> Association[
+               "DefaultHighlight" -> {"Dynamic", None}, "Index" -> {}, 
+               "Function" -> ListPlot, "GroupHighlight" -> False]], 
+            "DynamicHighlight"], {{}, {}}}, {DisplayFunction -> Identity, 
+           AspectRatio -> GoldenRatio^(-1), Axes -> {True, True}, 
+           AxesLabel -> {None, None}, AxesOrigin -> {0, 0.26403170734816456}, 
+           DisplayFunction :> Identity, Frame -> {{False, False}, 
+             {False, False}}, FrameLabel -> {{None, None}, {None, None}}, 
+           FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
+           GridLines -> {None, None}, GridLinesStyle -> 
+            Directive[GrayLevel[0.5, 0.4]], Method -> 
+            {"AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+              Automatic, "DefaultGraphicsInteraction" -> {"Version" -> 1.2, 
+               "TrackMousePosition" -> {True, False}, "Effects" -> 
+                {"Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> 
+                  {"ratio" -> 2}, "Droplines" -> {"freeformCursorMode" -> 
+                    True, "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+             "DefaultMeshStyle" -> AbsolutePointSize[6], 
+             "DefaultPlotStyle" -> {Directive[RGBColor[0.368417, 0.506779, 
+                 0.709798], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.880722, 0.611041, 0.142051], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.560181, 0.691569, 0.194885], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.922526, 0.385626, 
+                 0.209179], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.528488, 0.470624, 0.701351], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.772079, 0.431554, 0.102387], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.363898, 0.618501, 
+                 0.782349], AbsoluteThickness[2]], Directive[RGBColor[1, 
+                 0.75, 0], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.647624, 0.37816, 0.614037], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.571589, 0.586483, 0], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.915, 0.3325, 0.2125], 
+                AbsoluteThickness[2]], Directive[RGBColor[
+                 0.40082222609352647, 0.5220066643438841, 0.85], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.9728288904374106, 
+                 0.621644452187053, 0.07336199581899142], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.736782672705901, 0.358, 
+                 0.5030266573755369], AbsoluteThickness[2]], Directive[
+                RGBColor[0.28026441037696703, 0.715, 0.4292089322474965], 
+                AbsoluteThickness[2]]}, "DomainPadding" -> Scaled[0.02], 
+             "PointSizeFunction" -> "SmallPointSize", "RangePadding" -> 
+              Scaled[0.05], "OptimizePlotMarkers" -> True, 
+             "IncludeHighlighting" -> "CurrentPoint", "HighlightStyle" -> 
+              Automatic, "OptimizePlotMarkers" -> True, 
+             "CoordinatesToolOptions" -> {"DisplayFunction" -> 
+                ({Identity[#1[[1]]], Identity[#1[[2]]]} & ), 
+               "CopiedValueFunction" -> ({Identity[#1[[1]]], Identity[
+                   #1[[2]]]} & )}}, PlotLabel -> "\[CapitalPi]\[Omicron]\
+\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma]", 
+           PlotRange -> {{0, 51}, {0.26403170734816456, 
+              0.33846393341612824}}, PlotRangeClipping -> True, 
+           PlotRangePadding -> {{Scaled[0.02], Scaled[0.02]}, 
+             {Scaled[0.05], Scaled[0.05]}}, Ticks -> {Automatic, 
+             Automatic}}]]|>, "78ebc3f6-830e-4c9e-ac91-b601116a3be3" -> 
+      <|"Public" -> Hold[Graphics[{{}, Annotation[
+            {{Annotation[{Directive[PointSize[0.011000000000000001], 
+                 RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[
+                  2]], Point[{{0.1, 0.9}, {0.27899999999999997, 
+                   0.7210000000000001}, {0.4154159, 0.5845841}, 
+                  {0.515075683002719, 0.4849243169972811}, 
+                  {0.5855302504801034, 0.41446974951989657}, 
+                  {0.6341396329613534, 0.36586036703864655}, 
+                  {0.6670983989598468, 0.3329016010401533}, 
+                  {0.6891766917783984, 0.31082330822160176}, 
+                  {0.7038449021736568, 0.29615509782634314}, 
+                  {0.7135361571073411, 0.286463842892659}, 
+                  {0.7199155409359216, 0.2800844590640784}, 
+                  {0.7241045941406312, 0.27589540585936884}, 
+                  {0.7268509289869481, 0.27314907101305186}, 
+                  {0.7286495158926396, 0.27135048410736046}, 
+                  {0.7298266010130539, 0.2701733989869462}, 
+                  {0.7305965940558163, 0.2694034059441837}, 
+                  {0.7311001369200573, 0.2688998630799429}, 
+                  {0.731429368515593, 0.2685706314844069}, 
+                  {0.7316446026997626, 0.26835539730023755}, 
+                  {0.7317852996938407, 0.26821470030615935}, 
+                  {0.7318772672702721, 0.2681227327297279}, 
+                  {0.7319373803815176, 0.2680626196184825}, 
+                  {0.7319766714252381, 0.2680233285747618}, 
+                  {0.7320023523891134, 0.26799764761088657}, 
+                  {0.732019137520971, 0.26798086247902886}, 
+                  {0.7320301082470823, 0.26796989175291774}, 
+                  {0.7320372786596424, 0.2679627213403577}, 
+                  {0.7320419651929725, 0.2679580348070277}, 
+                  {0.7320450282740191, 0.26795497172598104}, 
+                  {0.7320470302771442, 0.26795296972285576}, 
+                  {0.7320483387679568, 0.2679516612320433}, 
+                  {0.7320491939850728, 0.26795080601492716}, 
+                  {0.7320497529466389, 0.26795024705336123}, 
+                  {0.7320501182783876, 0.26794988172161244}, 
+                  {0.7320503570555699, 0.2679496429444301}, 
+                  {0.7320505131179372, 0.2679494868820628}, 
+                  {0.7320506151187263, 0.2679493848812738}, 
+                  {0.7320506817854106, 0.26794931821458956}, 
+                  {0.7320507253580799, 0.2679492746419201}, 
+                  {0.7320507538367348, 0.2679492461632652}, 
+                  {0.7320507724500946, 0.26794922754990536}, 
+                  {0.7320507846155977, 0.2679492153844023}, 
+                  {0.7320507925668469, 0.2679492074331531}, 
+                  {0.7320507977637026, 0.2679492022362973}, 
+                  {0.7320508011603146, 0.2679491988396852}, 
+                  {0.7320508033803059, 0.2679491966196941}, 
+                  {0.7320508048312695, 0.2679491951687304}, 
+                  {0.7320508057796046, 0.2679491942203953}, 
+                  {0.7320508063994269, 0.2679491936005731}, 
+                  {0.7320508068045365, 0.2679491931954636}, 
+                  {0.7320508070693119, 0.26794919293068814}, 
+                  {0.7320508072423665, 0.2679491927576336}, 
+                  {0.7320508073554731, 0.26794919264452693}, 
+                  {0.7320508074293984, 0.2679491925706015}, 
+                  {0.7320508074777153, 0.26794919252228466}, 
+                  {0.7320508075092947, 0.26794919249070526}}]}, 
+               "Charting`Private`Tag#1"]}}, Association[
+             "HighlightElements" -> Association["Label" -> {"XYLabel"}, 
+               "Ball" -> {"IndicatedBall"}], "LayoutOptions" -> 
+              Association["PanelPlotLayout" -> Association[], "PlotRange" -> 
+                {{0.6847998808967035, 0.7320508075092947}, 
+                 {0.2653777134913813, 0.314235814478552}}, "Frame" -> 
+                {{False, False}, {False, False}}, "AxesOrigin" -> 
+                {0.6847998808967035, 0.2653777134913813}, "ImageSize" -> 
+                {360, 360/GoldenRatio}, "Axes" -> {True, True}, 
+               "LabelStyle" -> {}, "AspectRatio" -> GoldenRatio^(-1), 
+               "DefaultStyle" -> {Directive[PointSize[0.011000000000000001], 
+                  RGBColor[0.368417, 0.506779, 0.709798], AbsoluteThickness[
+                   2]]}, "HighlightLabelingFunctions" -> Association[
+                 "CoordinatesToolOptions" -> ({Identity[#1[[1]]], Identity[
+                     #1[[2]]]} & ), "ScalingFunctions" -> {{Identity, 
+                    Identity}, {Identity, Identity}}], "Primitives" -> {}, 
+               "GCFlag" -> False], "Meta" -> Association[
+               "DefaultHighlight" -> {"Dynamic", None}, "Index" -> {}, 
+               "Function" -> ListPlot, "GroupHighlight" -> False]], 
+            "DynamicHighlight"], {{}, {}}}, {DisplayFunction -> Identity, 
+           AspectRatio -> GoldenRatio^(-1), Axes -> {True, True}, 
+           AxesLabel -> {HoldForm["\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\
+\[CurlyEpsilon]\[Rho]\[Omicron]\:03af"], HoldForm[
+              "\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03af"]}, 
+           AxesOrigin -> {0.6847998808967035, 0.2653777134913813}, 
+           DisplayFunction :> Identity, Frame -> {{False, False}, 
+             {False, False}}, FrameLabel -> {{None, None}, {None, None}}, 
+           FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
+           GridLines -> {None, None}, GridLinesStyle -> 
+            Directive[GrayLevel[0.5, 0.4]], Method -> 
+            {"AxisPadding" -> Scaled[0.02], "DefaultBoundaryStyle" -> 
+              Automatic, "DefaultGraphicsInteraction" -> {"Version" -> 1.2, 
+               "TrackMousePosition" -> {True, False}, "Effects" -> 
+                {"Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> 
+                  {"ratio" -> 2}, "Droplines" -> {"freeformCursorMode" -> 
+                    True, "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+             "DefaultMeshStyle" -> AbsolutePointSize[6], 
+             "DefaultPlotStyle" -> {Directive[RGBColor[0.368417, 0.506779, 
+                 0.709798], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.880722, 0.611041, 0.142051], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.560181, 0.691569, 0.194885], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.922526, 0.385626, 
+                 0.209179], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.528488, 0.470624, 0.701351], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.772079, 0.431554, 0.102387], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.363898, 0.618501, 
+                 0.782349], AbsoluteThickness[2]], Directive[RGBColor[1, 
+                 0.75, 0], AbsoluteThickness[2]], Directive[RGBColor[
+                 0.647624, 0.37816, 0.614037], AbsoluteThickness[2]], 
+               Directive[RGBColor[0.571589, 0.586483, 0], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.915, 0.3325, 0.2125], 
+                AbsoluteThickness[2]], Directive[RGBColor[
+                 0.40082222609352647, 0.5220066643438841, 0.85], 
+                AbsoluteThickness[2]], Directive[RGBColor[0.9728288904374106, 
+                 0.621644452187053, 0.07336199581899142], AbsoluteThickness[
+                 2]], Directive[RGBColor[0.736782672705901, 0.358, 
+                 0.5030266573755369], AbsoluteThickness[2]], Directive[
+                RGBColor[0.28026441037696703, 0.715, 0.4292089322474965], 
+                AbsoluteThickness[2]]}, "DomainPadding" -> Scaled[0.02], 
+             "PointSizeFunction" -> "SmallPointSize", "RangePadding" -> 
+              Scaled[0.05], "OptimizePlotMarkers" -> True, 
+             "IncludeHighlighting" -> "CurrentPoint", "HighlightStyle" -> 
+              Automatic, "OptimizePlotMarkers" -> True, 
+             "CoordinatesToolOptions" -> {"DisplayFunction" -> 
+                ({Identity[#1[[1]]], Identity[#1[[2]]]} & ), 
+               "CopiedValueFunction" -> ({Identity[#1[[1]]], Identity[
+                   #1[[2]]]} & )}}, PlotRange -> {{0.6847998808967035, 
+              0.7320508075092947}, {0.2653777134913813, 0.314235814478552}}, 
+           PlotRangeClipping -> True, PlotRangePadding -> 
+            {{Scaled[0.02], Scaled[0.02]}, {Scaled[0.05], Scaled[0.05]}}, 
+           Ticks -> {Automatic, Automatic}}]]|>|>, 
+   "Path" -> "C:\\Users\\kkoud\\Documents\\GitHub\\epipsayseis\\mathematica\\\
+aristeraDexia\\aristeradaxia.wln", "PublicFields" -> {"Properties"}, 
+   "Quick" -> True, "Symbols" -> <||>, 
+   "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[1, "\
+\[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$279]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\[Alpha]\
+\[Nu]\[Iota]\[Chi]\[Alpha]\:03ca\[Sigma]\[Tau]\[Iota]\[Kappa]\:03cc \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$279]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\[Omicron]\
+\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron] \[Mu]\[CurlyEpsilon] \
+\[Delta]\[Iota]\:03ce\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$310]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\:038e\[Pi]\[Alpha]\
+\[Rho]\[Xi]\[Eta] \[Kappa]\:03ad\[Nu]\[Tau]\[Rho]\[Omicron]\[Upsilon]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$312]]}|>, 
+ "Cells" -> 
+  {<|"Data" -> ".md # \[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]\n\n## \
+\[CapitalMu]\[Alpha]\[Nu]\[Iota]\[Chi]\[Alpha]\:03ca\[Sigma]\[Tau]\[Iota]\
+\[Kappa]\:03cc \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\n\n\:0388\[Sigma]\[Tau]\
+\[Omega] \:03cc\[Tau]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Tau]\[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron] \[Pi]\[Lambda]\:03ae\[Theta]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] `aristeroi[t]` \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+`dexioi[t]`.\n\n\[CapitalTheta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\
+\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Iota]\[Delta]\:03af \[CurlyEpsilon]\[Nu]\:03cc\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[Mu]\[CurlyEpsilon] \[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Alpha] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \:03ae \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Mu]\[CurlyEpsilon] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Alpha] \:03ac\[Lambda]\[Lambda]\[Eta] \
+\[Pi]\[Iota]\[Theta]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]. \
+\[CapitalSigma]\[Upsilon]\[Gamma]\[Kappa]\[CurlyEpsilon]\[Kappa]\[Rho]\[Iota]\
+\[Mu]\:03ad\[Nu]\[Alpha], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Alpha]\[Nu] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Mu]\:03cc\[Nu]\[Omicron] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03af \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha], \
+\[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc\[FinalSigma] \
+\[Nu]\[Alpha] \[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] `a0`. \[CapitalAlpha]\[Pi]\:03cc \
+\[Tau]\[Eta]\[Nu] \:03ac\[Lambda]\[Lambda]\[Eta], \[Alpha]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Sigma]\[Chi]\[CurlyEpsilon]\[Delta]\:03cc\[Nu] \
+\[Kappa]\[Alpha]\[Theta]\:03cc\[Lambda]\[Omicron]\[Upsilon] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03af, \
+\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] `a1`. \
+\:0389, \[Mu]\[CurlyEpsilon] \:03ac\[Lambda]\[Lambda]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Iota]\[Alpha], \[Theta]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Mu]\[CurlyEpsilon] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] `1-a1`. \
+\[CapitalGamma]\[Iota]\[Alpha] \[Tau]\[Iota]\[FinalSigma] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[CurlyEpsilon]\[FinalSigma] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota]\[FinalSigma] \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \[Kappa]\:03ac\[Tau]\[Iota] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[Omicron] \[Tau]\[Omega]\[Nu] `a0` \[Kappa]\[Alpha]\[Iota] `1-a1`. \
+\[CapitalGamma]\[Iota]\[Alpha] \[Tau]\[Eta]\[Nu] \
+\[Alpha]\[Kappa]\[Rho]\:03af\[Beta]\[CurlyEpsilon]\[Iota]\[Alpha], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\[Iota]\[Alpha]\:03af\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Iota]\[Sigma]\[Eta] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[CurlyPhi]\:03ad\[Rho]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Eta] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta] \[Tau]\[Eta]\[FinalSigma] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]\
+\[FinalSigma] \[Tau]\[Omicron] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc. \:0388\[Tau]\[Sigma]\[Iota], \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`a0+(1-a1-a0)dexioi[t]/(aristeroi[t]+dexioi[t])`. \[CapitalMu]\[CurlyEpsilon] \
+\[Alpha]\[Pi]\[Lambda]\:03ad\[FinalSigma] \
+\[Pi]\[Rho]\:03ac\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\:03cd\[Pi]\[Tau]\[CurlyEpsilon]\[Iota] \
+\:03cc\[Tau]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`1-a0+(a1-1+a0)dexioi[t]/(aristeroi[t]+dexioi[t])`.\n\n\[CapitalMu]\
+\[CurlyEpsilon] \[Tau]\[Eta]\[Nu] \:03af\[Delta]\[Iota]\[Alpha] \
+\[Lambda]\[Omicron]\[Gamma]\[Iota]\[Kappa]\:03ae \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Eta] \[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03cd \[Nu]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`d0+(1-d1-d0)aristeroi[t]/(aristeroi[t]+dexioi[t])`, \
+\[CurlyEpsilon]\[Nu]\:03ce \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`1-d0+(d1-1+d0)aristeroi[t]/(aristeroi[t]+dexioi[t])`.\n\n\[CapitalSigma]\
+\[Upsilon]\[Nu]\[CurlyEpsilon]\[Pi]\:03ce\[FinalSigma], \[Alpha]\[Nu] \
+\[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ac\[Nu]\[Theta]\[Rho]\[Omega]\[Pi]\[Omicron]\[FinalSigma] \
+\[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] `c` \
+\[Pi]\[Alpha]\[Iota]\[Delta]\[Iota]\:03ac, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \
+\[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron]\[FinalSigma] \[Alpha]\[Rho]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t+1` \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n`(1-a0+(a1-1+a0)dexioi[t]/(aris\
+teroi[t]+dexioi[t]))*c*aristeroi[t]+(d0+(1-d1-d0)aristeroi[t]/(aristeroi[t]+d\
+exioi[t]))*c*dexioi[t]`,\n\n\[CurlyEpsilon]\[Nu]\:03ce \[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron]\[FinalSigma] \[Alpha]\[Rho]\[Iota]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n`(a0+(1-a1-a0)dexioi[t]/(ariste\
+roi[t]+dexioi[t]))*c*aristeroi[t]+(1-d0+(d1-1+d0)aristeroi[t]/(aristeroi[t]+d\
+exioi[t]))*c*dexioi[t]`.", "Display" -> "codemirror", 
+    "Hash" -> "99f056ee-affb-4a96-80c3-0127d326b6ce", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "# \[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]\n\n## \
+\[CapitalMu]\[Alpha]\[Nu]\[Iota]\[Chi]\[Alpha]\:03ca\[Sigma]\[Tau]\[Iota]\
+\[Kappa]\:03cc \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\n\n\:0388\[Sigma]\[Tau]\
+\[Omega] \:03cc\[Tau]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Tau]\[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron] \[Pi]\[Lambda]\:03ae\[Theta]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] `aristeroi[t]` \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+`dexioi[t]`.\n\n\[CapitalTheta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\
+\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Iota]\[Delta]\:03af \[CurlyEpsilon]\[Nu]\:03cc\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[Mu]\[CurlyEpsilon] \[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Alpha] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \:03ae \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Mu]\[CurlyEpsilon] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Alpha] \:03ac\[Lambda]\[Lambda]\[Eta] \
+\[Pi]\[Iota]\[Theta]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]. \
+\[CapitalSigma]\[Upsilon]\[Gamma]\[Kappa]\[CurlyEpsilon]\[Kappa]\[Rho]\[Iota]\
+\[Mu]\:03ad\[Nu]\[Alpha], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Alpha]\[Nu] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Mu]\:03cc\[Nu]\[Omicron] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03af \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha], \
+\[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc\[FinalSigma] \
+\[Nu]\[Alpha] \[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] `a0`. \[CapitalAlpha]\[Pi]\:03cc \
+\[Tau]\[Eta]\[Nu] \:03ac\[Lambda]\[Lambda]\[Eta], \[Alpha]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Sigma]\[Chi]\[CurlyEpsilon]\[Delta]\:03cc\[Nu] \
+\[Kappa]\[Alpha]\[Theta]\:03cc\[Lambda]\[Omicron]\[Upsilon] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03af, \
+\[Tau]\[Omicron] \[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] `a1`. \
+\:0389, \[Mu]\[CurlyEpsilon] \:03ac\[Lambda]\[Lambda]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Iota]\[Alpha], \[Theta]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Mu]\[CurlyEpsilon] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] `1-a1`. \
+\[CapitalGamma]\[Iota]\[Alpha] \[Tau]\[Iota]\[FinalSigma] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[CurlyEpsilon]\[FinalSigma] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota]\[FinalSigma] \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \[Kappa]\:03ac\[Tau]\[Iota] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[Omicron] \[Tau]\[Omega]\[Nu] `a0` \[Kappa]\[Alpha]\[Iota] `1-a1`. \
+\[CapitalGamma]\[Iota]\[Alpha] \[Tau]\[Eta]\[Nu] \
+\[Alpha]\[Kappa]\[Rho]\:03af\[Beta]\[CurlyEpsilon]\[Iota]\[Alpha], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\[Pi]\[Omega]\[FinalSigma] \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\[Iota]\[Alpha]\:03af\[Alpha] \
+\[Alpha]\:03cd\[Xi]\[Iota]\[Sigma]\[Eta] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[CurlyPhi]\:03ad\[Rho]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Nu]\:03ac\[Lambda]\[Omicron]\[Gamma]\[Eta] \
+\[Alpha]\:03cd\[Xi]\[Eta]\[Sigma]\[Eta] \[Tau]\[Eta]\[FinalSigma] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]\
+\[FinalSigma] \[Tau]\[Omicron] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc. \:0388\[Tau]\[Sigma]\[Iota], \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Nu]\[Alpha] \[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`a0+(1-a1-a0)dexioi[t]/(aristeroi[t]+dexioi[t])`. \[CapitalMu]\[CurlyEpsilon] \
+\[Alpha]\[Pi]\[Lambda]\:03ad\[FinalSigma] \
+\[Pi]\[Rho]\:03ac\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\:03cd\[Pi]\[Tau]\[CurlyEpsilon]\[Iota] \
+\:03cc\[Tau]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t` \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd \
+\[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`1-a0+(a1-1+a0)dexioi[t]/(aristeroi[t]+dexioi[t])`.\n\n\[CapitalMu]\
+\[CurlyEpsilon] \[Tau]\[Eta]\[Nu] \:03af\[Delta]\[Iota]\[Alpha] \
+\[Lambda]\[Omicron]\[Gamma]\[Iota]\[Kappa]\:03ae \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Eta] \[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\:03ad\[Nu]\[Alpha] \[Pi]\[Alpha]\[Iota]\[Delta]\:03af \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03cd \[Nu]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`d0+(1-d1-d0)aristeroi[t]/(aristeroi[t]+dexioi[t])`, \
+\[CurlyEpsilon]\[Nu]\:03ce \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Nu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\
+\[Iota] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03cc \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+`1-d0+(d1-1+d0)aristeroi[t]/(aristeroi[t]+dexioi[t])`.\n\n\[CapitalSigma]\
+\[Upsilon]\[Nu]\[CurlyEpsilon]\[Pi]\:03ce\[FinalSigma], \[Alpha]\[Nu] \
+\[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ac\[Nu]\[Theta]\[Rho]\[Omega]\[Pi]\[Omicron]\[FinalSigma] \
+\[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] `c` \
+\[Pi]\[Alpha]\[Iota]\[Delta]\[Iota]\:03ac, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \
+\[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron]\[FinalSigma] \[Alpha]\[Rho]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae `t+1` \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n`(1-a0+(a1-1+a0)dexioi[t]/(aris\
+teroi[t]+dexioi[t]))*c*aristeroi[t]+(d0+(1-d1-d0)aristeroi[t]/(aristeroi[t]+d\
+exioi[t]))*c*dexioi[t]`,\n\n\[CurlyEpsilon]\[Nu]\:03ce \[Omicron] \
+\[Alpha]\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon]\[Nu]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Omicron]\[FinalSigma] \[Alpha]\[Rho]\[Iota]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n`(a0+(1-a1-a0)dexioi[t]/(ariste\
+roi[t]+dexioi[t]))*c*aristeroi[t]+(1-d0+(d1-1+d0)aristeroi[t]/(aristeroi[t]+d\
+exioi[t]))*c*dexioi[t]`.", "Display" -> "markdown", 
+    "Hash" -> "ec66641f-1082-4c23-8adc-a6d9ff809e06", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \[CapitalGamma]\[Iota]\[Alpha] \[Nu]\[Alpha] \
+\[Pi]\[Rho]\[Omicron]\[Chi]\[Omega]\[Rho]\:03ae\[Sigma]\[CurlyEpsilon]\[Iota] \
+\[Eta] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\
+\:03af\[Eta]\[Sigma]\[Eta], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\:03cc\[Tau]\[Iota] \[Omicron] \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ad\[Nu]\[Alpha]\[FinalSigma] \[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] 2 \
+\[Pi]\[Alpha]\[Iota]\[Delta]\[Iota]\:03ac (`c=2`), \:03cc\[Tau]\[Iota] \
+\[Xi]\[CurlyEpsilon]\[Kappa]\[Iota]\[Nu]\:03ac\[Mu]\[CurlyEpsilon] \
+\[Mu]\[CurlyEpsilon] 10000 \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd\
+\[FinalSigma] (`aristeroi[0]=10000`), \[Mu]\[CurlyEpsilon] 90000 \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03cd\[FinalSigma] \
+(`dexioi[0]=90000`)  \[Kappa]\[Alpha]\[Iota] \:03cc\[Tau]\[Iota]:\n\n- \
+`a0=0.1`\n- `a1=0.3`\n- `d0=0.2`\n- \
+`d1=0.1`\n\n\[CapitalTau]\[Omicron]\[Iota]\[Alpha]\:03cd\[Tau]\[Eta] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha] \
+\[Tau]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \[Nu]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \[Sigma]\[CurlyEpsilon] \
+\[Beta]\:03ac\[Theta]\[Omicron]\[FinalSigma] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron]\[Upsilon] 73%, \
+\:03cc\[Pi]\[Omega]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\:03af\[Chi]\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Tau]\[Omicron] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Eta]\[Mu]\[Alpha].", 
+    "Display" -> "codemirror", "Hash" -> 
+     "0b91db3b-f8ac-4349-8841-e2742f054bcc", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalGamma]\[Iota]\[Alpha] \[Nu]\[Alpha] \
+\[Pi]\[Rho]\[Omicron]\[Chi]\[Omega]\[Rho]\:03ae\[Sigma]\[CurlyEpsilon]\[Iota] \
+\[Eta] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\[Omicron]\
+\:03af\[Eta]\[Sigma]\[Eta], \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \
+\:03cc\[Tau]\[Iota] \[Omicron] \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ad\[Nu]\[Alpha]\[FinalSigma] \[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] 2 \
+\[Pi]\[Alpha]\[Iota]\[Delta]\[Iota]\:03ac (`c=2`), \:03cc\[Tau]\[Iota] \
+\[Xi]\[CurlyEpsilon]\[Kappa]\[Iota]\[Nu]\:03ac\[Mu]\[CurlyEpsilon] \
+\[Mu]\[CurlyEpsilon] 10000 \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03cd\
+\[FinalSigma] (`aristeroi[0]=10000`), \[Mu]\[CurlyEpsilon] 90000 \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03cd\[FinalSigma] \
+(`dexioi[0]=90000`)  \[Kappa]\[Alpha]\[Iota] \:03cc\[Tau]\[Iota]:\n\n- \
+`a0=0.1`\n- `a1=0.3`\n- `d0=0.2`\n- \
+`d1=0.1`\n\n\[CapitalTau]\[Omicron]\[Iota]\[Alpha]\:03cd\[Tau]\[Eta] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha] \
+\[Tau]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \[Nu]\[Alpha] \
+\[Gamma]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \[Sigma]\[CurlyEpsilon] \
+\[Beta]\:03ac\[Theta]\[Omicron]\[FinalSigma] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron]\[Upsilon] 73%, \
+\:03cc\[Pi]\[Omega]\[FinalSigma] \
+\[Delta]\[CurlyEpsilon]\:03af\[Chi]\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Tau]\[Omicron] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Eta]\[Mu]\[Alpha].", 
+    "Display" -> "markdown", "Hash" -> 
+     "a12eb3bf-7136-44a3-b134-2a542a431eb8", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\nc=2;\na0=0.1;\na1=0.3;\nd0=0.2;\nd1=0.1;\
+\naristeroi[0]=10000;\ndexioi[0]=90000;\naristeroi[n_] := aristeroi[n] = \
+(1-a0+(a1-1+a0)dexioi[n-1]/(aristeroi[n-1]+dexioi[n-1]))*c*aristeroi[n-1]+(d0\
++(1-d1-d0)aristeroi[n-1]/(aristeroi[n-1]+dexioi[n-1]))*c*dexioi[n-1]\n\ndexio\
+i[n_] := dexioi[n] \
+=(a0+(1-a1-a0)dexioi[n-1]/(aristeroi[n-1]+dexioi[n-1]))*c*aristeroi[n-1]+(1-d\
+0+(d1-1+d0)aristeroi[n-1]/(aristeroi[n-1]+dexioi[n-1]))*c*dexioi[n-1]\n\naPro\
+p = Table[aristeroi[n]/(aristeroi[n]+dexioi[n]),{n,0,50}];\nListPlot[aProp, \
+PlotLabel -> \"\[CapitalPi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ac\[FinalSigma]\"\
+]\ndProp = \
+Table[dexioi[n]/(aristeroi[n]+dexioi[n]),{n,0,50}];\nListPlot[dProp, \
+PlotLabel -> \"\[CapitalPi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac\[FinalSigma]\"]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "12b7a209-ce68-4305-aa98-5757f230c2a6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"c12b36e4-b785-418b-bf5b-f427625f9442\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKJxsaJ\
+RmbpZroJplbmOqaGFok6SalmSbpppkYmZsZmaZZmpgYAQCCWBVK\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "3e449397-128e-4adc-a896-2d1580739328", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"c062893b-cd56-4673-a1e6-b00892b19b91\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKJxuYG\
+VlYGifpJqeYmumamJkb6yYapprpJhkYWFgaJRlaJlkaAgB7hhUU\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "62b664df-33ef-413c-8637-ac592777e2f6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \[CapitalSigma]\[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Kappa]\:03ac\[Tau]\[Omega] \
+\[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Eta]\[Mu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Kappa]\[Omicron]\[Lambda]\[Omicron]\[Upsilon]\
+\[Theta]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[Gamma]\[Rho]\[Alpha]\[Mu]\[Mu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Tau]\[Omega]\[Nu] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha], \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Omicron] \
+\[Sigma]\[Eta]\[Mu]\[CurlyEpsilon]\:03af\[Omicron] \
+\:03cc\[Pi]\[Omicron]\[Upsilon] \[Alpha]\[Upsilon]\[Tau]\[Omicron]\:03af \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\[Omicron]\[Pi]\[Omicron]\
+\[Iota]\[Omicron]\:03cd\[Nu]\[Tau]\[Alpha]\[Iota].", 
+    "Display" -> "codemirror", "Hash" -> 
+     "4b7a00a6-7b05-4ba7-b0ac-f6f778e901be", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalSigma]\[Tau]\[Omicron] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Kappa]\:03ac\[Tau]\[Omega] \
+\[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Eta]\[Mu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Kappa]\[Omicron]\[Lambda]\[Omicron]\[Upsilon]\
+\[Theta]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[Gamma]\[Rho]\[Alpha]\[Mu]\[Mu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Tau]\[Omega]\[Nu] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha], \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Omicron] \
+\[Sigma]\[Eta]\[Mu]\[CurlyEpsilon]\:03af\[Omicron] \
+\:03cc\[Pi]\[Omicron]\[Upsilon] \[Alpha]\[Upsilon]\[Tau]\[Omicron]\:03af \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\[Omicron]\[Pi]\[Omicron]\
+\[Iota]\[Omicron]\:03cd\[Nu]\[Tau]\[Alpha]\[Iota].", "Display" -> "markdown", 
+    "Hash" -> "e4002254-1690-4337-b1e0-9aca272c005d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(* \
+\[CapitalUpsilon]\[Pi]\[Omicron]\[Lambda]\[Omicron]\[Gamma]\[Iota]\[Sigma]\
+\[Mu]\:03cc\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[Iota]\[Alpha]\[Nu]\[Upsilon]\[Sigma]\[Mu]\:03ac\[Tau]\[Omega]\[Nu] \
+*)\nlistAB2 = Table[{aristeroi[n]/(aristeroi[n]+dexioi[n]), \
+dexioi[n]/(aristeroi[n]+dexioi[n])}, {n, 0, 55}];\nListPlot[listAB2, \
+AxesLabel -> \
+{\"\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\[Omicron]\:03af\"\
+,\"\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\[Omicron]\:03af\"}]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "0693440c-3488-453e-a315-5e5ebb75078c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"78ebc3f6-830e-4c9e-ac91-b601116a3be3\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKm1ukJ\
+iUbp5npWhgbpOqaJFum6iYmWxrqJpkZGBoamiUaJ6UaAwCKoxXN\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "f3c41873-6e0d-4154-9d4b-ccb130db11c6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \
+\[CapitalPi]\[Rho]\[Omicron]\[Kappa]\[CurlyEpsilon]\[Iota]\[Mu]\:03ad\[Nu]\
+\[Omicron]\[Upsilon] \[Nu]\[Alpha] \
+\[Beta]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Mu]\[Iota]\[Alpha] \
+\[Pi]\[Iota]\[Omicron] \
+\[Sigma]\[Upsilon]\[Gamma]\[Kappa]\[CurlyEpsilon]\[Kappa]\[Rho]\[Iota]\[Mu]\
+\:03ad\[Nu]\[Eta] \[Tau]\[Iota]\[Mu]\:03ae \[Gamma]\[Iota]\[Alpha] \
+\[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+\[Iota]\[Sigma]\[Omicron]\[Rho]\[Rho]\[Omicron]\[Pi]\:03af\[Alpha]\
+\[FinalSigma] \[Tau]\[Omega]\[Nu] \[Delta]\:03cd\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu], \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\[Omicron]\[Lambda]\:03af\[Zeta]\[Omicron]\
+\[Upsilon]\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Mu]\[Iota]\[Alpha] \[Tau]\[Upsilon]\[Chi]\[Alpha]\:03af\[Alpha] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Omicron]\[Delta]\[Omicron] \
+(\[Alpha]\[Delta]\[Iota]\:03ac\[CurlyPhi]\[Omicron]\[Rho]\[Omicron] \
+\[Pi]\[Omicron]\[Iota]\[Alpha]) \[Omega]\[FinalSigma] `pa`, \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \[Omega]\[FinalSigma] `pd` \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc \
+\[Omega]\[FinalSigma] `pop`, \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Tau]\[Eta]\[Nu] \[CurlyEpsilon]\[Pi]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[Alpha]\[Nu]\[Tau]\:03af\[Sigma]\[Tau]\[Omicron]\[Iota]\[Chi]\[Alpha] \
+\[Theta]\[Alpha] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "fcb875f5-e928-40bc-9b34-bce247e3955c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalPi]\[Rho]\[Omicron]\[Kappa]\[CurlyEpsilon]\[Iota]\
+\[Mu]\:03ad\[Nu]\[Omicron]\[Upsilon] \[Nu]\[Alpha] \
+\[Beta]\[Rho]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon] \[Mu]\[Iota]\[Alpha] \
+\[Pi]\[Iota]\[Omicron] \
+\[Sigma]\[Upsilon]\[Gamma]\[Kappa]\[CurlyEpsilon]\[Kappa]\[Rho]\[Iota]\[Mu]\
+\:03ad\[Nu]\[Eta] \[Tau]\[Iota]\[Mu]\:03ae \[Gamma]\[Iota]\[Alpha] \
+\[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+\[Iota]\[Sigma]\[Omicron]\[Rho]\[Rho]\[Omicron]\[Pi]\:03af\[Alpha]\
+\[FinalSigma] \[Tau]\[Omega]\[Nu] \[Delta]\:03cd\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu], \
+\[Sigma]\[Upsilon]\[Mu]\[Beta]\[Omicron]\[Lambda]\:03af\[Zeta]\[Omicron]\
+\[Upsilon]\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Mu]\[Iota]\[Alpha] \[Tau]\[Upsilon]\[Chi]\[Alpha]\:03af\[Alpha] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Omicron]\[Delta]\[Omicron] \
+(\[Alpha]\[Delta]\[Iota]\:03ac\[CurlyPhi]\[Omicron]\[Rho]\[Omicron] \
+\[Pi]\[Omicron]\[Iota]\[Alpha]) \[Omega]\[FinalSigma] `pa`, \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \[Omega]\[FinalSigma] `pd` \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc \
+\[Omega]\[FinalSigma] `pop`, \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Tau]\[Eta]\[Nu] \[CurlyEpsilon]\[Pi]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae \[Tau]\[Omicron] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[Alpha]\[Nu]\[Tau]\:03af\[Sigma]\[Tau]\[Omicron]\[Iota]\[Chi]\[Alpha] \
+\[Theta]\[Alpha] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:", 
+    "Display" -> "markdown", "Hash" -> 
+     "5587d1ba-36c6-4494-9592-a4d5b0a2734d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\nar2 = \
+(1-a0+(a1-1+a0)pd)*c*pa*pop+(d0+(1-d1-d0)pa)*c*pd*pop;\nde2 = \
+(a0+(1-a1-a0)pd)*c*pa*pop+(1-d0+(d1-1+d0)pa)*c*pd*pop;\npa2 = \
+ar2/(ar2+de2)//Simplify\npd2 = de2/(ar2+de2)//Simplify", 
+    "Display" -> "codemirror", "Hash" -> 
+     "37f070fe-e5a3-413a-977b-9b8de4ee4711", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*FB[*)((d0 pd+pa (1+a0 (-1+pd)+a1 pd-d0 pd-d1 \
+pd))(*,*)/(*,*)(pa+pd))(*]FB*)", "Display" -> "codemirror", 
+    "Hash" -> "42ed9cfc-e1a0-4311-8533-26ea4ee5e219", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*FB[*)(((1+d0 (-1+pa)-a1 pa+d1 pa) pd+a0 (pa-pa \
+pd))(*,*)/(*,*)(pa+pd))(*]FB*)", "Display" -> "codemirror", 
+    "Hash" -> "06ea7863-046d-4dd2-b549-e434080bdb62", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \
+\[CapitalBeta]\[Lambda]\:03ad\[Pi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\:03cc\[Tau]\[Iota] \[Tau]\[Alpha] \[CurlyEpsilon]\[Nu] \
+\[Lambda]\:03cc\[Gamma]\[Omega] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[CurlyEpsilon]\[Xi]\[Alpha]\[Rho]\[Tau]\:03cc\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\:03cc \[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd `pop`, \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma], \
+\[Alpha]\[Nu]\[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\[Iota]\[Kappa]\:03ac \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd\
+\[FinalSigma] \[Mu]\[Alpha]\[FinalSigma], \[Tau]\[Alpha] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[CurlyEpsilon]\[Xi]\[Alpha]\[Rho]\[Tau]\:03ce\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Mu]\[Omicron]\[Nu]\:03ac\[Chi]\[Alpha] \[Alpha]\[Pi]\:03cc \[Tau]\[Alpha] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Tau]\[Eta]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Eta]\[Gamma]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Eta] \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae.\n\n\[CapitalEpsilon]\[Pi]\[Omicron]\
+\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+\[Pi]\[Rho]\:03ad\[Pi]\[CurlyEpsilon]\[Iota] \[Nu]\[Alpha] \
+\[Lambda]\:03cd\[Sigma]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Omicron] \[Sigma]\:03cd\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] \
+\[CurlyEpsilon]\[Xi]\[Iota]\[Sigma]\:03ce\[Sigma]\[CurlyEpsilon]\[Omega]\[Nu] \
+\[Omega]\[FinalSigma] \[Pi]\[Rho]\[Omicron]\[FinalSigma] `pa` \
+\[Kappa]\[Alpha]\[Iota] `pd`:", "Display" -> "codemirror", 
+    "Hash" -> "068dfb2b-e29f-43f3-83d7-0678cab7d2f3", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalBeta]\[Lambda]\:03ad\[Pi]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \[Tau]\[Alpha] \[CurlyEpsilon]\[Nu] \
+\[Lambda]\:03cc\[Gamma]\[Omega] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[CurlyEpsilon]\[Xi]\[Alpha]\[Rho]\[Tau]\:03cc\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\:03cc \[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd `pop`, \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma], \
+\[Alpha]\[Nu]\[Alpha]\[CurlyPhi]\[Omicron]\[Rho]\[Iota]\[Kappa]\:03ac \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd\
+\[FinalSigma] \[Mu]\[Alpha]\[FinalSigma], \[Tau]\[Alpha] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Tau]\[Omega]\[Nu] \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ce\[Nu] \
+\[Kappa]\[Alpha]\[Iota] \[Tau]\[Omega]\[Nu] \
+\[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ce\[Nu] \
+\[CurlyEpsilon]\[Xi]\[Alpha]\[Rho]\[Tau]\:03ce\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Mu]\[Omicron]\[Nu]\:03ac\[Chi]\[Alpha] \[Alpha]\[Pi]\:03cc \[Tau]\[Alpha] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ac \[Tau]\[Eta]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Eta]\[Gamma]\[Omicron]\:03cd\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Eta] \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae.\n\n\[CapitalEpsilon]\[Pi]\[Omicron]\
+\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+\[Pi]\[Rho]\:03ad\[Pi]\[CurlyEpsilon]\[Iota] \[Nu]\[Alpha] \
+\[Lambda]\:03cd\[Sigma]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Omicron] \[Sigma]\:03cd\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] \
+\[CurlyEpsilon]\[Xi]\[Iota]\[Sigma]\:03ce\[Sigma]\[CurlyEpsilon]\[Omega]\[Nu] \
+\[Omega]\[FinalSigma] \[Pi]\[Rho]\[Omicron]\[FinalSigma] `pa` \
+\[Kappa]\[Alpha]\[Iota] `pd`:", "Display" -> "markdown", 
+    "Hash" -> "163ad433-9bd8-4c2b-a804-0b97030e1368", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> 
+     "eqAr = pa2==pa\neqDe = pd2==pd\nSolve[{eqAr,eqDe},{pa,pd}]//TableForm", 
+    "Display" -> "codemirror", "Hash" -> 
+     "93a5ce01-a2ec-4b38-a3a4-7a0cb50b8678", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*FB[*)((d0 pd+pa (1+a0 (-1+pd)+a1 pd-d0 pd-d1 \
+pd))(*,*)/(*,*)(pa+pd))(*]FB*)==pa", "Display" -> "codemirror", 
+    "Hash" -> "9d6e9eca-bc49-4637-a628-b99a99ec3b14", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*FB[*)(((1+d0 (-1+pa)-a1 pa+d1 pa) pd+a0 (pa-pa \
+pd))(*,*)/(*,*)(pa+pd))(*]FB*)==pd", "Display" -> "codemirror", 
+    "Hash" -> "111e6250-20ac-4579-90b8-46c47cc34e13", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*GB[*){{pa->(*FB[*)((a1-2 \
+d0-d1+(*SqB[*)Sqrt[(*SpB[*)Power[a1(*|*),(*|*)2](*]SpB*)+4 a0 d0-2 a1 \
+d1+(*SpB[*)Power[d1(*|*),(*|*)2](*]SpB*)](*]SqB*))(*,*)/(*,*)(2 \
+(a0+a1-d0-d1)))(*]FB*)(*|*),(*|*)pd->1-(*FB[*)((a1)(*,*)/(*,*)(2 \
+(a0+a1-d0-d1)))(*]FB*)+(*FB[*)((d0)(*,*)/(*,*)(a0+a1-d0-d1))(*]FB*)+(*FB[*)((\
+d1)(*,*)/(*,*)(2 \
+(a0+a1-d0-d1)))(*]FB*)-(*FB[*)(((*SqB[*)Sqrt[(*SpB[*)Power[a1(*|*),(*|*)2](*]\
+SpB*)+4 a0 d0-2 a1 \
+d1+(*SpB[*)Power[d1(*|*),(*|*)2](*]SpB*)](*]SqB*))(*,*)/(*,*)(2 \
+(a0+a1-d0-d1)))(*]FB*)}(*||*),(*||*){pa->(*FB[*)((-a1+2 \
+d0+d1+(*SqB[*)Sqrt[(*SpB[*)Power[a1(*|*),(*|*)2](*]SpB*)+4 a0 d0-2 a1 \
+d1+(*SpB[*)Power[d1(*|*),(*|*)2](*]SpB*)](*]SqB*))(*,*)/(*,*)(2 \
+(-a0-a1+d0+d1)))(*]FB*)(*|*),(*|*)pd->1+(*FB[*)((a1)(*,*)/(*,*)(2 \
+(-a0-a1+d0+d1)))(*]FB*)-(*FB[*)((d0)(*,*)/(*,*)(-a0-a1+d0+d1))(*]FB*)-(*FB[*)\
+((d1)(*,*)/(*,*)(2 \
+(-a0-a1+d0+d1)))(*]FB*)-(*FB[*)(((*SqB[*)Sqrt[(*SpB[*)Power[a1(*|*),(*|*)2](*\
+]SpB*)+4 a0 d0-2 a1 \
+d1+(*SpB[*)Power[d1(*|*),(*|*)2](*]SpB*)](*]SqB*))(*,*)/(*,*)(2 \
+(-a0-a1+d0+d1)))(*]FB*)}}(*]GB*)", "Display" -> "codemirror", 
+    "Hash" -> "3d71c275-dbd7-4e90-9abe-2b5c1c890657", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \
+\[CapitalEpsilon]\[Pi]\[CurlyEpsilon]\[Iota]\[Delta]\:03ae \[Tau]\[Omicron] \
+\[Gamma]\[CurlyEpsilon]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Alpha]\[Pi]\[Omicron]\[Tau]\:03ad\[Lambda]\[CurlyEpsilon]\[Sigma]\[Mu]\
+\[Alpha] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Kappa]\[CurlyEpsilon]\[Tau]\:03ac \
+\[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Pi]\[Lambda]\[Omicron]\[Kappa]\[Omicron], \
+\[CurlyEpsilon]\[Pi]\[Alpha]\[Nu]\[CurlyEpsilon]\[Rho]\[Chi]\:03cc\[Mu]\
+\[Alpha]\[Sigma]\[Tau]\[CurlyEpsilon] \[Sigma]\[Tau]\[Iota]\[FinalSigma] \
+\[Tau]\[Iota]\[Mu]\:03ad\[FinalSigma] \[Pi]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Chi]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Delta]\:03ce\[Sigma]\[CurlyEpsilon]\[Iota] \[Pi]\[Rho]\[Iota]\[Nu]:\n\n- \
+`c=2`\n- `a0=0.1`\n- `a1=0.3`\n- `d0=0.2`\n- \
+`d1=0.1`\n\n\[CapitalTau]\[Omicron]\[Iota]\[Alpha]\:03cd\[Tau]\[Eta] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Omicron]\[Iota] \[Tau]\[Iota]\[Mu]\:03ad\[FinalSigma] \
+\[Iota]\[Sigma]\[Omicron]\[Rho]\[Rho]\[Omicron]\[Pi]\:03af\[Alpha]\
+\[FinalSigma] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "6b169fbc-00c0-4ab5-9f9e-eeae0fb6a0f0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalEpsilon]\[Pi]\[CurlyEpsilon]\[Iota]\[Delta]\:03ae \
+\[Tau]\[Omicron] \[Gamma]\[CurlyEpsilon]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Alpha]\[Pi]\[Omicron]\[Tau]\:03ad\[Lambda]\[CurlyEpsilon]\[Sigma]\[Mu]\
+\[Alpha] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Rho]\[Kappa]\[CurlyEpsilon]\[Tau]\:03ac \
+\[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Pi]\[Lambda]\[Omicron]\[Kappa]\[Omicron], \
+\[CurlyEpsilon]\[Pi]\[Alpha]\[Nu]\[CurlyEpsilon]\[Rho]\[Chi]\:03cc\[Mu]\
+\[Alpha]\[Sigma]\[Tau]\[CurlyEpsilon] \[Sigma]\[Tau]\[Iota]\[FinalSigma] \
+\[Tau]\[Iota]\[Mu]\:03ad\[FinalSigma] \[Pi]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Chi]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Delta]\:03ce\[Sigma]\[CurlyEpsilon]\[Iota] \[Pi]\[Rho]\[Iota]\[Nu]:\n\n- \
+`c=2`\n- `a0=0.1`\n- `a1=0.3`\n- `d0=0.2`\n- \
+`d1=0.1`\n\n\[CapitalTau]\[Omicron]\[Iota]\[Alpha]\:03cd\[Tau]\[Eta] \
+\[Pi]\[CurlyEpsilon]\[Rho]\[Iota]\[Pi]\[Tau]\:03ce\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Omicron]\[Iota] \[Tau]\[Iota]\[Mu]\:03ad\[FinalSigma] \
+\[Iota]\[Sigma]\[Omicron]\[Rho]\[Rho]\[Omicron]\[Pi]\:03af\[Alpha]\
+\[FinalSigma] \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:", 
+    "Display" -> "markdown", "Hash" -> 
+     "52bcf8f8-2dd5-4d45-aedb-a425426995de", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "c=2;\na0=1/10;\na1=3/10;\nd0=2/10;\nd1=1/10;\nSolve[{eqAr,eqD\
+e},{pa,pd}]//TableForm", "Display" -> "codemirror", 
+    "Hash" -> "1db5e97e-0fd8-4ae8-b355-13aa509b716e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*GB[*){{pa->-1-(*SqB[*)Sqrt[3](*]SqB*)(*|*),(*|*)pd->2+(*SqB\
+[*)Sqrt[3](*]SqB*)}(*||*),(*||*){pa->-1+(*SqB[*)Sqrt[3](*]SqB*)(*|*),(*|*)pd-\
+>2-(*SqB[*)Sqrt[3](*]SqB*)}}(*]GB*)", "Display" -> "codemirror", 
+    "Hash" -> "ce29224a-064b-4535-a8ed-1fca902eb1fb", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \:0389 \[Sigma]\[CurlyEpsilon] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\[CurlyEpsilon]\[Gamma]\[Gamma]\[Iota]\[Sigma]\
+\[Tau]\[Iota]\[Kappa]\:03ae \[Mu]\[Omicron]\[Rho]\[CurlyPhi]\:03ae:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "e5906e1e-96b0-496d-8f99-a6bf9feb3f5c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\:0389 \[Sigma]\[CurlyEpsilon] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\[CurlyEpsilon]\[Gamma]\[Gamma]\[Iota]\[Sigma]\
+\[Tau]\[Iota]\[Kappa]\:03ae \[Mu]\[Omicron]\[Rho]\[CurlyPhi]\:03ae:", 
+    "Display" -> "markdown", "Hash" -> 
+     "3a993083-38f4-4c98-92e8-05d31760d70d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "NSolve[{eqAr,eqDe},{pa,pd}]//TableForm", 
+    "Display" -> "codemirror", "Hash" -> 
+     "a3c631ab-ba3a-4bb4-acaa-11876bb5845a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Fade" -> True, "Hidden" -> False|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "(*GB[*){{pa->0.7320508075688774`(*|*),(*|*)pd->0.267949192431\
+12264`}(*||*),(*||*){pa->-2.732050807568879`(*|*),(*|*)pd->3.732050807568879`\
+}}(*]GB*)", "Display" -> "codemirror", 
+    "Hash" -> "123479ce-456c-4fd7-89cb-10bc8d890cbc", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \
+\[CapitalPi]\[Rho]\[Omicron]\[CurlyPhi]\[Alpha]\[Nu]\:03ce\[FinalSigma], \
+\[Eta] 2\[Eta] \[Lambda]\:03cd\[Sigma]\[Eta] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\[Alpha]\[Rho]\:03ac\[Delta]\[CurlyEpsilon]\[Kappa]\[Tau]\[Eta] \
+\[Beta]\:03ac\[Sigma]\[CurlyEpsilon]\[Iota] \[Tau]\[Eta]\[FinalSigma] \
+\[CurlyEpsilon]\[Rho]\[Mu]\[Eta]\[Nu]\[CurlyEpsilon]\:03af\[Alpha]\
+\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu], \
+\:03ac\[Rho]\[Alpha] \:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Eta]\[Nu] 1\[Eta], \[Eta] \[Omicron]\[Pi]\[Omicron]\:03af\[Alpha] \
+\[Kappa]\[Alpha]\[Iota] \
+\[Tau]\[Alpha]\[Iota]\[Rho]\[Iota]\:03ac\[Zeta]\[CurlyEpsilon]\[Iota] \
+\[Mu]\[CurlyEpsilon] \[Alpha]\[Upsilon]\[Tau]\:03cc \[Pi]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Chi]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Beta]\[Rho]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03ac.", "Display" -> "codemirror", 
+    "Hash" -> "15363369-fa36-4410-9dfe-ea954f4bdaf2", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalPi]\[Rho]\[Omicron]\[CurlyPhi]\[Alpha]\[Nu]\:03ce\
+\[FinalSigma], \[Eta] 2\[Eta] \[Lambda]\:03cd\[Sigma]\[Eta] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\[Alpha]\[Rho]\:03ac\[Delta]\[CurlyEpsilon]\[Kappa]\[Tau]\[Eta] \
+\[Beta]\:03ac\[Sigma]\[CurlyEpsilon]\[Iota] \[Tau]\[Eta]\[FinalSigma] \
+\[CurlyEpsilon]\[Rho]\[Mu]\[Eta]\[Nu]\[CurlyEpsilon]\:03af\[Alpha]\
+\[FinalSigma] \[Tau]\[Omega]\[Nu] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03ce\[Nu], \
+\:03ac\[Rho]\[Alpha] \:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Eta]\[Nu] 1\[Eta], \[Eta] \[Omicron]\[Pi]\[Omicron]\:03af\[Alpha] \
+\[Kappa]\[Alpha]\[Iota] \
+\[Tau]\[Alpha]\[Iota]\[Rho]\[Iota]\:03ac\[Zeta]\[CurlyEpsilon]\[Iota] \
+\[Mu]\[CurlyEpsilon] \[Alpha]\[Upsilon]\[Tau]\:03cc \[Pi]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Chi]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Beta]\[Rho]\[CurlyEpsilon]\[Iota] \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03ac.", "Display" -> "markdown", 
+    "Hash" -> "3671e43d-87e0-4d05-ab14-b83145ef3661", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md ## \
+\[CapitalMu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron] \
+\[Mu]\[CurlyEpsilon] \
+\[Delta]\[Iota]\:03ce\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma]\n\n:::warning\n\
+\[CapitalUpsilon]\[Pi]\:03cc \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Kappa]\[CurlyEpsilon]\[Upsilon]\:03ae\
+\n:::", "Display" -> "codemirror", "Hash" -> 
+     "15e1ad66-5ff6-4c1e-ba28-39e5f34b48c3", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "## \[CapitalMu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron] \
+\[Mu]\[CurlyEpsilon] \
+\[Delta]\[Iota]\:03ce\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma]\n\n:::warning\n\
+\[CapitalUpsilon]\[Pi]\:03cc \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Kappa]\[CurlyEpsilon]\[Upsilon]\:03ae\
+\n:::", "Display" -> "markdown", "Hash" -> 
+     "809035cc-b02c-41df-934a-5585150a494b", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md ## \:038e\[Pi]\[Alpha]\[Rho]\[Xi]\[Eta] \
+\[Kappa]\:03ad\[Nu]\[Tau]\[Rho]\[Omicron]\[Upsilon]\n\n:::warning\n\
+\[CapitalUpsilon]\[Pi]\:03cc \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Kappa]\[CurlyEpsilon]\[Upsilon]\:03ae\
+\n:::", "Display" -> "codemirror", "Hash" -> 
+     "bd3a36ad-e6c1-4281-ab3c-ac5d7940e12d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "## \:038e\[Pi]\[Alpha]\[Rho]\[Xi]\[Eta] \
+\[Kappa]\:03ad\[Nu]\[Tau]\[Rho]\[Omicron]\[Upsilon]\n\n:::warning\n\
+\[CapitalUpsilon]\[Pi]\:03cc \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Kappa]\[CurlyEpsilon]\[Upsilon]\:03ae\
+\n:::", "Display" -> "markdown", "Hash" -> 
+     "19b66d59-4571-4d02-92c9-0cbf6dcdf72f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> ".md \[CapitalAlpha]\[Upsilon]\[Tau]\:03cc \[Tau]\[Omicron] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \:03af\[Delta]\[Iota]\[Omicron] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron] \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03cc, \[Mu]\:03cc\[Nu]\[Omicron] \
+\[Pi]\[Omicron]\[Upsilon] \[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Alpha]\[Nu]\[Delta]\[CurlyEpsilon]\[Chi]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Eta] \[Mu]\[CurlyEpsilon]\[Tau]\:03ac\[Beta]\[Alpha]\[Sigma]\[Eta] \
+\[Alpha]\[Pi]\:03cc \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ac \
+\[Sigma]\[Tau]\[Alpha] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac \
+\[Mu]\[CurlyEpsilon]\[Sigma]\[Omicron]\[Lambda]\[Alpha]\[Beta]\[CurlyEpsilon]\
+\:03af \[Tau]\[Omicron] \[Kappa]\:03ad\[Nu]\[Tau]\[Rho]\[Omicron].", 
+    "Display" -> "codemirror", "Hash" -> 
+     "ebd51a98-90d6-4857-9c42-039c9c3c5a3f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>, 
+   <|"Data" -> "\[CapitalAlpha]\[Upsilon]\[Tau]\:03cc \[Tau]\[Omicron] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \:03af\[Delta]\[Iota]\[Omicron] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Omicron] \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03cc, \[Mu]\:03cc\[Nu]\[Omicron] \
+\[Pi]\[Omicron]\[Upsilon] \[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Alpha]\[Nu]\[Delta]\[CurlyEpsilon]\[Chi]\:03cc\[Mu]\[CurlyEpsilon]\[Nu]\
+\[Eta] \[Mu]\[CurlyEpsilon]\[Tau]\:03ac\[Beta]\[Alpha]\[Sigma]\[Eta] \
+\[Alpha]\[Pi]\:03cc \
+\[Alpha]\[Rho]\[Iota]\[Sigma]\[Tau]\[CurlyEpsilon]\[Rho]\:03ac \
+\[Sigma]\[Tau]\[Alpha] \[Delta]\[CurlyEpsilon]\[Xi]\[Iota]\:03ac \
+\[Mu]\[CurlyEpsilon]\[Sigma]\[Omicron]\[Lambda]\[Alpha]\[Beta]\[CurlyEpsilon]\
+\:03af \[Tau]\[Omicron] \[Kappa]\:03ad\[Nu]\[Tau]\[Rho]\[Omicron].", 
+    "Display" -> "markdown", "Hash" -> 
+     "4fefd310-5820-4f41-bd85-6ed22a249d95", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cbda86df-f55a-4a69-a1f1-824ca132eae2"|>}, 
+ "serializer" -> "jsfn4"|>

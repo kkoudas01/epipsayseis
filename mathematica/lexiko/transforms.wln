@@ -1,0 +1,402 @@
+<|"Notebook" -> <|"Controller" -> "2269b909-ba37-44c4-b917-aa75cb49eb13", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$333], "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "92a62640-bb23-49db-ba36-57db6cd7ff29", 
+   "Objects" -> <|"94ebf508-aea5-4ae8-923a-b79af2104a82" -> 
+      <|"Public" -> Hold[Graphics[Annotation[
+           {{{{}, {}, Annotation[{Directive[Opacity[1], RGBColor[0.24, 0.6, 
+                  0.8], AbsoluteThickness[2]], Line[{{-0.9999999591836735, 
+                   0}, {-0.9993865641588807, 0}, {-0.998773169134088, 0}, 
+                  {-0.9975463790845025, 0}, {-0.9950927989853317, 0}, 
+                  {-0.9901856387869898, 0}, {-0.9803713183903062, 0}, 
+                  {-0.9607426775969391, 0}, {-0.9181832858290826, 0}, 
+                  {-0.8784442328596956, 0}, {-0.8394847023622477, 0}, 
+                  {-0.7972230616836775, 0}, {-0.757781759803577, 0}, 
+                  {-0.7150383477423542, 0}, {-0.6730744581530703, 0}, 
+                  {-0.6339309073622561, 0}, {-0.5914852463903196, 0}, 
+                  {-0.5518599242168528, 0}, {-0.5512529585965165, 0}, 
+                  {-0.55064599297618, 0}, {-0.5494320617355073, 0}, 
+                  {-0.5470041992541619, 0}, {-0.5421484742914708, 0}, 
+                  {-0.5324370243660889, 0}, {-0.5318300587457525, 0}, 
+                  {-0.531223093125416, 0}, {-0.5300091618847433, 0}, 
+                  {-0.5275812994033979, 0}, {-0.5227255744407069, 0}, 
+                  {-0.5130141245153249, 0}, {-0.5123555634234085, 0}, 
+                  {-0.5116970023314922, 0}, {-0.5103798801476593, 0}, 
+                  {-0.5077456357799937, 0}, {-0.5070870746880772, 0}, 
+                  {-0.5064285135961608, 0}, {-0.505111391412328, 0}, 
+                  {-0.5044528303204115, 0}, {-0.5037942692284951, 0}, 
+                  {-0.5024771470446624, 0}, {-0.501818585952746, 0}, 
+                  {-0.5011600248608296, 0}, {-0.5006377551020408, 0}}], 
+                Line[{{-0.49936224489795916, 1}, {-0.498525780493164, 1}, 
+                  {-0.49720865830933114, 1}, {-0.4945744139416655, 1}, 
+                  {-0.4919401695739999, 1}, {-0.4814031921033374, 1}, 
+                  {-0.47086621463267486, 1}, {-0.4512024290905846, 1}, 
+                  {-0.4315386435484944, 1}, {-0.3889089622831917, 1}, 
+                  {-0.34705880348982804, 1}, {-0.30802898349493396, 1}, 
+                  {-0.26569705331891763, 1}, {-0.2261854619413709, 1}, 
+                  {-0.18337176038270195, 1}, {-0.141337581295972, 1}, 
+                  {-0.10212374100771163, 1}, {-0.05960779053832902, 1}, 
+                  {-0.01991217886741602, 1}, {0.01900391033155799, 1}, 
+                  {0.06122210971165424, 1}, {0.10061997029328089, 1}, 
+                  {0.14331994105602977, 1}, {0.18524038934683965, 1}, 
+                  {0.22434049883917992, 1}, {0.2667427185126425, 1}, 
+                  {0.3063245993876354, 1}, {0.3451269577906893, 1}, 
+                  {0.38723142637486546, 1}, {0.426515556160572, 1}, 
+                  {0.44780867614398645, 1}, {0.4691017961274008, 1}, 
+                  {0.47904327141949066, 1}, {0.48898474671158043, 1}, 
+                  {0.4939554843576253, 1}, {0.4989262220036702, 1}, 
+                  {0.49936224489795916, 1}}], Line[{{0.5006377551020408, 0}, 
+                  {0.5014115908266927, 0}, {0.5020329330324483, 0}, 
+                  {0.5026542752382039, 0}, {0.5038969596497151, 0}, 
+                  {0.5045183018554708, 0}, {0.5051396440612264, 0}, 
+                  {0.5063823284727376, 0}, {0.50886769729576, 0}, 
+                  {0.5094768594628916, 0}, {0.5100860216300231, 0}, 
+                  {0.5113043459642863, 0}, {0.5137409946328125, 0}, 
+                  {0.5186142919698651, 0}, {0.5283608866439702, 0}, 
+                  {0.5478540759921803, 0}, {0.5901425648697227, 0}, 
+                  {0.6296107149487956, 0}, {0.6723809752089908, 0}, 
+                  {0.7143717129972469, 0}, {0.7535421119870335, 0}, 
+                  {0.7960146211579422, 0}, {0.8356667915303814, 0}, 
+                  {0.8745394394308815, 0}, {0.9167141975125039, 0}, 
+                  {0.9560686167956567, 0}, {0.9567550440204695, 0}, 
+                  {0.9574414712452822, 0}, {0.9588143256949078, 0}, 
+                  {0.9615600345941588, 0}, {0.9670514523926609, 0}, 
+                  {0.9780342879896651, 0}, {0.9787207152144779, 0}, 
+                  {0.9794071424392906, 0}, {0.9807799968889162, 0}, 
+                  {0.9835257057881672, 0}, {0.9890171235866693, 0}, 
+                  {0.989703550811482, 0}, {0.9903899780362948, 0}, 
+                  {0.9917628324859202, 0}, {0.9945085413851713, 0}, 
+                  {0.9951949686099841, 0}, {0.9958813958347968, 0}, 
+                  {0.9972542502844224, 0}, {0.9979406775092352, 0}, 
+                  {0.9986271047340479, 0}, {0.9993135319588606, 0}, 
+                  {0.9999999591836735, 0}}]}, "Charting`Private`Tag#1"], 
+              {}}}, {}}, Association["HighlightElements" -> 
+             Association["Label" -> {"XYLabel"}, "Ball" -> {
+                "InterpolatedBall"}], "LayoutOptions" -> Association[
+              "PanelPlotLayout" -> Association[], "PlotRange" -> {{-1, 1}, 
+                {0, 1}}, "Frame" -> {{False, False}, {False, False}}, 
+              "AxesOrigin" -> {0, 0}, "ImageSize" -> {360, 360/GoldenRatio}, 
+              "Axes" -> {True, True}, "LabelStyle" -> {}, "AspectRatio" -> 
+               GoldenRatio^(-1), "DefaultStyle" -> {Directive[Opacity[1], 
+                 RGBColor[0.24, 0.6, 0.8], AbsoluteThickness[2]]}, 
+              "HighlightLabelingFunctions" -> Association[
+                "CoordinatesToolOptions" -> ({(Identity[#1] & )[#1[[1]]], 
+                   (Identity[#1] & )[#1[[2]]]} & ), "ScalingFunctions" -> 
+                 {{Identity, Identity}, {Identity, Identity}}], 
+              "Primitives" -> {}, "GCFlag" -> False], "Meta" -> 
+             Association["DefaultHighlight" -> {"Dynamic", None}, 
+              "Index" -> {}, "Function" -> Plot, "GroupHighlight" -> False]], 
+           "DynamicHighlight"], {DisplayFunction -> Identity, 
+           Ticks -> {Automatic, Automatic}, AxesOrigin -> {0, 0}, 
+           FrameTicks -> {{Automatic, Automatic}, {Automatic, Automatic}}, 
+           GridLines -> {None, None}, DisplayFunction -> Identity, 
+           PlotRangePadding -> {{Scaled[0.02], Scaled[0.02]}, 
+             {Scaled[0.05], Scaled[0.05]}}, PlotRangeClipping -> True, 
+           ImagePadding -> All, AspectRatio -> GoldenRatio^(-1), 
+           Axes -> {True, True}, AxesLabel -> {None, None}, 
+           AxesOrigin -> {0, 0}, DisplayFunction :> Identity, 
+           Frame -> {{False, False}, {False, False}}, FrameLabel -> 
+            {{None, None}, {None, None}}, FrameTicks -> 
+            {{Automatic, Automatic}, {Automatic, Automatic}}, 
+           GridLines -> {None, None}, GridLinesStyle -> 
+            Directive[GrayLevel[0.5, 0.4]], Method -> 
+            {"DefaultBoundaryStyle" -> Automatic, 
+             "DefaultGraphicsInteraction" -> {"Version" -> 1.2, 
+               "TrackMousePosition" -> {True, False}, "Effects" -> 
+                {"Highlight" -> {"ratio" -> 2}, "HighlightPoint" -> 
+                  {"ratio" -> 2}, "Droplines" -> {"freeformCursorMode" -> 
+                    True, "placement" -> {"x" -> "All", "y" -> "None"}}}}, 
+             "DefaultMeshStyle" -> AbsolutePointSize[6], 
+             "ScalingFunctions" -> None, "CoordinatesToolOptions" -> 
+              {"DisplayFunction" -> ({(Identity[#1] & )[#1[[1]]], 
+                  (Identity[#1] & )[#1[[2]]]} & ), "CopiedValueFunction" -> 
+                ({(Identity[#1] & )[#1[[1]]], (Identity[#1] & )[
+                   #1[[2]]]} & )}}, PlotRange -> {{-1, 1}, {0, 1}}, 
+           PlotRangeClipping -> True, PlotRangePadding -> 
+            {{Scaled[0.02], Scaled[0.02]}, {Scaled[0.02], Scaled[0.02]}}, 
+           Ticks -> {Automatic, Automatic}}]]|>|>, 
+   "Path" -> "C:\\Users\\kkoud\\Documents\\GitHub\\arkoudakafe\\mathematica\\\
+lexiko\\transforms.wln", "PublicFields" -> {"Properties"}, "Quick" -> True, 
+   "Symbols" -> <||>, "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[
+      1, "\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\
+\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$279]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\
+\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\
+\[Sigma]\[Mu]\[Omicron]\:03af Fourier", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$282]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "\[CapitalMu]\
+\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\
+\[Sigma]\[Mu]\:03cc\[FinalSigma] \[Mu]\[CurlyEpsilon] \
+\[CurlyPhi]\[Upsilon]\[Sigma]\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Rho]\[Mu]\[Eta]\[Nu]\[CurlyEpsilon]\:03af\[Alpha]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{-2\\pi i st} d t$", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$291]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "\[CapitalMu]\
+\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\
+\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac \
+(\[CapitalMu].\[CapitalDelta].\[CapitalEpsilon].): \
+$\\hat{f}(s)={\\frac{1}{\\sqrt{2\\pi}}}\\int_{-\\infty}^{\\infty} f(t) e^{- i \
+st} d t$", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$294]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[3, "\[CapitalMu]\
+\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\
+\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[Iota]\[Sigma]\[Omicron]\[Delta]\:03cd\[Nu]\[Alpha]\[Mu]\[Omicron]\
+\[FinalSigma] \[Pi]\[Omicron]\[Upsilon] \
+\[Alpha]\[Nu]\[Alpha]\[CurlyPhi]\:03ad\[Rho]\[CurlyEpsilon]\[Iota] \[Omicron] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac\[FinalSigma]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{ i st} d t$", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$315]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\
+\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\
+\[Sigma]\[Mu]\[Omicron]\:03af Laplace", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$324]]}|>, 
+ "Cells" -> {<|"Data" -> ".md\n\n# \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af", "Display" -> "codemirror", 
+    "Hash" -> "02a5624c-1c9f-42e9-adb0-5419bbc8b759", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n# \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af", "Display" -> "markdown", 
+    "Hash" -> "442cbc3b-fbfd-4e87-a82d-2596d95d7af7", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> ".md\n\n## \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af Fourier", 
+    "Display" -> "codemirror", "Hash" -> 
+     "14a2ebec-994d-4961-b1d8-091e3ef2c998", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n## \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af Fourier", "Display" -> "markdown", 
+    "Hash" -> "c676bb30-4bfe-40d9-9e07-54f5851be711", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\np[x_] := Which[-1/2 < x < 1/2, 1, Abs[x] \
+> 1/2, 0]\nPlot[p[x], {x, -1, 1}]", "Display" -> "codemirror", 
+    "Hash" -> "3434c998-d19a-445c-a60c-d90c53c6b840", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "(*VB[*)(FrontEndRef[\"94ebf508-aea5-4ae8-923a-b79af2104a82\"]\
+)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKW5qkJ\
+qWZGljoJqYmmuqaJKZa6FoaGSfqJplbJqYZGRqYJFoYAQCNZxXS\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "60e80a2a-21c8-4a82-bc8c-d76b6ef9f69c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> ".md\n\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \[Mu]\[CurlyEpsilon] \
+\[CurlyPhi]\[Upsilon]\[Sigma]\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Rho]\[Mu]\[Eta]\[Nu]\[CurlyEpsilon]\:03af\[Alpha]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{-2\\pi i st} d t$", 
+    "Display" -> "codemirror", "Hash" -> 
+     "6500c8ac-f735-4582-8517-34407a90f0b6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \[Mu]\[CurlyEpsilon] \
+\[CurlyPhi]\[Upsilon]\[Sigma]\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Rho]\[Mu]\[Eta]\[Nu]\[CurlyEpsilon]\:03af\[Alpha]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{-2\\pi i st} d t$", 
+    "Display" -> "markdown", "Hash" -> 
+     "49099c18-bd96-49ef-b506-dcb785daa276", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "FourierTransform[1, x, s, FourierParameters -> {0, -2 \
+Pi}]\nFourierTransform[p[x], x, s, FourierParameters -> {0, -2 \
+Pi}]\nInverseFourierTransform[Sin[\[Pi] s]/(\[Pi] s), s, x, FourierParameters \
+-> {0, -2 Pi}] // Simplify", "Display" -> "codemirror", 
+    "Hash" -> "e6d9fedd-c9dc-4d75-943f-4e88252b4ac0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "DiracDelta[s]", "Display" -> "codemirror", 
+    "Hash" -> "5bc317b0-d884-425f-89cf-5d74742778df", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "(*FB[*)((Sin[\\[Pi] s])(*,*)/(*,*)(\\[Pi] s))(*]FB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "f4165ad2-a5de-4fdd-945c-3f1b4cf3e7d9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "((*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)) \
+(Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)-x]+Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]\
+FB*)+x])", "Display" -> "codemirror", 
+    "Hash" -> "692db550-8eaa-4300-be45-e70c2d920a1d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> ".md\n\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac \
+(\[CapitalMu].\[CapitalDelta].\[CapitalEpsilon].): \
+$\\hat{f}(s)={\\frac{1}{\\sqrt{2\\pi}}}\\int_{-\\infty}^{\\infty} f(t) e^{- i \
+st} d t$", "Display" -> "codemirror", 
+    "Hash" -> "d3b94eee-9621-4bc0-9975-4653fdab450b", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac \
+(\[CapitalMu].\[CapitalDelta].\[CapitalEpsilon].): \
+$\\hat{f}(s)={\\frac{1}{\\sqrt{2\\pi}}}\\int_{-\\infty}^{\\infty} f(t) e^{- i \
+st} d t$", "Display" -> "markdown", 
+    "Hash" -> "f4ca91ce-1d71-4bc9-a94d-a4afd3dc587c", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "FourierTransform[p[x], x, \
+s]\nInverseFourierTransform[(Sqrt[2/\[Pi]] Sin[s/2])/s, s, x] // \
+Simplify\nFourierTransform[p[x], x, s, FourierParameters -> {0, \
+1}]\nInverseFourierTransform[(Sqrt[2/\[Pi]] Sin[s/2])/s, s, x, \
+FourierParameters -> {0, 1}] // Simplify", "Display" -> "codemirror", 
+    "Hash" -> "4d06ae18-23c9-4dc6-a941-b73a5f7c4015", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "(*FB[*)((((*SqB[*)Sqrt[(*FB[*)((2)(*,*)/(*,*)(\\[Pi]))(*]FB*)\
+](*]SqB*)) Sin[(*FB[*)((s)(*,*)/(*,*)(2))(*]FB*)])(*,*)/(*,*)(s))(*]FB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "c81b4ead-ae7c-432a-8e82-e56fe26995f5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "((*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)) \
+(Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)-x]+Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]\
+FB*)+x])", "Display" -> "codemirror", 
+    "Hash" -> "a2eeda35-7491-4d3e-bfd3-f6f877e424ec", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "(*FB[*)((((*SqB[*)Sqrt[(*FB[*)((2)(*,*)/(*,*)(\\[Pi]))(*]FB*)\
+](*]SqB*)) Sin[(*FB[*)((s)(*,*)/(*,*)(2))(*]FB*)])(*,*)/(*,*)(s))(*]FB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "c57c8887-a221-4c62-8689-020aa36770a7", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "((*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)) \
+(Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)-x]+Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]\
+FB*)+x])", "Display" -> "codemirror", 
+    "Hash" -> "85513be2-26c4-4ecf-a719-a5bb29b5b77d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> ".md\n\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[Iota]\[Sigma]\[Omicron]\[Delta]\:03cd\[Nu]\[Alpha]\[Mu]\[Omicron]\
+\[FinalSigma] \[Pi]\[Omicron]\[Upsilon] \
+\[Alpha]\[Nu]\[Alpha]\[CurlyPhi]\:03ad\[Rho]\[CurlyEpsilon]\[Iota] \[Omicron] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac\[FinalSigma]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{ i st} d t$", 
+    "Display" -> "codemirror", "Hash" -> 
+     "4c482ae5-8ec8-47c5-a49d-1d6460bedc3e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n### \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[Iota]\[Sigma]\[Omicron]\[Delta]\:03cd\[Nu]\[Alpha]\[Mu]\[Omicron]\
+\[FinalSigma] \[Pi]\[Omicron]\[Upsilon] \
+\[Alpha]\[Nu]\[Alpha]\[CurlyPhi]\:03ad\[Rho]\[CurlyEpsilon]\[Iota] \[Omicron] \
+\[CapitalTau]\[Rho]\[Alpha]\[Chi]\[Alpha]\[Nu]\:03ac\[FinalSigma]: \
+$\\hat{f}(s)=\\int_{-\\infty}^{\\infty} f(t) e^{ i st} d t$", 
+    "Display" -> "markdown", "Hash" -> 
+     "b249b42a-9338-4337-845b-94f5573531db", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "FourierTransform[p[x], x, s, FourierParameters -> {1, \
+1}]\nInverseFourierTransform[(2 Sin[s/2])/s, s, x, FourierParameters -> {1, \
+1}] // Simplify", "Display" -> "codemirror", 
+    "Hash" -> "9baf724f-2078-4497-95c2-6c4549daac77", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> 
+     "(*FB[*)((2 \
+Sin[(*FB[*)((s)(*,*)/(*,*)(2))(*]FB*)])(*,*)/(*,*)(s))(*]FB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "f3ba0c68-f156-47d7-8321-6aae2e83a408", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "((*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)) \
+(Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]FB*)-x]+Sign[(*FB[*)((1)(*,*)/(*,*)(2))(*]\
+FB*)+x])", "Display" -> "codemirror", 
+    "Hash" -> "68f57ea3-48ee-4d52-b771-499a7c93c6c7", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> ".md\n\n## \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af Laplace", 
+    "Display" -> "codemirror", "Hash" -> 
+     "41a32bf2-42c3-4176-9f3f-7fa696adc1a0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "\n## \
+\[CapitalMu]\[CurlyEpsilon]\[Tau]\[Alpha]\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\
+\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03af Laplace", "Display" -> "markdown", 
+    "Hash" -> "abe159f6-359b-4021-888a-db8faeb708a9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\nf[x_] := x^2 Exp[x - \
+a]\nLaplaceTransform[f[x], x, s]\n(* \[Tau]\[Omicron] f[s_] := \
+LaplaceTransform[f[x],x,s]  \[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+\[Pi]\:03ac\[Rho]\[Alpha] \[Pi]\[Omicron]\[Lambda]\:03cd \
+\[CapitalAlpha]\[CapitalRho]\[CapitalGamma]\[CapitalOmicron] *)\nfL[t_] := \
+Evaluate[%]", "Display" -> "codemirror", 
+    "Hash" -> "699188d7-cfba-4302-9963-d724c7c2dfbe", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "(*FB[*)((2 \
+((*SpB[*)Power[E(*|*),(*|*)-a](*]SpB*)))(*,*)/(*,*)((*SpB[*)Power[(-1+s)(*|*)\
+,(*|*)3](*]SpB*)))(*]FB*)", "Display" -> "codemirror", 
+    "Hash" -> "0100725d-f494-4f1d-8d1f-bee7f09f0695", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "InverseLaplaceTransform[(2 E^-a)/(-1 + s)^3, s, x]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "946cf5c9-38a5-4a93-adec-3a1b35a1da1a", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>, 
+   <|"Data" -> "((*SpB[*)Power[E(*|*),(*|*)-a+x](*]SpB*)) \
+((*SpB[*)Power[x(*|*),(*|*)2](*]SpB*))", "Display" -> "codemirror", 
+    "Hash" -> "f3be3e03-2381-4bb9-9fe2-35f9999b0e5b", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8cc71814-64b1-4610-8347-c2a9d650a868"|>}, 
+ "serializer" -> "jsfn4"|>

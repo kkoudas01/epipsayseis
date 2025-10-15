@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootsnav Menu Demo</title>
+    
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
+    <!-- Google Fonts - Ubuntu -->
+    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
+    
+    <style>
+
+
+        /*Για πάνω background*/
+        .demo{ background: #ff7d03; }
+        nav.navbar.bootsnav{
+            background-color: transparent;
+            font-family: 'Ubuntu', sans-serif;
+            margin-bottom: 50px;
+            border: none;
+        }
+        nav.navbar.bootsnav ul.nav > li{ margin: 0 15px 0 0; }
+        nav.navbar.bootsnav ul.nav > li > a{
+            color: #160258; /*Για τίτλους menu*/
+            font-size: 16px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 7px 15px;
+            border-radius: 5px 5px 0 0;
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            transition: all .5s ease;
+        }
+        nav.navbar.bootsnav ul.nav > li.dropdown > a{ padding: 7px 30px 7px 15px; }
+        nav.navbar.bootsnav ul.nav > li.active > a,
+        nav.navbar.bootsnav ul.nav > li.active > a:hover,
+        nav.navbar.bootsnav ul.nav > li > a:hover,
+        nav.navbar.bootsnav ul.nav > li.on > a{
+            color: #fee2cf;/*Για τίτλους μενού, όταν περνάει το ποντίκι πάνω τους*/
+            text-shadow: 0 0 3px #000;
+            background-color: transparent;
+        }
+        nav.navbar.bootsnav ul.nav > li > a>span:before{
+            content: '';
+            background-color: rgba(213, 138, 148, 1); /*Για background τίτλων menou, όταν περνάει το ποντίκι πάνω τους*/
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            transform: translateX(-50%) rotate(45deg) scale(0);
+            z-index: -1;
+            transition: all 0.3s;
+        }
+        nav.navbar.bootsnav ul.nav > li.on > a > span:before,
+        nav.navbar.bootsnav ul.nav > li.active > a > span:before,
+        nav.navbar.bootsnav ul.nav > li > a:hover > span:before{
+            transform: translateX(-50%) rotate(45deg) scale(1.8);
+        }
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content li a:hover,
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu li a:hover,
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu li a.dropdown-toggle:active,
+        nav.navbar ul.nav li.dropdown.on ul.dropdown-menu li.dropdown.on > a{
+            color: #f3d5d9 !important;/*Για χρωματισμό επιλεγμένων λέξεψν στο dropdown*/
+            background-color: #5a57b3 !important;/*Για χρωματισμό φόντου επιλεγμένων λέξεψν στο dropdown*/
+            font-weight: 600;
+            box-shadow: 0 0 5px #000;
+        }
+        nav.navbar.bootsnav ul.nav > li.dropdown > a.dropdown-toggle:after{
+            content: "\f107";
+            font-family: 'FontAwesome';
+            color: #dacffe;/*Για βέλη dropdown*/
+            margin: 0 0 0 7px;
+            position: absolute;
+            top: 7px;
+            right: 7px;
+            transition: all 0.3s;
+        }
+        nav.navbar.bootsnav ul.nav > li.dropdown > ul{
+            opacity: 0;
+            visibility: hidden;
+            left: 0;
+            display: block;
+        }
+        nav.navbar.bootsnav ul.nav > li.dropdown.on > ul{
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+        
+        /* Βελτίωση για το Shortcodes και Pages menu - πιο κοντά στο κουμπί */
+        nav.navbar.bootsnav ul.nav > li.dropdown:nth-child(3) > ul,
+        nav.navbar.bootsnav ul.nav > li.dropdown:nth-child(4) > ul {
+            top: 95% !important;
+        }
+        
+        /* Διόρθωση για megamenu */
+        .dropdown-menu.megamenu-content {
+            width: 700px;
+            left: -200px !important;
+            padding: 15px;
+        }
+        .dropdown-menu.megamenu-content .row {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .dropdown-menu.megamenu-content .col-menu {
+            flex: 0 0 25%;
+            max-width: 25%;
+        }
+        .dropdown-menu.megamenu-content .title {
+            color: #bf5757;/*Για τίτλους του megamenu*/
+            font-size: 16px;
+            font-weight: bold;
+            margin-top: 0;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #bf5757;/*Για για οριζόντια γραμμή τίτλων του megamenu*/
+            margin-bottom: 10px;
+        }
+        .dropdown-menu.megamenu-content .menu-col {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .dropdown-menu.megamenu-content .menu-col li a {
+            display: block;
+            padding: 5px 0;
+            color: #666666;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+        .dropdown-menu.megamenu-content .menu-col li a:hover {
+            color: #6c5ce7;
+            padding-left: 5px;
+        }
+        
+        /* Διόρθωση για sub-menus - ανοίγουν στο πλάι και στο ίδιο ύψος */
+        .dropdown-menu .dropdown-menu {
+            top: -10px !important;
+            left: 100%;
+            margin-top: 0;
+            margin-left: 0;
+        }
+        .dropdown-menu li {
+            position: relative;
+        }
+        .dropdown-menu > li > a {
+            padding: 10px 20px;
+            display: block;
+            clear: both;
+            font-weight: 400;
+            line-height: 1.42857143;
+            color: #f30f0f;
+            white-space: nowrap;
+        }
+        .dropdown-menu > li > a:hover, 
+        .dropdown-menu > li > a:focus {
+            text-decoration: none;
+            color: #262626;
+            background-color: #f5f5f5;
+        }
+        
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu{
+            background-color: transparent;
+            border: none;
+            border-radius: 0;
+            top: 95%;
+            z-index: 1;
+        }
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu > li > a{
+            color: #666;
+            background-color: #e7e7e7;
+            border: none;
+            opacity: 0;
+            transform: rotateY(180deg);
+            transition: all 0.3s ease 0s;
+        }
+        nav.navbar.bootsnav li.dropdown.on ul.dropdown-menu > li > a{
+            opacity: 1;
+            transform: rotateY(0);
+        }
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content{
+            background-color: #f5f5f5;
+            top: 95%;
+            left: 0;
+        }
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content li{ font-size: 14px; }
+        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .menu-col li a{
+            color: #666;
+            border: 1px solid rgba(0,0,0,0.1);
+            padding-left: 10px;
+            margin: 0 0 5px;
+            opacity: 0;
+            transform: rotateY(180deg);
+            transition: all 0.3s;
+        }
+        nav.navbar.bootsnav li.dropdown.on ul.dropdown-menu.megamenu-content .menu-col li a{
+            opacity: 1;
+            transform: rotateY(0);
+        }
+        
+        /* Βελτίωση για hover στα sub-menus */
+        .dropdown-menu li:hover > .dropdown-menu {
+            display: block;
+        }
+        
+        /* Modal styling */
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.3);
+        }
+        .modal-header {
+            background-color: #7065c1;
+            color: rgb(255, 160, 160);
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+        .modal-title {
+            font-weight: 700;
+        }
+        .close {
+            color: white;
+            opacity: 0.8;
+        }
+        .close:hover {
+            color: white;
+            opacity: 1;
+        }
+        
+        /* Βελτιώσεις για κινητά */
+        @media only screen and (max-width:990px){
+            .demo {
+                padding: 10px 0;
+            }
+            
+            nav.navbar.bootsnav {
+                margin-bottom: 50px;
+            }
+            
+            .navbar-header {
+                display: flex;
+                justify-content: flex-end;
+                width: 100%;
+            }
+            
+            .dropdown-menu.megamenu-content {
+                width: 100%;
+                left: 0 !important;
+                padding: 10px;
+            }
+            .dropdown-menu.megamenu-content .col-menu {
+                flex: 0 0 100%;
+                max-width: 100%;
+                margin-bottom: 15px;
+            }
+            .dropdown-menu .dropdown-menu {
+                position: static;
+                float: none;
+                width: auto;
+                margin-top: 0;
+                background-color: transparent;
+                border: 0;
+                box-shadow: none;
+                top: 0 !important;
+                left: 0 !important;
+                display: none;
+            }
+            
+            nav.navbar.bootsnav .navbar-toggle{
+                color: #fff;
+                background: rgba(255, 255, 255, 0.2) !important;
+                border: 1px solid #fff;
+                border-radius: 4px;
+                padding: 9px 12px;
+                margin: 15px;
+                display: block;
+            }
+            
+            nav.navbar.bootsnav .navbar-toggle .fa-bars {
+                font-size: 24px;
+            }
+            
+            nav.navbar.bootsnav.navbar-mobile .navbar-collapse{ 
+                background-color: #6c5ce7; 
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-top: 1px solid rgba(255, 255, 255, 0.2);
+                display: block !important;
+            }
+            
+            nav.navbar.bootsnav.navbar-mobile .navbar-collapse.in {
+                max-height: 80vh;
+                overflow-y: auto;
+            }
+            
+            nav.navbar.bootsnav ul.nav{ 
+                margin: 0;
+                width: 100%;
+            }
+            
+            nav.navbar.bootsnav ul.nav>li{ 
+                margin: 0;
+                width: 100%;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            }
+            
+            /* Αρχική κατάσταση - dropdowns κλειστά */
+            nav.navbar.bootsnav ul.nav>li.dropdown > a:after {
+                content: "\f107" !important; /* Βέλος προς τα κάτω */
+                transform: rotate(0deg);
+                transition: transform 0.3s;
+            }
+            
+            nav.navbar.bootsnav ul.nav>li.dropdown.on > a:after {
+                content: "\f106" !important; /* Βέλος προς τα πάνω */
+            }
+            
+            nav.navbar.bootsnav.navbar-mobile ul.nav>li>a{
+                text-align: left;
+                padding: 15px;
+                border: none;
+                color: #fff;
+                font-size: 16px;
+                width: 100%;
+            }
+            
+            nav.navbar.bootsnav ul.nav>li.dropdown>a{ 
+                padding: 15px 40px 15px 15px;
+            }
+            
+            nav.navbar.bootsnav.navbar-mobile ul.nav>li>a>span:before{
+                display: none;
+            }
+            
+            nav.navbar.bootsnav ul.nav > li.on > a > span:before,
+            nav.navbar.bootsnav ul.nav > li.active > a > span:before,
+            nav.navbar.bootsnav ul.nav > li > a:hover > span:before{
+                display: none;
+            }
+            
+            nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after{ 
+                right: 15px;
+                top: 15px;
+                font-size: 18px;
+            }
+            
+            nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu>li>a{
+                color: #fff;
+                padding: 12px 15px 12px 30px;
+                border: none;
+                background-color: rgba(255, 255, 255, 0.1);
+            }
+            
+            nav.navbar.bootsnav .dropdown-menu{ 
+                z-index: 0;
+                position: static;
+                float: none;
+                width: auto;
+                margin-top: 0;
+                background-color: transparent;
+                border: 0;
+                box-shadow: none;
+                display: none;
+            }
+            
+            nav.navbar.bootsnav li.dropdown.on > .dropdown-menu {
+                display: block;
+            }
+            
+            /* Βελτίωση 1: Καλύτερα χρώματα για το mega-menu */
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content {
+                background-color: rgba(0, 0, 0, 0.3); /* Πιο σκούρο φόντο για καλύτερη αντίθεση */
+            }
+            
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu{
+                background-color: rgba(255, 255, 255, 0.15); /* Πιο ανοιχτό φόντο για τις στήλες */
+                padding: 15px;
+                margin-bottom: 10px;
+                border-radius: 5px;
+            }
+            
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .title{
+                font-size: 16px;
+                font-weight: bold;
+                color: #fff;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Πιο έντονο border */
+            }
+            
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu.on .title{ 
+                color: #fff; 
+            }
+            
+            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a{
+               color: rgba(255, 255, 255, 0.95); /* Πιο λευκό κείμενο */
+               border: none;
+               padding: 8px 0;
+           }
+           
+           nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a:hover {
+               color: #fff;
+               padding-left: 5px;
+               background-color: rgba(255, 255, 255, 0.1); /* Προσθήκη φόντου στο hover */
+           }
+           
+           /* Βελτίωση 2: Υπο-μενού να ανοίγουν πιο δεξιά */
+           nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu li ul.dropdown-menu {
+               padding-left: 20px; /* Επιπλέον padding για να φαίνονται πιο δεξιά */
+           }
+        }
+        
+        /* Additional styling for demo page */
+        body {
+            background-color: rgb(0, 0, 0);/* Χρωματισμός κάτω μέρους */
+    color: #ff7d03; /* ή #fff αν θες λευκά γράμματα */
+            font-family: 'Ubuntu', sans-serif;
+        }
+        .content-section {
+            padding: 50px 0;
+        }
+        .content-section h2 {
+            margin-bottom: 30px;
+        }
+
+        /* SVG Icon Styling */
+        .svg-icon {
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+            margin-bottom: 20px;
+        }
+        
+        /* Mobile specific improvements */
+        @media only screen and (max-width:768px){
+            .content-section {
+                padding: 30px 0;
+            }
+            
+            .content-section h2 {
+                font-size: 24px;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="aboutModalLabel">About Us</h4>
+                </div>
+                <div class="modal-body">
+                    <p>We are a creative team passionate about web design and development. Our mission is to create beautiful and functional websites that help businesses grow.</p>
+                    <p>With years of experience in the industry, we have developed a unique approach to web design that combines creativity with technical excellence.</p>
+                    <p>Contact us today to discuss how we can help you achieve your online goals!</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="demo">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <nav class="navbar navbar-default navbar-mobile bootsnav">
+                        <div class="navbar-header">
+                            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                        </div>
+                        <div class="collapse navbar-collapse" id="navbar-menu">
+                            <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
+                                <li><a href="#" data-toggle="modal" data-target="#aboutModal" data-hover="About">Περί ου ο λόγος...<span data-hover="About"></span></a></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Shortcodes">εκμάθηση<span data-hover="Shortcodes"></span></a>
+                                    <ul class="dropdown-menu animated">
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sub Menu sort</a>
+                                            <ul class="dropdown-menu animated">
+                                                <li><a href="#">Custom Menu 1</a></li>
+                                                <li><a href="#">Custom Menu 2</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sub Menu b</a>
+                                                    <ul class="dropdown-menu animated">
+                                                        <li><a href="#">Custom Menu a1</a></li>
+                                                        <li><a href="#">Custom Menu a2</a></li>
+                                                        <li><a href="#">Custom Menu a3</a></li>
+                                                        <li><a href="#">Custom Menu a4</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Custom Menu 3</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Pages">Εφαρμογές<span data-hover="Pages"></span></a>
+                                    <ul class="dropdown-menu animated">
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sub Menu</a>
+                                            <ul class="dropdown-menu animated">
+                                                <li><a href="#">Custom Menu</a></li>
+                                                <li><a href="#">Custom Menu</a></li>
+                                                <li class="dropdown">
+                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sub Menu</a>
+                                                    <ul class="dropdown-menu animated">
+                                                        <li><a href="#">Custom Menu</a></li>
+                                                        <li><a href="#">Custom Menu</a></li>
+                                                        <li><a href="#">Custom Menu</a></li>
+                                                        <li><a href="#">Custom Menu</a></li>
+                                                    </ul>
+                                                </li>
+                                                <li><a href="#">Custom Menu</a></li>
+                                            </ul>
+                                        </li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                        <li><a href="#">Custom Menu</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown megamenu-fw">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="Megamenu">έρευνες<span data-hover="Megamenu"></span></a>
+                                    <ul class="dropdown-menu megamenu-content animated" role="menu">
+                                        <li>
+                                            <div class="row">
+                                                <div class="col-menu col-md-3">
+                                                    <h6 class="title">Κοινωνικές επιστήμες</h6>
+                                                    <div class="content">
+                                                        <ul class="menu-col">
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- end col-3 -->
+                                                <div class="col-menu col-md-3">
+                                                    <h6 class="title">Μαθηματικά</h6>
+                                                    <div class="content">
+                                                        <ul class="menu-col">
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- end col-3 -->
+                                                <div class="col-menu col-md-3">
+                                                    <h6 class="title">Φυσική</h6>
+                                                    <div class="content">
+                                                        <ul class="menu-col">
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="col-menu col-md-3">
+                                                    <h6 class="title">Βιολογία</h6>
+                                                    <div class="content">
+                                                        <ul class="menu-col">
+                                                            <li><a href="#">Μοντελοποίηση στειρώσεων με λογιστικό μοντέλο σποράς-συγκομιδής (υπό κατασκευή)</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                            <li><a href="#">Custom Menu</a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div><!-- end col-3 -->
+                                            </div><!-- end row -->
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo content -->
+    <div class="container content-section">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <div class="svg-icon">
+                    <svg width="120px" height="120px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg">
+                        <title>Wolfram Language icon</title>
+                        <path d="M14.335 12.432c-.552.149-.615.18-1.164.337-.589-.337-1.107-.526-1.595-.463.057-.306.151-.525.245-.8 1.036-.151 1.805.4 2.514.926zM19.643 19.633a10.796 10.796 0 0 1-1.907 1.521h-.006l-3.702-4.614 3.07.336s1.471.151 1.807 0c.308-.117 1.963-2.449 1.963-2.449s-4.759-3.009-6.384-4.666c.188-2.794-.213-6.509-.213-6.479-1.193 1.195-1.35 1.383-2.544 2.489-.52-1.688-.769-2.269-1.289-3.958-1.568 1.289-2.763 3.464-3.62 6.016a12.29 12.29 0 0 0-.551.656c-.112.157-.23.313-.344.475-.231.326-.45.675-.663 1.032-.15.257-.299.52-.438.788-.063.112-.125.231-.188.35-.913 1.788-1.676 3.789-2.339 5.604A10.825 10.825 0 0 1 1.204 12c0-2.863 1.138-5.614 3.164-7.64S9.137 1.201 12 1.201a10.8 10.8 0 0 1 7.642 3.158 10.831 10.831 0 0 1 3.156 7.64 10.814 10.814 0 0 1-3.155 7.634M12 6.691c.832-.801.951-.92 1.751-1.689.063 1.532.031 2.333-.063 4.203-.463-.458-1.381-1.044-1.381-1.044s-.181-1.07-.307-1.47m3.834 15.464c-6.616 2.393-11.398-2.014-12.417-3.552.006-.014.006-.027.006-.039.92-3.889 2.058-8.535 3.884-9.91.955-1.656 1.231-4.114 2.943-5.402.432 1.288 1.107 3.958 1.57 5.246 2.025 2.026 5.087 4.546 7.146 5.59.212.12.489.981.489.981l-.825 1.038-8.835-.887c-.2-.02-.394-.028-.594-.028-.569 0-1.15.073-1.833.18.432-1.071 1.35-1.936 1.35-1.936s-.855-.519-1.505-.605c.187-.432.681-.989.799-1.138-.243.087-2.025.888-2.207 1.563.857.214 1.469.487 1.469.487s-.949.957-1.131 2.612c0 0 2.82-.431 4.939-.153.063.03.094.03.125.03l1.102.031 3.509 5.841.027.045a.012.012 0 0 1-.011.006m4.652-18.64A12.02 12.02 0 0 0 12 0C8.818 0 5.768 1.27 3.516 3.515 1.272 5.766.002 8.817.002 12s1.27 6.235 3.513 8.478a11.98 11.98 0 0 0 16.971 0c2.251-2.243 3.512-5.296 3.512-8.478s-1.261-6.234-3.512-8.485z" fill="#8a4fff"/>
+                    </svg>
+                </div>
+                                <h2>Bootsnav Menu Demo</h2>
+                <p>Αυτό είναι ένα demo της πλούσιας σε λειτουργίες navigation μπάρρας Bootsnav.</p>
+                <p>Χρησιμοποιήστε το menu για να δείτε τις διαφορετικές επιλογές και τις εφέ κινούμενης εικόνας.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- jQuery -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    
+    <!-- Custom Bootsnav JS -->
+    <script>
+$(document).ready(function() {
+    // Enable dropdown functionality for desktop
+    function setupDesktopMenu() {
+        $('.navbar .dropdown').off('hover');
+        $('.navbar .dropdown').hover(function() {
+            $(this).addClass('on');
+            $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
+        }, function() {
+            $(this).removeClass('on');
+            $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
+        });
+    }
+    
+    // Enable dropdown functionality for mobile
+    function setupMobileMenu() {
+        $('.navbar .dropdown').off('hover');
+        
+        // Αρχικά κλείστε όλα τα dropdowns
+        $('.navbar .dropdown').removeClass('on');
+        $('.navbar .dropdown-menu').hide();
+        
+        // Handle dropdown clicks
+        $('.navbar .dropdown > a').off('click').on('click', function(e) {
+            if ($(window).width() <= 990) {
+                e.preventDefault();
+                var $parent = $(this).parent();
+                var wasOpen = $parent.hasClass('on');
+                
+                // Close all dropdowns first
+                $('.navbar .dropdown').removeClass('on');
+                $('.navbar .dropdown-menu').slideUp();
+                
+                // If the clicked dropdown was not open, open it
+                if (!wasOpen) {
+                    $parent.addClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
+                }
+                
+                return false;
+            }
+        });
+        
+        // Handle subdropdown clicks
+        $('.navbar .dropdown .dropdown > a').off('click').on('click', function(e) {
+            if ($(window).width() <= 990) {
+                e.preventDefault();
+                e.stopPropagation(); // Prevent event from bubbling to parent dropdown
+                
+                var $parent = $(this).parent();
+                var wasOpen = $parent.hasClass('on');
+                
+                // Close other subdropdowns at this level
+                $parent.siblings('.dropdown').removeClass('on').find('.dropdown-menu').slideUp();
+                
+                // Toggle this subdropdown
+                if (wasOpen) {
+                    $parent.removeClass('on');
+                    $parent.find('.dropdown-menu').slideUp();
+                } else {
+                    $parent.addClass('on');
+                    $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
+                }
+                
+                return false;
+            }
+        });
+    }
+    
+    // Initialize based on screen size
+    function initMenu() {
+        if ($(window).width() > 990) {
+            setupDesktopMenu();
+        } else {
+            setupMobileMenu();
+        }
+    }
+    
+    // Initial setup
+    initMenu();
+    
+    // Handle window resize
+    $(window).resize(function() {
+        initMenu();
+    });
+    
+    // Mobile menu toggle - use Bootstrap's built-in collapse
+    $('.navbar-toggle').click(function() {
+        // This is handled by Bootstrap's collapse plugin
+    });
+});
+</script>
+</body>
+</html>

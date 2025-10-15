@@ -1,0 +1,725 @@
+<|"Notebook" -> <|"Controller" -> "ccaa2145-9c8c-44e4-883f-49c40de030a9", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$218], "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "53033a86-0136-4940-bbe8-c593f53f2054", "Objects" -> <||>, 
+   "Path" -> "C:\\Users\\kkoud\\Documents\\GitHub\\epipsayseis\\mathematica\\\
+PosoiParamenoyn\\PosoiParamenoyn.wln", "PublicFields" -> {"Properties"}, 
+   "Symbols" -> <||>, "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[
+      1, "\[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1081]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalTheta]\
+\[CurlyEpsilon]\[Mu]\[CurlyEpsilon]\[Lambda]\:03af\[Omega]\[Sigma]\[Eta] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\[Upsilon]", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1083]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalGamma]\[Nu]\
+\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc.", 
+      CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1085]], 
+     CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalGamma]\[Nu]\
+\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc \
+\[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma].", CoffeeLiqueur`Notebook`Cells`CellObj[
+       CoffeeLiqueur`Notebook`Cells`CellObj`$1091]]}|>, 
+ "Cells" -> 
+  {<|"Data" -> ".md # \[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]\n\n*\
+\[CapitalMu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\
+\[Omicron]\:03af\[Eta]\[Sigma]\[Eta] \[Tau]\[Eta]\[FinalSigma] \
+\[Pi]\[Omicron]\[Rho]\[CurlyEpsilon]\:03af\[Alpha]\[FinalSigma] \
+\[Sigma]\[Tau]\[Omicron] \[Chi]\[Rho]\:03cc\[Nu]\[Omicron] \
+\[Mu]\[Iota]\[Alpha]\[FinalSigma] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Omicron]\[Nu]\[Tau]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[Beta]\[Omicron]\:03ae\[Theta]\[CurlyEpsilon]\[Iota]\[Alpha] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta]\[FinalSigma]*", 
+    "Display" -> "codemirror", "Hash" -> 
+     "84876ab3-3782-4e41-a816-0a849861c0e9", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "# \[CapitalEpsilon]\[Xi]\:03ad\[Lambda]\[Iota]\[Xi]\[Eta] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03ce\[Nu]\n\n*\
+\[CapitalMu]\[Omicron]\[Nu]\[Tau]\[CurlyEpsilon]\[Lambda]\[Omicron]\[Pi]\
+\[Omicron]\:03af\[Eta]\[Sigma]\[Eta] \[Tau]\[Eta]\[FinalSigma] \
+\[Pi]\[Omicron]\[Rho]\[CurlyEpsilon]\:03af\[Alpha]\[FinalSigma] \
+\[Sigma]\[Tau]\[Omicron] \[Chi]\[Rho]\:03cc\[Nu]\[Omicron] \
+\[Mu]\[Iota]\[Alpha]\[FinalSigma] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Omicron]\[Nu]\[Tau]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[Beta]\[Omicron]\:03ae\[Theta]\[CurlyEpsilon]\[Iota]\[Alpha] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta]\[FinalSigma]*", 
+    "Display" -> "markdown", "Hash" -> 
+     "d6b723ab-c963-4eb7-a87e-86537f9f1369", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> ".md ## \
+\[CapitalTheta]\[CurlyEpsilon]\[Mu]\[CurlyEpsilon]\[Lambda]\:03af\[Omega]\
+\[Sigma]\[Eta] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\[Upsilon]\n\n\:0388\
+\[Sigma]\[Tau]\[Omega] \:03cc\[Tau]\[Iota] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03ad\[Nu]\[Alpha]\[Nu] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03cc \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc \
+(\[CurlyEpsilon]\[Delta]\:03ce, \[Gamma]\[Iota]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Upsilon]\[Kappa]\[Omicron]\[Lambda]\:03af\[Alpha]\
+\[FinalSigma], \[Theta]\[Alpha] \[Lambda]\:03ad\[Mu]\[CurlyEpsilon] \
+\[LeftGuillemet]*\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]*\[RightGuillemet]) \
+\[Pi]\[Omicron]\[Upsilon]:\n\n- \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $0$ \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc $n_0$, \
+\[CurlyEpsilon]\[Nu]\:03ce $t$ \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ad\[FinalSigma] \
+\[Mu]\[Omicron]\[Nu]\:03ac\[Delta]\[CurlyEpsilon]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Tau]\:03ac (\[CurlyEpsilon]\[Delta]\:03ce, \
+\[Gamma]\[Iota]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Upsilon]\[Kappa]\[Omicron]\[Lambda]\:03af\[Alpha]\
+\[FinalSigma], \[Theta]\[Alpha] \[Lambda]\:03ad\[Mu]\[CurlyEpsilon] \
+\[LeftGuillemet]*\[Chi]\[Rho]\:03cc\[Nu]\[Iota]\[Alpha]*\[RightGuillemet]) \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc $n(t)$,\n- \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ac $t$ \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Rho]\:03ad\[Omicron]\[Upsilon]\[Nu] \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Mu]\[CurlyEpsilon] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc $r(t)$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha] \[Alpha]\[Nu]\:03ac \
+\:03ad\[Tau]\[Omicron]\[FinalSigma],\n- \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ac $t$ \
+\[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\[Mu]\:03ad\[Lambda]\[Omicron]\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[CurlyEpsilon]\[Iota]\[Sigma]\:03ac\[Gamma]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Omicron]\[Rho]\[Gamma]\:03ac\[Nu]\[Omega]\[Sigma]\[Eta] $f(t)$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha] \[Tau]\[Omicron] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron],\n- \[Gamma]\[Iota]\[Alpha] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Delta]\[Iota]\:03ac\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] $\\Delta t=t_2-t_1$ \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc $s\\left(\\Delta \
+t\\right)$ \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd \
+\[Pi]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Chi]\[CurlyEpsilon] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t_1$.\n\n\[CapitalAlpha]\[Pi]\:03cc \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Pi]\:03ac\[Nu]\[Omega] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Gamma]\[Iota]\[Alpha] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Delta]\[Iota]\:03ac\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] \
+$\\left[\\tau,\\tau+d\\tau\\right] $\[Tau]\[Alpha] \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Pi]\[Omicron]\[Upsilon] \
+\:03ad\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Kappa]\[Alpha]\[Tau]\:03cc\[Pi]\[Iota]\[Nu] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Zeta]\:03cd\[Mu]\[Omega]\[Sigma]\[Eta]\[FinalSigma] \[Mu]\[CurlyEpsilon] \
+\[Tau]\[Alpha] \[Mu]\:03ad\[Lambda]\[Eta] \[Tau]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] $f(\\tau)n(\\tau)d\\tau$, \
+\:03ac\[Rho]\[Alpha] \[Tau]\[Alpha] \
+\[Sigma]\[Upsilon]\[Nu]\[Omicron]\[Lambda]\[Iota]\[Kappa]\:03ac \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+$\\left(r(\\tau)+f(\\tau)n(\\tau)\\right)d\\tau$. \[CapitalAlpha]\[Pi]\:03cc \
+\[Alpha]\[Upsilon]\[Tau]\:03ac \[Theta]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[Omicron]\
+\[Upsilon]\[Nu] \[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t$ \[Tau]\[Alpha] \
+$s(t-\\tau)\\cdot\\left(r(\\tau)+f(\\tau)\\cdot n(\\tau) \\right)d \\tau$ \
+\[Mu]\:03ad\[Lambda]\[Eta]. \
+\[CapitalLambda]\[Alpha]\[Mu]\[Beta]\:03ac\[Nu]\[Omicron]\[Nu]\[Tau]\[Alpha]\
+\[FinalSigma] \[Upsilon]\[Pi]' \:03cc\[Psi]\[Iota]\[Nu] \
+\:03cc\[Lambda]\[CurlyEpsilon]\[FinalSigma] \[Tau]\[Iota]\[FinalSigma] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[CurlyEpsilon]\[FinalSigma] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ad\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Delta]\[Iota]\[Alpha]\[Sigma]\[Tau]\:03ae\[Mu]\[Alpha]\[Tau]\[Omicron]\
+\[FinalSigma] $[0,t]$ \:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\:03cc\[Tau]\[Iota] \[Sigma]\[Tau]\[Omicron] \
+\:03ad\[Tau]\[Omicron]\[FinalSigma] $t$ \[Theta]\[Alpha] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\:03cd\[Psi]\[CurlyEpsilon]\[Iota]/\[Pi]\[Alpha]\
+\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Iota]:\n\n$$\n\
+\\sum_{\\tau}s(t-\\tau)\\left(r(\\tau)+f(\\tau)\\cdot n(\\tau) \\right)d \
+\\tau\\text{ \[Nu]\:03ad\[Alpha] \[Mu]\:03ad\[Lambda]\[Eta] \
+}=\\int_{0}^{t}s(t-\\tau)\\left(r(\\tau)+f(\\tau) n(\\tau) \\right)d \
+\\tau\\text{ \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta]}.\n$$\n\n\n\[CapitalSigma]\[Upsilon]\[Nu]\
+\[CurlyEpsilon]\[Pi]\:03ce\[FinalSigma], \[Omicron] \
+\[Sigma]\[Upsilon]\[Nu]\[Omicron]\[Lambda]\[Iota]\[Kappa]\:03cc\[FinalSigma] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Alpha]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] \[Tau]\[Omicron] \
+\:03ad\[Tau]\[Omicron]\[FinalSigma] $t$ \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n$$\ns(t)n_0+\\int_{0}^{t}s(t-\\\
+tau)\\left(r(\\tau)+f(\\tau) n(\\tau) \\right)d \
+\\tau.\n$$\n\n\[CapitalKappa]\[Alpha]\[Tau]\[Alpha]\[Lambda]\:03ae\[Gamma]\
+\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta] Volterra \
+\[Delta]\[CurlyEpsilon]\[Upsilon]\[Tau]\:03ad\[Rho]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Delta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\:03cd\[Pi]\[Omicron]\[Upsilon] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\[Lambda]\:03af\[Xi]\[CurlyEpsilon]\
+\[Omega]\[FinalSigma]:\n\n$$\nn(t)=s(t)n_0+\\int_{0}^{t}s(t-\\tau)\\left(r(\\\
+tau)+f(\\tau) n(\\tau) \\right)d \\tau\n$$", "Display" -> "codemirror", 
+    "Hash" -> "23211690-37a4-475f-b395-3eaf0d1da810", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "## \
+\[CapitalTheta]\[CurlyEpsilon]\[Mu]\[CurlyEpsilon]\[Lambda]\:03af\[Omega]\
+\[Sigma]\[Eta] \
+\[Mu]\[Omicron]\[Nu]\[Tau]\:03ad\[Lambda]\[Omicron]\[Upsilon]\n\n\:0388\
+\[Sigma]\[Tau]\[Omega] \:03cc\[Tau]\[Iota] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03ad\[Nu]\[Alpha]\[Nu] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03cc \
+\[Sigma]\[Chi]\[Eta]\[Mu]\[Alpha]\[Tau]\[Iota]\[Sigma]\[Mu]\:03cc \
+(\[CurlyEpsilon]\[Delta]\:03ce, \[Gamma]\[Iota]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Upsilon]\[Kappa]\[Omicron]\[Lambda]\:03af\[Alpha]\
+\[FinalSigma], \[Theta]\[Alpha] \[Lambda]\:03ad\[Mu]\[CurlyEpsilon] \
+\[LeftGuillemet]*\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]*\[RightGuillemet]) \
+\[Pi]\[Omicron]\[Upsilon]:\n\n- \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $0$ \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc $n_0$, \
+\[CurlyEpsilon]\[Nu]\:03ce $t$ \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ad\[FinalSigma] \
+\[Mu]\[Omicron]\[Nu]\:03ac\[Delta]\[CurlyEpsilon]\[FinalSigma] \
+\[Mu]\[CurlyEpsilon]\[Tau]\:03ac (\[CurlyEpsilon]\[Delta]\:03ce, \
+\[Gamma]\[Iota]\[Alpha] \
+\[Lambda]\:03cc\[Gamma]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Upsilon]\[Kappa]\[Omicron]\[Lambda]\:03af\[Alpha]\
+\[FinalSigma], \[Theta]\[Alpha] \[Lambda]\:03ad\[Mu]\[CurlyEpsilon] \
+\[LeftGuillemet]*\[Chi]\[Rho]\:03cc\[Nu]\[Iota]\[Alpha]*\[RightGuillemet]) \
+\:03ad\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc $n(t)$,\n- \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ac $t$ \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Rho]\:03ad\[Omicron]\[Upsilon]\[Nu] \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Mu]\[CurlyEpsilon] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc $r(t)$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha] \[Alpha]\[Nu]\:03ac \
+\:03ad\[Tau]\[Omicron]\[FinalSigma],\n- \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ac $t$ \
+\[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\[Mu]\:03ad\[Lambda]\[Omicron]\[FinalSigma] \[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma] \
+\[CurlyEpsilon]\[Iota]\[Sigma]\:03ac\[Gamma]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Omicron]\[Rho]\[Gamma]\:03ac\[Nu]\[Omega]\[Sigma]\[Eta] $f(t)$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha] \[Tau]\[Omicron] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron],\n- \[Gamma]\[Iota]\[Alpha] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Delta]\[Iota]\:03ac\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] $\\Delta t=t_2-t_1$ \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[Omicron]\[Sigma]\[Omicron]\[Sigma]\[Tau]\:03cc $s\\left(\\Delta \
+t\\right)$ \[Tau]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\[Omicron]\:03cd \
+\[Pi]\[Omicron]\[Upsilon] \[CurlyEpsilon]\:03af\[Chi]\[CurlyEpsilon] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t_1$.\n\n\[CapitalAlpha]\[Pi]\:03cc \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Pi]\:03ac\[Nu]\[Omega] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Gamma]\[Iota]\[Alpha] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03cc \
+\[Delta]\[Iota]\:03ac\[Sigma]\[Tau]\[Eta]\[Mu]\[Alpha] \
+$\\left[\\tau,\\tau+d\\tau\\right] $\[Tau]\[Alpha] \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Pi]\[Omicron]\[Upsilon] \
+\:03ad\[Rho]\[Chi]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Kappa]\[Alpha]\[Tau]\:03cc\[Pi]\[Iota]\[Nu] \
+\[Pi]\[Omicron]\[Lambda]\[Iota]\[Tau]\[Iota]\[Kappa]\:03ae\[FinalSigma] \
+\[Zeta]\:03cd\[Mu]\[Omega]\[Sigma]\[Eta]\[FinalSigma] \[Mu]\[CurlyEpsilon] \
+\[Tau]\[Alpha] \[Mu]\:03ad\[Lambda]\[Eta] \[Tau]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] $f(\\tau)n(\\tau)d\\tau$, \
+\:03ac\[Rho]\[Alpha] \[Tau]\[Alpha] \
+\[Sigma]\[Upsilon]\[Nu]\[Omicron]\[Lambda]\[Iota]\[Kappa]\:03ac \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \
+$\\left(r(\\tau)+f(\\tau)n(\\tau)\\right)d\\tau$. \[CapitalAlpha]\[Pi]\:03cc \
+\[Alpha]\[Upsilon]\[Tau]\:03ac \[Theta]\[Alpha] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[Omicron]\
+\[Upsilon]\[Nu] \[Sigma]\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Eta] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t$ \[Tau]\[Alpha] \
+$s(t-\\tau)\\cdot\\left(r(\\tau)+f(\\tau)\\cdot n(\\tau) \\right)d \\tau$ \
+\[Mu]\:03ad\[Lambda]\[Eta]. \
+\[CapitalLambda]\[Alpha]\[Mu]\[Beta]\:03ac\[Nu]\[Omicron]\[Nu]\[Tau]\[Alpha]\
+\[FinalSigma] \[Upsilon]\[Pi]' \:03cc\[Psi]\[Iota]\[Nu] \
+\:03cc\[Lambda]\[CurlyEpsilon]\[FinalSigma] \[Tau]\[Iota]\[FinalSigma] \
+\[CurlyEpsilon]\[Nu]\[Delta]\[Iota]\:03ac\[Mu]\[CurlyEpsilon]\[Sigma]\
+\[CurlyEpsilon]\[FinalSigma] \
+\[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\:03ad\[FinalSigma] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Delta]\[Iota]\[Alpha]\[Sigma]\[Tau]\:03ae\[Mu]\[Alpha]\[Tau]\[Omicron]\
+\[FinalSigma] $[0,t]$ \:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\:03cc\[Tau]\[Iota] \[Sigma]\[Tau]\[Omicron] \
+\:03ad\[Tau]\[Omicron]\[FinalSigma] $t$ \[Theta]\[Alpha] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\:03cd\[Psi]\[CurlyEpsilon]\[Iota]/\[Pi]\[Alpha]\
+\[Rho]\[Alpha]\[Mu]\[CurlyEpsilon]\:03af\[Nu]\[CurlyEpsilon]\[Iota]:\n\n$$\n\
+\\sum_{\\tau}s(t-\\tau)\\left(r(\\tau)+f(\\tau)\\cdot n(\\tau) \\right)d \
+\\tau\\text{ \[Nu]\:03ad\[Alpha] \[Mu]\:03ad\[Lambda]\[Eta] \
+}=\\int_{0}^{t}s(t-\\tau)\\left(r(\\tau)+f(\\tau) n(\\tau) \\right)d \
+\\tau\\text{ \[Nu]\:03ad\[Alpha] \
+\[Mu]\:03ad\[Lambda]\[Eta]}.\n$$\n\n\n\[CapitalSigma]\[Upsilon]\[Nu]\
+\[CurlyEpsilon]\[Pi]\:03ce\[FinalSigma], \[Omicron] \
+\[Sigma]\[Upsilon]\[Nu]\[Omicron]\[Lambda]\[Iota]\[Kappa]\:03cc\[FinalSigma] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \
+\[Kappa]\[Omicron]\[Mu]\[Mu]\[Alpha]\[Tau]\[Iota]\[Kappa]\:03ce\[Nu] \
+\[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] \[Tau]\[Omicron] \
+\:03ad\[Tau]\[Omicron]\[FinalSigma] $t$ \[Theta]\[Alpha] \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota]:\n\n$$\ns(t)n_0+\\int_{0}^{t}s(t-\\\
+tau)\\left(r(\\tau)+f(\\tau) n(\\tau) \\right)d \
+\\tau.\n$$\n\n\[CapitalKappa]\[Alpha]\[Tau]\[Alpha]\[Lambda]\:03ae\[Gamma]\
+\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \[Sigma]\[Tau]\[Eta]\[Nu] \
+\[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta] Volterra \
+\[Delta]\[CurlyEpsilon]\[Upsilon]\[Tau]\:03ad\[Rho]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\:03af\[Delta]\[Omicron]\[Upsilon]\[FinalSigma] \
+\[Tau]\:03cd\[Pi]\[Omicron]\[Upsilon] \
+\[Sigma]\[Upsilon]\[Nu]\[CurlyEpsilon]\[Lambda]\:03af\[Xi]\[CurlyEpsilon]\
+\[Omega]\[FinalSigma]:\n\n$$\nn(t)=s(t)n_0+\\int_{0}^{t}s(t-\\tau)\\left(r(\\\
+tau)+f(\\tau) n(\\tau) \\right)d \\tau\n$$", "Display" -> "markdown", 
+    "Hash" -> "bbc72757-2a7a-4129-9dc4-c5065dd3fbb0", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> ".md ## \
+\[CapitalGamma]\[Nu]\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc.\n\n\
+\[CapitalEpsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\[CurlyEpsilon]\[Iota]\[Mu]\:03ad\[Nu]\[Omega] \
+\[Theta]\[Alpha] \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\:03ae\[Sigma]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \:03cc\[Tau]\[Iota]:\n\n- \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03ac \[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \[CurlyEpsilon]\:03af\[Chi]\[CurlyEpsilon] \
+$n_0$ \[Mu]\:03ad\[Lambda]\[Eta],\n- \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \[Nu]\[Alpha] \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\[Omega]\[Rho]\:03ae\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Mu]\:03ad\[Sigma]\[Alpha] \[Sigma]\[CurlyEpsilon] $\\Delta t$ \
+\:03ad\[Tau]\[Eta] \[Alpha]\[Pi]\:03cc \[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Alpha]\[Kappa]\[Omicron]\[Lambda]\[Omicron]\[Upsilon]\[Theta]\
+\[CurlyEpsilon]\:03af \[Tau]\[Eta]\[Nu] \
+\[CurlyEpsilon]\[Kappa]\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03ae \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Nu]\[Omicron]\[Mu]\:03ae \[Mu]\[CurlyEpsilon] \
+\[Pi]\[Alpha]\[Rho]\:03ac\[Mu]\[CurlyEpsilon]\[Tau]\[Rho]\[Omicron] \
+$\\frac{1}{t_0}$, \[Delta]\[Eta]\[Lambda]\[Alpha]\[Delta]\:03ae \
+\[Kappa]\[Alpha]\[Tau]\:03ac \[Mu]\:03ad\[Sigma]\[Omicron] \
+\:03cc\[Rho]\[Omicron] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\[Omega]\[Rho]\[CurlyEpsilon]\:03af \
+\[Sigma]\[Tau]\[Alpha] $t_0$ \:03ad\[Tau]\[Eta] \[Alpha]\[Pi]\:03cc \
+\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha], \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+$s(t)=\\exp\\left(-\\frac{t}{t_0}\\right)$,\n- \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\:03cc\[FinalSigma] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\:03ad\[Xi]\[Omega]\[Theta]\[CurlyEpsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Lambda]\[CurlyEpsilon]\[Upsilon]\[Sigma]\
+\[Eta]\[FinalSigma] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu], $r(t)=\\rho$ \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Tau]\[Omicron] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron],\n- \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Omicron] \
+\[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[CurlyEpsilon]\[Tau]\[Upsilon]\[Chi]\[Eta]\[Mu]\:03ad\[Nu]\[Omicron] \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\:03cc \
+\[LeftGuillemet]\[Psi]\[Eta]\[Sigma]\[Tau]\:03ae\[Rho]\[Iota]\
+\[RightGuillemet] \[Sigma]\[CurlyEpsilon] $f(t)=\\phi$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha].\n\n\:0388\[Chi]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon], \[Delta]\[Eta]\[Lambda]\[Alpha]\[Delta]\:03ae \
+\[Tau]\[Eta]\[Nu] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta].\n\n$$\nn(t)=n_0\\ex\
+p\\left(-\\frac{t}{t_0}\\right)+\\int_{0}^{t}\\exp\\left(-\\frac{t-\\tau}{t_0\
+}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau\n$$\n\n\n\[CapitalChi]\[Rho]\[Eta]\[Sigma]\[Iota]\[Mu]\[Omicron]\[Pi]\
+\[Omicron]\[Iota]\:03ce\[Nu]\[Tau]\[Alpha]\[FinalSigma] \[Tau]\[Omicron]\[Nu] \
+\[Kappa]\[Alpha]\[Nu]\:03cc\[Nu]\[Alpha] \[Tau]\[Omicron]\[Upsilon] Leibniz \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon]:\n\n$$\nn'(t)=-\\frac{n_\
+0}{t_0}\\exp\\left(-\\frac{t}{t_0}\\right)-\\frac{1}{t_0}\\int_{0}^{t}\\exp\\\
+left(-\\frac{t-\\tau}{t_0}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau+\\rho+\\phi\\cdot n(t)\n$$\n\n\n\:03ae \
+\[Iota]\[Sigma]\[Omicron]\[Delta]\:03cd\[Nu]\[Alpha]\[Mu]\[Alpha]:\n\n$$\nt_0\
+\\cdot \
+n'(t)=-n_0\\exp\\left(-\\frac{t}{t_0}\\right)-\\int_{0}^{t}\\exp\\left(-\\fra\
+c{t-\\tau}{t_0}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau+\\rho t_0+\\phi t_0\\cdot n(t)\n$$\n\n\n\[CapitalAlpha]\[Pi]\:03cc \
+\[Tau]\[Eta]\[Nu] 1\[Eta] \[Kappa]\[Alpha]\[Iota] \[Tau]\[Eta]\[Nu] \
+\[Tau]\[CurlyEpsilon]\[Lambda]\[CurlyEpsilon]\[Upsilon]\[Tau]\[Alpha]\:03af\
+\[Alpha] \[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[CapitalSigma].\[CapitalDelta].\[CapitalEpsilon].:\n\n$$\nn(t)+t_0\\cdot \
+n'(t)=\\rho t_0+\\phi t_0\\cdot n(t)\\Leftrightarrow t_0\\cdot n'(t)=\\rho \
+t_0+(\\phi t_0-1)\\cdot n(t)\n$$\n\n\[CapitalUpsilon]\[Pi]\:03cc \
+\[Alpha]\[Upsilon]\[Tau]\:03ad\[FinalSigma] \[Tau]\[Iota]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[Theta]\:03ae\[Kappa]\[CurlyEpsilon]\[FinalSigma] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t$ \[Sigma]\[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \[Theta]\[Alpha] \
+\[Beta]\[Rho]\:03af\[Sigma]\[Kappa]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota]:", 
+    "Display" -> "codemirror", "Hash" -> 
+     "b8cb22b0-9e72-4f91-a80c-ae5766b28d1e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "## \
+\[CapitalGamma]\[Nu]\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc.\n\n\
+\[CapitalEpsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Kappa]\[CurlyEpsilon]\[Iota]\[Mu]\:03ad\[Nu]\[Omega] \
+\[Theta]\[Alpha] \
+\[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\:03ae\[Sigma]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \:03cc\[Tau]\[Iota]:\n\n- \
+\[Alpha]\[Rho]\[Chi]\[Iota]\[Kappa]\:03ac \[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \[CurlyEpsilon]\:03af\[Chi]\[CurlyEpsilon] \
+$n_0$ \[Mu]\:03ad\[Lambda]\[Eta],\n- \[Eta] \
+\[Pi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \[Nu]\[Alpha] \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\[Omega]\[Rho]\:03ae\[Sigma]\[CurlyEpsilon]\
+\[Iota] \[Mu]\:03ad\[Sigma]\[Alpha] \[Sigma]\[CurlyEpsilon] $\\Delta t$ \
+\:03ad\[Tau]\[Eta] \[Alpha]\[Pi]\:03cc \[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \
+\[Alpha]\[Kappa]\[Omicron]\[Lambda]\[Omicron]\[Upsilon]\[Theta]\
+\[CurlyEpsilon]\:03af \[Tau]\[Eta]\[Nu] \
+\[CurlyEpsilon]\[Kappa]\[Theta]\[CurlyEpsilon]\[Tau]\[Iota]\[Kappa]\:03ae \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Nu]\[Omicron]\[Mu]\:03ae \[Mu]\[CurlyEpsilon] \
+\[Pi]\[Alpha]\[Rho]\:03ac\[Mu]\[CurlyEpsilon]\[Tau]\[Rho]\[Omicron] \
+$\\frac{1}{t_0}$, \[Delta]\[Eta]\[Lambda]\[Alpha]\[Delta]\:03ae \
+\[Kappa]\[Alpha]\[Tau]\:03ac \[Mu]\:03ad\[Sigma]\[Omicron] \
+\:03cc\[Rho]\[Omicron] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\[Omega]\[Rho]\[CurlyEpsilon]\:03af \
+\[Sigma]\[Tau]\[Alpha] $t_0$ \:03ad\[Tau]\[Eta] \[Alpha]\[Pi]\:03cc \
+\[Tau]\[Omicron] \[Kappa]\:03cc\[Mu]\[Mu]\[Alpha], \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+$s(t)=\\exp\\left(-\\frac{t}{t_0}\\right)$,\n- \
+\[Upsilon]\[Pi]\:03ac\[Rho]\[Chi]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\:03cc\[FinalSigma] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc\[FinalSigma] \
+\:03ad\[Xi]\[Omega]\[Theta]\[CurlyEpsilon]\[Nu] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Lambda]\[CurlyEpsilon]\[Upsilon]\[Sigma]\
+\[Eta]\[FinalSigma] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu], $r(t)=\\rho$ \
+\[Mu]\:03ad\[Lambda]\[Eta] \[Tau]\[Omicron] \
+\[Chi]\[Rho]\:03cc\[Nu]\[Omicron],\n- \[Kappa]\:03ac\[Theta]\[CurlyEpsilon] \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Omicron] \
+\[Kappa]\:03ac\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Pi]\[CurlyEpsilon]\[Tau]\[Upsilon]\[Chi]\[Eta]\[Mu]\:03ad\[Nu]\[Omicron] \
+\[Sigma]\[Tau]\[Alpha]\[Theta]\[CurlyEpsilon]\[Rho]\:03cc \
+\[LeftGuillemet]\[Psi]\[Eta]\[Sigma]\[Tau]\:03ae\[Rho]\[Iota]\
+\[RightGuillemet] \[Sigma]\[CurlyEpsilon] $f(t)=\\phi$ \
+\:03ac\[Tau]\[Omicron]\[Mu]\[Alpha].\n\n\:0388\[Chi]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon], \[Delta]\[Eta]\[Lambda]\[Alpha]\[Delta]\:03ae \
+\[Tau]\[Eta]\[Nu] \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota] \
+\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\[Eta]\[Rho]\[Omega]\[Tau]\
+\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta].\n\n$$\nn(t)=n_0\\ex\
+p\\left(-\\frac{t}{t_0}\\right)+\\int_{0}^{t}\\exp\\left(-\\frac{t-\\tau}{t_0\
+}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau\n$$\n\n\n\[CapitalChi]\[Rho]\[Eta]\[Sigma]\[Iota]\[Mu]\[Omicron]\[Pi]\
+\[Omicron]\[Iota]\:03ce\[Nu]\[Tau]\[Alpha]\[FinalSigma] \[Tau]\[Omicron]\[Nu] \
+\[Kappa]\[Alpha]\[Nu]\:03cc\[Nu]\[Alpha] \[Tau]\[Omicron]\[Upsilon] Leibniz \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon]:\n\n$$\nn'(t)=-\\frac{n_\
+0}{t_0}\\exp\\left(-\\frac{t}{t_0}\\right)-\\frac{1}{t_0}\\int_{0}^{t}\\exp\\\
+left(-\\frac{t-\\tau}{t_0}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau+\\rho+\\phi\\cdot n(t)\n$$\n\n\n\:03ae \
+\[Iota]\[Sigma]\[Omicron]\[Delta]\:03cd\[Nu]\[Alpha]\[Mu]\[Alpha]:\n\n$$\nt_0\
+\\cdot \
+n'(t)=-n_0\\exp\\left(-\\frac{t}{t_0}\\right)-\\int_{0}^{t}\\exp\\left(-\\fra\
+c{t-\\tau}{t_0}\\right)\\left(\\rho+\\phi\\cdot n(\\tau) \\right)d \
+\\tau+\\rho t_0+\\phi t_0\\cdot n(t)\n$$\n\n\n\[CapitalAlpha]\[Pi]\:03cc \
+\[Tau]\[Eta]\[Nu] 1\[Eta] \[Kappa]\[Alpha]\[Iota] \[Tau]\[Eta]\[Nu] \
+\[Tau]\[CurlyEpsilon]\[Lambda]\[CurlyEpsilon]\[Upsilon]\[Tau]\[Alpha]\:03af\
+\[Alpha] \[CurlyEpsilon]\[Xi]\:03af\[Sigma]\[Omega]\[Sigma]\[Eta] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \[Tau]\[Eta] \
+\[CapitalSigma].\[CapitalDelta].\[CapitalEpsilon].:\n\n$$\nn(t)+t_0\\cdot \
+n'(t)=\\rho t_0+\\phi t_0\\cdot n(t)\\Leftrightarrow t_0\\cdot n'(t)=\\rho \
+t_0+(\\phi t_0-1)\\cdot n(t)\n$$\n\n\[CapitalUpsilon]\[Pi]\:03cc \
+\[Alpha]\[Upsilon]\[Tau]\:03ad\[FinalSigma] \[Tau]\[Iota]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[Theta]\:03ae\[Kappa]\[CurlyEpsilon]\[FinalSigma] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \:03cc\[Tau]\[Iota] \
+\[Tau]\[Eta] \[Chi]\[Rho]\[Omicron]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Sigma]\[Tau]\[Iota]\[Gamma]\[Mu]\:03ae $t$ \[Sigma]\[Tau]\[Omicron] \
+\[Kappa]\:03cc\[Mu]\[Mu]\[Alpha] \[Theta]\[Alpha] \
+\[Beta]\[Rho]\:03af\[Sigma]\[Kappa]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota]:", 
+    "Display" -> "markdown", "Hash" -> 
+     "08b3ac36-80eb-46c2-8fb5-a4360d2eba0f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "Clear[\"Global`*\"]\neq = t0*n'[t] == \
+\[Rho]*t0+(\[CurlyPhi]*t0-1)n[t];\ninit = \
+n[0]==n0;\nDSolve[{eq,init},n[t],t]//Simplify", "Display" -> "codemirror", 
+    "Hash" -> "481ef0e8-4a81-4d28-bee1-23ad9b354a44", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> False, "Fade" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "{{n[t]->(*FB[*)((-t0 \\[Rho]+((*SpB[*)Power[E(*|*),(*|*)t \
+(-(*FB[*)((1)(*,*)/(*,*)(t0))(*]FB*)+\\[CurlyPhi])](*]SpB*)) (t0 \\[Rho]+n0 \
+(-1+t0 \\[CurlyPhi])))(*,*)/(*,*)(-1+t0 \\[CurlyPhi]))(*]FB*)}}", 
+    "Display" -> "codemirror", "Hash" -> 
+     "786bc8c3-4943-4968-a1f0-ee588e8f28e6", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> ".md \
+\[CapitalSigma]\:03cd\[Mu]\[CurlyPhi]\[Omega]\[Nu]\[Alpha] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[Theta]\:03ae\[Kappa]\[CurlyEpsilon]\[FinalSigma] \
+\[Pi]\[Omicron]\[Upsilon] \
+\[Upsilon]\[Pi]\[Omicron]\[Theta]\:03ad\[Sigma]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\:03cc\[Lambda]\[Alpha] \
+\[Kappa]\[Rho]\:03af\[Nu]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\:03cc \[Tau]\[Eta] \[Sigma]\[Chi]\:03ad\[Sigma]\[Eta] \
+\[Tau]\[Omicron]\[Upsilon] \[Rho]\[Upsilon]\[Theta]\[Mu]\[Omicron]\:03cd \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\:03ce\[Rho]\[Eta]\[Sigma]\[Eta]\[FinalSigma] \
+($\\frac{1}{t_0}$) \[Mu]\[CurlyEpsilon] \[Tau]\[Omicron]\[Nu] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Rho]\[Rho]\[Omicron]\:03ae\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] ($\\phi$):\n\n- \
+\[CapitalAlpha]\[Nu] $\\phi>\\frac{1}{t_0}$, \
+\[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Omicron] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CurlyEpsilon]\[Kappa]\[Tau]\[Omicron]\[Xi]\:03ad\[Upsilon]\[CurlyEpsilon]\
+\[Tau]\[Alpha]\[Iota] \[Sigma]\[Tau]\[Omicron] \
+\:03ac\[Pi]\[CurlyEpsilon]\[Iota]\[Rho]\[Omicron].\n- \[CapitalAlpha]\[Nu] \
+$\\phi<\\frac{1}{t_0}$, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Omicron] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CurlyPhi]\[Theta]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+$n(+\\infty)=\\frac{\\rho}{\\frac{1}{t_0}-\\phi}$.\n- \[CapitalAlpha]\[Nu] \
+$\\phi<\\frac{1}{t_0}$, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[Alpha]\[Pi]\[Omicron]\[Delta]\:03af\[Delta]\[CurlyEpsilon]\[Iota] \
+\[Omicron] \[Tau]\:03cd\[Pi]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc\[FinalSigma] \[Tau]\[Eta]\[FinalSigma] \
+\[Lambda]\:03cd\[Sigma]\[Eta]\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Lambda]\[Alpha]\[Mu]\[Beta]\:03ac\[Nu]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Upsilon]\[Pi]' \:03cc\[Psi]\[Iota]\[Nu] \
+\[Alpha]\[Pi]\[Lambda]\:03ac \[Tau]\[Eta] \
+\[CapitalSigma].\[CapitalDelta].\[CapitalEpsilon]. $n'(t)=\\rho$, \
+\:03ae\[Tau]\[Omicron]\[Iota] $n(t)=\\rho t+n_0$, \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Iota] \[Pi]\:03ac\[Lambda]\[Iota] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[CurlyEpsilon]\[Kappa]\[Tau]\:03cc\[Xi]\[CurlyEpsilon]\[Upsilon]\[Sigma]\
+\[Eta] \[Sigma]\[Tau]\[Omicron] \
+\:03ac\[Pi]\[CurlyEpsilon]\[Iota]\[Rho]\[Omicron], \
+\[Alpha]\[Lambda]\[Lambda]\:03ac \[Mu]\[CurlyEpsilon] \
+\[Gamma]\[Rho]\[Alpha]\[Mu]\[Mu]\[Iota]\[Kappa]\:03cc \
+\[Tau]\[Rho]\:03cc\[Pi]\[Omicron] \[Alpha]\[Upsilon]\[Tau]\:03ae \[Tau]\[Eta] \
+\[CurlyPhi]\[Omicron]\[Rho]\:03ac.\n\n\[CapitalPi]\[Rho]\[Omicron]\[CurlyPhi]\
+\[Alpha]\[Nu]\:03ce\[FinalSigma] \
+\[Kappa]\:03ac\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
+\[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Iota] \
+\[Kappa]\[Alpha]\[Theta]\:03cc\[Lambda]\[Omicron]\[Upsilon] \
+\[Alpha]\[Upsilon]\[Tau]\[Omicron]\[Nu]\:03cc\[Eta]\[Tau]\[CurlyEpsilon]\
+\[FinalSigma] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Delta]\[Omicron]\[Chi]\:03ad\[FinalSigma], \
+\[Alpha]\[Lambda]\[Lambda]\:03ac \[Alpha]\[Upsilon]\[Tau]\:03ac \
+\[Tau]\[Alpha] \
+\[Alpha]\[Pi]\[Omicron]\[Tau]\[CurlyEpsilon]\[Lambda]\:03ad\[Sigma]\[Mu]\
+\[Alpha]\[Tau]\[Alpha] \
+\[Delta]\[CurlyEpsilon]\:03af\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Nu] \
+\[Tau]\[Omicron] \[Pi]\:03cc\[Sigma]\[Omicron] \
+\[Sigma]\[Eta]\[Mu]\[Alpha]\[Nu]\[Tau]\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \[Eta] \
+\[CurlyEpsilon]\[Sigma]\[Omega]\[Tau]\[CurlyEpsilon]\[Rho]\[Iota]\[Kappa]\
+\:03ae \[Delta]\[Omicron]\[Upsilon]\[Lambda]\[CurlyEpsilon]\[Iota]\:03ac \
+\[Tau]\[Omega]\[Nu] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\:03cc\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma].", 
+    "Display" -> "codemirror", "Hash" -> 
+     "7db1010c-50c6-4dfc-a505-3223534ea7bf", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "\[CapitalSigma]\:03cd\[Mu]\[CurlyPhi]\[Omega]\[Nu]\[Alpha] \
+\[Mu]\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Sigma]\[Upsilon]\[Nu]\[Theta]\:03ae\[Kappa]\[CurlyEpsilon]\[FinalSigma] \
+\[Pi]\[Omicron]\[Upsilon] \
+\[Upsilon]\[Pi]\[Omicron]\[Theta]\:03ad\[Sigma]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\:03cc\[Lambda]\[Alpha] \
+\[Kappa]\[Rho]\:03af\[Nu]\[Omicron]\[Nu]\[Tau]\[Alpha]\[Iota] \
+\[Alpha]\[Pi]\:03cc \[Tau]\[Eta] \[Sigma]\[Chi]\:03ad\[Sigma]\[Eta] \
+\[Tau]\[Omicron]\[Upsilon] \[Rho]\[Upsilon]\[Theta]\[Mu]\[Omicron]\:03cd \
+\[Alpha]\[Pi]\[Omicron]\[Chi]\:03ce\[Rho]\[Eta]\[Sigma]\[Eta]\[FinalSigma] \
+($\\frac{1}{t_0}$) \[Mu]\[CurlyEpsilon] \[Tau]\[Omicron]\[Nu] \
+\[Rho]\[Upsilon]\[Theta]\[Mu]\:03cc \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Rho]\[Rho]\[Omicron]\:03ae\[FinalSigma] \
+\[Tau]\[Omega]\[Nu] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] ($\\phi$):\n\n- \
+\[CapitalAlpha]\[Nu] $\\phi>\\frac{1}{t_0}$, \
+\[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Omicron] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CurlyEpsilon]\[Kappa]\[Tau]\[Omicron]\[Xi]\:03ad\[Upsilon]\[CurlyEpsilon]\
+\[Tau]\[Alpha]\[Iota] \[Sigma]\[Tau]\[Omicron] \
+\:03ac\[Pi]\[CurlyEpsilon]\[Iota]\[Rho]\[Omicron].\n- \[CapitalAlpha]\[Nu] \
+$\\phi<\\frac{1}{t_0}$, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \[Omicron] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc\[FinalSigma] \
+\[CurlyPhi]\[Theta]\:03af\[Nu]\[CurlyEpsilon]\[Iota] \
+\[Mu]\:03ad\[Chi]\[Rho]\[Iota] \[Tau]\[Eta]\[Nu] \[Tau]\[Iota]\[Mu]\:03ae \
+$n(+\\infty)=\\frac{\\rho}{\\frac{1}{t_0}-\\phi}$.\n- \[CapitalAlpha]\[Nu] \
+$\\phi<\\frac{1}{t_0}$, \[Tau]\:03cc\[Tau]\[CurlyEpsilon] \
+\[Delta]\[CurlyEpsilon]\[Nu] \
+\[Alpha]\[Pi]\[Omicron]\[Delta]\:03af\[Delta]\[CurlyEpsilon]\[Iota] \
+\[Omicron] \[Tau]\:03cd\[Pi]\[Omicron]\[FinalSigma] \
+\[Alpha]\[Upsilon]\[Tau]\:03cc\[FinalSigma] \[Tau]\[Eta]\[FinalSigma] \
+\[Lambda]\:03cd\[Sigma]\[Eta]\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \
+\[Lambda]\[Alpha]\[Mu]\[Beta]\:03ac\[Nu]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Upsilon]\[Pi]' \:03cc\[Psi]\[Iota]\[Nu] \
+\[Alpha]\[Pi]\[Lambda]\:03ac \[Tau]\[Eta] \
+\[CapitalSigma].\[CapitalDelta].\[CapitalEpsilon]. $n'(t)=\\rho$, \
+\:03ae\[Tau]\[Omicron]\[Iota] $n(t)=\\rho t+n_0$, \
+\[CurlyEpsilon]\[Pi]\[Omicron]\[Mu]\:03ad\[Nu]\[Omega]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Iota] \[Pi]\:03ac\[Lambda]\[Iota] \
+\:03ad\[Chi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[CurlyEpsilon]\[Kappa]\[Tau]\:03cc\[Xi]\[CurlyEpsilon]\[Upsilon]\[Sigma]\
+\[Eta] \[Sigma]\[Tau]\[Omicron] \
+\:03ac\[Pi]\[CurlyEpsilon]\[Iota]\[Rho]\[Omicron], \
+\[Alpha]\[Lambda]\[Lambda]\:03ac \[Mu]\[CurlyEpsilon] \
+\[Gamma]\[Rho]\[Alpha]\[Mu]\[Mu]\[Iota]\[Kappa]\:03cc \
+\[Tau]\[Rho]\:03cc\[Pi]\[Omicron] \[Alpha]\[Upsilon]\[Tau]\:03ae \[Tau]\[Eta] \
+\[CurlyPhi]\[Omicron]\[Rho]\:03ac.\n\n\[CapitalPi]\[Rho]\[Omicron]\[CurlyPhi]\
+\[Alpha]\[Nu]\:03ce\[FinalSigma] \
+\[Kappa]\:03ac\[Nu]\[Alpha]\[Mu]\[CurlyEpsilon] \
+\[Kappa]\:03ac\[Pi]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma] \
+\[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
+\[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[CurlyEpsilon]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Iota] \
+\[Kappa]\[Alpha]\[Theta]\:03cc\[Lambda]\[Omicron]\[Upsilon] \
+\[Alpha]\[Upsilon]\[Tau]\[Omicron]\[Nu]\:03cc\[Eta]\[Tau]\[CurlyEpsilon]\
+\[FinalSigma] \
+\[Pi]\[Alpha]\[Rho]\[Alpha]\[Delta]\[Omicron]\[Chi]\:03ad\[FinalSigma], \
+\[Alpha]\[Lambda]\[Lambda]\:03ac \[Alpha]\[Upsilon]\[Tau]\:03ac \
+\[Tau]\[Alpha] \
+\[Alpha]\[Pi]\[Omicron]\[Tau]\[CurlyEpsilon]\[Lambda]\:03ad\[Sigma]\[Mu]\
+\[Alpha]\[Tau]\[Alpha] \
+\[Delta]\[CurlyEpsilon]\:03af\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Nu] \
+\[Tau]\[Omicron] \[Pi]\:03cc\[Sigma]\[Omicron] \
+\[Sigma]\[Eta]\[Mu]\[Alpha]\[Nu]\[Tau]\[Iota]\[Kappa]\:03ae \
+\[CurlyEpsilon]\:03af\[Nu]\[Alpha]\[Iota] \[Eta] \
+\[CurlyEpsilon]\[Sigma]\[Omega]\[Tau]\[CurlyEpsilon]\[Rho]\[Iota]\[Kappa]\
+\:03ae \[Delta]\[Omicron]\[Upsilon]\[Lambda]\[CurlyEpsilon]\[Iota]\:03ac \
+\[Tau]\[Omega]\[Nu] \[Mu]\[CurlyEpsilon]\[Lambda]\:03ce\[Nu] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[Kappa]\:03cc\[Mu]\[Alpha]\[Tau]\[Omicron]\[FinalSigma].", 
+    "Display" -> "markdown", "Hash" -> 
+     "a2efea1a-173e-40db-9d1f-98a78358c343", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> ".md ## \
+\[CapitalGamma]\[Nu]\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc \
+\[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma].\n\n:::warning\n\[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
+\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta]\n:::", 
+    "Display" -> "codemirror", "Hash" -> 
+     "551c64b6-1012-4cd9-af14-c8650aad6a86", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>, 
+   <|"Data" -> "## \
+\[CapitalGamma]\[Nu]\[Omega]\[Rho]\:03af\[Zeta]\[Omicron]\[Upsilon]\[Mu]\
+\[CurlyEpsilon] \[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Delta]\[Eta]\[Mu]\[Iota]\[Omicron]\[Upsilon]\[Rho]\[Gamma]\:03af\[Alpha]\
+\[FinalSigma] \[Kappa]\[Alpha]\[Iota] \[Tau]\[Omicron]\[Nu] \
+\[Pi]\[Lambda]\[Eta]\[Theta]\[Upsilon]\[Sigma]\[Mu]\:03cc \
+\[Kappa]\[Alpha]\[Iota] \
+\[Psi]\:03ac\[Chi]\[Nu]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon] \
+\[Tau]\[Iota]\[FinalSigma] \
+\[Delta]\[Upsilon]\[Nu]\:03ac\[Mu]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
+\[Kappa]\[Alpha]\[Tau]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omicron]\[CurlyPhi]\:03ae\
+\[FinalSigma].\n\n:::warning\n\[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
+\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta]\n:::", 
+    "Display" -> "markdown", "Hash" -> 
+     "e0c144c8-b9c8-4dbb-aca0-542a3e8ebda1", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "9ac6f1b4-7f88-474a-88d2-af8f4e46818f"|>}, 
+ "serializer" -> "jsfn4"|>

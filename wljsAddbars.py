@@ -6,7 +6,7 @@ from bs4 import BeautifulSoup
 PARAGRAPH_TEXT = """Υλοποίηση μέσω γλώσσας Wolfram στο <a href="https://jerryi.github.io/wljs-docs/" target="_blank" rel="noopener noreferrer">WLJS Notebook</a>."""
 BASE_SIGNATURE_TEXT = "Κώστας Κούδας | &copy; "
 INDEX_FILENAME = "index.html"
-FILENAME_KEYWORD = "(wljs)"
+FILENAME_KEYWORD = "(wljsRE)"
 
 # --- Loader HTML Template ---
 LOADER_HTML = """
