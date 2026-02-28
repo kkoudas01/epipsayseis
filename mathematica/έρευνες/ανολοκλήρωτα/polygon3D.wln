@@ -1,0 +1,204 @@
+<|"Notebook" -> <|"Controller" -> "49d2581f-2c1f-48a5-ad4c-cd267135bd6a", 
+   "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
+     CoffeeLiqueur`Notebook`Cells`CellObj`$40], "HaveToSaveAs" -> False, 
+   "MessangerChannel" -> Messanger, "ModalsChannel" -> 
+    "05f1d3fe-ca48-4fdc-a302-891dd200d0cb", 
+   "Objects" -> <|"fd75d27b-9587-40d3-b0ef-c99ffe7f2b66" -> 
+      <|"Public" -> Hold[Graphics3D[{GraphicsComplex[{{1.5, 0, 2}, 
+             {0.9352347027881003, 1.1727472237020446, 2}, 
+             {-0.3337814009344716, 1.4623918682727355, 2}, 
+             {-1.3514533018536288, 0.6508256086763372, 2}, 
+             {-1.3514533018536288, -0.6508256086763372, 2}, 
+             {-0.3337814009344716, -1.4623918682727355, 2}, 
+             {0.9352347027881003, -1.1727472237020446, 2}, 
+             {1.3514533018536288, 0.6508256086763372, 0}, 
+             {0.3337814009344716, 1.4623918682727355, 0}, 
+             {-0.9352347027881003, 1.1727472237020446, 0}, {-1.5, 0, 0}, 
+             {-0.9352347027881003, -1.1727472237020446, 0}, 
+             {0.3337814009344716, -1.4623918682727355, 0}, 
+             {1.3514533018536288, -0.6508256086763372, 0}}, 
+            {{{EdgeForm[], Directive[Specularity[GrayLevel[1], 3], 
+                RGBColor[0.880722, 0.611041, 0.142051], Lighting -> 
+                 {{"Ambient", RGBColor[0.30100577, 0.22414668499999998, 
+                    0.090484535]}, {"Directional", RGBColor[0.2642166, 
+                    0.18331229999999998, 0.04261530000000001], ImageScaled[
+                    {0, 2, 2}]}, {"Directional", RGBColor[0.2642166, 
+                    0.18331229999999998, 0.04261530000000001], ImageScaled[
+                    {2, 2, 2}]}, {"Directional", RGBColor[0.2642166, 
+                    0.18331229999999998, 0.04261530000000001], ImageScaled[
+                    {2, 0, 2}]}}], GraphicsGroup[{Polygon[{{14, 8, 1}, 
+                   {9, 10, 3}, {8, 9, 2}, {10, 11, 4}, {12, 13, 6}, 
+                   {11, 12, 5}, {13, 14, 7}, {2, 1, 8}, {3, 2, 9}, 
+                   {5, 4, 11}, {4, 3, 10}, {6, 5, 12}, {1, 7, 14}, 
+                   {7, 6, 13}}], Polygon[{{1, 2, 3, 4, 5, 6, 7}, {14, 13, 12, 
+                    11, 10, 9, 8}}]}]}, {}, {}, {}, {}}}], {}}, 
+          {DisplayFunction -> Identity, PlotInteractivity :> 
+            $PlotInteractivity, DisplayFunction -> Identity, 
+           PlotInteractivity :> $PlotInteractivity, DisplayFunction :> 
+            Identity, FaceGridsStyle -> Automatic, ImageSize -> 200, 
+           Method -> {"RelieveDPZFighting" -> True, "DefaultBoundaryStyle" -> 
+              Directive[GrayLevel[0.3]], "DefaultGraphicsInteraction" -> 
+              {"Version" -> 1.2, "TrackMousePosition" -> {True, False}, 
+               "Effects" -> {"Highlight" -> {"ratio" -> 2}, 
+                 "HighlightPoint" -> {"ratio" -> 2}, "Droplines" -> 
+                  {"freeformCursorMode" -> True, "placement" -> 
+                    {"x" -> "All", "y" -> "None"}}}}}, PlotRange -> 
+            {All, All, All}, PlotRangePadding -> {Automatic, Automatic, 
+             Automatic}, Ticks -> {Automatic, Automatic, Automatic}}]]|>|>, 
+   "Path" -> "C:\\Users\\kkoud\\Documents\\GitHub\\epipsayseis\\mathematica\\\
+\:03ad\[Rho]\[CurlyEpsilon]\[Upsilon]\[Nu]\[CurlyEpsilon]\[FinalSigma]\\\
+\[Alpha]\[Nu]\[Omicron]\[Lambda]\[Omicron]\[Kappa]\[Lambda]\:03ae\[Rho]\
+\[Omega]\[Tau]\[Alpha]\\polygon3D.wln", "PublicFields" -> {"Properties"}, 
+   "Quick" -> True, "Symbols" -> <||>, "TOC" -> {}|>, 
+ "Cells" -> {<|"Data" -> "Clear[\"Global`*\"]\nn = 7;\nr = 1.5;\nh = 2;\n\nA \
+= Table[r {Cos[2 Pi j/n], Sin[2 Pi j/n], h/r}, {j, 0, n-1}];\nB = Table[r \
+{Cos[2 Pi j/n + Pi/n], Sin[2 Pi j/n + Pi/n], 0}, {j, 0, n-1}];\n\nupper = \
+Polygon[Range[n]];\nlower = Polygon[Range[n, 2n]] + n; (* \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Xi]\[Tau]\[CurlyEpsilon]: \
+\[CurlyEpsilon]\[Delta]\:03ce \[Theta]\:03ad\[Lambda]\[CurlyEpsilon]\[Iota] \
+\[Sigma]\[Omega]\[Sigma]\[Tau]\:03ae \
+\[Alpha]\[Nu]\[Tau]\[Iota]\[Sigma]\[Tau]\[Omicron]\:03af\[Chi]\[Iota]\[Sigma]\
+\[Eta] *)\n\n(* \[CapitalPi]\[Iota]\[Omicron] \
+\[Alpha]\[Pi]\[Lambda]\:03cc\[FinalSigma] \
+\[Tau]\[Rho]\:03cc\[Pi]\[Omicron]\[FinalSigma] \[Gamma]\[Iota]\[Alpha] mesh \
+*)\nmesh = BoundaryMeshRegion[\n    Join[A, B],\n    Polygon /@ Join[\n       \
+ {Range[n]},\n        {Range[n+1, 2n]},\n        Table[{j, n + j, n + \
+Mod[j-2, n] + 1}, {j, n}], (* A_j B_j B_{j-1} *)\n        Table[{n + j, j, \
+Mod[j, n] + 1}, {j, n}]        (* B_j A_j A_{j+1} *)\n    ]\n]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "106234a5-3aff-40fa-b3b4-ba69e502a2ad", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "(*VB[*)(CoffeeLiqueur`Extensions`Boxes`Workarounds`temporal$2\
+14026)(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEK\
+p6WYm6YYmSfpWppamOuaGKQY6yYZpKbpJltapqWlmqcZJZmZAQCKphYg\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "a24bd2e4-a5b7-4bb0-8dbf-c308e0c3e29d", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "l = 2R Sin[w/2];\na = R Cos[w/2];\ny = R-a;\nb = 2 a \
+Tan[w/4];\ny2 = h Sqrt[((R-a)/h)^2 /(1+((R-a)/h)^2)];\nw = 2Pi/n;\nexpr = n l \
+a h/2 + h y (b + l) n/6 -(R-a)b*h* n/6\nFullSimplify[expr, {R > 0, h > 0, n \
+\\[Element] Integers, n > 2}]//Expand // \
+Factor\nexpr//FullSimplify//InputForm\nClear[n,h,R]\nLimit[expr,n->Infinity]"\
+, "Display" -> "codemirror", "Hash" -> 
+     "b7dd2874-7ea1-4ebc-b8b0-205ff116c218", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "14 ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] \
+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]-((*FB[*)((14)(*,*)/(*,*)(3))(*]FB\
+*)) R Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] (R-R \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]) \
+Tan[(*FB[*)((\\[Pi])(*,*)/(*,*)(14))(*]FB*)]+((*FB[*)((7)(*,*)/(*,*)(3))(*]FB\
+*)) (R-R Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]) (2 R \
+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]+2 R \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] \
+Tan[(*FB[*)((\\[Pi])(*,*)/(*,*)(14))(*]FB*)])", "Display" -> "codemirror", 
+    "Hash" -> "fb542914-996f-4177-b9a4-67670fc9bfaf", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "((*FB[*)((14)(*,*)/(*,*)(3))(*]FB*)) \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) (Cos[(*FB[*)((3 \
+\\[Pi])(*,*)/(*,*)(14))(*]FB*)]+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)])"\
+, "Display" -> "codemirror", "Hash" -> 
+     "4035e6d0-d546-449f-8b0c-ba575d587ef3", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "(*VB[*)(InputForm[(14*R^2*(Cos[(3*Pi)/14] + \
+Sin[Pi/7]))/3])(*,*)(*\"1:eJwlj1FPgzAAhInxwfgr5p7azoQgWyQmPoAbUwgbawGtBJPKOqx\
+01A0JY7/NHyfTly93l0sud/Wu8OZM07T6ssdsLb7VPhG8JT+9BchxUgQBMMYIv90g8KDqFJgoFFA3\
+xtlgNCCiSkOh32YQ6iYE6Lpvo6Fxx71DFAUqJNuFoHNbTYqAtOQ5WbKy2eXVBNNSjuJ4lWNazBLCS\
+kPVtvRXZWLxF9ePt6+bpvJcKr2PvJRf8dSlOJaEiR3jc+uz9S1jQYTZReToY1FM7aDoHtXT/fC0nz\
+kOgv+nznvgRnJycRKcrZeV7P7SaN/wX0QjSHc=\"*)(*]VB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "12e3d490-e52e-4dd9-a62e-60fbbeca55d1", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "14 ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] \
+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]-((*FB[*)((14)(*,*)/(*,*)(3))(*]FB\
+*)) R Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] (R-R \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]) \
+Tan[(*FB[*)((\\[Pi])(*,*)/(*,*)(14))(*]FB*)]+((*FB[*)((7)(*,*)/(*,*)(3))(*]FB\
+*)) (R-R Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]) (2 R \
+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)]+2 R \
+Cos[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)] \
+Tan[(*FB[*)((\\[Pi])(*,*)/(*,*)(14))(*]FB*)])", "Display" -> "codemirror", 
+    "Hash" -> "e62b5523-c5f1-47a6-8fe7-d7c461815eaf", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "ttt = \
+Table[{n,Simplify[(h*n*R^2*(Sin[Pi/n]+Sin[(2*Pi)/n]))/3],N[(h*n*R^2*(Sin[Pi/n\
+]+Sin[(2*Pi)/n]))/3]},{n,3,15}];\nTableForm[ttt,TableHeadings->{None, \
+{\"n\",\"V\",\"approx V\"}}]", "Display" -> "codemirror", 
+    "Hash" -> "850c768f-a1b0-49c3-8407-ef444b931b9e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Input", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>, 
+   <|"Data" -> "(*GB[*){{\"n\"(*|*),(*|*)\"V\"(*|*),(*|*)\"approx \
+V\"}(*||*),(*||*){3(*|*),(*|*)((*SqB[*)Sqrt[3](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)1.7320508075688772` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){4(*|*),(*|*)((*FB[*)((2)\
+(*,*)/(*,*)(3))(*]FB*)) (2+(*SqB[*)Sqrt[2](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)2.2761423749153966` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){5(*|*),(*|*)((*FB[*)((5)\
+(*,*)/(*,*)(12))(*]FB*)) ((*SqB[*)Sqrt[10-2 \
+((*SqB[*)Sqrt[5](*]SqB*))](*]SqB*)+(*SqB[*)Sqrt[2 \
+(5+(*SqB[*)Sqrt[5](*]SqB*))](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)2.564736280979378` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){6(*|*),(*|*)(1+(*SqB[*)S\
+qrt[3](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)2.732050807568877` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){7(*|*),(*|*)((*FB[*)((7)\
+(*,*)/(*,*)(3))(*]FB*)) h ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Cos[(*FB[*)((3 \
+\\[Pi])(*,*)/(*,*)(14))(*]FB*)]+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(7))(*]FB*)])(\
+*|*),(*|*)2.836668850366372` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){8(*|*),(*|*)((*FB[*)((8)\
+(*,*)/(*,*)(3))(*]FB*)) h ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+((*FB[*)((1)(*,*)/(*,*)((*SqB[*)Sqrt[2](*]SqB*)))(*]FB*)+Sin[(*FB[*)((\\[Pi])\
+(*,*)/(*,*)(8))(*]FB*)])(*|*),(*|*)2.906107236137699` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){9(*|*),(*|*)3 h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(9))(*]FB*)]+Sin[(*FB[*)((2 \
+\\[Pi])(*,*)/(*,*)(9))(*]FB*)])(*|*),(*|*)2.9544232590366235` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){10(*|*),(*|*)((*FB[*)((5\
+)(*,*)/(*,*)(6))(*]FB*)) (-1+(*SqB[*)Sqrt[5](*]SqB*)+(*SqB[*)Sqrt[10-2 \
+((*SqB[*)Sqrt[5](*]SqB*))](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)2.9893408222247353` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){11(*|*),(*|*)((*FB[*)((1\
+1)(*,*)/(*,*)(3))(*]FB*)) h ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(11))(*]FB*)]+Sin[(*FB[*)((2 \
+\\[Pi])(*,*)/(*,*)(11))(*]FB*)])(*|*),(*|*)3.0153690390890997` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){12(*|*),(*|*)(2-(*SqB[*)\
+Sqrt[2](*]SqB*)+(*SqB[*)Sqrt[6](*]SqB*)) h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))(*|*),(*|*)3.035276180410083` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){13(*|*),(*|*)((*FB[*)((1\
+3)(*,*)/(*,*)(3))(*]FB*)) h ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(13))(*]FB*)]+Sin[(*FB[*)((2 \
+\\[Pi])(*,*)/(*,*)(13))(*]FB*)])(*|*),(*|*)3.050834957435747` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){14(*|*),(*|*)((*FB[*)((1\
+4)(*,*)/(*,*)(3))(*]FB*)) h ((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(14))(*]FB*)]+Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)\
+(7))(*]FB*)])(*|*),(*|*)3.063221807678072` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}(*||*),(*||*){15(*|*),(*|*)5 h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*)) \
+(Sin[(*FB[*)((\\[Pi])(*,*)/(*,*)(15))(*]FB*)]+Sin[(*FB[*)((2 \
+\\[Pi])(*,*)/(*,*)(15))(*]FB*)])(*|*),(*|*)3.073241669467797` h \
+((*SpB[*)Power[R(*|*),(*|*)2](*]SpB*))}}(*||*)(*1:eJxTTMoPSmNiYGAo5gUSYZmp5S6\
+pyflFiSX5RcEsQBH3oswUiDyIF1Sak1rMDxV2yq9wySzLTEktKkao8MksLkFVH8wOZDjn55Tm5hWn\
+MaKoQ+EVswIZbok5xalo+sGM/PLiNBbsysFCIUWlqbjMQ7AA/yA0Xg==*)(*]GB*)", 
+    "Display" -> "codemirror", "Hash" -> 
+     "24d9fe93-3b8e-4c96-8156-88af5c8d79e5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "cfdf359f-7c4e-477f-b73d-55331ca85ca9"|>}, 
+ "serializer" -> "jsfn4"|>
