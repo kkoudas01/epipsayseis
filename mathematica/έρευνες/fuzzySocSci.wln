@@ -1,8 +1,8 @@
-<|"Notebook" -> <|"Controller" -> "a5b898b9-696e-468a-baa3-0f352b06d542", 
+<|"Notebook" -> <|"Controller" -> "7364051a-32af-408f-9c4c-f3343211408a", 
    "FocusedCell" -> CoffeeLiqueur`Notebook`Cells`CellObj[
-     CoffeeLiqueur`Notebook`Cells`CellObj`$73], "HaveToSaveAs" -> False, 
+     CoffeeLiqueur`Notebook`Cells`CellObj`$570], "HaveToSaveAs" -> False, 
    "MessangerChannel" -> Messanger, "ModalsChannel" -> 
-    "71108d3e-de69-4e3a-a51f-15241ccacb1b", 
+    "4d6adbca-ebb0-4e77-91a4-32aac7702100", 
    "Objects" -> <|"4a4c37db-9a91-4e01-b746-98200417e198" -> 
       <|"Public" -> Hold[Graphics[Annotation[
            {{{{}, {}, Annotation[{Directive[Opacity[1], AbsoluteThickness[2], 
@@ -151,32 +151,33 @@
             {{Scaled[0.02], Scaled[0.02]}, {Scaled[0.02], Scaled[0.02]}}, 
            Ticks -> {Automatic, Automatic}}]]|>|>, 
    "Path" -> "C:\\Users\\kkoud\\Documents\\GitHub\\epipsayseis\\mathematica\\\
-fuzzy\\fuzzySocSci.wln", "PublicFields" -> {"Properties"}, "Symbols" -> <||>, 
+\:03ad\[Rho]\[CurlyEpsilon]\[Upsilon]\[Nu]\[CurlyEpsilon]\[FinalSigma]\\fuzzy\
+SocSci.wln", "PublicFields" -> {"Properties"}, "Symbols" -> <||>, 
    "TOC" -> {CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\
 \[Iota]\[Alpha] \[Pi]\[Rho]\:03ce\[Tau]\[Eta] \
 \[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
 \[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[Eta] \
 \[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Gamma]\[Gamma]\[Iota]\[Sigma]\[Eta]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$802]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$559]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalPi]\[Rho]\
 \:03ac\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma] \[Sigma]\[Tau]\[Alpha] \
 \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
 \[Sigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$809]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$536]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
       "\:0386\[Rho]\[Nu]\[Eta]\[Sigma]\[Eta]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$811]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$538]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, 
       "\[CapitalSigma]\:03cd\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$813]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$540]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[3, "\[CapitalDelta]\[Iota]\
 \:03ac\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$815]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$542]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalMu]\[Iota]\
 \[Alpha] \[Kappa]\[Alpha]\[Lambda]\:03cd\[Tau]\[CurlyEpsilon]\[Rho]\[Eta] \
 \[CurlyEpsilon]\[Kappa]\[Tau]\:03af\[Mu]\[Eta]\[Sigma]\[Eta] \
@@ -184,7 +185,7 @@ fuzzy\\fuzzySocSci.wln", "PublicFields" -> {"Properties"}, "Symbols" -> <||>,
 \[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
 \[Pi]\[Lambda]\[Omicron]\[Upsilon]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03cd"\
 , CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$817]], 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$567]], 
      CoffeeLiqueur`Extensions`TOC`Private`heading[2, "\[CapitalPi]\[Iota]\
 \[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
 \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[Omicron]\:03cd\[FinalSigma] \
@@ -196,25 +197,74 @@ style=\"color:orange\">**\[Pi]\[Lambda]\[Omicron]\:03cd\[Sigma]\[Iota]\
 \[FinalSigma] \[Tau]\[Eta]\[FinalSigma] \
 \[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha]\[FinalSigma]", 
       CoffeeLiqueur`Notebook`Cells`CellObj[
-       CoffeeLiqueur`Notebook`Cells`CellObj`$819]]}|>, 
+       CoffeeLiqueur`Notebook`Cells`CellObj`$569]]}|>, 
  "Cells" -> 
   {<|"Data" -> ".md  # \[CapitalEpsilon]\[Kappa]\[CurlyPhi]\[Rho]\:03ac\
 \[Zeta]\[Omicron]\[Nu]\[Tau]\[Alpha]\[FinalSigma] \[Tau]\[Eta]\[Nu] \
 \[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\[Iota]\[Kappa]\:03ae \
 \[Delta]\[Iota]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omega]\[Mu]\:03ac\[Tau]\[Omega]\
-\[Sigma]\[Eta]\n\n*\[CapitalTau]\[Alpha] \
+\[Sigma]\[Eta]", "Display" -> "codemirror", 
+    "Hash" -> "7589094d-634a-4955-9125-579d5371fb43", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> " # \
+\[CapitalEpsilon]\[Kappa]\[CurlyPhi]\[Rho]\:03ac\[Zeta]\[Omicron]\[Nu]\[Tau]\
+\[Alpha]\[FinalSigma] \[Tau]\[Eta]\[Nu] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\[Iota]\[Kappa]\:03ae \
+\[Delta]\[Iota]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omega]\[Mu]\:03ac\[Tau]\[Omega]\
+\[Sigma]\[Eta]", "Display" -> "markdown", 
+    "Hash" -> "40249a59-aff4-498f-b305-9e2e2891f817", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> ".md\n*\[CapitalTau]\[Alpha] \
 \[CapitalAlpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
 \[CapitalSigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha] \
 \[Xi]\[CurlyEpsilon]\[Kappa]\[Alpha]\[Theta]\[Alpha]\[Rho]\:03af\[Zeta]\
 \[Omicron]\[Upsilon]\[Nu] \[Tau]\[Iota]\[FinalSigma] \
 \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[CurlyEpsilon]\:03af\[FinalSigma] \
-\:03ad\[Nu]\[Nu]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma]!*\n\n## \
-\[CapitalMu]\[Iota]\[Alpha] \[Pi]\[Rho]\:03ce\[Tau]\[Eta] \
+\:03ad\[Nu]\[Nu]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma]!*", 
+    "Display" -> "codemirror", "Hash" -> 
+     "7fa5275a-bab9-488d-87bd-69e64c55869e", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> "*\[CapitalTau]\[Alpha] \
+\[CapitalAlpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
+\[CapitalSigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha] \
+\[Xi]\[CurlyEpsilon]\[Kappa]\[Alpha]\[Theta]\[Alpha]\[Rho]\:03af\[Zeta]\
+\[Omicron]\[Upsilon]\[Nu] \[Tau]\[Iota]\[FinalSigma] \
+\[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[CurlyEpsilon]\:03af\[FinalSigma] \
+\:03ad\[Nu]\[Nu]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma]!*", 
+    "Display" -> "markdown", "Hash" -> 
+     "f0350046-e394-4028-b6f2-14bef8e02d45", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> ".md\n\n## \[CapitalMu]\[Iota]\[Alpha] \
+\[Pi]\[Rho]\:03ce\[Tau]\[Eta] \
 \[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
 \[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[Eta] \
-\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Gamma]\[Gamma]\[Iota]\[Sigma]\[Eta]\n\n\
-\[CapitalTau]\[Omicron] \[Mu]\[Alpha]\[Kappa]\[Rho]\[Iota]\[Nu]\:03cc 2010, \
-\[Pi]\[Rho]\[Iota]\[Nu] \[Tau]\[Omicron] \[Delta]\:03cc\[Gamma]\[Mu]\[Alpha] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Gamma]\[Gamma]\[Iota]\[Sigma]\[Eta]", 
+    "Display" -> "codemirror", "Hash" -> 
+     "1cfa517f-e837-489b-bada-ce6a640f9864", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> "\n## \[CapitalMu]\[Iota]\[Alpha] \
+\[Pi]\[Rho]\:03ce\[Tau]\[Eta] \
+\[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
+\[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[Eta] \
+\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Gamma]\[Gamma]\[Iota]\[Sigma]\[Eta]", 
+    "Display" -> "markdown", "Hash" -> 
+     "fd4d7ce6-94a8-4521-9091-c8af27cec011", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> ".md  \n\n\[CapitalTau]\[Omicron] \
+\[Mu]\[Alpha]\[Kappa]\[Rho]\[Iota]\[Nu]\:03cc 2010, \[Pi]\[Rho]\[Iota]\[Nu] \
+\[Tau]\[Omicron] \[Delta]\:03cc\[Gamma]\[Mu]\[Alpha] \
 **\[CapitalTau]\[CapitalIota]\[CapitalNu]\[CapitalAlpha]** (There Is No \
 Alternative) \
 \[CurlyEpsilon]\[Mu]\[Pi]\[CurlyEpsilon]\[Delta]\[Omega]\[Theta]\
@@ -671,28 +721,13 @@ ${\\color{red}\\mu({\\color{blue}x})}={\\color{red}1}$ \
 \[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon], \
 \[Lambda]\[Omicron]\[Iota]\[Pi]\:03cc\[Nu], \[Tau]\[Alpha] \
 \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota]:", "Display" -> "codemirror", 
-    "Hash" -> "ff085c21-d8f2-4ebd-bb68-0fdd86946cf7", "Invisible" -> False, 
+    "Hash" -> "3adfe917-4461-4c2a-a6d1-5e3acfae0fb0", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
-   <|"Data" -> " # \
-\[CapitalEpsilon]\[Kappa]\[CurlyPhi]\[Rho]\:03ac\[Zeta]\[Omicron]\[Nu]\[Tau]\
-\[Alpha]\[FinalSigma] \[Tau]\[Eta]\[Nu] \
-\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\[Iota]\[Kappa]\:03ae \
-\[Delta]\[Iota]\[Alpha]\[Sigma]\[Tau]\[Rho]\[Omega]\[Mu]\:03ac\[Tau]\[Omega]\
-\[Sigma]\[Eta]\n\n*\[CapitalTau]\[Alpha] \
-\[CapitalAlpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
-\[CapitalSigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha] \
-\[Xi]\[CurlyEpsilon]\[Kappa]\[Alpha]\[Theta]\[Alpha]\[Rho]\:03af\[Zeta]\
-\[Omicron]\[Upsilon]\[Nu] \[Tau]\[Iota]\[FinalSigma] \
-\[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[CurlyEpsilon]\:03af\[FinalSigma] \
-\:03ad\[Nu]\[Nu]\[Omicron]\[Iota]\[CurlyEpsilon]\[FinalSigma]!*\n\n## \
-\[CapitalMu]\[Iota]\[Alpha] \[Pi]\[Rho]\:03ce\[Tau]\[Eta] \
-\[CurlyEpsilon]\[Xi]\[CurlyEpsilon]\[Iota]\[Delta]\[Alpha]\[Nu]\[Iota]\
-\[Kappa]\[CurlyEpsilon]\[Upsilon]\[Mu]\:03ad\[Nu]\[Eta] \
-\[Pi]\[Rho]\[Omicron]\[Sigma]\:03ad\[Gamma]\[Gamma]\[Iota]\[Sigma]\[Eta]\n\n\
-\[CapitalTau]\[Omicron] \[Mu]\[Alpha]\[Kappa]\[Rho]\[Iota]\[Nu]\:03cc 2010, \
-\[Pi]\[Rho]\[Iota]\[Nu] \[Tau]\[Omicron] \[Delta]\:03cc\[Gamma]\[Mu]\[Alpha] \
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> " \n\n\[CapitalTau]\[Omicron] \
+\[Mu]\[Alpha]\[Kappa]\[Rho]\[Iota]\[Nu]\:03cc 2010, \[Pi]\[Rho]\[Iota]\[Nu] \
+\[Tau]\[Omicron] \[Delta]\:03cc\[Gamma]\[Mu]\[Alpha] \
 **\[CapitalTau]\[CapitalIota]\[CapitalNu]\[CapitalAlpha]** (There Is No \
 Alternative) \
 \[CurlyEpsilon]\[Mu]\[Pi]\[CurlyEpsilon]\[Delta]\[Omega]\[Theta]\
@@ -1149,16 +1184,16 @@ ${\\color{red}\\mu({\\color{blue}x})}={\\color{red}1}$ \
 \[Gamma]\[Rho]\:03ac\[CurlyPhi]\[Omicron]\[Upsilon]\[Mu]\[CurlyEpsilon], \
 \[Lambda]\[Omicron]\[Iota]\[Pi]\:03cc\[Nu], \[Tau]\[Alpha] \
 \[Kappa]\:03ac\[Tau]\[Omega]\[Theta]\[Iota]:", "Display" -> "markdown", 
-    "Hash" -> "beeecfdf-2e4a-4f57-887c-beac42d18850", "Invisible" -> False, 
+    "Hash" -> "ae7d8cf7-0779-49a4-855d-0301316d2de2", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "Clear[\"Global`*\"]\nm[x_] := \
 Which[x<=x1,0,x1<x<x2,(x-x1)/(x2-x1),x>=x2,1]", "Display" -> "codemirror", 
-    "Hash" -> "694c61cc-16db-4fee-b3d4-3cff5b4d8a5b", "Invisible" -> False, 
+    "Hash" -> "8e6b72de-f9b4-4ff0-aca6-0a8423087da7", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md \[CapitalSigma]\[Tau]\[Eta]\[Nu] \
 \[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Pi]\[Tau]\[Omega]\[Sigma]\[Eta] \
 \[Pi]\[Omicron]\[Upsilon] \[Theta]\[Alpha] \
@@ -1188,10 +1223,10 @@ $\\color{red}\\mu$, \[Delta]\[CurlyEpsilon]\[Nu] \
 \[Pi]\[Rho]\[Omicron]\[Sigma]\[Delta]\[Iota]\[Omicron]\[Rho]\[Iota]\[Sigma]\
 \[Mu]\:03cc\[FinalSigma] \[Tau]\[Omicron]\[Upsilon]\[FinalSigma].", 
     "Display" -> "codemirror", "Hash" -> 
-     "7f961ab5-b52e-4da6-b419-49e723e46f89", "Invisible" -> False, 
+     "b38e5f32-14d3-4073-9b32-7880767d3644", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "\[CapitalSigma]\[Tau]\[Eta]\[Nu] \
 \[Pi]\[CurlyEpsilon]\[Rho]\:03af\[Pi]\[Tau]\[Omega]\[Sigma]\[Eta] \
 \[Pi]\[Omicron]\[Upsilon] \[Theta]\[Alpha] \
@@ -1221,60 +1256,60 @@ $\\color{red}\\mu$, \[Delta]\[CurlyEpsilon]\[Nu] \
 \[Pi]\[Rho]\[Omicron]\[Sigma]\[Delta]\[Iota]\[Omicron]\[Rho]\[Iota]\[Sigma]\
 \[Mu]\:03cc\[FinalSigma] \[Tau]\[Omicron]\[Upsilon]\[FinalSigma].", 
     "Display" -> "markdown", "Hash" -> 
-     "755b5538-40bb-4be2-9c32-a1ddc64dc48d", "Invisible" -> False, 
+     "b294e66a-b652-4de5-aaf0-495fca87da62", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "x1=3000;\nx2=20000;\nPlot[m[x],{x,0,x1+x2}, ImageSize->500, \
 PlotStyle->Red]", "Display" -> "codemirror", 
-    "Hash" -> "ca80e591-4ae7-4dc6-8a6d-935c05e5ca1d", "Invisible" -> False, 
+    "Hash" -> "a4e87d2f-3671-4983-bbdf-f8058969b527", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Fade" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "(*VB[*)(FrontEndRef[\"4a4c37db-9a91-4e01-b746-98200417e198\"]\
 )(*,*)(*\"1:eJxTTMoPSmNkYGAoZgESHvk5KRCeEJBwK8rPK3HNS3GtSE0uLUlMykkNVgEKmySaJ\
 BubpyTpWiZaGuqapBoY6iaZm5jpWloYGRiYGJqnGlpaAAB/jxTm\"*)(*]VB*)", 
     "Display" -> "codemirror", "Hash" -> 
-     "c7dd7b64-26c1-4658-907a-7d5e1df20371", "Invisible" -> False, 
+     "8d8a77b5-2aec-4b77-8b6f-d72c405b3b91", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ## \
 \[CapitalPi]\[Rho]\:03ac\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
 \[Sigma]\[Tau]\[Alpha] \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
 \[Sigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha]", "Display" -> "codemirror", 
-    "Hash" -> "9e784d65-5098-4590-b6a6-f9310724cf3b", "Invisible" -> False, 
+    "Hash" -> "0ced2759-65a6-49c2-9e78-f6814fca62b5", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "## \
 \[CapitalPi]\[Rho]\:03ac\[Xi]\[CurlyEpsilon]\[Iota]\[FinalSigma] \
 \[Sigma]\[Tau]\[Alpha] \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\:03ae \
 \[Sigma]\:03cd\[Nu]\[Omicron]\[Lambda]\[Alpha]", "Display" -> "markdown", 
-    "Hash" -> "659c1247-67bc-4fd5-8217-0f4d3ce3d383", "Invisible" -> False, 
+    "Hash" -> "108f4729-3fc2-4e58-b793-6d8ac0a5acd2", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ### \
 \:0386\[Rho]\[Nu]\[Eta]\[Sigma]\[Eta]\n\n:::warning\n\:26a0\:fe0f \
 \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
 \[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
 \[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
 \:26a0\:fe0f\n:::", "Display" -> "codemirror", 
-    "Hash" -> "4b605235-b830-4780-b5a1-98dfbadee164", "Invisible" -> False, 
+    "Hash" -> "52e73a41-c7e6-41ef-a4d2-e0a65f8555fa", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "### \
 \:0386\[Rho]\[Nu]\[Eta]\[Sigma]\[Eta]\n\n:::warning\n\:26a0\:fe0f \
 \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
 \[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
 \[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
 \:26a0\:fe0f\n:::", "Display" -> "markdown", 
-    "Hash" -> "2a6f58d5-eb5f-4667-8eb5-711ec30408a8", "Invisible" -> False, 
+    "Hash" -> "2c45e044-7c77-44a6-869b-01fd5cc036a2", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ### \
 \[CapitalSigma]\:03cd\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]\n\n\:0388\
 \[Sigma]\[Tau]\[Omega] \:03cc\[Tau]\[Iota] \
@@ -1455,10 +1490,10 @@ an}\\text{\[CapitalGamma]\[Iota]\:03ce\[Rho]\[Gamma]\[Omicron]\[FinalSigma]}}\
 )},{\\color{red}\\mu_2({\\color{cyan}\\text{\[CapitalGamma]\[Iota]\:03ce\
 \[Rho]\[Gamma]\[Omicron]\[FinalSigma]}})}\\right)}\n$$", 
     "Display" -> "codemirror", "Hash" -> 
-     "2f9d52cb-bc3e-415e-b9af-067d279e7990", "Invisible" -> False, 
+     "08d1833d-7798-4f51-b792-a5316dd08056", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "### \
 \[CapitalSigma]\:03cd\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]\n\n\:0388\
 \[Sigma]\[Tau]\[Omega] \:03cc\[Tau]\[Iota] \
@@ -1639,37 +1674,52 @@ an}\\text{\[CapitalGamma]\[Iota]\:03ce\[Rho]\[Gamma]\[Omicron]\[FinalSigma]}}\
 )},{\\color{red}\\mu_2({\\color{cyan}\\text{\[CapitalGamma]\[Iota]\:03ce\
 \[Rho]\[Gamma]\[Omicron]\[FinalSigma]}})}\\right)}\n$$", 
     "Display" -> "markdown", "Hash" -> 
-     "4a12d81e-c0ab-41e3-b521-ae902be92603", "Invisible" -> False, 
+     "044b1923-35bd-4754-8c3a-ef816d6bc7a1", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ### \
 \[CapitalDelta]\[Iota]\:03ac\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]\n\n::\
 :warning\n\:26a0\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
 \[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
 \[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
 \:26a0\:fe0f\n:::", "Display" -> "codemirror", 
-    "Hash" -> "8ee89feb-2dad-40ef-9421-e104d6edd2e1", "Invisible" -> False, 
+    "Hash" -> "2e2c870f-fd78-4311-a30b-d37a189ef9fa", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "### \
 \[CapitalDelta]\[Iota]\:03ac\[Zeta]\[CurlyEpsilon]\[Upsilon]\[Xi]\[Eta]\n\n::\
 :warning\n\:26a0\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
 \[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
 \[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
 \:26a0\:fe0f\n:::", "Display" -> "markdown", 
-    "Hash" -> "242140ff-e6ec-4eb9-9a0f-5ec3681072a5", "Invisible" -> False, 
+    "Hash" -> "5e613b4c-aa3a-484d-acae-5f9ed24e72c9", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ## \[CapitalMu]\[Iota]\[Alpha] \
 \[Kappa]\[Alpha]\[Lambda]\:03cd\[Tau]\[CurlyEpsilon]\[Rho]\[Eta] \
 \[CurlyEpsilon]\[Kappa]\[Tau]\:03af\[Mu]\[Eta]\[Sigma]\[Eta] \
 \[Tau]\[Omicron]\[Upsilon] \
 \[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
-\[Pi]\[Lambda]\[Omicron]\[Upsilon]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03cd\
-\n\n\[CapitalOmicron]\[Iota] \
+\[Pi]\[Lambda]\[Omicron]\[Upsilon]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03cd"\
+, "Display" -> "codemirror", "Hash" -> 
+     "149c5624-af5a-4e16-a15b-a88eed8a1c4f", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> "## \[CapitalMu]\[Iota]\[Alpha] \
+\[Kappa]\[Alpha]\[Lambda]\:03cd\[Tau]\[CurlyEpsilon]\[Rho]\[Eta] \
+\[CurlyEpsilon]\[Kappa]\[Tau]\:03af\[Mu]\[Eta]\[Sigma]\[Eta] \
+\[Tau]\[Omicron]\[Upsilon] \
+\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
+\[Pi]\[Lambda]\[Omicron]\[Upsilon]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03cd"\
+, "Display" -> "markdown", "Hash" -> "38a7e465-81eb-4056-8d6f-b016265fc9f1", 
+    "Invisible" -> False, "MetaOnly" -> False, "Props" -> <||>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Output", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> ".md \n\[CapitalOmicron]\[Iota] \
 \[Alpha]\[Rho]\[Chi]\[Alpha]\:03af\[Omicron]\[Iota] \
 \[CapitalRho]\[Omega]\[Mu]\[Alpha]\:03af\[Omicron]\[Iota] \
 \[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Sigma]\[Alpha]\[Nu] \
@@ -2081,17 +2131,11 @@ style=\"color:blue\">**\[CurlyEpsilon]\[Pi]\:03af\[Pi]\[CurlyEpsilon]\[Delta]\
 \\mu({\\color{brown}p},{\\color{brown}p_1},{\\color{brown}p_0})}={\\color{red\
 }\\dfrac{{\\color{brown}p_1}-{\\color{brown}p_0}}{{\\color{brown}p}-{\\color{\
 brown}p_0}}}.\n$$", "Display" -> "codemirror", 
-    "Hash" -> "b7b18258-b292-4e1c-ae1f-91cce46d9c54", "Invisible" -> False, 
+    "Hash" -> "18ca06a0-f450-4844-833e-4cf4fa61bd29", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
-   <|"Data" -> "## \[CapitalMu]\[Iota]\[Alpha] \
-\[Kappa]\[Alpha]\[Lambda]\:03cd\[Tau]\[CurlyEpsilon]\[Rho]\[Eta] \
-\[CurlyEpsilon]\[Kappa]\[Tau]\:03af\[Mu]\[Eta]\[Sigma]\[Eta] \
-\[Tau]\[Omicron]\[Upsilon] \
-\[CurlyEpsilon]\[Pi]\[Iota]\[Pi]\:03ad\[Delta]\[Omicron]\[Upsilon] \
-\[Pi]\[Lambda]\[Omicron]\[Upsilon]\[Tau]\[Iota]\[Sigma]\[Mu]\[Omicron]\:03cd\
-\n\n\[CapitalOmicron]\[Iota] \
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> "\n\[CapitalOmicron]\[Iota] \
 \[Alpha]\[Rho]\[Chi]\[Alpha]\:03af\[Omicron]\[Iota] \
 \[CapitalRho]\[Omega]\[Mu]\[Alpha]\:03af\[Omicron]\[Iota] \
 \[Theta]\[CurlyEpsilon]\[Omega]\[Rho]\[Omicron]\:03cd\[Sigma]\[Alpha]\[Nu] \
@@ -2503,10 +2547,10 @@ style=\"color:blue\">**\[CurlyEpsilon]\[Pi]\:03af\[Pi]\[CurlyEpsilon]\[Delta]\
 \\mu({\\color{brown}p},{\\color{brown}p_1},{\\color{brown}p_0})}={\\color{red\
 }\\dfrac{{\\color{brown}p_1}-{\\color{brown}p_0}}{{\\color{brown}p}-{\\color{\
 brown}p_0}}}.\n$$", "Display" -> "markdown", 
-    "Hash" -> "252cdad9-d9b2-40dd-a392-25c0939be887", "Invisible" -> False, 
+    "Hash" -> "d9a250d7-d7cf-4313-8928-961645f451dc", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> ".md ## \
 \[CapitalPi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
 \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[Omicron]\:03cd\[FinalSigma] \
@@ -2516,15 +2560,12 @@ style=\"color:orange\">**\[Pi]\[Lambda]\[Omicron]\:03cd\[Sigma]\[Iota]\
 \[Mu]\:03ad\[Tau]\[Rho]\[Omicron] \
 \[CurlyEpsilon]\[Upsilon]\[Mu]\:03ac\[Rho]\[Omicron]\[Iota]\[Alpha]\
 \[FinalSigma] \[Tau]\[Eta]\[FinalSigma] \
-\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha]\[FinalSigma]\n\n:::\
-warning\n\:26a0\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
-\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
-\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
-\:26a0\:fe0f\n:::", "Display" -> "codemirror", 
-    "Hash" -> "241efe7b-1ffb-4719-9997-9b6910d0660d", "Invisible" -> False, 
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha]\[FinalSigma]\n", 
+    "Display" -> "codemirror", "Hash" -> 
+     "84319272-fd4e-41c7-8d93-6b447d87cd6f", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
     "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
-    "UID" -> Null, "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>, 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
    <|"Data" -> "## \
 \[CapitalPi]\[Iota]\[Theta]\[Alpha]\[Nu]\:03cc\[Tau]\[Eta]\[Tau]\[Alpha] \
 \[Alpha]\[Sigma]\[Alpha]\[CurlyPhi]\[Omicron]\:03cd\[FinalSigma] \
@@ -2534,13 +2575,28 @@ style=\"color:orange\">**\[Pi]\[Lambda]\[Omicron]\:03cd\[Sigma]\[Iota]\
 \[Mu]\:03ad\[Tau]\[Rho]\[Omicron] \
 \[CurlyEpsilon]\[Upsilon]\[Mu]\:03ac\[Rho]\[Omicron]\[Iota]\[Alpha]\
 \[FinalSigma] \[Tau]\[Eta]\[FinalSigma] \
-\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha]\[FinalSigma]\n\n:::\
-warning\n\:26a0\:fe0f \[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[Kappa]\[Omicron]\[Iota]\[Nu]\[Omega]\[Nu]\:03af\[Alpha]\[FinalSigma]\n", 
+    "Display" -> "markdown", "Hash" -> 
+     "9ed2cce3-5302-48e5-8d02-24537f8ddcbd", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
+    "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> ".md\n\n:::warning\n\:26a0\:fe0f \
+\[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
+\[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
+\[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
+\:26a0\:fe0f\n:::", "Display" -> "codemirror", 
+    "Hash" -> "e5d19d88-08dc-414d-b0b8-edbeb9f34fb5", "Invisible" -> False, 
+    "MetaOnly" -> False, "Props" -> <|"Hidden" -> True|>, 
+    "PublicFields" -> {"Properties"}, "State" -> "Idle", "Type" -> "Input", 
+    "UID" -> Null, "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>, 
+   <|"Data" -> "\n:::warning\n\:26a0\:fe0f \
+\[CapitalUpsilon]\[CapitalPi]\[CapitalOmicron] \
 \[CapitalKappa]\[CapitalAlpha]\[CapitalTau]\[CapitalAlpha]\[CapitalSigma]\
 \[CapitalKappa]\[CapitalEpsilon]\[CapitalUpsilon]\[CapitalEta] \
 \:26a0\:fe0f\n:::", "Display" -> "markdown", 
-    "Hash" -> "dccf18bc-2514-49e8-b460-745b60549193", "Invisible" -> False, 
+    "Hash" -> "5884486c-b156-43e7-b870-6c94ecfa883e", "Invisible" -> False, 
     "MetaOnly" -> False, "Props" -> <||>, "PublicFields" -> {"Properties"}, 
     "State" -> "Idle", "Type" -> "Output", "UID" -> Null, 
-    "Notebook" -> "acbeda93-960c-4278-96a7-d9d4e32fd89a"|>}, 
+    "Notebook" -> "8b3a6fca-2896-4bec-9125-a6861c4ae107"|>}, 
  "serializer" -> "jsfn4"|>
