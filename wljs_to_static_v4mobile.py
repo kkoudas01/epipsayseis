@@ -660,8 +660,16 @@ def decode_gb(raw: str) -> list | None:
     Αποκωδικοποιεί (*GB[*) GRID (*]GB*) σε λίστα γραμμών x λίστα κελιών.
     Χρησιμοποιεί depth-aware split ώστε τα (*|*) μέσα σε SpB/FB να μη
     μπερδεύονται με τους διαχωριστές κελιών/γραμμών του GB.
+
+    Bug #27 (MatrixForm output): το WLJS τυλίγει το GB box σε εξωτερικές
+    παρενθέσεις: ((*GB[*){{...}}(*]GB*))  αντί  (*GB[*){{...}}(*]GB*)
+    Το αρχικό regex ^(*GB[*) απέτυχε → decode_gb επέστρεφε None →
+    format_gb_matrix επέστρεφε '' → κανένα output cell δεν εμφανιζόταν.
+    Fix: αφαιρούμε πρώτα τυχόν εξωτερικό ( ) wrapper πριν το match.
     """
     s = raw.strip("'").strip()
+    # Bug #27 fix: strip outer ( ) that WLJS wraps around the GB expression
+    s = re.sub(r'^\((\(\*GB\[\*\).*\(\*\]GB\*\))\)$', r'\1', s, flags=re.DOTALL)
     m = re.match(r'^\(\*GB\[\*\)(.*)\(\*\]GB\*\)$', s, re.DOTALL)
     if not m:
         return None
@@ -2445,6 +2453,18 @@ def convert(inp: str, out: str):
                 headings.append((lvl,text,slug))
             blocks.append(f'<div class="cell {wcls}">{html_block}</div>')
             stats['md']+=1
+
+        # ── Output print: Print["..."] output — Bug #28 ─────────────────────
+        # Το display='print' είναι ο τύπος των Output cells που παράγονται από
+        # Print["string"] στο Mathematica. Εντελώς αγνοούνταν πριν τη διόρθωση.
+        # Το data περιέχει plain string (με outer quotes): '"(x,y)=(SX, SY)"'
+        # Αποδίδεται ως monospace block (ίδιο με format_plain_output).
+        elif display=='print' and ctype=='Output':
+            txt = data.strip("'").strip('"').strip()
+            if txt:
+                esc = txt.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
+                blocks.append(f'<div class="cell {wcls}"><code class="plain-out">{esc}</code></div>')
+                stats['plain_out']+=1
 
         # ── Output codemirror: graphic, math, or plain ────────────────────────
         # Εδώ γίνεται το κύριο rendering των Output cells.
