@@ -5,881 +5,563 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ἐπιψαύσεις</title>
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Google Fonts - Ubuntu -->
-    <link href="https://fonts.googleapis.com/css?family=Ubuntu:400,700" rel="stylesheet">
-
     <style>
-        /*Για πάνω background*/
-        .demo {
-            background: #403c61;
+        /* ── Reset & Base ── */
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        :root {
+            --nav-bg:           #1a1728;
+            --nav-link:         #c9bfff;
+            --nav-hover:        #ffd6b0;
+            --diamond-bg:       rgba(180, 130, 160, 0.85);
+            --dropdown-bg:      #252235;
+            --dropdown-link:    #cdc6f0;
+            --dropdown-hover-bg:#3d3660;
+            --dropdown-hover-fg:#f0d6ff;
+            --mega-bg:          #1e1b2e;
+            --mega-title:       #e08aaa;
+            --mobile-bg:        #2a2545;
+            --accent:           #7c6fc4;
+            --page-bg:          #13111f;
+            --page-text:        #d4cef5;
+            --hero-sub:         #9b92cc;
+            --hero-h2:          #e0d8ff;
+            --font:             system-ui, 'Segoe UI', Ubuntu, sans-serif;
         }
 
-        nav.navbar.bootsnav {
-            background-color: transparent;
-            font-family: 'Ubuntu', sans-serif;
-            margin-bottom: 50px;
-            border: none;
-        }
+        html { scroll-behavior: smooth; }
 
-        nav.navbar.bootsnav ul.nav>li {
-            margin: 0 15px 0 0;
-        }
-
-        nav.navbar.bootsnav ul.nav>li>a {
-            color: #dacffe;
-            /*Για τίτλους menu*/
-            font-size: 16px;
-            font-weight: 700;
-            text-transform: uppercase;
-            padding: 7px 15px;
-            border-radius: 5px 5px 0 0;
-            overflow: hidden;
-            position: relative;
-            z-index: 1;
-            transition: all .5s ease;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.dropdown>a {
-            padding: 7px 30px 7px 15px;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.active>a,
-        nav.navbar.bootsnav ul.nav>li.active>a:hover,
-        nav.navbar.bootsnav ul.nav>li>a:hover,
-        nav.navbar.bootsnav ul.nav>li.on>a {
-            color: #fee2cf;
-            /*Για τίτλους μενού, όταν περνάει το ποντίκι πάνω τους*/
-            text-shadow: 0 0 3px #000;
-            background-color: transparent;
-        }
-
-        nav.navbar.bootsnav ul.nav>li>a>span:before {
-            content: '';
-            background-color: rgba(213, 138, 148, 1);
-            /*Για background τίτλων menou, όταν περνάει το ποντίκι πάνω τους*/
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            transform: translateX(-50%) rotate(45deg) scale(0);
-            z-index: -1;
-            transition: all 0.3s;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.on>a>span:before,
-        nav.navbar.bootsnav ul.nav>li.active>a>span:before,
-        nav.navbar.bootsnav ul.nav>li>a:hover>span:before {
-            transform: translateX(-50%) rotate(45deg) scale(1.8);
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content li a:hover,
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu li a:hover,
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu li a.dropdown-toggle:active,
-        nav.navbar ul.nav li.dropdown.on ul.dropdown-menu li.dropdown.on>a {
-            color: #f3d5d9 !important;
-            /*Για χρωματισμό επιλεγμένων λέξεψν στο dropdown*/
-            background-color: #5a57b3 !important;
-            /*Για χρωματισμό φόντου επιλεγμένων λέξεψν στο dropdown*/
-            font-weight: 600;
-            box-shadow: 0 0 5px #000;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after {
-            content: "\f107";
-            font-family: 'FontAwesome';
-            color: #dacffe;
-            /*Για βέλη dropdown*/
-            margin: 0 0 0 7px;
-            position: absolute;
-            top: 7px;
-            right: 7px;
-            transition: all 0.3s;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.dropdown>ul {
-            opacity: 0;
-            visibility: hidden;
-            left: 0;
-            display: block;
-        }
-
-        nav.navbar.bootsnav ul.nav>li.dropdown.on>ul {
-            opacity: 1 !important;
-            visibility: visible !important;
-        }
-
-        /* Βελτίωση για το Shortcodes και Pages menu - πιο κοντά στο κουμπί */
-        nav.navbar.bootsnav ul.nav>li.dropdown:nth-child(3)>ul,
-        nav.navbar.bootsnav ul.nav>li.dropdown:nth-child(4)>ul {
-            top: 95% !important;
-        }
-
-        /* Διόρθωση για megamenu */
-        .dropdown-menu.megamenu-content {
-            width: 700px;
-            left: -200px !important;
-            padding: 15px;
-        }
-
-        .dropdown-menu.megamenu-content .row {
-            display: flex;
-            flex-wrap: wrap;
-        }
-
-        .dropdown-menu.megamenu-content .col-menu {
-            flex: 0 0 25%;
-            max-width: 25%;
-        }
-
-        .dropdown-menu.megamenu-content .title {
-            color: #bf5757;
-            /*Για τίτλους του megamenu*/
-            font-size: 16px;
-            font-weight: bold;
-            margin-top: 0;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #bf5757;
-            /*Για για οριζόντια γραμμή τίτλων του megamenu*/
-            margin-bottom: 10px;
-        }
-
-        .dropdown-menu.megamenu-content .menu-col {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .dropdown-menu.megamenu-content .menu-col li a {
-            display: block;
-            padding: 5px 0;
-            color: #666666;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        .dropdown-menu.megamenu-content .menu-col li a:hover {
-            color: #6c5ce7;
-            padding-left: 5px;
-        }
-
-        /* Διόρθωση για sub-menus - ανοίγουν στο πλάι και στο ίδιο ύψος */
-        .dropdown-menu .dropdown-menu {
-            top: -10px !important;
-            left: 100%;
-            margin-top: 0;
-            margin-left: 0;
-        }
-
-        .dropdown-menu li {
-            position: relative;
-        }
-
-        .dropdown-menu>li>a {
-            padding: 10px 20px;
-            display: block;
-            clear: both;
-            font-weight: 400;
-            line-height: 1.42857143;
-            color: #f30f0f;
-            white-space: nowrap;
-        }
-
-        .dropdown-menu>li>a:hover,
-        .dropdown-menu>li>a:focus {
-            text-decoration: none;
-            color: #262626;
-            background-color: #f5f5f5;
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu {
-            background-color: transparent;
-            border: none;
-            border-radius: 0;
-            top: 95%;
-            z-index: 1;
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu>li>a {
-            color: #666;
-            background-color: #e7e7e7;
-            border: none;
-            opacity: 0;
-            transform: rotateY(180deg);
-            transition: all 0.3s ease 0s;
-        }
-
-        nav.navbar.bootsnav li.dropdown.on ul.dropdown-menu>li>a {
-            opacity: 1;
-            transform: rotateY(0);
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content {
-            background-color: #f5f5f5;
-            top: 95%;
-            left: 0;
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content li {
-            font-size: 14px;
-        }
-
-        nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .menu-col li a {
-            color: #666;
-            border: 1px solid rgba(0, 0, 0, 0.1);
-            padding-left: 10px;
-            margin: 0 0 5px;
-            opacity: 0;
-            transform: rotateY(180deg);
-            transition: all 0.3s;
-        }
-
-        nav.navbar.bootsnav li.dropdown.on ul.dropdown-menu.megamenu-content .menu-col li a {
-            opacity: 1;
-            transform: rotateY(0);
-        }
-
-        /* Βελτίωση για hover στα sub-menus */
-        .dropdown-menu li:hover>.dropdown-menu {
-            display: block;
-        }
-
-        /* Modal styling */
-        .modal-content {
-            border-radius: 10px;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.3);
-        }
-
-        .modal-header {
-            background-color: #7065c1;
-            color: rgb(255, 160, 160);
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-        }
-
-        .modal-title {
-            font-weight: 700;
-        }
-
-        .close {
-            color: white;
-            opacity: 0.8;
-        }
-
-        .close:hover {
-            color: white;
-            opacity: 1;
-        }
-
-        /* Βελτιώσεις για κινητά */
-        @media only screen and (max-width:990px) {
-            .demo {
-                padding: 10px 0;
-            }
-
-            nav.navbar.bootsnav {
-                margin-bottom: 50px;
-            }
-
-            .navbar-header {
-                display: flex;
-                justify-content: flex-end;
-                width: 100%;
-            }
-
-            .dropdown-menu.megamenu-content {
-                width: 100%;
-                left: 0 !important;
-                padding: 10px;
-            }
-
-            .dropdown-menu.megamenu-content .col-menu {
-                flex: 0 0 100%;
-                max-width: 100%;
-                margin-bottom: 15px;
-            }
-
-            .dropdown-menu .dropdown-menu {
-                position: static;
-                float: none;
-                width: auto;
-                margin-top: 0;
-                background-color: transparent;
-                border: 0;
-                box-shadow: none;
-                top: 0 !important;
-                left: 0 !important;
-                display: none;
-            }
-
-            nav.navbar.bootsnav .navbar-toggle {
-                color: #fff;
-                background: rgba(255, 255, 255, 0.2) !important;
-                border: 1px solid #fff;
-                border-radius: 4px;
-                padding: 9px 12px;
-                margin: 15px;
-                display: block;
-            }
-
-            nav.navbar.bootsnav .navbar-toggle .fa-bars {
-                font-size: 24px;
-            }
-
-            nav.navbar.bootsnav.navbar-mobile .navbar-collapse {
-                background-color: #6c5ce7;
-                max-height: 0;
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-                border-top: 1px solid rgba(255, 255, 255, 0.2);
-                display: block !important;
-            }
-
-            nav.navbar.bootsnav.navbar-mobile .navbar-collapse.in {
-                max-height: 80vh;
-                overflow-y: auto;
-            }
-
-            nav.navbar.bootsnav ul.nav {
-                margin: 0;
-                width: 100%;
-            }
-
-            nav.navbar.bootsnav ul.nav>li {
-                margin: 0;
-                width: 100%;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            }
-
-            /* Αρχική κατάσταση - dropdowns κλειστά */
-            nav.navbar.bootsnav ul.nav>li.dropdown>a:after {
-                content: "\f107" !important;
-                /* Βέλος προς τα κάτω */
-                transform: rotate(0deg);
-                transition: transform 0.3s;
-            }
-
-            nav.navbar.bootsnav ul.nav>li.dropdown.on>a:after {
-                content: "\f106" !important;
-                /* Βέλος προς τα πάνω */
-            }
-
-            nav.navbar.bootsnav.navbar-mobile ul.nav>li>a {
-                text-align: left;
-                padding: 15px;
-                border: none;
-                color: #fff;
-                font-size: 16px;
-                width: 100%;
-            }
-
-            nav.navbar.bootsnav ul.nav>li.dropdown>a {
-                padding: 15px 40px 15px 15px;
-            }
-
-            nav.navbar.bootsnav.navbar-mobile ul.nav>li>a>span:before {
-                display: none;
-            }
-
-            nav.navbar.bootsnav ul.nav>li.on>a>span:before,
-            nav.navbar.bootsnav ul.nav>li.active>a>span:before,
-            nav.navbar.bootsnav ul.nav>li>a:hover>span:before {
-                display: none;
-            }
-
-            nav.navbar.bootsnav ul.nav>li.dropdown>a.dropdown-toggle:after {
-                right: 15px;
-                top: 15px;
-                font-size: 18px;
-            }
-
-            nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu>li>a {
-                color: #fff;
-                padding: 12px 15px 12px 30px;
-                border: none;
-                background-color: rgba(255, 255, 255, 0.1);
-            }
-
-            nav.navbar.bootsnav .dropdown-menu {
-                z-index: 0;
-                position: static;
-                float: none;
-                width: auto;
-                margin-top: 0;
-                background-color: transparent;
-                border: 0;
-                box-shadow: none;
-                display: none;
-            }
-
-            nav.navbar.bootsnav li.dropdown.on>.dropdown-menu {
-                display: block;
-            }
-
-            /* Βελτίωση 1: Καλύτερα χρώματα για το mega-menu */
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content {
-                background-color: rgba(0, 0, 0, 0.3);
-                /* Πιο σκούρο φόντο για καλύτερη αντίθεση */
-            }
-
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu {
-                background-color: rgba(255, 255, 255, 0.15);
-                /* Πιο ανοιχτό φόντο για τις στήλες */
-                padding: 15px;
-                margin-bottom: 10px;
-                border-radius: 5px;
-            }
-
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .title {
-                font-size: 16px;
-                font-weight: bold;
-                color: #fff;
-                border-bottom: 1px solid rgba(255, 255, 255, 0.3);
-                /* Πιο έντονο border */
-            }
-
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu.on .title {
-                color: #fff;
-            }
-
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a {
-                color: rgba(255, 255, 255, 0.95);
-                /* Πιο λευκό κείμενο */
-                border: none;
-                padding: 8px 0;
-            }
-
-            nav.navbar.bootsnav li.dropdown ul.dropdown-menu.megamenu-content .col-menu li a:hover {
-                color: #fff;
-                padding-left: 5px;
-                background-color: rgba(255, 255, 255, 0.1);
-                /* Προσθήκη φόντου στο hover */
-            }
-
-            /* Βελτίωση 2: Υπο-μενού να ανοίγουν πιο δεξιά */
-            nav.navbar.bootsnav ul.nav li.dropdown ul.dropdown-menu li ul.dropdown-menu {
-                padding-left: 20px;
-                /* Επιπλέον padding για να φαίνονται πιο δεξιά */
-            }
-        }
-
-        /* Additional styling for demo page */
         body {
-            background-color: rgb(255, 255, 255);
-            /* Χρωματισμός κάτω μέρους */
-            color: #000000;
-            /* ή #fff αν θες λευκά γράμματα */
-            font-family: 'Ubuntu', sans-serif;
+            background: var(--page-bg);
+            color: var(--page-text);
+            font-family: var(--font);
+            line-height: 1.6;
         }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+
+        .demo {
+            background: var(--nav-bg);
+            background-image: linear-gradient(135deg, #110f1c 0%, #1a1728 60%, #221e36 100%);
+        }
+
+        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+        .navbar {
+            display: flex; align-items: center; justify-content: flex-start;
+            padding: 10px 0 0; position: relative;
+        }
+
+        .navbar-toggle {
+            display: none;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.5);
+            border-radius: 4px; padding: 8px 12px; cursor: pointer;
+            color: #fff; font-size: 20px; line-height: 1; margin-bottom: 10px;
+            transition: background 0.2s;
+        }
+        .navbar-toggle:hover { background: rgba(255,255,255,0.28); }
+
+        .nav-menu { display: flex; gap: 4px; padding-bottom: 0; }
+
+        .nav-menu > li > a {
+            display: inline-block; color: var(--nav-link); font-size: 15px;
+            font-weight: 700; text-transform: uppercase; letter-spacing: .04em;
+            padding: 8px 16px; border-radius: 5px 5px 0 0; position: relative;
+            overflow: hidden; z-index: 1; transition: color .3s; white-space: nowrap;
+        }
+
+        .nav-menu > li.dropdown > a::after {
+            content: "▾"; margin-left: 6px; font-size: 13px;
+            display: inline-block; transition: transform .3s;
+        }
+        .nav-menu > li.dropdown.on > a::after { transform: rotate(180deg); }
+
+        .nav-menu > li > a > .nav-label::before {
+            content: ''; background-color: var(--diamond-bg);
+            width: 110px; height: 110px; position: absolute;
+            left: 50%; top: 0;
+            transform: translateX(-50%) rotate(45deg) scale(0);
+            z-index: -1; transition: transform 0.3s; border-radius: 4px;
+        }
+        .nav-menu > li > a:hover,
+        .nav-menu > li.on > a,
+        .nav-menu > li.active > a { color: var(--nav-hover); text-shadow: 0 0 4px rgba(0,0,0,.5); }
+        .nav-menu > li > a:hover .nav-label::before,
+        .nav-menu > li.on > a .nav-label::before,
+        .nav-menu > li.active > a .nav-label::before {
+            transform: translateX(-50%) rotate(45deg) scale(1.9);
+        }
+
+        .dropdown-menu {
+            position: absolute; top: 100%; left: 0; min-width: 220px;
+            background: transparent; display: block;
+            opacity: 0; visibility: hidden; pointer-events: none;
+            transition: opacity .25s, visibility .25s; z-index: 9999;
+        }
+        .nav-menu > li.dropdown { position: relative; }
+        .nav-menu > li.dropdown.on > .dropdown-menu {
+            opacity: 1; visibility: visible; pointer-events: auto;
+        }
+
+        .dropdown-menu > li > a {
+            display: block; padding: 10px 20px; color: var(--dropdown-link);
+            background: var(--dropdown-bg); font-size: 14px; white-space: nowrap;
+            opacity: 0; transform: rotateY(180deg);
+            transition: opacity .3s, transform .3s, color .2s, background .2s, padding-left .2s;
+        }
+        .nav-menu > li.dropdown.on .dropdown-menu > li > a { opacity: 1; transform: rotateY(0); }
+        .dropdown-menu > li > a:hover {
+            color: var(--dropdown-hover-fg) !important;
+            background: var(--dropdown-hover-bg) !important;
+            font-weight: 600; box-shadow: 0 0 5px rgba(0,0,0,.35); padding-left: 26px;
+        }
+
+        .dropdown-menu li { position: relative; }
+        .dropdown-menu li.dropdown > a::after { content: " ▸"; float: right; font-size: 12px; }
+        .dropdown-menu .dropdown-menu { top: -10px; left: 100%; }
+        .dropdown-menu li.dropdown:hover > .dropdown-menu,
+        .dropdown-menu li.dropdown.on > .dropdown-menu {
+            opacity: 1; visibility: visible; pointer-events: auto;
+        }
+        .dropdown-menu li.dropdown:hover > .dropdown-menu > li > a,
+        .dropdown-menu li.dropdown.on > .dropdown-menu > li > a {
+            opacity: 1; transform: rotateY(0);
+        }
+
+        .megamenu-content {
+            width: 720px; left: -180px !important; background: var(--mega-bg);
+            padding: 20px; border-top: 3px solid #5a4f8a;
+            border-radius: 0 0 8px 8px; box-shadow: 0 8px 32px rgba(0,0,0,.55);
+        }
+        .megamenu-content > li { display: block; }
+        .megamenu-row { display: flex; gap: 16px; flex-wrap: wrap; }
+        .col-menu { flex: 1 1 22%; }
+        .col-menu .title {
+            color: var(--mega-title); font-size: 14px; font-weight: 700;
+            padding-bottom: 8px; border-bottom: 1px solid var(--mega-title); margin-bottom: 10px;
+        }
+        .menu-col li a {
+            display: block; padding: 5px 0 5px 8px; color: var(--hero-sub);
+            font-size: 13px; border: 1px solid rgba(255,255,255,.07);
+            margin-bottom: 4px; border-radius: 3px;
+            opacity: 0; transform: rotateY(180deg);
+            transition: opacity .3s, transform .3s, color .2s, padding-left .2s, background .2s;
+        }
+        .nav-menu > li.dropdown.on .megamenu-content .menu-col li a {
+            opacity: 1; transform: rotateY(0);
+        }
+        .menu-col li a:hover {
+            color: var(--dropdown-hover-fg) !important;
+            background: var(--dropdown-hover-bg) !important;
+            padding-left: 14px; box-shadow: 0 0 4px rgba(0,0,0,.2);
+        }
+
+        .modal-overlay {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,.55);
+            z-index: 10000; align-items: center; justify-content: center;
+            backdrop-filter: blur(3px);
+        }
+        .modal-overlay.open { display: flex; }
+        .modal-box {
+            background: #1e1b2e; border-radius: 12px; max-width: 680px; width: 92%;
+            max-height: 85vh; overflow-y: auto; box-shadow: 0 8px 48px rgba(0,0,0,.75);
+            animation: modalIn .25s ease;
+        }
+        @keyframes modalIn {
+            from { opacity: 0; transform: translateY(-20px) scale(.97); }
+            to   { opacity: 1; transform: translateY(0) scale(1); }
+        }
+        .modal-header {
+            background: linear-gradient(135deg, #2e2850, #4a3d7a); color: #ffa0a0;
+            padding: 18px 24px; border-radius: 12px 12px 0 0;
+            display: flex; align-items: center; justify-content: space-between;
+        }
+        .modal-title { font-weight: 700; font-size: 18px; }
+        .modal-close {
+            background: none; border: none; color: #fff; font-size: 24px;
+            cursor: pointer; line-height: 1; opacity: .8; transition: opacity .2s;
+        }
+        .modal-close:hover { opacity: 1; }
+        .modal-body { padding: 24px; color: #cdc6f0; line-height: 1.75; }
+        .modal-body p { margin-bottom: 14px; }
+        .modal-body a { color: #b39dff; text-decoration: underline; }
+        .modal-body hr { margin: 16px 0; border: none; border-top: 1px solid #2e2a4a; }
+        .modal-body li { margin-left: 20px; margin-bottom: 6px; list-style: disc; }
+        .modal-footer { padding: 16px 24px; border-top: 1px solid #2e2a4a; text-align: right; }
+        .btn-close {
+            background: #5a4f8a; color: #fff; border: none; padding: 8px 22px;
+            border-radius: 6px; font-size: 14px; cursor: pointer; transition: background .2s;
+        }
+        .btn-close:hover { background: #4a4080; }
 
         .content-section {
-            padding: 50px 0;
+            padding: 70px 20px 80px; text-align: center;
+            max-width: 700px; margin: 0 auto;
         }
-
-        .content-section h2 {
-            margin-bottom: 30px;
-        }
-
-        /* SVG Icon Styling */
         .svg-icon {
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
-            margin-bottom: 20px;
+            filter: drop-shadow(0 4px 14px rgba(160,140,220,.35));
+            margin-bottom: 28px; transition: filter .3s;
+        }
+        .svg-icon:hover { filter: drop-shadow(0 6px 22px rgba(180,150,255,.6)); }
+        .content-section h2 {
+            font-size: 2.4rem; font-weight: 700; color: var(--hero-h2);
+            letter-spacing: .02em; margin-bottom: 16px;
+        }
+        .content-section p { font-size: 1.1rem; color: var(--hero-sub); }
+        .hero-divider {
+            display: block; width: 60px; height: 3px;
+            background: linear-gradient(90deg, #7c6fc4, #e08aaa);
+            border-radius: 2px; margin: 18px auto 22px;
         }
 
-        /* Mobile specific improvements */
-        @media only screen and (max-width:768px) {
-            .content-section {
-                padding: 30px 0;
+        @media (max-width: 990px) {
+            .navbar { flex-direction: column; align-items: flex-start; padding: 8px 0; }
+            .navbar-toggle { display: block; }
+            .nav-menu {
+                display: none; flex-direction: column; width: 100%;
+                background: var(--mobile-bg); border-top: 1px solid rgba(255,255,255,.2);
+                gap: 0; max-height: 80vh; overflow-y: auto;
             }
-
-            .content-section h2 {
-                font-size: 24px;
-                margin-bottom: 20px;
+            .nav-menu.open { display: flex; }
+            .nav-menu > li > a {
+                color: #fff; font-size: 15px; padding: 14px 16px; border-radius: 0;
+                border-bottom: 1px solid rgba(255,255,255,.1); width: 100%;
             }
+            .nav-menu > li > a > .nav-label::before { display: none; }
+            .nav-menu > li > a:hover, .nav-menu > li.on > a { text-shadow: none; }
+            .dropdown-menu {
+                position: static; visibility: visible; pointer-events: auto;
+                background: transparent; opacity: 1; max-height: 0; overflow: hidden;
+                transition: max-height .35s ease; box-shadow: none;
+            }
+            .nav-menu > li.dropdown.on > .dropdown-menu { max-height: 2000px; }
+            .dropdown-menu > li > a {
+                color: #fff; background: rgba(255,255,255,.1); border: none;
+                padding: 11px 16px 11px 32px; opacity: 1; transform: none;
+            }
+            .dropdown-menu > li > a:hover {
+                background: rgba(255,255,255,.22) !important; color: #fff !important;
+                padding-left: 38px; box-shadow: none;
+            }
+            .dropdown-menu .dropdown-menu { position: static; top: auto; left: auto; max-height: 0; }
+            .dropdown-menu li.dropdown.on > .dropdown-menu { max-height: 2000px; }
+            .dropdown-menu li.dropdown.on > .dropdown-menu > li > a { opacity: 1; transform: none; }
+            .dropdown-menu li.dropdown > a::after { content: " ▾"; }
+            .dropdown-menu li.dropdown.on > a::after { content: " ▴"; }
+            .megamenu-content {
+                width: 100%; left: 0 !important; padding: 12px; border-top: none;
+                border-radius: 0; background: rgba(0,0,0,.45); box-shadow: none;
+            }
+            .megamenu-row { flex-direction: column; gap: 8px; }
+            .col-menu { background: rgba(255,255,255,.12); border-radius: 6px; padding: 12px; }
+            .col-menu .title { color: #fff; border-color: rgba(255,255,255,.35); }
+            .menu-col li a { color: rgba(255,255,255,.9); border: none; opacity: 1; transform: none; }
+            .menu-col li a:hover { background: rgba(255,255,255,.15) !important; color: #fff !important; }
+            .nav-menu > li.dropdown.on .megamenu-content .menu-col li a { opacity: 1; transform: none; }
+            .content-section h2 { font-size: 1.8rem; }
         }
+
     </style>
 </head>
 
 <body>
-    <!-- About Modal -->
-    <div class="modal fade" id="aboutModal" tabindex="-1" role="dialog" aria-labelledby="aboutModalLabel">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
-                            aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="aboutModalLabel">Περί τίνος πρόκειται;</h4>
-                </div>
-                <div class="modal-body">
-                    <p>Τα μαθηματικά παρέχουν ισχυρά εργαλεία για τη μελέτη του φυσικού και κοινωνικού μας
-                        περιβάλλοντος.
-                        Στην παρούσα σελίδα θα προσπαθήσουμε να τα αξιοποιήσουμε με αυτόν ακριβώς τον τρόπο, δηλαδή για
-                        να ψηλαφίσουμε τη δομή και τον τρόπο λειτουργείας του κόσμου που μας περιβάλλει.
-                        Του φυσικού και του κοινωνικού κόσμου που μας περιβάλλει.</p>
-                    <p> Δυστυχώς, κάποιες φορές αυτά τα εργαλεία μπορεί να είναι απρόσιτα στους μη μυημένους ή έστω
-                        αρκετά κουραστικά σε βαθμό που ο αναγνώστης να αναλώνεται στην «πάλη» με αυτά κι όχι σε αυτό που
-                        περιγράφουν.
-                        Σε μια προσπάθεια να εξομαλύνουμε τη διαδικασία και να κάνουμε πιο φιλικούς στον αναγνώστη τους
-                        καρπούς των μαθηματικών, προσπαθήσαμε (όπου γίνεται)
-                        να αυτοματοποιήσουμε τη μαθηματική διαδικασία ή έστω να την παρακάμψουμε.</p>
 
-
-
-                    <p> Όσον αφορά τη παράκαμψη των μαθηματικών, εκεί χρησιμοποιήσαμε τη γλώσσα Wolfram. Η γλώσσα
-                        Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να
-                        απαιτούσαν δυσθεώρητο κόπο και χρόνο,
-                        μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα
-                        πρόβλημα, να το μεταφράσεις σε μαθηματική γλώσσα κι αυτή στο λύνει. Συνεπώς
-                        βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων,
-                        χωρίς να αποτελεί ανασταλτικό παράγοντα η
-                        περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από
-                        μέρους μας (όπως λ.χ. η επίλυση μιας
-                        περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της
-                        μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
-
-                    <p>Στο σημείο αυτό θα πρέπει να πούμε ότι ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την
-                        πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ
-                        θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a
-                            href="https://wljs.io/">WLJS Notebook</a>,
-                        το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του
-                        Wolfram Mathematica. Σε πολλά σημεία υστερεί του
-                        Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του WLJS Notebook σε τυχούσες
-                        απορίες στο
-                        <a href="https://github.com/JerryI/wolfram-js-frontend/issues">github</a> τα ελαττώνει στο
-                        ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης,
-                        δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε
-                        με το Wolfram Mathematica, καταφέρνουμε και
-                        με το WLJS Notebook.
-                    </p>
-                    <hr>
-                    <p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός
-                        στη μέση εκπαίδευση στην Κέρκυρα. Προσπαθώ να κρατήσω μια επαφή με όλες τις επιστήμες και
-                        ειδικότερα με τα μαθηματικά, τα οποία και σπούδασα. Άλλες σελίδες που διαχειρίζομαι είναι:
-                        <li><a href="https://dromos.pages.dev/">Δρόμος</a>, μια σελίδα με εκπαιδευτικό υλικό,</li>
-                        <li><a href="https://kkoudas01.github.io/r4social/index.html">Στοχαστικά Μαθηματικά χωρίς…
-                                μαθηματικά για κοινωνικούς επιστήμονες με τη συνδρομή της R</a>, μια σελίδα εκμάθυνσης
-                            της γλώσσας R εξειδικευμένης στις ανάγκες των κοινωνικών επιστημόνων, καθώς και κάποιες
-                            κοινωνικές μελέτες με τη χρήση της.</li>
-                        <li><a href="https://antaios.pages.dev/">Ανταίος</a>, περιέχει αυτοματοποιημένες εφαρμογές για
-                            πρακτική χρήση.</li>
-                    </p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                </div>
+    <!-- ══ Modal ══ -->
+    <div class="modal-overlay" id="aboutModal" role="dialog" aria-modal="true" aria-labelledby="aboutModalLabel">
+        <div class="modal-box">
+            <div class="modal-header">
+                <span class="modal-title" id="aboutModalLabel">Περί τίνος πρόκειται;</span>
+                <button class="modal-close" id="modalClose" aria-label="Κλείσιμο">&times;</button>
+            </div>
+            <div class="modal-body">
+<p>Τα μαθηματικά παρέχουν ισχυρά εργαλεία για τη μελέτη του φυσικού και κοινωνικού μας περιβάλλοντος. Στην παρούσα σελίδα θα προσπαθήσουμε να τα αξιοποιήσουμε με αυτόν ακριβώς τον τρόπο, δηλαδή για να ψηλαφίσουμε τη δομή και τον τρόπο λειτουργείας του κόσμου που μας περιβάλλει. Του φυσικού και του κοινωνικού κόσμου που μας περιβάλλει.</p>
+<p>Δυστυχώς, κάποιες φορές αυτά τα εργαλεία μπορεί να είναι απρόσιτα στους μη μυημένους ή έστω αρκετά κουραστικά σε βαθμό που ο αναγνώστης να αναλώνεται στην «πάλη» με αυτά κι όχι σε αυτό που περιγράφουν. Σε μια προσπάθεια να εξομαλύνουμε τη διαδικασία και να κάνουμε πιο φιλικούς στον αναγνώστη τους καρπούς των μαθηματικών, προσπαθήσαμε (όπου γίνεται) να αυτοματοποιήσουμε τη μαθηματική διαδικασία ή έστω να την παρακάμψουμε.</p>
+<p>Όσον αφορά τη παράκαμψη των μαθηματικών, εκεί χρησιμοποιήσαμε τη γλώσσα Wolfram. Η γλώσσα Wolfram είναι κάτι σαν ένα μαγικό ραβδί των μαθηματικών. Πράγματα που κανονικά μπορεί να απαιτούσαν δυσθεώρητο κόπο και χρόνο, μπορούν χάρις σε αυτήν να λυθούν με λίγες γραμμές κώδικα. Δεν έχεις παρά να φανταστείς ένα πρόβλημα, να το μεταφράσεις σε μαθηματική γλώσσα κι αυτή στο λύνει. Συνεπώς βασιζόμενοι πάνω της μπορούμε να αφιερώνουμε τη σκέψη μας στη μοντελοποίηση των φαινομένων, χωρίς να αποτελεί ανασταλτικό παράγοντα η περιπλοκότητά τους. Ακόμα όμως και σε ζητήματα που χρειάζονται κάποιες μαθηματικές κινήσεις από μέρους μας (όπως λ.χ. η επίλυση μιας περίπλοκης Μ.Δ.Ε.), ακόμα και τότε μάς προσφέρει τη δυνατότητα να ασχοληθούμε με το «ζουμί» της μεθοδολογίας κι όχι με το «σκάψιμο» πράξεων.</p>
+<p>Στο σημείο αυτό θα πρέπει να πούμε ότι ένα βασικό μειονέκτημα της εν λόγω γλώσσας είναι ότι την πληρώνεις. Και, για τα δεδομένα ενός μέσου Έλληνα, την πληρώνεις καλά. Συνεπώς εδώ θα βασιστούμε σε μία από τις δωρεάν της εκδόσεις. Εν προκειμένω θα χρησιμοποιήσουμε το <a href="https://wljs.io/" target="_blank">WLJS Notebook</a>, το οποίο χρησιμοποιεί την Wolfram Engine για να παράγει μια ελαφρώς περιορισμένη έκδοση του Wolfram Mathematica. Σε πολλά σημεία υστερεί του Wolfram Mathematica, αλλά η συνεργατική διάθεση των δημιουργών του WLJS Notebook σε τυχούσες απορίες στο <a href="https://github.com/JerryI/wolfram-js-frontend/issues" target="_blank">github</a> τα ελαττώνει στο ελάχιστο. Όπως θα διαπιστώσει ο αναγνώστης, δεν υπήρξε ουσιαστικό πρόβλημα σε κανένα από τα ζητήματα που καταπιαστήκαμε. Ό,τι θα καταφέρναμε με το Wolfram Mathematica, καταφέρνουμε και με το WLJS Notebook.</p>
+<hr>
+<p>Όσον αφορά τον γράφοντα, να πω πως ονομάζομαι Κώστας Κούδας και εργάζομαι ως μαθηματικός στη μέση εκπαίδευση στην Κέρκυρα. Προσπαθώ να κρατήσω μια επαφή με όλες τις επιστήμες και ειδικότερα με τα μαθηματικά, τα οποία και σπούδασα. Άλλες σελίδες που διαχειρίζομαι:</p>
+<ul>
+    <li><a href="https://dromos.pages.dev/" target="_blank">Δρόμος</a> — μια σελίδα με εκπαιδευτικό υλικό.</li>
+    <li><a href="https://kkoudas01.github.io/r4social/index.html" target="_blank">Στοχαστικά Μαθηματικά χωρίς… μαθηματικά για κοινωνικούς επιστήμονες με τη συνδρομή της R</a> — μια σελίδα εκμάθυνσης της γλώσσας R εξειδικευμένης στις ανάγκες των κοινωνικών επιστημόνων, καθώς και κάποιες κοινωνικές μελέτες με τη χρήση της.</li>
+    <li><a href="https://antaios.pages.dev/" target="_blank">Ανταίος</a> — περιέχει αυτοματοποιημένες εφαρμογές για πρακτική χρήση.</li>
+</ul>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-close" id="modalCloseBtn">Κλείσιμο</button>
             </div>
         </div>
     </div>
 
+    <!-- ══ Nav ══ -->
     <div class="demo">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <nav class="navbar navbar-default navbar-mobile bootsnav">
-                        <div class="navbar-header">
-                            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                                data-target="#navbar-menu">
-                                <i class="fa fa-bars"></i>
-                            </button>
-                        </div>
-                        <div class="collapse navbar-collapse" id="navbar-menu">
-                            <ul class="nav navbar-nav" data-in="fadeInDown" data-out="fadeOutUp">
-                                <li><a href="#" data-toggle="modal" data-target="#aboutModal"
-                                        data-hover="About">Περί...<span data-hover="About"></span></a></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        data-hover="Shortcodes">εκμάθηση<span data-hover="Shortcodes"></span></a>
-                                    <ul class="dropdown-menu animated">
-                                        <li><a href="algebra (wljsEDU).html">Άλγεβρα</a></li>
-                                        <li><a href="exisoseisKAIsystimata (wljsEDU).html">Εξισώσεις και συστήματα</a>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Γραφικές
-                                                Παραστάσεις</a>
-                                            <ul class="dropdown-menu animated">
-                                                <li><a href="plot2D (wljsEDU).html">Στο επίπεδο</a></li>
-                                                <li><a href="plot3D (wljsEDU).html">Στον χώρο</a></li>
-                                                <li><a href="plot3D2D (wljsEDU).html">Απεικόνιση του 3D στο 2D</a></li>
-                                                <li><a href="vectorFields (wljsEDU).html">Διανυσματικά πεδία</a></li>
-                                                <li><a href="plotComplex (wljsEDU).html">Μιγαδικοί</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="TheoriaPinakon (wljsEDU).html">Γραμμική Άλγεβρα</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Λογισμός</a>
-                                            <ul class="dropdown-menu animated">
-                                                <li><a href="SeqSerM (wljsEDU).html">Ακολουθίες, σειρές, γινόμενα</a>
-                                                </li>
-                                                <li><a href="serExpan (wljsEDU).html">Προσέγγιση μέσω σειρών</a></li>
-                                                <li><a href="DiaforikosLogismos (wljsEDU).html">Διαφορικός λογισμός</a>
-                                                </li>
-                                                <li><a href="OloklirotikosLogismos (wljsEDU).html">Ολοκληρωτικός
-                                                        λογισμός</a></li>
-                                            </ul>
-                                        </li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Διαφορικές
-                                                εξισώσεις</a>
-                                            <ul class="dropdown-menu animated">
-                                                <li><a href="ODE (wljsEDU).html">Συνήθεις Διαφορικές Εξισώσεις</a></li>
-                                                <li class="dropdown">
-                                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Μερικές
-                                                        Διαφορικές εξισώσεις</a>
-                                                    <ul class="dropdown-menu animated">
-                                                        <li><a href="PDEauto (wljsEDU).html">Αυτόματοποιημένα</a></li>
-                                                        <li><a href="PDE1stDeg (wljsEDU).html">Πρώτου βαθμού</a></li>
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle"
-                                                                data-toggle="dropdown">Εξίσωση κύματος</a>
-                                                            <ul class="dropdown-menu animated">
-                                                                <li><a href="PDEwave (genANDsepvar) (wljsEDU).html">Γενική
-                                                                        λύση & επίλυση μέσω χωριζομένων μεταβλητών</a>
-                                                                </li>
-                                                                <li><a href="PDEwave (3var) (wljsEDU).html">Τρεις
-                                                                        μεταβλητές</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle"
-                                                                data-toggle="dropdown">Εξίσωση θερμότητας</a>
-                                                            <ul class="dropdown-menu animated">
-                                                                <li><a href="PDEtherm (bound) (wljsEDU).html">Φραγμένο
-                                                                        χωρίο</a></li>
-                                                                <li><a href="PDEtherm (inf) (wljsEDU).html">Άπειρο
-                                                                        χωρίο</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li class="dropdown">
-                                                            <a href="#" class="dropdown-toggle"
-                                                                data-toggle="dropdown">Εξίσωση Laplace</a>
-                                                            <ul class="dropdown-menu animated">
-                                                                <li><a href="PDElaplace (cart) (wljsEDU).html">Καρτεσιανές
-                                                                        συντεταγμένες</a></li>
-                                                                <li><a href="PDElaplace (pol) (wljsEDU).html">Πολικές
-                                                                        συντεταγμένες</a></li>
-                                                                <li><a href="PDEtherm (3var) (wljsEDU).html">Τρεις
-                                                                        μεταβλητές</a></li>
-                                                            </ul>
-                                                        </li>
-                                                        <li><a href="PDEtransformation (wljsEDU).html">Επίλυση με
-                                                                μετασχηματισμούς</a></li>
-                                                    </ul>
-                                                </li>
-                                                <li><a href="systemODE (wljsEDU).html">Συστήματα Σ.Δ.Ε.</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="eig (wljsEDU).html">Ιδιοτιμές και ιδιοσυναρτήσεις</a></li>
-                                        <li><a href="transforms (wljsEDU).html">Μετασχηματισμοί</a></li>
-                                        <li><a href="markov (wljsEDU).html">Μαρκοβιανές αλυσίδες</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        data-hover="Pages">Εφαρμογές<span data-hover="Pages"></span></a>
-                                    <ul class="dropdown-menu animated">
-                                        <li><a href="#">Custom Menu</a></li>
-                                        <li><a href="#">Custom Menu</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Sub Menu</a>
-                                            <ul class="dropdown-menu animated">
-                                                <li><a href="#">Custom Menu</a></li>
-                                                <li><a href="#">Custom Menu</a></li>
-                                                <li><a href="#">Custom Menu</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="#">Custom Menu</a></li>
-                                        <li><a href="#">Custom Menu</a></li>
-                                    </ul>
-                                </li>
-                                <li class="dropdown megamenu-fw">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"
-                                        data-hover="Megamenu">έρευνες<span data-hover="Megamenu"></span></a>
-                                    <ul class="dropdown-menu megamenu-content animated" role="menu">
-                                        <li>
-                                            <div class="row">
-                                                <div class="col-menu col-md-3">
-                                                    <h6 class="title">Κοινωνικές επιστήμες</h6>
-                                                    <div class="content">
-                                                        <ul class="menu-col">
-                                                            <li><a href="aristeradaxia (wljsRE).html">Εξέλιξη πολιτικών
-                                                                    σχηματισμών</a></li>
-                                                            <li><a href="exoplismoi (wljsRE).html">Κούρσα εξοπλισμών</a>
-                                                            </li>
-                                                            <li><a href="fuzzySocSci (wljsRE).html">Εκφράζοντας την
-                                                                    κοινωνική διαστρωμάτωση</a></li>
-                                                            <li><a href="politicsDist (wljsRE).html">Εξέλιξη κατανομής
-                                                                    πολιτικού φάσματος</a></li>
-                                                            <li><a href="PosoiParamenoyn (wljsRE).html">Εξέλιξη
-                                                                    πολιτικών σχηματισμών</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- end col-3 -->
-                                                <div class="col-menu col-md-3">
-                                                    <h6 class="title">Μαθηματικά</h6>
-                                                    <div class="content">
-                                                        <ul class="menu-col">
-                                                            <li><a href="FrobeniusPerron (wljsRE).html">Αντίστροφο
-                                                                    προβλήματος Frobenius-Perron</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- end col-3 -->
-                                                <div class="col-menu col-md-3">
-                                                    <h6 class="title">Φυσική</h6>
-                                                    <div class="content">
-                                                        <ul class="menu-col">
-                                                            <li><a href="#">Custom Menu</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="col-menu col-md-3">
-                                                    <h6 class="title">Βιολογία</h6>
-                                                    <div class="content">
-                                                        <ul class="menu-col">
-                                                            <li><a href="#">Μοντελοποίηση στειρώσεων με λογιστικό
-                                                                    μοντέλο σποράς-συγκομιδής (υπό κατασκευή)</a></li>
-                                                        </ul>
-                                                    </div>
-                                                </div><!-- end col-3 -->
-                                            </div><!-- end row -->
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-                    </nav>
-                </div>
-            </div>
+        <div class="nav-container">
+            <nav class="navbar" role="navigation">
+                <button class="navbar-toggle" id="navToggle" aria-label="Μενού" aria-expanded="false">
+                    &#9776;
+                </button>
+                <ul class="nav-menu" id="navMenu">
+                    <!-- Περί... -->
+                    <li>
+                        <a href="#" id="aboutLink">
+                            <span class="nav-label">Περί...</span>
+                        </a>
+                    </li>
+                    <!-- Εκμάθηση -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <span class="nav-label">Εκμάθηση</span>
+                        </a>
+                        <ul class="dropdown-menu">
+            <li><a href="algebra (wljsEDU).html">Άλγεβρα</a></li>
+            <li><a href="exisoseisKAIsystimata (wljsEDU).html">Εξισώσεις και συστήματα</a></li>
+            <li class="dropdown">
+                <a href="#">Γραφικές παραστάσεις</a>
+                <ul class="dropdown-menu">
+                <li><a href="plot2D (wljsEDU).html">Στο επίπεδο</a></li>
+                <li><a href="plot3D (wljsEDU).html">Στον χώρο</a></li>
+                <li><a href="plot3D2D (wljsEDU).html">Απεικόνιση του 3D στο 2D</a></li>
+                <li><a href="vectorFields (wljsEDU).html">Διανυσματικά πεδία</a></li>
+                <li><a href="plotComplex (wljsEDU).html">Μιγαδικοί</a></li>
+                </ul>
+            </li>
+            <li><a href="TheoriaPinakon (wljsEDU).html">Γραμμική Άλγεβρα</a></li>
+            <li class="dropdown">
+                <a href="#">Λογισμός</a>
+                <ul class="dropdown-menu">
+                <li><a href="SeqSerM (wljsEDU).html">Ακολουθίες, σειρές, γινόμενα</a></li>
+                <li><a href="serExpan (wljsEDU).html">Προσέγγιση μέσω σειρών</a></li>
+                <li><a href="DiaforikosLogismos (wljsEDU).html">Διαφορικός λογισμός</a></li>
+                <li><a href="OloklirotikosLogismos (wljsEDU).html">Ολοκληρωτικός λογισμός</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <a href="#">Διαφορικές εξισώσεις</a>
+                <ul class="dropdown-menu">
+                <li><a href="ODE (wljsEDU).html">Συνήθεις Διαφορικές Εξισώσεις</a></li>
+                <li class="dropdown">
+                    <a href="#">Μερικές Διαφορικές εξισώσεις</a>
+                    <ul class="dropdown-menu">
+                    <li><a href="PDEauto (wljsEDU).html">Αυτόματοποιημένα</a></li>
+                    <li><a href="PDE1stDeg (wljsEDU).html">Πρώτου βαθμού</a></li>
+                    <li class="dropdown">
+                        <a href="#">Εξίσωση κύματος</a>
+                        <ul class="dropdown-menu">
+                        <li><a href="PDEwave (genANDsepvar) (wljsEDU).html">Γενική λύση &amp; επίλυση μέσω χωριζομένων μεταβλητών</a></li>
+                        <li><a href="PDEwave (3var) (wljsEDU).html">Τρεις μεταβλητές</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Εξίσωση θερμότητας</a>
+                        <ul class="dropdown-menu">
+                        <li><a href="PDEtherm (bound) (wljsEDU).html">Φραγμένο χωρίο</a></li>
+                        <li><a href="PDEtherm (inf) (wljsEDU).html">Άπειρο χωρίο</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#">Εξίσωση Laplace</a>
+                        <ul class="dropdown-menu">
+                        <li><a href="PDElaplace (cart) (wljsEDU).html">Καρτεσιανές συντεταγμένες</a></li>
+                        <li><a href="PDElaplace (pol) (wljsEDU).html">Πολικές συντεταγμένες</a></li>
+                        <li><a href="PDEtherm (3var) (wljsEDU).html">Τρεις μεταβλητές</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="PDEtransformation (wljsEDU).html">Επίλυση με μετασχηματισμούς</a></li>
+                    </ul>
+                </li>
+                <li><a href="systemODE (wljsEDU).html">Συστήματα Σ.Δ.Ε.</a></li>
+                </ul>
+            </li>
+            <li><a href="eig (wljsEDU).html">Ιδιοτιμές και ιδιοσυναρτήσεις</a></li>
+            <li><a href="transforms (wljsEDU).html">Μετασχηματισμοί</a></li>
+            <li><a href="markov (wljsEDU).html">Μαρκοβιανές αλυσίδες</a></li>
+                        </ul>
+                    </li>
+                    <!-- Εφαρμογές -->
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle">
+                            <span class="nav-label">Εφαρμογές</span>
+                        </a>
+                        <ul class="dropdown-menu">
+                        </ul>
+                    </li>
+                    <!-- Έρευνες (Megamenu) -->
+                    <li class="dropdown megamenu-fw">
+                        <a href="#" class="dropdown-toggle">
+                            <span class="nav-label">Έρευνες</span>
+                        </a>
+                        <ul class="dropdown-menu megamenu-content">
+                            <li>
+                                <div class="megamenu-row">
+                                    <div class="col-menu">
+                                        <h6 class="title">Κοινωνικές επιστήμες</h6>
+                                        <ul class="menu-col">
+                                            <li><a href="aristeradaxia (wljsRE).html">Εξέλιξη πολιτικών σχηματισμών</a></li>
+                                            <li><a href="exoplismoi (wljsRE).html">Κούρσα εξοπλισμών</a></li>
+                                            <li><a href="fuzzySocSci (wljsRE).html">Εκφράζοντας την κοινωνική διαστρωμάτωση</a></li>
+                                            <li><a href="politicsDist (wljsRE).html">Εξέλιξη κατανομής πολιτικού φάσματος</a></li>
+                                            <li><a href="PosoiParamenoyn (wljsRE).html">Εξέλιξη πολιτικών σχηματισμών</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-menu">
+                                        <h6 class="title">Μαθηματικά</h6>
+                                        <ul class="menu-col">
+                                            <li><a href="FrobeniusPerron (wljsRE).html">Αντίστροφο προβλήματος Frobenius-Perron</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-menu">
+                                        <h6 class="title">Φυσική</h6>
+                                        <ul class="menu-col">
+                                            <li><a href="#">Custom Menu</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-menu">
+                                        <h6 class="title">Βιολογία</h6>
+                                        <ul class="menu-col">
+                                            <li><a href="#">Μοντελοποίηση στειρώσεων με λογιστικό μοντέλο σποράς-συγκομιδής (υπό κατασκευή)</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </div>
 
-    <!-- Demo content -->
-    <div class="container content-section">
-        <div class="row">
-            <div class="col-md-12 text-center">
-                <div class="svg-icon">
-                    <svg width="120px" height="120px" viewBox="0 0 602 593" role="img"
-                        xmlns="http://www.w3.org/2000/svg">
-                        <title>Wolfram Language icon</title>
-                        <path
-                            d="M -0.53428567,297.26714 V 1.767141 H 299.46571 h 300 v 295.499999 295.5 h -300 -299.99999567 z m 76.99999967,271 c 1.02123,-1.2305 0.94775,-1.5 -0.40894,-1.5 -3.37542,0 -2.8923,-3.02656 1.0371,-6.49707 2.81747,-2.48844 3.39529,-3.43101 2.12184,-3.4613 -2.52304,-0.06 -2.15611,-2.0083 0.99832,-5.30081 1.81701,-1.89656 2.15587,-2.64128 1,-2.19773 -2.41398,0.92633 -2.20399,-0.0703 1.59315,-7.56133 1.81723,-3.58504 3.56669,-7.52254 3.88768,-8.75 0.71387,-2.72987 3.77085,-2.99332 3.77085,-0.32498 0,1.04873 1.36728,4.95418 3.03839,8.67878 1.67111,3.72459 2.79621,7.4031 2.50021,8.17446 -0.296,0.77137 0.13672,2.36605 0.96161,3.54374 0.82489,1.17769 1.49979,3.11437 1.49979,4.30374 0,2.94685 4.589636,5.97796 6.566916,4.33696 1.97,-1.63496 1.79559,-2.69463 -0.56692,-3.44446 -3.06598,-0.97311 -2.40592,-3.01044 2.14243,-6.61281 3.95589,-3.13312 4.04595,-3.32391 2,-4.23684 -3.06564,-1.36793 -2.66564,-3.137 1.60757,-7.10983 2.77779,-2.58253 3.2963,-3.49342 2,-3.51346 -2.30913,-0.0357 -2.21462,-1.61197 0.25562,-4.26347 1.25304,-1.34497 1.77796,-2.87011 1.3989,-4.06443 -0.36652,-1.15478 0.48509,-3.91768 2.15097,-6.97844 1.51673,-2.78675 3.2994,-6.90144 3.96148,-9.14377 1.45641,-4.93256 3.65252,-5.29208 4.58147,-0.75002 0.37424,1.82981 2.18661,6.29434 4.02749,9.92117 2.34205,4.61422 2.97366,6.7187 2.10349,7.00876 -0.89413,0.29804 -0.67959,1.20656 0.7635,3.2332 2.24224,3.14893 2.57085,5.00994 0.88464,5.00994 -0.7618,0 -0.71116,0.49557 0.15761,1.54238 1.63193,1.96635 2.96513,0.69122 3.86194,-3.69369 0.65841,-3.21927 4.10289,-5.49056 4.10289,-2.70545 0,2.6586 3.32054,9.85676 4.54696,9.85676 0.70139,0 2.49939,-1.45481 3.99557,-3.23291 l 2.72031,-3.23291 -2.38142,-0.55808 c -3.49103,-0.81813 -3.51313,-4.09021 -0.0432,-6.39235 3.71712,-2.46613 5.7993,-5.58375 3.72924,-5.58375 -2.7462,0 -2.73179,-2.09581 0.0394,-5.72901 1.79199,-2.34942 2.35494,-3.78372 1.58573,-4.04012 -1.79181,-0.59727 -1.5334,-1.42591 2.70817,-8.68432 2.14543,-3.67137 4.19082,-8.22127 4.54531,-10.11089 0.95692,-5.10082 3.01545,-4.17748 5.42605,2.43383 1.17707,3.22822 3.26237,7.5232 4.63399,9.54441 2.74735,4.04844 3.14392,6.20275 1.25758,6.83153 -0.77722,0.25907 -0.14377,1.42461 1.70589,3.13882 2.50324,2.31992 2.76533,3.00991 1.75677,4.62488 -0.71374,1.14287 -0.80991,2.13022 -0.24172,2.48139 2.03325,1.25661 10.92674,-17.1387 10.99426,-22.74052 0.0422,-3.50061 2.94661,-1.74032 4.08129,2.47355 0.6255,2.32295 2.50572,7.03014 4.17825,10.46041 2.53212,5.19323 3.32629,6.08417 4.74605,5.32433 1.7437,-0.93319 7.50099,-7.95238 6.86649,-8.37149 -0.19305,-0.12751 -1.58849,-0.76331 -3.10099,-1.41288 -1.5125,-0.64957 -2.75,-1.63143 -2.75,-2.18191 0,-0.55047 2.5875,-3.57374 5.75,-6.71837 5.21699,-5.18751 5.54143,-5.75204 3.5,-6.09012 -2.96225,-0.49058 -2.84513,-2.48865 0.34769,-5.932 4.13902,-4.46379 4.84987,-6.30152 2.43749,-6.30152 -2.74642,0 -2.56474,-1.28628 0.84686,-5.99586 3.1895,-4.40298 7.44286,-14.11112 9.16813,-20.92594 0.82016,-3.23965 1.36002,-4.04169 2.01932,-3 0.76671,1.21138 0.91956,1.19981 1.03282,-0.0782 0.0731,-0.825 0.50537,0.72614 0.96059,3.44698 0.94277,5.635 6.75083,17.98977 10.61725,22.58475 1.97772,2.35038 2.32072,3.3674 1.43455,4.25357 -0.88616,0.88616 -1.65293,0.85966 -3.20692,-0.11082 -1.90713,-1.19102 -1.89012,-1.057 0.25698,2.02504 1.26461,1.81527 3.14202,4.27967 4.17203,5.47645 2.16764,2.51861 1.49319,4.30685 -1.64581,4.36374 -1.8697,0.0339 -1.47422,0.69922 2.69701,4.53733 2.68839,2.4737 5.37235,4.33618 5.96434,4.13885 1.78622,-0.59541 8.22139,-13.35557 10.73721,-21.2906 1.29777,-4.09324 2.74895,-7.31246 3.22484,-7.15383 0.4759,0.15863 1.95324,3.42495 3.28299,7.25848 3.41809,9.85398 8.29029,19.47006 9.86495,19.47006 0.73535,0 3.70129,-2.58691 6.59098,-5.7487 l 5.25399,-5.7487 -3.60124,-0.58536 c -3.87033,-0.62911 -6.73002,-2.46908 -6.66705,-4.28968 0.0215,-0.62016 1.98064,-2.55471 4.35376,-4.29901 2.37312,-1.7443 5.76838,-5.0068 7.54503,-7.25 l 3.23029,-4.07855 h -2.61542 c -4.135,0 -4.27788,-2.6931 -0.33476,-6.30993 1.91282,-1.75454 4.19833,-4.58577 5.07891,-6.29163 1.59196,-3.08396 1.58715,-3.09891 -0.84787,-2.63343 -3.13174,0.59867 -3.09633,-0.72947 0.14586,-5.4706 5.61352,-8.20881 9.33372,-17.17554 11.82813,-28.50911 0.9733,-4.42232 3.23984,-2.31189 3.94307,3.67149 0.73977,6.29432 5.31914,16.97414 10.17865,23.73822 3.97418,5.53177 4.24648,6.80499 1.45537,6.80499 -1.1,0 -2,0.2981 -2,0.66245 0,1.28576 6.22064,10.33755 7.10425,10.33755 0.49266,0 0.89575,0.87011 0.89575,1.93358 0,1.35154 -0.8278,2.04676 -2.75,2.30958 -2.66736,0.3647 -2.51711,0.60412 5,7.96709 4.2625,4.1751 7.75,7.84496 7.75,8.15524 0,0.99967 -4.40187,2.98849 -7.90364,3.57096 l -3.40365,0.56615 5.28712,5.78495 c 7.95283,8.70167 8.25061,8.74895 12.34296,1.95976 4.09843,-6.79927 9.32971,-18.87806 10.21133,-23.57747 0.92546,-4.93316 3.029,-4.08856 4.35059,1.74683 1.19225,5.2643 9.6939,23.24232 13.0136,27.51921 l 1.89071,2.43588 5.85549,-5.7855 c 3.22052,-3.18203 5.30229,-5.49486 4.62616,-5.13964 -0.67614,0.35523 -2.16724,0.14392 -3.31357,-0.46958 -2.01516,-1.07848 -1.94386,-1.26774 2.15136,-5.71053 4.07311,-4.4188 4.15228,-4.62591 2.06357,-5.39857 -2.73172,-1.01053 -2.71536,-1.28904 0.30863,-5.2537 3.17036,-4.15656 8.14541,-15.10411 9.04631,-19.90632 0.95808,-5.10697 2.9591,-4.64383 4.50228,1.04208 1.39305,5.13272 6.07884,15.12731 9.09741,19.40437 2.42996,3.44305 2.40321,5.21746 -0.0689,4.57099 -1.75757,-0.45962 -1.6974,-0.13794 0.63289,3.38336 1.41632,2.14021 2.96532,3.89128 3.44224,3.89128 0.47691,0 0.86711,0.9 0.86711,2 0,1.34854 -0.66667,2 -2.04668,2 -1.96715,0 -1.9798,0.0887 -0.32551,2.28182 0.94665,1.255 3.66766,3.84041 6.04669,5.74536 2.37902,1.90494 4.3255,3.999 4.3255,4.65345 0,0.65445 -1.575,1.75944 -3.5,2.45553 -3.8808,1.40332 -4.20652,2.03259 -2,3.86384 1.19605,0.99263 1.80368,0.99286 2.99863,10e-4 2.11685,-1.75682 9.29744,-16.39717 10.07493,-20.54154 0.92701,-4.94139 3.96706,-4.76071 4.88633,0.29041 0.37537,2.0625 2.90045,8.29216 5.61129,13.84368 2.71085,5.55152 4.92882,10.35602 4.92882,10.67667 0,0.32065 -0.69273,0.7285 -1.5394,0.90633 -1.25359,0.26329 -1.02985,1.10713 1.2051,4.54504 3.01883,4.6437 5.2384,6.03316 6.48904,4.06215 1.30095,-2.0503 0.9884,-2.78387 -1.18612,-2.78387 -3.81807,0 -3.42969,-2.91349 0.88015,-6.60255 3.56455,-3.05112 3.944,-3.75641 2.91094,-5.41061 -0.97709,-1.56457 -0.83092,-2.30896 0.82364,-4.19449 4.38132,-4.99291 4.7165,-5.68352 2.4738,-5.09704 -1.42598,0.3729 -2.05715,0.06 -2.05715,-1.01966 0,-0.85669 0.46007,-1.84195 1.02238,-2.18948 1.29581,-0.80086 6.31311,-10.78377 7.93484,-15.78796 1.51634,-4.67895 2.97764,-4.36459 4.55572,0.98005 0.66176,2.24125 2.61707,6.68544 4.34513,9.87596 3.59513,6.63768 4.00433,8.9878 1.39193,7.99409 -0.9625,-0.36611 0.05,1.19077 2.25,3.45974 3.90521,4.02764 3.95261,4.16081 2,5.61967 -1.96335,1.46689 -1.94345,1.54355 1.08596,4.18328 1.69727,1.47895 3.94417,3.18608 4.99309,3.79363 1.64214,0.95114 1.71739,1.33325 0.5416,2.75 -0.75105,0.90495 -1.98544,1.64537 -2.74309,1.64537 -1.94649,0 -1.67099,1.05764 1.17218,4.5 2.07066,2.50705 2.63735,2.75352 3.44872,1.5 0.534,-0.825 0.97781,-2.2875 0.98623,-3.25 0.0295,-3.36705 2.71,-1.7124 3.95438,2.44097 2.86257,9.55441 2.5079,9.32294 6.97243,4.55037 2.18217,-2.33274 3.54479,-4.39134 3.02804,-4.57467 -1.57969,-0.56045 -1.06277,-2.23162 1.70817,-5.52231 2.22399,-2.64117 2.38402,-3.1961 1,-3.46768 -2.1143,-0.41489 -2.15329,-0.2312 1.28818,-6.06794 1.61473,-2.7386 3.74536,-7.25841 4.73471,-10.04401 1.7247,-4.85599 4.3294,-6.89417 4.3294,-3.38776 0,0.92233 1.84192,5.48236 4.09315,10.13341 2.64863,5.47205 3.71432,8.69058 3.0197,9.11988 -0.6955,0.42984 -0.20015,1.94863 1.40684,4.31353 2.95052,4.34208 3.01167,4.74376 0.73031,4.79722 -1.24639,0.0292 -0.49457,1.17621 2.61248,3.98569 4.31297,3.8999 5.04852,6.9733 1.6689,6.9733 -2.76169,0 -1.60685,2.77217 2.51473,6.03652 4.25429,3.36946 5.91189,3.47035 3.89258,0.23691 -1.02069,-1.63438 -0.7852,-2.33601 1.57684,-4.69805 2.06074,-2.06074 2.44875,-2.97942 1.50478,-3.56283 -0.96609,-0.59707 -0.40006,-2.52889 2.35387,-8.03368 1.9942,-3.98617 3.62582,-8.08712 3.62582,-9.11323 0,-3.76051 2.86625,-1.78441 4.48626,3.09299 0.90585,2.72725 2.74201,6.57224 4.08037,8.54441 2.60529,3.83924 3.03758,5.49709 1.43337,5.49709 -1.56182,0 -1.18358,1.42583 1,3.76963 2.24668,2.41153 2.64479,5.20941 0.75,5.27101 -0.6875,0.0223 0.3017,1.36709 2.19821,2.9883 3.89322,3.32807 4.11067,3.18594 6.63695,-4.33785 l 1.61471,-4.80891 -7.92952,-11.69109 c -4.36123,-6.4301 -9.61378,-14.50359 -11.67233,-17.94109 -2.05856,-3.4375 -4.03564,-6.25 -4.39352,-6.25 -0.35788,0 -3.43794,2.76248 -6.84459,6.13884 -3.54397,3.51248 -6.76419,5.90973 -7.5269,5.60331 -0.73316,-0.29454 -5.15801,-7.99816 -9.83301,-17.11915 -4.675,-9.121 -8.77814,-16.59248 -9.11808,-16.60331 -0.33994,-0.0108 -4.16494,6.73199 -8.5,14.98404 -5.02246,9.56058 -8.39008,14.91168 -9.28263,14.75 -1.22791,-0.22243 -5.56967,-6.96562 -27.0599,-42.02667 l -4.76432,-7.77293 -5.20745,9.02293 c -3.56004,6.16849 -5.78511,9.02294 -7.03345,9.02294 -2.38846,0 -58.42798,-42.59212 -60.54375,-46.0155 -0.40245,-0.65118 -4.31674,4.9623 -9.19808,13.19096 -4.67362,7.8785 -8.93821,14.77454 -9.47687,15.32454 -0.64627,0.65988 -10.90003,-9.14204 -30.14743,-28.81896 l -29.16804,-29.81896 -12,11.21306 c -33.61287,31.40859 -49.82097,45.98454 -50.77869,45.6653 -0.5833,-0.19444 -3.34986,-3.70307 -6.14792,-7.79698 -2.79805,-4.0939 -5.81541,-8.47568 -6.70523,-9.73728 l -1.61785,-2.29382 -11.87515,12.17231 c -15.50043,15.88829 -29.66079,29.72667 -32.3351,31.59982 -3.00202,2.1027 -4.38827,1.23835 -8.61773,-5.37336 l -3.71233,-5.80331 -1.80207,2.49609 c -0.99114,1.37285 -5.53839,7.74251 -10.105,14.15479 -12.2104,17.14544 -21.62724,28.8413 -23.22139,28.8413 -0.7718,0 -3.73518,-4.3875 -6.58528,-9.75 -2.8501,-5.3625 -5.50064,-10.08793 -5.89008,-10.50095 -0.38945,-0.41303 -4.24803,6.44947 -8.57464,15.25 -4.3266,8.80052 -8.42718,16.00095 -9.1124,16.00095 -0.68522,0 -4.65993,-3.67492 -8.832676,-8.16648 -4.17275,-4.49157 -7.74455,-7.97907 -7.93734,-7.75 -0.19279,0.22906 -4.50858,9.14715 -9.59065,19.81796 -8.6646,18.19306 -9.20018,19.6879 -8.59882,24 1.64605,11.80318 2.03255,12.62024 4.54035,9.59852 z M 531.46571,557.87413 c 0,-0.49116 -0.73865,-1.17646 -1.64144,-1.52289 -1.37248,-0.52667 -1.43434,-0.38034 -0.37756,0.89301 1.44013,1.73524 2.019,1.91584 2.019,0.62988 z m 26.34208,-0.55606 c 0.37166,-0.96852 0.0755,-1.26467 -0.89301,-0.89301 -0.79699,0.30583 -1.44907,0.95791 -1.44907,1.44907 0,1.43762 1.73512,1.02567 2.34208,-0.55606 z m -60.99513,-17.68355 c -3.03909,-1.19594 -3.47294,-0.97132 -2.31239,1.19719 0.91848,1.7162 1.36261,1.8507 2.63213,0.79709 1.35357,-1.12336 1.31722,-1.35011 -0.31974,-1.99428 z M 201.40042,527.34581 c 0.96744,-1.1657 0.81164,-1.3251 -0.86631,-0.88631 -1.12525,0.29426 -1.79941,0.93386 -1.49814,1.42133 0.73278,1.18565 0.98351,1.12892 2.36445,-0.53502 z m 174.3376,-17.88954 c -7.15883,-2.15095 -9.25194,-2.47498 -8.51173,-1.31768 0.40668,0.63582 1.86442,2.84844 3.23942,4.91692 l 2.5,3.76086 2.77231,-3.26356 2.77231,-3.26356 z m -127.06882,2.30455 c 1.82488,-3.207 1.68052,-3.32048 -3.02646,-2.37909 -2.98289,0.59658 -3.02715,0.68452 -1.50999,3 2.00768,3.0641 2.47605,3 4.53645,-0.62091 z m 92.16733,-1.74368 1.42219,-2.75 -4.61033,0.3677 -4.61033,0.3677 2.76959,2.3823 c 1.52327,1.31026 2.95794,2.3823 3.18814,2.3823 0.23021,0 1.05854,-1.2375 1.84074,-2.75 z m -64.87082,-0.25 c 0.33992,-0.55 -0.0835,-1 -0.94098,-1 -0.85746,0 -1.55902,0.45 -1.55902,1 0,0.55 0.42344,1 0.94098,1 0.51754,0 1.2191,-0.45 1.55902,-1 z m -95.77143,-61.92792 c 9.43212,-3.94092 11.14514,-5.11414 22,-15.06738 6.47428,-5.93654 16.34096,-15.45367 21.92595,-21.1492 10.16127,-10.36239 24.34548,-28.0127 24.34548,-30.29464 0,-0.66673 -1.09927,-2.24494 -2.44281,-3.50713 -2.32913,-2.18811 -2.41548,-2.69649 -1.85536,-10.92432 0.56344,-8.27669 0.78494,-8.91696 5.419,-15.6643 4.11046,-5.98496 5.29386,-8.87181 7.92916,-19.34287 1.70368,-6.76939 2.91238,-12.4932 2.686,-12.71958 -0.22638,-0.22638 -4.63026,5.04577 -9.78641,11.7159 -6.74297,8.7229 -12.05227,14.32729 -18.91219,19.96333 -16.44931,13.51458 -15.93698,12.95916 -16.98905,18.41811 -2.36252,12.25854 -4.86421,22.2599 -6.15144,24.59244 -0.7683,1.39219 -7.14303,10.92317 -14.16607,21.17996 l -12.76917,18.64869 -14.23083,11.3961 c -12.03618,9.63862 -18.71202,16.1709 -28.66629,28.04986 -0.8605,1.02688 5.86046,-3.28282 14.93546,-9.57712 11.96789,-8.30075 19.30952,-12.61803 26.72857,-15.71785 z M 100.46571,451.49 c 3.575,-1.37918 9.717,-3.70298 13.64889,-5.16401 5.98275,-2.22311 7.36329,-3.17404 8.46327,-5.82962 0.7229,-1.74526 9.43091,-11.53835 19.35111,-21.76243 17.96342,-18.51369 18.06429,-18.64285 24.81777,-31.77802 3.72958,-7.25383 6.65249,-13.18878 6.49537,-13.18878 -0.15712,0 -18.50859,18.28268 -40.78104,40.62818 -22.27245,22.34549 -40.045366,40.39735 -39.495366,40.11523 0.55,-0.28212 3.925,-1.64137 7.499996,-3.02055 z m -0.43426,-29.22286 c 19.96871,-22.07653 73.33316,-75.75074 75.86662,-76.30701 0.76904,-0.16886 6.27386,0.61794 12.23294,1.74845 15.24058,2.8913 16.18433,2.80027 21.94391,-2.11681 10.29458,-8.78872 16.1097,-14.96737 32.65809,-34.69976 17.8135,-21.24092 20.58761,-23.58938 27.09514,-22.93781 2.8485,0.28521 3.24692,-0.0415 4.49685,-3.68706 1.45334,-4.23887 2.89223,-37.3992 1.80749,-41.65518 -0.32869,-1.28965 -3.81423,-6.16982 -7.74562,-10.84482 -8.45816,-10.05796 -13.48683,-20.03888 -14.4687,-28.71746 -0.59622,-5.26989 -1.01067,-6.22021 -2.82558,-6.47912 -2.80036,-0.3995 -4.59824,-7.09446 -5.31806,-19.80342 -0.53545,-9.4537 1.47945,-24.86734 3.82316,-29.2466 2.08551,-3.89682 1.16682,-9.19802 -3.017,-17.40923 -4.18688,-8.21723 -4.93252,-11.94806 -3.0798,-15.40991 1.40288,-2.6213 2.8285,-2.43517 6.24799,0.81574 l 2.8926,2.75 -0.66122,-4.5 c -0.74091,-5.04226 0.50752,-9.31383 3.72638,-12.75 3.79526,-4.05149 5.77237,-2.977762 11.75907,6.3861 4.95126,7.74431 6.04874,8.84554 11,11.03759 7.41664,3.28353 10.49135,6.43857 15.03028,15.42297 2.86489,5.67079 5.42965,9.00221 10.11678,13.1409 6.86758,6.06401 7.01398,7.88023 0.73642,9.13574 l -3.07167,0.61434 2.69157,3.25618 c 4.63486,5.60711 18.95495,18.12664 26.60251,23.2576 5.40134,3.62391 12.8065,6.95555 28.13254,12.65704 30.91568,11.50106 34.68632,13.97534 46.33003,30.40159 15.47129,21.82598 34.34249,32.94317 55.68154,32.80251 8.82046,-0.0581 10.33008,0.64568 7.5,3.49669 -1.00222,1.00963 -0.90478,1.12782 0.49157,0.59624 1.14825,-0.43712 1.96388,-0.0837 2.39412,1.03752 0.77578,2.02164 -4.44387,6.91431 -9.25216,8.67258 -2.19011,0.80087 -2.98367,1.64746 -2.6697,2.84808 0.52578,2.0106 -5.09738,3.72387 -15.37093,4.68323 -14.94013,1.39513 -31.92404,-7.83716 -38.87473,-21.13193 -1.57092,-3.00475 -1.59213,-2.91761 -1.07933,4.43503 0.7428,10.65053 1.96886,13.98168 8.14808,22.13796 4.75508,6.27649 5.4654,7.80399 5.48102,11.78653 0.01,2.51653 0.67679,8.85051 1.48206,14.07551 0.80527,5.225 1.4722,12.26005 1.48206,15.63345 l 0.0179,6.13344 12.09346,11.65954 c 6.65141,6.41275 15.63765,14.14302 19.96944,17.17838 9.76468,6.8423 14.23558,11.87096 19.7012,22.15903 5.91845,11.14045 5.8847,11.11062 37.04831,32.74061 6.22182,4.31844 13.55282,10.30307 16.2911,13.29919 2.73829,2.99612 5.10422,5.27848 5.25764,5.07192 2.60913,-3.51287 9.91457,-16.38377 14.52076,-25.58302 14.42941,-28.81773 21.7014,-51.98587 26.77153,-85.29254 2.40125,-15.77427 2.40071,-52.64799 -10e-4,-69.5 C 563.58057,195.36243 539.2787,146.32396 497.53194,104.76047 463.027,70.407026 427.12066,50.245088 374.96571,35.937737 c -16.81254,-4.612082 -46.24045,-8.170596 -67.56853,-8.170596 -40.72228,0 -81.22197,9.038551 -116.69336,26.043135 -31.18173,14.948165 -49.44386,27.907252 -73.77369,52.350934 -34.096136,34.25569 -54.003426,69.20035 -67.282626,118.10593 -7.15329,26.34463 -9.97692,65.84729 -6.72886,94.13692 4.53596,39.5068 18.09409,78.79667 38.85881,112.60823 3.89016,6.33442 4.24158,6.63889 5.77107,5 0.89576,-0.95983 6.51308,-7.14515 12.482926,-13.74515 z m 340.88426,-8.33868 c -0.5225,-0.46127 -5.45,-4.25258 -10.95,-8.42513 -5.5,-4.17255 -11.65695,-9.75764 -13.68212,-12.41132 -6.44956,-8.45121 -11.02241,-12.0848 -21.06788,-16.74055 -5.3625,-2.48535 -9.75,-4.36283 -9.75,-4.17218 0,0.19065 4.01483,3.55258 8.92184,7.47095 4.90702,3.91837 12.53297,11.01966 16.94657,15.78065 7.01955,7.57206 9.31532,9.31661 18.32815,13.92748 9.7833,5.00503 13.41819,6.48119 11.25344,4.5701 z m -33.60299,-94.66132 c -1.00122,-6.69406 -3.1785,-14.32955 -5.13273,-18 -2.43618,-4.57566 -5.38486,-7.50045 -15.43891,-15.3139 -10.04425,-7.80582 -9.9723,-7.8635 -4.50867,3.61473 2.2792,4.78824 2.46636,6.10617 1.93546,13.62907 -0.38808,5.49908 -1.45644,10.46613 -3.14495,14.62158 -1.40646,3.46133 -2.55735,6.32825 -2.55752,6.37093 -1.7e-4,0.0427 6.65868,0.0776 14.79743,0.0776 h 14.79774 z m -41.34048,0.25 c 0.94803,-2.3375 1.96147,-7.09941 2.25208,-10.58203 l 0.52838,-6.33202 -7.04751,-7.16798 c -11.75336,-11.95426 -18.23948,-24.11786 -18.23948,-34.20499 v -5.46298 h -5.36351 c -7.19621,0 -14.53226,-1.47448 -21.65986,-4.35345 l -5.89395,-2.38067 -0.63341,4.61706 c -1.36511,9.95055 -5.82206,30.6691 -8.95262,41.61706 -0.49291,1.72376 0.28574,2.2655 5.63753,3.92223 3.41519,1.05723 16.36346,7.01973 28.77394,13.25 26.13499,13.12021 27.97512,13.54586 30.59841,7.07777 z m 6.17658,-13.9375 c -0.31922,-0.79773 -0.55618,-0.56078 -0.60416,0.60417 -0.0434,1.05416 0.19293,1.64479 0.52522,1.3125 0.33229,-0.33229 0.36781,-1.1948 0.0789,-1.91667 z m -83.07903,-18.49503 c 0.61305,-2.76066 1.36286,-9.24895 1.66625,-14.41843 0.30339,-5.16947 0.34609,-8.27404 0.0949,-6.89904 -1.37918,7.54922 -3.82345,17.98293 -5.00311,21.35648 -0.74168,2.12106 -1.08534,4.28232 -0.76367,4.80279 1.2441,2.01299 2.93816,-0.0347 4.00565,-4.8418 z m 85.39592,-10.69503 c 0,-0.20765 -0.7875,-0.99515 -1.75,-1.75 -1.58606,-1.24387 -1.62143,-1.2085 -0.37756,0.37756 1.30637,1.66575 2.12756,2.19548 2.12756,1.37244 z M 255.1587,109.03617 c -0.25354,-0.97297 -0.47766,-0.41903 -0.49804,1.23097 -0.0204,1.65 0.18706,2.44606 0.46099,1.76903 0.27392,-0.67703 0.29059,-2.02703 0.0371,-3 z m 23.55701,-82.93131 c -0.6875,-0.277412 -1.8125,-0.277412 -2.5,0 -0.6875,0.277413 -0.125,0.504386 1.25,0.504386 1.375,0 1.9375,-0.226973 1.25,-0.504386 z m 61.01903,0.0063 c -0.67703,-0.273923 -2.02703,-0.290597 -3,-0.03705 -0.97297,0.253544 -0.41903,0.477663 1.23097,0.498042 1.65,0.02038 2.44606,-0.187065 1.76903,-0.460988 z"
-                            fill="#595858" />
-                    </svg>
-                </div>
-                <h2>ἐπιψαύσεις</h2>
-                <p>Ψηλαφίζοντας τὴ μορφή, τὴ δομὴ καὶ τὴ λειτουργεία τοῦ κόσμου,</p>
-                <p>χρησιμοποιώντας τὴ γλῶσσα Wolfram.</p>
+    <!-- ══ Hero ══ -->
+    <main>
+        <div class="content-section">
+            <div class="svg-icon">
+                <svg width="120px" height="120px" viewBox="0 0 602 593" role="img" xmlns="http://www.w3.org/2000/svg">
+                    <title>Wolfram Language icon</title>
+                    <path d="M -0.53428567,297.26714 V 1.767141 H 299.46571 h 300 v 295.499999 295.5 h -300 -299.99999567 z m 76.99999967,271 c 1.02123,-1.2305 0.94775,-1.5 -0.40894,-1.5 -3.37542,0 -2.8923,-3.02656 1.0371,-6.49707 2.81747,-2.48844 3.39529,-3.43101 2.12184,-3.4613 -2.52304,-0.06 -2.15611,-2.0083 0.99832,-5.30081 1.81701,-1.89656 2.15587,-2.64128 1,-2.19773 -2.41398,0.92633 -2.20399,-0.0703 1.59315,-7.56133 1.81723,-3.58504 3.56669,-7.52254 3.88768,-8.75 0.71387,-2.72987 3.77085,-2.99332 3.77085,-0.32498 0,1.04873 1.36728,4.95418 3.03839,8.67878 1.67111,3.72459 2.79621,7.4031 2.50021,8.17446 -0.296,0.77137 0.13672,2.36605 0.96161,3.54374 0.82489,1.17769 1.49979,3.11437 1.49979,4.30374 0,2.94685 4.589636,5.97796 6.566916,4.33696 1.97,-1.63496 1.79559,-2.69463 -0.56692,-3.44446 -3.06598,-0.97311 -2.40592,-3.01044 2.14243,-6.61281 3.95589,-3.13312 4.04595,-3.32391 2,-4.23684 -3.06564,-1.36793 -2.66564,-3.137 1.60757,-7.10983 2.77779,-2.58253 3.2963,-3.49342 2,-3.51346 -2.30913,-0.0357 -2.21462,-1.61197 0.25562,-4.26347 1.25304,-1.34497 1.77796,-2.87011 1.3989,-4.06443 -0.36652,-1.15478 0.48509,-3.91768 2.15097,-6.97844 1.51673,-2.78675 3.2994,-6.90144 3.96148,-9.14377 1.45641,-4.93256 3.65252,-5.29208 4.58147,-0.75002 0.37424,1.82981 2.18661,6.29434 4.02749,9.92117 2.34205,4.61422 2.97366,6.7187 2.10349,7.00876 -0.89413,0.29804 -0.67959,1.20656 0.7635,3.2332 2.24224,3.14893 2.57085,5.00994 0.88464,5.00994 -0.7618,0 -0.71116,0.49557 0.15761,1.54238 1.63193,1.96635 2.96513,0.69122 3.86194,-3.69369 0.65841,-3.21927 4.10289,-5.49056 4.10289,-2.70545 0,2.6586 3.32054,9.85676 4.54696,9.85676 0.70139,0 2.49939,-1.45481 3.99557,-3.23291 l 2.72031,-3.23291 -2.38142,-0.55808 c -3.49103,-0.81813 -3.51313,-4.09021 -0.0432,-6.39235 3.71712,-2.46613 5.7993,-5.58375 3.72924,-5.58375 -2.7462,0 -2.73179,-2.09581 0.0394,-5.72901 1.79199,-2.34942 2.35494,-3.78372 1.58573,-4.04012 -1.79181,-0.59727 -1.5334,-1.42591 2.70817,-8.68432 2.14543,-3.67137 4.19082,-8.22127 4.54531,-10.11089 0.95692,-5.10082 3.01545,-4.17748 5.42605,2.43383 1.17707,3.22822 3.26237,7.5232 4.63399,9.54441 2.74735,4.04844 3.14392,6.20275 1.25758,6.83153 -0.77722,0.25907 -0.14377,1.42461 1.70589,3.13882 2.50324,2.31992 2.76533,3.00991 1.75677,4.62488 -0.71374,1.14287 -0.80991,2.13022 -0.24172,2.48139 2.03325,1.25661 10.92674,-17.1387 10.99426,-22.74052 0.0422,-3.50061 2.94661,-1.74032 4.08129,2.47355 0.6255,2.32295 2.50572,7.03014 4.17825,10.46041 2.53212,5.19323 3.32629,6.08417 4.74605,5.32433 1.7437,-0.93319 7.50099,-7.95238 6.86649,-8.37149 -0.19305,-0.12751 -1.58849,-0.76331 -3.10099,-1.41288 -1.5125,-0.64957 -2.75,-1.63143 -2.75,-2.18191 0,-0.55047 2.5875,-3.57374 5.75,-6.71837 5.21699,-5.18751 5.54143,-5.75204 3.5,-6.09012 -2.96225,-0.49058 -2.84513,-2.48865 0.34769,-5.932 4.13902,-4.46379 4.84987,-6.30152 2.43749,-6.30152 -2.74642,0 -2.56474,-1.28628 0.84686,-5.99586 3.1895,-4.40298 7.44286,-14.11112 9.16813,-20.92594 0.82016,-3.23965 1.36002,-4.04169 2.01932,-3 0.76671,1.21138 0.91956,1.19981 1.03282,-0.0782 0.0731,-0.825 0.50537,0.72614 0.96059,3.44698 0.94277,5.635 6.75083,17.98977 10.61725,22.58475 1.97772,2.35038 2.32072,3.3674 1.43455,4.25357 -0.88616,0.88616 -1.65293,0.85966 -3.20692,-0.11082 -1.90713,-1.19102 -1.89012,-1.057 0.25698,2.02504 1.26461,1.81527 3.14202,4.27967 4.17203,5.47645 2.16764,2.51861 1.49319,4.30685 -1.64581,4.36374 -1.8697,0.0339 -1.47422,0.69922 2.69701,4.53733 2.68839,2.4737 5.37235,4.33618 5.96434,4.13885 1.78622,-0.59541 8.22139,-13.35557 10.73721,-21.2906 1.29777,-4.09324 2.74895,-7.31246 3.22484,-7.15383 0.4759,0.15863 1.95324,3.42495 3.28299,7.25848 3.41809,9.85398 8.29029,19.47006 9.86495,19.47006 0.73535,0 3.70129,-2.58691 6.59098,-5.7487 l 5.25399,-5.7487 -3.60124,-0.58536 c -3.87033,-0.62911 -6.73002,-2.46908 -6.66705,-4.28968 0.0215,-0.62016 1.98064,-2.55471 4.35376,-4.29901 2.37312,-1.7443 5.76838,-5.0068 7.54503,-7.25 l 3.23029,-4.07855 h -2.61542 c -4.135,0 -4.27788,-2.6931 -0.33476,-6.30993 1.91282,-1.75454 4.19833,-4.58577 5.07891,-6.29163 1.59196,-3.08396 1.58715,-3.09891 -0.84787,-2.63343 -3.13174,0.59867 -3.09633,-0.72947 0.14586,-5.4706 5.61352,-8.20881 9.33372,-17.17554 11.82813,-28.50911 0.9733,-4.42232 3.23984,-2.31189 3.94307,3.67149 0.73977,6.29432 5.31914,16.97414 10.17865,23.73822 3.97418,5.53177 4.24648,6.80499 1.45537,6.80499 -1.1,0 -2,0.2981 -2,0.66245 0,1.28576 6.22064,10.33755 7.10425,10.33755 0.49266,0 0.89575,0.87011 0.89575,1.93358 0,1.35154 -0.8278,2.04676 -2.75,2.30958 -2.66736,0.3647 -2.51711,0.60412 5,7.96709 4.2625,4.1751 7.75,7.84496 7.75,8.15524 0,0.99967 -4.40187,2.98849 -7.90364,3.57096 l -3.40365,0.56615 5.28712,5.78495 c 7.95283,8.70167 8.25061,8.74895 12.34296,1.95976 4.09843,-6.79927 9.32971,-18.87806 10.21133,-23.57747 0.92546,-4.93316 3.029,-4.08856 4.35059,1.74683 1.19225,5.2643 9.6939,23.24232 13.0136,27.51921 l 1.89071,2.43588 5.85549,-5.7855 c 3.22052,-3.18203 5.30229,-5.49486 4.62616,-5.13964 -0.67614,0.35523 -2.16724,0.14392 -3.31357,-0.46958 -2.01516,-1.07848 -1.94386,-1.26774 2.15136,-5.71053 4.07311,-4.4188 4.15228,-4.62591 2.06357,-5.39857 -2.73172,-1.01053 -2.71536,-1.28904 0.30863,-5.2537 3.17036,-4.15656 8.14541,-15.10411 9.04631,-19.90632 0.95808,-5.10697 2.9591,-4.64383 4.50228,1.04208 1.39305,5.13272 6.07884,15.12731 9.09741,19.40437 2.42996,3.44305 2.40321,5.21746 -0.0689,4.57099 -1.75757,-0.45962 -1.6974,-0.13794 0.63289,3.38336 1.41632,2.14021 2.96532,3.89128 3.44224,3.89128 0.47691,0 0.86711,0.9 0.86711,2 0,1.34854 -0.66667,2 -2.04668,2 -1.96715,0 -1.9798,0.0887 -0.32551,2.28182 0.94665,1.255 3.66766,3.84041 6.04669,5.74536 2.37902,1.90494 4.3255,3.999 4.3255,4.65345 0,0.65445 -1.575,1.75944 -3.5,2.45553 -3.8808,1.40332 -4.20652,2.03259 -2,3.86384 1.19605,0.99263 1.80368,0.99286 2.99863,10e-4 2.11685,-1.75682 9.29744,-16.39717 10.07493,-20.54154 0.92701,-4.94139 3.96706,-4.76071 4.88633,0.29041 0.37537,2.0625 2.90045,8.29216 5.61129,13.84368 2.71085,5.55152 4.92882,10.35602 4.92882,10.67667 0,0.32065 -0.69273,0.7285 -1.5394,0.90633 -1.25359,0.26329 -1.02985,1.10713 1.2051,4.54504 3.01883,4.6437 5.2384,6.03316 6.48904,4.06215 1.30095,-2.0503 0.9884,-2.78387 -1.18612,-2.78387 -3.81807,0 -3.42969,-2.91349 0.88015,-6.60255 3.56455,-3.05112 3.944,-3.75641 2.91094,-5.41061 -0.97709,-1.56457 -0.83092,-2.30896 0.82364,-4.19449 4.38132,-4.99291 4.7165,-5.68352 2.4738,-5.09704 -1.42598,0.3729 -2.05715,0.06 -2.05715,-1.01966 0,-0.85669 0.46007,-1.84195 1.02238,-2.18948 1.29581,-0.80086 6.31311,-10.78377 7.93484,-15.78796 1.51634,-4.67895 2.97764,-4.36459 4.55572,0.98005 0.66176,2.24125 2.61707,6.68544 4.34513,9.87596 3.59513,6.63768 4.00433,8.9878 1.39193,7.99409 -0.9625,-0.36611 0.05,1.19077 2.25,3.45974 3.90521,4.02764 3.95261,4.16081 2,5.61967 -1.96335,1.46689 -1.94345,1.54355 1.08596,4.18328 1.69727,1.47895 3.94417,3.18608 4.99309,3.79363 1.64214,0.95114 1.71739,1.33325 0.5416,2.75 -0.75105,0.90495 -1.98544,1.64537 -2.74309,1.64537 -1.94649,0 -1.67099,1.05764 1.17218,4.5 2.07066,2.50705 2.63735,2.75352 3.44872,1.5 0.534,-0.825 0.97781,-2.2875 0.98623,-3.25 0.0295,-3.36705 2.71,-1.7124 3.95438,2.44097 2.86257,9.55441 2.5079,9.32294 6.97243,4.55037 2.18217,-2.33274 3.54479,-4.39134 3.02804,-4.57467 -1.57969,-0.56045 -1.06277,-2.23162 1.70817,-5.52231 2.22399,-2.64117 2.38402,-3.1961 1,-3.46768 -2.1143,-0.41489 -2.15329,-0.2312 1.28818,-6.06794 1.61473,-2.7386 3.74536,-7.25841 4.73471,-10.04401 1.7247,-4.85599 4.3294,-6.89417 4.3294,-3.38776 0,0.92233 1.84192,5.48236 4.09315,10.13341 2.64863,5.47205 3.71432,8.69058 3.0197,9.11988 -0.6955,0.42984 -0.20015,1.94863 1.40684,4.31353 2.95052,4.34208 3.01167,4.74376 0.73031,4.79722 -1.24639,0.0292 -0.49457,1.17621 2.61248,3.98569 4.31297,3.8999 5.04852,6.9733 1.6689,6.9733 -2.76169,0 -1.60685,2.77217 2.51473,6.03652 4.25429,3.36946 5.91189,3.47035 3.89258,0.23691 -1.02069,-1.63438 -0.7852,-2.33601 1.57684,-4.69805 2.06074,-2.06074 2.44875,-2.97942 1.50478,-3.56283 -0.96609,-0.59707 -0.40006,-2.52889 2.35387,-8.03368 1.9942,-3.98617 3.62582,-8.08712 3.62582,-9.11323 0,-3.76051 2.86625,-1.78441 4.48626,3.09299 0.90585,2.72725 2.74201,6.57224 4.08037,8.54441 2.60529,3.83924 3.03758,5.49709 1.43337,5.49709 -1.56182,0 -1.18358,1.42583 1,3.76963 2.24668,2.41153 2.64479,5.20941 0.75,5.27101 -0.6875,0.0223 0.3017,1.36709 2.19821,2.9883 3.89322,3.32807 4.11067,3.18594 6.63695,-4.33785 l 1.61471,-4.80891 -7.92952,-11.69109 c -4.36123,-6.4301 -9.61378,-14.50359 -11.67233,-17.94109 -2.05856,-3.4375 -4.03564,-6.25 -4.39352,-6.25 -0.35788,0 -3.43794,2.76248 -6.84459,6.13884 -3.54397,3.51248 -6.76419,5.90973 -7.5269,5.60331 -0.73316,-0.29454 -5.15801,-7.99816 -9.83301,-17.11915 -4.675,-9.121 -8.77814,-16.59248 -9.11808,-16.60331 -0.33994,-0.0108 -4.16494,6.73199 -8.5,14.98404 -5.02246,9.56058 -8.39008,14.91168 -9.28263,14.75 -1.22791,-0.22243 -5.56967,-6.96562 -27.0599,-42.02667 l -4.76432,-7.77293 -5.20745,9.02293 c -3.56004,6.16849 -5.78511,9.02294 -7.03345,9.02294 -2.38846,0 -58.42798,-42.59212 -60.54375,-46.0155 -0.40245,-0.65118 -4.31674,4.9623 -9.19808,13.19096 -4.67362,7.8785 -8.93821,14.77454 -9.47687,15.32454 -0.64627,0.65988 -10.90003,-9.14204 -30.14743,-28.81896 l -29.16804,-29.81896 -12,11.21306 c -33.61287,31.40859 -49.82097,45.98454 -50.77869,45.6653 -0.5833,-0.19444 -3.34986,-3.70307 -6.14792,-7.79698 -2.79805,-4.0939 -5.81541,-8.47568 -6.70523,-9.73728 l -1.61785,-2.29382 -11.87515,12.17231 c -15.50043,15.88829 -29.66079,29.72667 -32.3351,31.59982 -3.00202,2.1027 -4.38827,1.23835 -8.61773,-5.37336 l -3.71233,-5.80331 -1.80207,2.49609 c -0.99114,1.37285 -5.53839,7.74251 -10.105,14.15479 -12.2104,17.14544 -21.62724,28.8413 -23.22139,28.8413 -0.7718,0 -3.73518,-4.3875 -6.58528,-9.75 -2.8501,-5.3625 -5.50064,-10.08793 -5.89008,-10.50095 -0.38945,-0.41303 -4.24803,6.44947 -8.57464,15.25 -4.3266,8.80052 -8.42718,16.00095 -9.1124,16.00095 -0.68522,0 -4.65993,-3.67492 -8.832676,-8.16648 -4.17275,-4.49157 -7.74455,-7.97907 -7.93734,-7.75 -0.19279,0.22906 -4.50858,9.14715 -9.59065,19.81796 -8.6646,18.19306 -9.20018,19.6879 -8.59882,24 1.64605,11.80318 2.03255,12.62024 4.54035,9.59852 z M 531.46571,557.87413 c 0,-0.49116 -0.73865,-1.17646 -1.64144,-1.52289 -1.37248,-0.52667 -1.43434,-0.38034 -0.37756,0.89301 1.44013,1.73524 2.019,1.91584 2.019,0.62988 z m 26.34208,-0.55606 c 0.37166,-0.96852 0.0755,-1.26467 -0.89301,-0.89301 -0.79699,0.30583 -1.44907,0.95791 -1.44907,1.44907 0,1.43762 1.73512,1.02567 2.34208,-0.55606 z m -60.99513,-17.68355 c -3.03909,-1.19594 -3.47294,-0.97132 -2.31239,1.19719 0.91848,1.7162 1.36261,1.8507 2.63213,0.79709 1.35357,-1.12336 1.31722,-1.35011 -0.31974,-1.99428 z M 201.40042,527.34581 c 0.96744,-1.1657 0.81164,-1.3251 -0.86631,-0.88631 -1.12525,0.29426 -1.79941,0.93386 -1.49814,1.42133 0.73278,1.18565 0.98351,1.12892 2.36445,-0.53502 z m 174.3376,-17.88954 c -7.15883,-2.15095 -9.25194,-2.47498 -8.51173,-1.31768 0.40668,0.63582 1.86442,2.84844 3.23942,4.91692 l 2.5,3.76086 2.77231,-3.26356 2.77231,-3.26356 z m -127.06882,2.30455 c 1.82488,-3.207 1.68052,-3.32048 -3.02646,-2.37909 -2.98289,0.59658 -3.02715,0.68452 -1.50999,3 2.00768,3.0641 2.47605,3 4.53645,-0.62091 z m 92.16733,-1.74368 1.42219,-2.75 -4.61033,0.3677 -4.61033,0.3677 2.76959,2.3823 c 1.52327,1.31026 2.95794,2.3823 3.18814,2.3823 0.23021,0 1.05854,-1.2375 1.84074,-2.75 z m -64.87082,-0.25 c 0.33992,-0.55 -0.0835,-1 -0.94098,-1 -0.85746,0 -1.55902,0.45 -1.55902,1 0,0.55 0.42344,1 0.94098,1 0.51754,0 1.2191,-0.45 1.55902,-1 z m -95.77143,-61.92792 c 9.43212,-3.94092 11.14514,-5.11414 22,-15.06738 6.47428,-5.93654 16.34096,-15.45367 21.92595,-21.1492 10.16127,-10.36239 24.34548,-28.0127 24.34548,-30.29464 0,-0.66673 -1.09927,-2.24494 -2.44281,-3.50713 -2.32913,-2.18811 -2.41548,-2.69649 -1.85536,-10.92432 0.56344,-8.27669 0.78494,-8.91696 5.419,-15.6643 4.11046,-5.98496 5.29386,-8.87181 7.92916,-19.34287 1.70368,-6.76939 2.91238,-12.4932 2.686,-12.71958 -0.22638,-0.22638 -4.63026,5.04577 -9.78641,11.7159 -6.74297,8.7229 -12.05227,14.32729 -18.91219,19.96333 -16.44931,13.51458 -15.93698,12.95916 -16.98905,18.41811 -2.36252,12.25854 -4.86421,22.2599 -6.15144,24.59244 -0.7683,1.39219 -7.14303,10.92317 -14.16607,21.17996 l -12.76917,18.64869 -14.23083,11.3961 c -12.03618,9.63862 -18.71202,16.1709 -28.66629,28.04986 -0.8605,1.02688 5.86046,-3.28282 14.93546,-9.57712 11.96789,-8.30075 19.30952,-12.61803 26.72857,-15.71785 z M 100.46571,451.49 c 3.575,-1.37918 9.717,-3.70298 13.64889,-5.16401 5.98275,-2.22311 7.36329,-3.17404 8.46327,-5.82962 0.7229,-1.74526 9.43091,-11.53835 19.35111,-21.76243 17.96342,-18.51369 18.06429,-18.64285 24.81777,-31.77802 3.72958,-7.25383 6.65249,-13.18878 6.49537,-13.18878 -0.15712,0 -18.50859,18.28268 -40.78104,40.62818 -22.27245,22.34549 -40.045366,40.39735 -39.495366,40.11523 0.55,-0.28212 3.925,-1.64137 7.499996,-3.02055 z m -0.43426,-29.22286 c 19.96871,-22.07653 73.33316,-75.75074 75.86662,-76.30701 0.76904,-0.16886 6.27386,0.61794 12.23294,1.74845 15.24058,2.8913 16.18433,2.80027 21.94391,-2.11681 10.29458,-8.78872 16.1097,-14.96737 32.65809,-34.69976 17.8135,-21.24092 20.58761,-23.58938 27.09514,-22.93781 2.8485,0.28521 3.24692,-0.0415 4.49685,-3.68706 1.45334,-4.23887 2.89223,-37.3992 1.80749,-41.65518 -0.32869,-1.28965 -3.81423,-6.16982 -7.74562,-10.84482 -8.45816,-10.05796 -13.48683,-20.03888 -14.4687,-28.71746 -0.59622,-5.26989 -1.01067,-6.22021 -2.82558,-6.47912 -2.80036,-0.3995 -4.59824,-7.09446 -5.31806,-19.80342 -0.53545,-9.4537 1.47945,-24.86734 3.82316,-29.2466 2.08551,-3.89682 1.16682,-9.19802 -3.017,-17.40923 -4.18688,-8.21723 -4.93252,-11.94806 -3.0798,-15.40991 1.40288,-2.6213 2.8285,-2.43517 6.24799,0.81574 l 2.8926,2.75 -0.66122,-4.5 c -0.74091,-5.04226 0.50752,-9.31383 3.72638,-12.75 3.79526,-4.05149 5.77237,-2.977762 11.75907,6.3861 4.95126,7.74431 6.04874,8.84554 11,11.03759 7.41664,3.28353 10.49135,6.43857 15.03028,15.42297 2.86489,5.67079 5.42965,9.00221 10.11678,13.1409 6.86758,6.06401 7.01398,7.88023 0.73642,9.13574 l -3.07167,0.61434 2.69157,3.25618 c 4.63486,5.60711 18.95495,18.12664 26.60251,23.2576 5.40134,3.62391 12.8065,6.95555 28.13254,12.65704 30.91568,11.50106 34.68632,13.97534 46.33003,30.40159 15.47129,21.82598 34.34249,32.94317 55.68154,32.80251 8.82046,-0.0581 10.33008,0.64568 7.5,3.49669 -1.00222,1.00963 -0.90478,1.12782 0.49157,0.59624 1.14825,-0.43712 1.96388,-0.0837 2.39412,1.03752 0.77578,2.02164 -4.44387,6.91431 -9.25216,8.67258 -2.19011,0.80087 -2.98367,1.64746 -2.6697,2.84808 0.52578,2.0106 -5.09738,3.72387 -15.37093,4.68323 -14.94013,1.39513 -31.92404,-7.83716 -38.87473,-21.13193 -1.57092,-3.00475 -1.59213,-2.91761 -1.07933,4.43503 0.7428,10.65053 1.96886,13.98168 8.14808,22.13796 4.75508,6.27649 5.4654,7.80399 5.48102,11.78653 0.01,2.51653 0.67679,8.85051 1.48206,14.07551 0.80527,5.225 1.4722,12.26005 1.48206,15.63345 l 0.0179,6.13344 12.09346,11.65954 c 6.65141,6.41275 15.63765,14.14302 19.96944,17.17838 9.76468,6.8423 14.23558,11.87096 19.7012,22.15903 5.91845,11.14045 5.8847,11.11062 37.04831,32.74061 6.22182,4.31844 13.55282,10.30307 16.2911,13.29919 2.73829,2.99612 5.10422,5.27848 5.25764,5.07192 2.60913,-3.51287 9.91457,-16.38377 14.52076,-25.58302 14.42941,-28.81773 21.7014,-51.98587 26.77153,-85.29254 2.40125,-15.77427 2.40071,-52.64799 -10e-4,-69.5 C 563.58057,195.36243 539.2787,146.32396 497.53194,104.76047 463.027,70.407026 427.12066,50.245088 374.96571,35.937737 c -16.81254,-4.612082 -46.24045,-8.170596 -67.56853,-8.170596 -40.72228,0 -81.22197,9.038551 -116.69336,26.043135 -31.18173,14.948165 -49.44386,27.907252 -73.77369,52.350934 -34.096136,34.25569 -54.003426,69.20035 -67.282626,118.10593 -7.15329,26.34463 -9.97692,65.84729 -6.72886,94.13692 4.53596,39.5068 18.09409,78.79667 38.85881,112.60823 3.89016,6.33442 4.24158,6.63889 5.77107,5 0.89576,-0.95983 6.51308,-7.14515 12.482926,-13.74515 z m 340.88426,-8.33868 c -0.5225,-0.46127 -5.45,-4.25258 -10.95,-8.42513 -5.5,-4.17255 -11.65695,-9.75764 -13.68212,-12.41132 -6.44956,-8.45121 -11.02241,-12.0848 -21.06788,-16.74055 -5.3625,-2.48535 -9.75,-4.36283 -9.75,-4.17218 0,0.19065 4.01483,3.55258 8.92184,7.47095 4.90702,3.91837 12.53297,11.01966 16.94657,15.78065 7.01955,7.57206 9.31532,9.31661 18.32815,13.92748 9.7833,5.00503 13.41819,6.48119 11.25344,4.5701 z m -33.60299,-94.66132 c -1.00122,-6.69406 -3.1785,-14.32955 -5.13273,-18 -2.43618,-4.57566 -5.38486,-7.50045 -15.43891,-15.3139 -10.04425,-7.80582 -9.9723,-7.8635 -4.50867,3.61473 2.2792,4.78824 2.46636,6.10617 1.93546,13.62907 -0.38808,5.49908 -1.45644,10.46613 -3.14495,14.62158 -1.40646,3.46133 -2.55735,6.32825 -2.55752,6.37093 -1.7e-4,0.0427 6.65868,0.0776 14.79743,0.0776 h 14.79774 z m -41.34048,0.25 c 0.94803,-2.3375 1.96147,-7.09941 2.25208,-10.58203 l 0.52838,-6.33202 -7.04751,-7.16798 c -11.75336,-11.95426 -18.23948,-24.11786 -18.23948,-34.20499 v -5.46298 h -5.36351 c -7.19621,0 -14.53226,-1.47448 -21.65986,-4.35345 l -5.89395,-2.38067 -0.63341,4.61706 c -1.36511,9.95055 -5.82206,30.6691 -8.95262,41.61706 -0.49291,1.72376 0.28574,2.2655 5.63753,3.92223 3.41519,1.05723 16.36346,7.01973 28.77394,13.25 26.13499,13.12021 27.97512,13.54586 30.59841,7.07777 z m 6.17658,-13.9375 c -0.31922,-0.79773 -0.55618,-0.56078 -0.60416,0.60417 -0.0434,1.05416 0.19293,1.64479 0.52522,1.3125 0.33229,-0.33229 0.36781,-1.1948 0.0789,-1.91667 z m -83.07903,-18.49503 c 0.61305,-2.76066 1.36286,-9.24895 1.66625,-14.41843 0.30339,-5.16947 0.34609,-8.27404 0.0949,-6.89904 -1.37918,7.54922 -3.82345,17.98293 -5.00311,21.35648 -0.74168,2.12106 -1.08534,4.28232 -0.76367,4.80279 1.2441,2.01299 2.93816,-0.0347 4.00565,-4.8418 z m 85.39592,-10.69503 c 0,-0.20765 -0.7875,-0.99515 -1.75,-1.75 -1.58606,-1.24387 -1.62143,-1.2085 -0.37756,0.37756 1.30637,1.66575 2.12756,2.19548 2.12756,1.37244 z M 255.1587,109.03617 c -0.25354,-0.97297 -0.47766,-0.41903 -0.49804,1.23097 -0.0204,1.65 0.18706,2.44606 0.46099,1.76903 0.27392,-0.67703 0.29059,-2.02703 0.0371,-3 z m 23.55701,-82.93131 c -0.6875,-0.277412 -1.8125,-0.277412 -2.5,0 -0.6875,0.277413 -0.125,0.504386 1.25,0.504386 1.375,0 1.9375,-0.226973 1.25,-0.504386 z m 61.01903,0.0063 c -0.67703,-0.273923 -2.02703,-0.290597 -3,-0.03705 -0.97297,0.253544 -0.41903,0.477663 1.23097,0.498042 1.65,0.02038 2.44606,-0.187065 1.76903,-0.460988 z" fill="#a89fd4" />
+                </svg>
             </div>
+            <h2>ἐπιψαύσεις</h2>
+            <span class="hero-divider"></span>
+            <p>Ψηλαφίζοντας τὴ μορφή, τὴ δομὴ καὶ τὴ λειτουργεία τοῦ κόσμου,</p>
+            <p>χρησιμοποιώντας τὴ γλῶσσα Wolfram.</p>
         </div>
-    </div>
+    </main>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"
-        integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
-        crossorigin="anonymous"></script>
-
-    <!-- Custom Bootsnav JS -->
     <script>
-        $(document).ready(function () {
-            // Enable dropdown functionality for desktop
-            function setupDesktopMenu() {
-                $('.navbar .dropdown').off('hover');
-                $('.navbar .dropdown').hover(function () {
-                    $(this).addClass('on');
-                    $(this).find('.dropdown-menu').first().stop(true, true).slideDown();
-                }, function () {
-                    $(this).removeClass('on');
-                    $(this).find('.dropdown-menu').first().stop(true, true).slideUp();
-                });
+
+    (function () {
+        'use strict';
+
+        var overlay   = document.getElementById('aboutModal');
+        var aboutLink = document.getElementById('aboutLink');
+        var closeBtn  = document.getElementById('modalClose');
+        var closeBtnF = document.getElementById('modalCloseBtn');
+
+        function openModal(e) { e.preventDefault(); overlay.classList.add('open'); }
+        function closeModal()  { overlay.classList.remove('open'); }
+
+        aboutLink.addEventListener('click', openModal);
+        closeBtn .addEventListener('click', closeModal);
+        closeBtnF.addEventListener('click', closeModal);
+        overlay  .addEventListener('click', function (e) {
+            if (e.target === overlay) closeModal();
+        });
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeModal();
+        });
+
+        var toggle  = document.getElementById('navToggle');
+        var navMenu = document.getElementById('navMenu');
+
+        toggle.addEventListener('click', function () {
+            var open = navMenu.classList.toggle('open');
+            toggle.setAttribute('aria-expanded', String(open));
+        });
+
+        var isMobile = function () { return window.innerWidth <= 990; };
+
+        /* ── Viewport overflow detection ── */
+        function fixOverflow(menu) {
+            if (!menu) return;
+            // Reset πρώτα
+            menu.style.left = '';
+            menu.style.right = '';
+
+            var rect = menu.getBoundingClientRect();
+            var vw   = window.innerWidth || document.documentElement.clientWidth;
+
+            if (rect.right > vw) {
+                // Ξεπερνά δεξιά → ανοίγει προς τα αριστερά
+                menu.style.left  = 'auto';
+                menu.style.right = '0';
             }
-
-            // Enable dropdown functionality for mobile
-            function setupMobileMenu() {
-                $('.navbar .dropdown').off('hover');
-
-                // Αρχικά κλείστε όλα τα dropdowns
-                $('.navbar .dropdown').removeClass('on');
-                $('.navbar .dropdown-menu').hide();
-
-                // Handle dropdown clicks
-                $('.navbar .dropdown > a').off('click').on('click', function (e) {
-                    if ($(window).width() <= 990) {
-                        e.preventDefault();
-                        var $parent = $(this).parent();
-                        var wasOpen = $parent.hasClass('on');
-
-                        // Close all dropdowns first
-                        $('.navbar .dropdown').removeClass('on');
-                        $('.navbar .dropdown-menu').slideUp();
-
-                        // If the clicked dropdown was not open, open it
-                        if (!wasOpen) {
-                            $parent.addClass('on');
-                            $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
-                        }
-
-                        return false;
-                    }
-                });
-
-                // Handle subdropdown clicks
-                $('.navbar .dropdown .dropdown > a').off('click').on('click', function (e) {
-                    if ($(window).width() <= 990) {
-                        e.preventDefault();
-                        e.stopPropagation(); // Prevent event from bubbling to parent dropdown
-
-                        var $parent = $(this).parent();
-                        var wasOpen = $parent.hasClass('on');
-
-                        // Close other subdropdowns at this level
-                        $parent.siblings('.dropdown').removeClass('on').find('.dropdown-menu').slideUp();
-
-                        // Toggle this subdropdown
-                        if (wasOpen) {
-                            $parent.removeClass('on');
-                            $parent.find('.dropdown-menu').slideUp();
-                        } else {
-                            $parent.addClass('on');
-                            $parent.find('.dropdown-menu').first().stop(true, true).slideDown();
-                        }
-
-                        return false;
-                    }
-                });
+            if (rect.left < 0) {
+                // Ξεπερνά αριστερά → επαναφορά στα δεξιά
+                menu.style.left  = '0';
+                menu.style.right = 'auto';
             }
+        }
 
-            // Initialize based on screen size
-            function initMenu() {
-                if ($(window).width() > 990) {
-                    setupDesktopMenu();
-                } else {
-                    setupMobileMenu();
+        document.querySelectorAll('.nav-menu > li.dropdown').forEach(function (li) {
+            li.addEventListener('mouseenter', function () {
+                if (!isMobile()) {
+                    li.classList.add('on');
+                    fixOverflow(li.querySelector(':scope > .dropdown-menu'));
                 }
-            }
-
-            // Initial setup
-            initMenu();
-
-            // Handle window resize
-            $(window).resize(function () {
-                initMenu();
             });
+            li.addEventListener('mouseleave', function () { if (!isMobile()) li.classList.remove('on'); });
+        });
 
-            // Mobile menu toggle - use Bootstrap's built-in collapse
-            $('.navbar-toggle').click(function () {
-                // This is handled by Bootstrap's collapse plugin
+        /* Sub-dropdown overflow: ανοίγουν δεξιά by default, αν δεν χωράνε → αριστερά */
+        document.querySelectorAll('.dropdown-menu li.dropdown').forEach(function (li) {
+            li.addEventListener('mouseenter', function () {
+                if (isMobile()) return;
+                var sub = li.querySelector(':scope > .dropdown-menu');
+                if (!sub) return;
+                // Reset
+                sub.style.left  = '';
+                sub.style.right = '';
+                sub.style.top   = '';
+                var rect = sub.getBoundingClientRect();
+                var vw   = window.innerWidth || document.documentElement.clientWidth;
+                if (rect.right > vw) {
+                    sub.style.left  = 'auto';
+                    sub.style.right = '100%';
+                }
             });
         });
+
+        document.querySelectorAll('.nav-menu > li.dropdown > a').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                if (!isMobile()) return;
+                e.preventDefault();
+                var li = a.parentElement;
+                var wasOpen = li.classList.contains('on');
+                document.querySelectorAll('.nav-menu > li.dropdown').forEach(function (x) { x.classList.remove('on'); });
+                if (!wasOpen) li.classList.add('on');
+            });
+        });
+
+        document.querySelectorAll('.dropdown-menu li.dropdown > a').forEach(function (a) {
+            a.addEventListener('click', function (e) {
+                if (!isMobile()) return;
+                e.preventDefault();
+                e.stopPropagation();
+                var li = a.parentElement;
+                var wasOpen = li.classList.contains('on');
+                li.parentElement.querySelectorAll(':scope > li.dropdown').forEach(function (x) { x.classList.remove('on'); });
+                if (!wasOpen) li.classList.add('on');
+            });
+        });
+
+        window.addEventListener('resize', function () {
+            if (!isMobile()) {
+                navMenu.classList.remove('open');
+                document.querySelectorAll('.nav-menu li.dropdown').forEach(function (li) { li.classList.remove('on'); });
+            }
+        });
+    })();
+
     </script>
 </body>
-
 </html>
