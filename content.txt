@@ -17,7 +17,7 @@
 [Ανταίος](https://antaios.pages.dev/) — περιέχει αυτοματοποιημένες εφαρμογές για πρακτική χρήση.
 
 
-# Εκμάθηση <listmenu>
+# wolf4sci <listmenu>
 
 [Άλγεβρα](algebra (wljsEDU).html)
 
