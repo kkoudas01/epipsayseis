@@ -874,7 +874,7 @@ def generate_html(data: dict) -> str:
         <div class="content-section">
             <div class="svg-icon">
                 <svg width="240px" height="130px" viewBox="0 0 1200 654" role="img" xmlns="http://www.w3.org/2000/svg">
-                    <title>Wolfram Language icon</title>
+                    <title>ἐπιψαύσεις icon</title>
                         <g transform="translate(0,654) scale(0.1,-0.1)" fill="#a89fd4">
                        <path d="{SVG_PATH}" />
     </g>
