@@ -231,17 +231,10 @@ CSS = """
             max-width: 700px; margin: 0 auto;
         }
         .svg-icon {
-            margin-bottom: 28px;
-            transition: transform .3s;
+            filter: drop-shadow(0 4px 14px rgba(160,140,220,.35));
+            margin-bottom: 28px; transition: filter .3s;
         }
-        .svg-icon:hover { transform: scale(1.06); }
-        .svg-icon svg {
-            filter: drop-shadow(0 0 10px rgba(160,140,220,.35));
-            transition: filter .3s;
-        }
-        .svg-icon:hover svg {
-            filter: drop-shadow(0 0 22px rgba(200,170,255,.9));
-        }
+        .svg-icon:hover { filter: drop-shadow(0 6px 22px rgba(180,150,255,.6)); }
         .content-section h2 {
             font-size: 2.4rem; font-weight: 700; color: var(--hero-h2);
             letter-spacing: .02em; margin-bottom: 16px;
@@ -880,11 +873,11 @@ def generate_html(data: dict) -> str:
     <main>
         <div class="content-section">
             <div class="svg-icon">
-                <svg width="240px" height="130px" viewBox="0 0 1200 654" overflow="visible" role="img" xmlns="http://www.w3.org/2000/svg">
+                <svg width="240px" height="130px" viewBox="0 0 1200 654" role="img" xmlns="http://www.w3.org/2000/svg">
                     <title>ἐπιψαύσεις icon</title>
-                    <g transform="translate(0,654) scale(0.1,-0.1)" fill="#a89fd4">
-                        <path d="{SVG_PATH}" />
-                    </g>
+                        <g transform="translate(0,654) scale(0.1,-0.1)" fill="#a89fd4">
+                       <path d="{SVG_PATH}" />
+    </g>
                 </svg>
             </div>
             <h2>{escape(data['hero_h2'])}</h2>

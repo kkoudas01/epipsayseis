@@ -2873,33 +2873,7 @@ a.toc-h3,.toc-h4{{color:#aaa}}
   #toc-btn{{display:none}}
   #toc-overlay{{display:none}}
 }}
-@media print{{#toc{{display:none}}#toc-btn{{display:none}}#notebook{{margin-left:0;max-width:none}}body{{background:#fff}}.cin{{background:#f0f0f0!important}}.cout{{background:#e8f0f8!important}}.sig-footer{{display:none}}}}
-
-/* ── Διακριτική υπογραφή (κάτω-δεξιά) ── */
-.sig-footer{{
-  position:fixed;
-  bottom:.6rem;right:.9rem;
-  z-index:150;
-  font-size:.7rem;
-  color:rgba(255,255,255,.32);
-  font-style:italic;
-  letter-spacing:.02em;
-  pointer-events:auto;
-  user-select:none;
-}}
-.sig-footer a{{
-  color:rgba(255,255,255,.48);
-  text-decoration:none;
-  border-bottom:1px dotted rgba(255,255,255,.3);
-  font-style:normal;
-  pointer-events:auto;
-}}
-.sig-footer a:hover{{color:rgba(255,255,255,.8)}}
-@media(max-width:700px){{
-  /* Στα κινητά το toc-btn είναι bottom-left, οπότε δεν υπάρχει σύγκρουση,
-     απλά μικραίνουμε λίγο τη γραμματοσειρά για να μη "πατάει" στο πλάι. */
-  .sig-footer{{font-size:.62rem;bottom:.5rem;right:.6rem}}
-}}
+@media print{{#toc{{display:none}}#toc-btn{{display:none}}#notebook{{margin-left:0;max-width:none}}body{{background:#fff}}.cin{{background:#f0f0f0!important}}.cout{{background:#e8f0f8!important}}}}
 """
 
     mathjax_cfg = """window.MathJax={tex:{inlineMath:[['$','$'],['\\\\(','\\\\)']],displayMath:[['$$','$$'],['\\\\[','\\\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};"""
@@ -2975,7 +2949,6 @@ a.toc-h3,.toc-h4{{color:#aaa}}
 <div id="notebook">
 {nb_html}
 </div>
-<div class="sig-footer">ἐπιψαύσεις - υλοποίηση με <a href="https://wljs.io/" target="_blank" rel="noopener noreferrer">WLJS</a></div>
 <script>{toc_js}</script>
 </body>
 </html>"""

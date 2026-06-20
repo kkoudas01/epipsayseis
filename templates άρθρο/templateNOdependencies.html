@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Template Εγγράφου</title>
+<!-- Το KaTeX CSS + JS φορτώνεται δυναμικά από τον loader στο τέλος —
+     δεν χρειάζεται τίποτα εδώ. -->
+
+<!-- ================================================================
+  ΟΔΗΓΟΣ ΧΡΗΣΗΣ (διαβάστε πριν συντάξετε το έγγραφό σας)
+  ================================================================
+
+  ΤΙΤΛΟΙ:
+    <h2 class="h2">Τίτλος Ενότητας</h2>
+    <h3 class="h3">Τίτλος Υποενότητας</h3>
+    → Ο πίνακας περιεχομένων δημιουργείται ΑΥΤΟΜΑΤΑ από αυτούς.
+
+  ΠΑΡΑΓΡΑΦΟΣ: <p>κείμενο...</p>
+
+  ΜΟΡΦΟΠΟΙΗΣΗ:
+    Bold:          <strong>...</strong>
+    Italic:        <em>...</em>
+    Underline:     <u>...</u>
+    Highlight:     <mark class="hl-yellow">...</mark>
+                   (hl-blue / hl-green / hl-pink / hl-teal)
+    Χρώμα κειμ.:  <span class="c-blue">...</span>
+                   (c-lavender / c-yellow / c-teal / c-pink /
+                    c-green / c-peach / c-sky)
+    Inline code:   <code>...</code>
+    Εξ. σύνδεσμος:<a href="URL" target="_blank" rel="noopener">...</a>
+
+  ΜΑΘΗΜΑΤΙΚΑ (KaTeX — όπως ακριβώς στο Quarto/Markdown):
+    Inline: $\frac{a}{b} + x^2$          (μέσα στο κείμενο)
+    Block:  <div class="mblock">$$\sum_{i=1}^n x_i = \mu$$</div>
+    Υποστηρίζεται πλήρης LaTeX σύνταξη.
+
+  ΛΙΣΤΕΣ:
+    <ul class="lst"><li>...</li>
+      <ul class="sublst"><li>...</li></ul>
+    </ul>
+
+  ΑΡΙΘΜΗΣΗ:
+    <ol class="nlst"><li>...</li>
+      <ol class="subnlst"><li>...</li></ol>
+    </ol>
+
+  QUOTE:
+    <blockquote class="bq">
+      <p>Κείμενο.</p><cite>Πηγή</cite>
+    </blockquote>
+
+  ΣΗΜΕΙΩΣΗ (σταθερή):
+    <div class="note">
+      <div class="note-ttl">📌 Τίτλος</div>
+      <div class="note-body">Κείμενο...</div>
+    </div>
+
+  ΣΗΜΕΙΩΣΗ (με collapse — αρχικά ΚΛΕΙΣΤΟ, ανοίγει με κλικ):
+    <div class="note">
+      <div class="note-ttl col" onclick="toggleNote(this)">💡 Τίτλος</div>
+      <div class="note-body">Κείμενο...</div>
+    </div>
+
+  ΚΩΔΙΚΑΣ:
+    <div class="cb">
+      <span class="cb-desc">Περιγραφή</span>
+      <pre><code>...κώδικας...</code></pre>
+    </div>
+    Syntax highlighting (προαιρετικό):
+      <span class="ck">keyword</span>  <span class="cf">function</span>
+      <span class="cs">string</span>   <span class="cn">number</span>
+      <span class="cc">comment</span>  <span class="ct">Type</span>
+
+  TABS (IDs μοναδικά ανά σελίδα!):
+    <div class="tbx">
+      <div class="tbnv">
+        <button class="tb on" onclick="tab(this,'A1')">Καρτέλα 1</button>
+        <button class="tb"    onclick="tab(this,'A2')">Καρτέλα 2</button>
+      </div>
+      <div class="tbp on" id="A1">Περιεχόμενο 1</div>
+      <div class="tbp"    id="A2">Περιεχόμενο 2</div>
+    </div>
+
+  ΕΙΚΟΝΑ:
+    <figure class="fig">
+      <img src="εικόνα.png" alt="Περιγραφή"
+           onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="img-ph" style="display:none">[ Εικόνα: filename ]</div>
+      <figcaption>Εικόνα Χ: Λεζάντα...</figcaption>
+    </figure>
+
+  PDF:
+    <div class="pdfbox">
+      <div class="pdf-lbl">Περιγραφή PDF</div>
+      <object class="pdf-emb" data="file.pdf" type="application/pdf">
+        <p style="padding:24px">Δεν φαίνεται. <a href="file.pdf">Λήψη</a></p>
+      </object>
+    </div>
+
+  ΒΙΝΤΕΟ τοπικό (αρχείο στον ίδιο φάκελο ή υποφάκελο):
+    <div class="vidbox">
+      <div class="vid-lbl">Περιγραφή βίντεο</div>
+      <video class="vid-emb" controls>
+        <source src="video.mp4" type="video/mp4">
+        <p>Ο browser δεν υποστηρίζει video. <a href="video.mp4">Λήψη</a></p>
+      </video>
+    </div>
+
+  ΒΙΝΤΕΟ YouTube (αντικαταστήστε VIDEO_ID με το id από το URL):
+    <div class="vidbox">
+      <div class="vid-lbl">Περιγραφή βίντεο</div>
+      <div class="yt-wrap">
+        <iframe class="yt-emb" src="https://www.youtube.com/embed/VIDEO_ID"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media;
+                       gyroscope; picture-in-picture" allowfullscreen></iframe>
+      </div>
+    </div>
+    Το VIDEO_ID βρίσκεται στο URL: youtube.com/watch?v=VIDEO_ID
+    ή σε σύντομο link:            youtu.be/VIDEO_ID
+
+  SVG / HTML με SVG (αρχείο στον ίδιο φάκελο):
+    <div class="svgbox">
+      <div class="svg-lbl">Περιγραφή διαγράμματος</div>
+      <div class="svg-wrap">
+        <iframe class="svg-emb" src="diagram.svg"></iframe>
+      </div>
+    </div>
+    Δουλεύει εξίσου με .svg και .html αρχεία.
+    Αλλάξτε το ύψος inline αν χρειαστεί:
+      <div class="svg-wrap" style="height:600px">...</div>
+    Για SVG με σκοτεινό φόντο αλλάξτε:
+      <div class="svg-wrap" style="background:var(--bg)">...</div>
+
+  ΠΙΝΑΚΑΣ:
+    <div class="tblw">
+      <p class="tbl-cap"><strong>Πίνακας Χ.</strong> Περιγραφή.</p>
+      <table class="dtbl">
+        <thead><tr><th>Α</th><th>Β</th></tr></thead>
+        <tbody><tr><td>1</td><td>2</td></tr></tbody>
+      </table>
+    </div>
+
+  ΔΙΑΧΩΡΙΣΤΙΚΗ ΓΡΑΜΜΗ: <hr class="div">
+================================================================ -->
+
+<style>
+/* ================================================================
+   ΜΕΤΑΒΛΗΤΕΣ ΧΡΩΜΑΤΩΝ (Catppuccin Mocha — φιλική για αστιγματισμό
+   και αχρωματοψία: αποφεύγει πλήρες λευκό/μαύρο, χρησιμοποιεί
+   μπλε-κίτρινο ζεύγη αντί κόκκινο-πράσινο)
+   ================================================================ */
+:root {
+  --bg:         #1e1e2e; /* Φόντο κύριου κειμένου               */
+  --bg-sb:      #181825; /* Φόντο sidebar / topbar              */
+  --bg-card:    #313244; /* Φόντο πλαισίων                      */
+  --bg-el:      #45475a; /* Φόντο ανυψωμένων στοιχείων          */
+  --txt:        #cdd6f4; /* Κύριο κείμενο                       */
+  --txt-m:      #a6adc8; /* Δευτερεύον κείμενο                  */
+  --txt-s:      #6c7086; /* Υποτονισμένο κείμενο                */
+  --brd:        #45475a; /* Περιγράμματα                        */
+  /* Accent χρώματα */
+  --blue:    #89b4fa;
+  --lav:     #b4befe;
+  --yel:     #f9e2af;
+  --teal:    #94e2d5;
+  --pink:    #f38ba8;
+  --grn:     #a6e3a1;
+  --pch:     #fab387;
+  --sky:     #89dceb;
+  /* Highlights (ημιδιάφανα) */
+  --hl-y:  rgba(249,226,175,.32);
+  --hl-b:  rgba(137,180,250,.32);
+  --hl-g:  rgba(166,227,161,.32);
+  --hl-p:  rgba(243,139,168,.32);
+  --hl-t:  rgba(148,226,213,.32);
+  /* Διάταξη */
+  --sb-w:  280px;  /* Πλάτος sidebar */
+  --tb-h:  46px;   /* Ύψος topbar   */
+  --r:     8px;    /* border-radius  */
+  --r-s:   4px;
+}
+
+*,*::before,*::after { box-sizing:border-box; margin:0; padding:0; }
+html { scroll-behavior:smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--txt);
+  font-family: Georgia, 'Palatino Linotype', serif; /* Serif για καλύτερη αναγνωσιμότητα */
+  font-size: 16.5px;
+  line-height: 1.82;
+}
+
+/* Headings, UI elements: sans-serif */
+.topbar, .btn-back, .btn-toc, .sidebar, .tbl-cap,
+.note-ttl, .cb-desc, .tab, .signature,
+h2.h2, h3.h3, h1.doc-title, .doc-subtitle, .doc-author,
+.toc-h2-lbl, .toc-h3-lnk, .tbl-cap, .pdf-lbl, .tb {
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+a { color:var(--blue); text-decoration:none; transition:opacity .15s; }
+a:hover { text-decoration:underline; opacity:.8; }
+
+/* Εξωτερικοί σύνδεσμοι — το ↗ εμφανίζεται αυτόματα */
+a[target="_blank"]::after {
+  content:'\202F↗'; font-size:.7em; opacity:.6;
+}
+
+/* ================================================================
+   TOP BAR — Επιστροφή + Toggle TOC
+   ================================================================ */
+.topbar {
+  position:fixed; top:0; left:0; right:0;
+  height:var(--tb-h);
+  background:var(--bg-sb);
+  border-bottom:1px solid var(--brd);
+  display:flex; align-items:center; gap:10px; padding:0 16px;
+  z-index:900;
+}
+
+/* ← Κουμπί επιστροφής (αλλάξτε href αν χρειαστεί) */
+.btn-back {
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--blue); border-radius:var(--r-s);
+  color:var(--blue); background:transparent;
+  padding:3px 11px; font-size:.82rem; cursor:pointer;
+  transition:background .15s, color .15s; white-space:nowrap;
+  text-decoration:none;
+}
+.btn-back:hover { background:var(--blue); color:var(--bg); text-decoration:none; opacity:1; }
+.btn-back::after { display:none; } /* κρύψε το ↗ */
+
+/* ☰ Κουμπί toggle TOC */
+.btn-toc {
+  display:inline-flex; align-items:center; gap:5px;
+  border:1px solid var(--brd); border-radius:var(--r-s);
+  color:var(--txt-m); background:transparent;
+  padding:3px 11px; font-size:.82rem; cursor:pointer;
+  transition:color .15s, border-color .15s; white-space:nowrap;
+}
+.btn-toc:hover { color:var(--txt); border-color:var(--txt-m); }
+
+.topbar-doc {
+  margin-left:auto; font-size:.76rem; color:var(--txt-s);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; max-width:300px;
+}
+
+/* ================================================================
+   ΥΠΟΓΡΑΦΗ — κάτω δεξιά, διακριτική
+   ================================================================ */
+.signature {
+  position:fixed; bottom:13px; right:18px; z-index:800;
+  font-size:.72rem; color:var(--txt-s);
+  letter-spacing:.1em; font-style:italic; pointer-events:none;
+}
+
+/* ================================================================
+   SIDEBAR — Αυτόματος πίνακας περιεχομένων
+   ================================================================ */
+.sidebar {
+  position:fixed; top:var(--tb-h); left:0;
+  width:var(--sb-w);
+  height:calc(100vh - var(--tb-h));
+  background:var(--bg-sb); border-right:1px solid var(--brd);
+  overflow-y:auto;
+  transition:transform .3s ease;
+  z-index:700; padding-bottom:50px;
+}
+.sidebar.closed { transform:translateX(-100%); }
+.sidebar::-webkit-scrollbar { width:4px; }
+.sidebar::-webkit-scrollbar-thumb { background:var(--brd); border-radius:2px; }
+
+.sb-head {
+  padding:14px 16px 10px; border-bottom:1px solid var(--brd);
+  font-size:.67rem; font-weight:800;
+  text-transform:uppercase; letter-spacing:.15em; color:var(--txt-s);
+}
+
+.toc-list { list-style:none; padding:6px 0; }
+
+/* Ενότητα (h2) */
+.toc-h2 { margin-top:10px; }
+.toc-h2-lbl {
+  display:block; padding:4px 16px;
+  font-size:.7rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.07em;
+  color:var(--lav); cursor:pointer;
+  transition:color .15s;
+}
+.toc-h2-lbl:hover { color:var(--txt); }
+.toc-h2 ul { list-style:none; }
+
+/* Υποενότητα (h3) */
+.toc-h3-lnk {
+  display:block; padding:5px 16px 5px 26px;
+  font-size:.84rem; color:var(--txt-m);
+  cursor:pointer; border-left:2px solid transparent; margin-left:8px;
+  transition:color .2s, border-color .2s, text-shadow .25s;
+}
+.toc-h3-lnk:hover { color:var(--blue); border-left-color:var(--blue); }
+
+/* Λάμψη (glow) για την ενεργή ενότητα κατά ανάγνωση */
+.toc-h3-lnk.active {
+  color:var(--blue); border-left-color:var(--blue);
+  text-shadow:0 0 8px rgba(137,180,250,.8), 0 0 22px rgba(137,180,250,.3);
+}
+
+/* Mobile overlay για κλείσιμο sidebar */
+.overlay {
+  display:none; position:fixed; inset:0;
+  background:rgba(0,0,0,.55); z-index:600;
+}
+.overlay.on { display:block; }
+
+/* ================================================================
+   ΚΥΡΙΩΣ ΠΕΡΙΕΧΟΜΕΝΟ
+   ================================================================ */
+.main {
+  margin-left:var(--sb-w); margin-top:var(--tb-h);
+  padding:52px 64px 130px;
+  max-width:calc(var(--sb-w) + 820px);
+  transition:margin-left .3s ease;
+}
+.main.wide { margin-left:0; }
+
+/* ── Κεφαλίδα εγγράφου ── */
+.doc-header { margin-bottom:42px; }
+h1.doc-title {
+  font-size:2.1rem; font-weight:800; color:var(--blue);
+  line-height:1.2; margin-bottom:10px;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.doc-subtitle { font-size:1.06rem; color:var(--txt-m); margin-bottom:6px; }
+.doc-author   { font-size:.9rem; color:var(--teal); font-style:italic; }
+
+/* ================================================================
+   ΤΙΤΛΟΙ ΕΝΟΤΗΤΩΝ
+   ================================================================ */
+h2.h2 {
+  font-size:1.52rem; color:var(--lav);
+  margin:54px 0 16px; padding-bottom:8px;
+  border-bottom:2px solid var(--brd);
+  scroll-margin-top:calc(var(--tb-h) + 8px);
+}
+h3.h3 {
+  font-size:1.16rem; color:var(--teal);
+  margin:38px 0 12px;
+  scroll-margin-top:calc(var(--tb-h) + 8px);
+}
+p { margin-bottom:14px; }
+
+/* ================================================================
+   ΚΕΙΜΕΝΟ — Inline μορφοποίηση
+   ================================================================ */
+mark { background:none; color:inherit; padding:0 3px; border-radius:3px; }
+.hl-yellow { background:var(--hl-y); }
+.hl-blue   { background:var(--hl-b); }
+.hl-green  { background:var(--hl-g); }
+.hl-pink   { background:var(--hl-p); }
+.hl-teal   { background:var(--hl-t); }
+
+.c-blue     { color:var(--blue); }
+.c-lavender { color:var(--lav);  }
+.c-yellow   { color:var(--yel);  }
+.c-teal     { color:var(--teal); }
+.c-pink     { color:var(--pink); }
+.c-green    { color:var(--grn);  }
+.c-peach    { color:var(--pch);  }
+.c-sky      { color:var(--sky);  }
+
+code {
+  background:rgba(69,71,90,.65); color:var(--pch);
+  padding:2px 5px; border-radius:var(--r-s);
+  font-family:'Consolas','Courier New',monospace; font-size:.875em;
+}
+
+/* ================================================================
+   ΜΑΘΗΜΑΤΙΚΑ — KaTeX (pinned v0.16.9, μόνιμο URL)
+   ================================================================
+   Inline: $LaTeX$   Block: <div class="mblock">$$LaTeX$$</div>
+   Η βιβλιοθήκη φορτώνεται από cdnjs (σταθερό CDN της Cloudflare).
+   ---------------------------------------------------------------- */
+/* Χρωματισμός μαθηματικών — κληρονομείται από KaTeX */
+.katex { color: var(--yel) !important; font-size: 1.06em; }
+.katex-display > .katex { color: var(--yel) !important; }
+
+/* Wrapper για block-math: δίνει φόντο, περίγραμμα, scroll */
+.mblock {
+  margin: 26px auto; padding: 16px 20px;
+  background: rgba(249,226,175,.05);
+  border: 1px solid rgba(249,226,175,.15);
+  border-radius: var(--r);
+  overflow-x: auto;  /* scroll για πλατιές εξισώσεις */
+  text-align: center;
+}
+.mblock .katex-display { margin: 4px 0; overflow-x: auto; overflow-y: hidden; }
+
+/* ================================================================
+   ΛΙΣΤΕΣ — bullet και υπο-λίστα
+   ================================================================ */
+ul.lst, ol.nlst { margin:14px 0 14px 24px; }
+ul.lst  { list-style:disc;    }
+ul.lst > li { margin-bottom:7px; }
+ul.sublst {
+  list-style:circle; margin:7px 0 4px 24px;
+  color:var(--txt-m); font-size:.95rem;
+}
+ul.sublst li { margin-bottom:4px; }
+
+/* ================================================================
+   ΑΡΙΘΜΗΣΗ — numbered και υπο-αρίθμηση
+   ================================================================ */
+ol.nlst { list-style:decimal; }
+ol.nlst > li { margin-bottom:7px; }
+ol.subnlst {
+  list-style:lower-alpha; margin:7px 0 4px 24px;
+  color:var(--txt-m); font-size:.95rem;
+}
+ol.subnlst li { margin-bottom:4px; }
+
+/* ================================================================
+   QUOTE — Πλαίσιο παράθεσης
+   ================================================================ */
+blockquote.bq {
+  border-left:4px solid var(--lav);
+  background:rgba(180,190,254,.07);
+  margin:26px 0; padding:16px 22px 12px;
+  border-radius:0 var(--r) var(--r) 0;
+  font-style:italic;
+}
+blockquote.bq p { font-size:1.05rem; margin-bottom:10px; }
+blockquote.bq cite {
+  display:block; font-size:.85rem;
+  font-style:normal; font-weight:700; color:var(--lav);
+  font-family:system-ui,-apple-system,sans-serif;
+}
+blockquote.bq cite::before { content:'— '; }
+
+/* ================================================================
+   NOTE — Σημείωση (σταθερό ύψος + scroll + προαιρετικό collapse)
+   ================================================================ */
+.note {
+  border:1px solid var(--teal); border-radius:var(--r);
+  margin:26px 0; overflow:hidden;
+  background:rgba(148,226,213,.04);
+}
+.note-ttl {
+  background:rgba(148,226,213,.12); color:var(--teal);
+  padding:9px 16px; font-weight:700; font-size:.88rem;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.note-ttl.col { cursor:pointer; user-select:none; }
+.note-ttl.col::after {
+  content:'▼'; font-size:.6rem; opacity:.7; transition:transform .25s;
+}
+.note-ttl.col.shut::after { transform:rotate(-180deg); }
+
+.note-body {
+  padding:14px 18px;
+  max-height:220px; /* Σταθερό ύψος — scroll αν χρειαστεί */
+  overflow-y:auto;
+  font-size:.94rem; line-height:1.77;
+}
+.note-body p { margin-bottom:10px; }
+.note-body.gone { display:none; }
+.note-body::-webkit-scrollbar { width:5px; }
+.note-body::-webkit-scrollbar-thumb { background:var(--brd); border-radius:3px; }
+
+/* ================================================================
+   CODE BLOCK — Φουτουριστικό πλαίσιο κώδικα
+   ================================================================ */
+.cb {
+  background:#0d0f1a; border:1px solid #2d2f48;
+  border-radius:var(--r); margin:26px 0;
+  overflow:hidden; position:relative;
+  box-shadow:0 4px 28px rgba(0,0,0,.55), inset 0 1px 0 rgba(255,255,255,.02);
+}
+/* Λεπτή φωτεινή γραμμή ("laser beam") στην κορυφή */
+.cb::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg,transparent 5%,var(--blue) 50%,transparent 95%);
+  opacity:.55;
+}
+.cb-desc {
+  display:block;
+  background:rgba(137,180,250,.06); border-bottom:1px solid #2d2f48;
+  padding:7px 16px;
+  font-family:'Consolas','Courier New',monospace;
+  font-size:.76rem; color:var(--txt-s); letter-spacing:.06em;
+}
+.cb-desc::before { content:'// '; color:#6272a4; }
+
+.cb pre {
+  margin:0; padding:18px; overflow-x:auto;
+  font-family:'Consolas','Courier New',monospace;
+  font-size:.875rem; line-height:1.68; color:#cdd6f4;
+  tab-size:4;
+}
+.cb pre code { background:none; padding:0; color:inherit; font-size:inherit; }
+
+/* Syntax highlighting — optional spans */
+.ck { color:#ff79c6; }                    /* keywords */
+.cf { color:#50fa7b; }                    /* functions */
+.cs { color:#f1fa8c; }                    /* strings */
+.cn { color:#bd93f9; }                    /* numbers */
+.cc { color:#6272a4; font-style:italic; } /* comments */
+.ct { color:#8be9fd; }                    /* types/classes */
+
+.cb pre::-webkit-scrollbar { height:5px; }
+.cb pre::-webkit-scrollbar-thumb { background:#44475a; border-radius:3px; }
+
+/* ================================================================
+   TABS — Πλαίσιο με καρτέλες
+   ================================================================ */
+.tbx {
+  background:rgba(249,226,175,.03);
+  border:1px solid var(--yel); border-radius:var(--r);
+  margin:26px 0; overflow:hidden;
+}
+.tbnv {
+  display:flex; border-bottom:1px solid var(--yel);
+  background:rgba(249,226,175,.08);
+  overflow-x:auto; scrollbar-width:none;
+}
+.tbnv::-webkit-scrollbar { display:none; }
+.tb {
+  background:transparent; border:none;
+  border-bottom:2px solid transparent; color:var(--txt-m);
+  padding:9px 20px; font-size:.86rem; cursor:pointer;
+  white-space:nowrap; margin-bottom:-1px;
+  transition:color .15s, border-color .15s;
+}
+.tb:hover { color:var(--yel); }
+.tb.on { color:var(--yel); border-bottom-color:var(--yel); font-weight:700; }
+.tbp { display:none; padding:18px 22px; }
+.tbp.on { display:block; }
+
+/* ================================================================
+   FIGURE — Εικόνα με λεζάντα
+   ================================================================ */
+figure.fig {
+  margin:30px auto; max-width:640px;
+  background:var(--bg-card); border:1px solid var(--brd);
+  border-radius:var(--r); overflow:hidden; text-align:center;
+}
+figure.fig img { width:100%; height:auto; display:block; min-height:80px; }
+figure.fig figcaption {
+  padding:10px 16px;
+  font-size:.83rem; color:var(--txt-m); font-style:italic;
+  border-top:1px solid var(--brd); line-height:1.5;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.img-ph {
+  min-height:160px; display:flex; align-items:center;
+  justify-content:center; color:var(--txt-s); font-size:.9rem;
+  font-family:system-ui,-apple-system,sans-serif;
+}
+
+/* ================================================================
+   PDF — Ενσωματωμένο PDF
+   ================================================================ */
+.pdfbox {
+  background:var(--bg-card); border:1px solid var(--brd);
+  border-radius:var(--r); margin:26px 0; overflow:hidden;
+}
+.pdf-lbl {
+  padding:9px 16px; font-size:.87rem; color:var(--txt-m);
+  background:rgba(69,71,90,.45); border-bottom:1px solid var(--brd);
+}
+.pdf-lbl::before { content:'📄 '; }
+.pdf-emb { display:block; width:100%; height:520px; border:none; }
+
+/* ================================================================
+   ΒΙΝΤΕΟ — Τοπικό αρχείο και YouTube embed
+   ================================================================ */
+.vidbox {
+  background:var(--bg-card); border:1px solid var(--brd);
+  border-radius:var(--r); margin:26px 0; overflow:hidden;
+}
+.vid-lbl {
+  padding:9px 16px; font-size:.87rem; color:var(--txt-m);
+  background:rgba(69,71,90,.45); border-bottom:1px solid var(--brd);
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.vid-lbl::before { content:'🎬 '; }
+
+/* Τοπικό βίντεο (<video>) */
+.vid-emb {
+  display:block; width:100%; max-height:520px;
+  background:#000; border:none;
+}
+
+/* YouTube — 16:9 responsive wrapper */
+.yt-wrap {
+  position:relative; width:100%; padding-top:56.25%; /* 9/16 = 56.25% */
+  background:#000;
+}
+.yt-emb {
+  position:absolute; inset:0;
+  width:100%; height:100%; border:none;
+}
+
+/* ================================================================
+   SVG / HTML με SVG — τοπικό αρχείο
+   ================================================================ */
+.svgbox {
+  background:var(--bg-card); border:1px solid var(--brd);
+  border-radius:var(--r); margin:26px 0; overflow:hidden;
+}
+.svg-lbl {
+  padding:9px 16px; font-size:.87rem; color:var(--txt-m);
+  background:rgba(69,71,90,.45); border-bottom:1px solid var(--brd);
+  font-family:system-ui,-apple-system,sans-serif;
+}
+.svg-lbl::before { content:'🖼 '; }
+/* Wrapper: καθορίζει ύψος + scroll αν χρειαστεί.
+   background:#fff γιατί τα SVG σχεδιάζονται συνήθως για λευκό φόντο.
+   Αλλάξτε σε background:var(--bg) αν το SVG σας υποστηρίζει dark mode. */
+.svg-wrap {
+  width:100%; height:420px;
+  overflow:auto;
+  background:#fff;
+  display:flex; align-items:flex-start; justify-content:center;
+}
+.svg-emb {
+  display:block; width:100%; height:100%; border:none;
+  flex-shrink:0;
+}
+
+/* ================================================================
+   ΠΙΝΑΚΑΣ — Εναλλαγή χρωμάτων γραμμών (zebra)
+   ================================================================ */
+.tblw { margin:26px 0; overflow-x:auto; }
+.tbl-cap { font-size:.87rem; color:var(--txt-m); margin-bottom:8px; font-style:italic; }
+.tbl-cap strong { font-style:normal; color:var(--blue); }
+
+table.dtbl {
+  width:100%; border-collapse:collapse;
+  font-size:.93rem; min-width:380px;
+}
+table.dtbl thead th {
+  background:var(--bg-card); color:var(--blue);
+  font-weight:700; padding:10px 14px; text-align:left;
+  border-bottom:2px solid var(--blue); white-space:nowrap;
+}
+table.dtbl td {
+  padding:9px 14px; border-bottom:1px solid var(--brd); vertical-align:top;
+}
+table.dtbl tbody tr:nth-child(even) td { background:rgba(69,71,90,.35); }
+table.dtbl tbody tr:hover td { background:rgba(137,180,250,.08); }
+
+/* ================================================================
+   ΒΟΗΘΗΤΙΚΑ
+   ================================================================ */
+hr.div { border:none; border-top:1px solid var(--brd); margin:42px 0; }
+
+/* ================================================================
+   RESPONSIVE — Mobile / μικρές οθόνες (<820px)
+   ================================================================ */
+@media (max-width:820px) {
+  .main       { margin-left:0 !important; padding:52px 18px 110px; }
+  .sidebar    { transform:translateX(-100%) !important; }
+  .sidebar.mob-on { transform:translateX(0) !important; }
+  .topbar-doc { display:none; }
+  h1.doc-title { font-size:1.6rem; }
+  h2.h2        { font-size:1.26rem; }
+  .pdf-emb     { height:320px; }
+  .main.wide   { margin-left:0 !important; } /* ήδη 0, safe */
+}
+@media (max-width:480px) {
+  .main { padding:50px 12px 100px; }
+  .tb   { padding:8px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════════════════════════
+     TOP BAR
+     ════════════════════════════════════════════════════════════════ -->
+<header class="topbar">
+  <!-- ← Αλλάξτε href αν το index.html έχει άλλη διαδρομή -->
+  <a href="index.html" class="btn-back">← Αρχική</a>
+  <button class="btn-toc" id="btn-toc" onclick="tocToggle()">☰ Περιεχόμενα</button>
+  <span class="topbar-doc" id="topbar-doc"></span>
+</header>
+
+<!-- ════════════════════════════════════════════════════════════════
+     SIDEBAR (γεμίζει αυτόματα από JS)
+     ════════════════════════════════════════════════════════════════ -->
+<nav class="sidebar" id="sidebar">
+  <div class="sb-head">Πίνακας Περιεχομένων</div>
+  <ul class="toc-list" id="toc"></ul>
+</nav>
+<div class="overlay" id="ov" onclick="tocClose()"></div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     ΥΠΟΓΡΑΦΗ
+     ════════════════════════════════════════════════════════════════ -->
+<div class="signature">επιψαύσεις</div>
+
+<!-- ════════════════════════════════════════════════════════════════
+     ΚΥΡΙΩΣ ΠΕΡΙΕΧΟΜΕΝΟ
+     ════════════════════════════════════════════════════════════════ -->
+<main class="main" id="main">
+
+  <!-- ──────────────────────────────────────────────────────────────
+       ΚΕΦΑΛΙΔΑ — Αλλάξτε τίτλο, υπότιτλο, συγγραφέα
+       ────────────────────────────────────────────────────────────── -->
+  <header class="doc-header">
+    <h1 class="doc-title" id="doc-title">Τίτλος Εγγράφου</h1>
+    <p class="doc-subtitle">Σύντομη περιγραφή — υπότιτλος που εξηγεί το θέμα του κειμένου.</p>
+    <p class="doc-author">Συγγραφέας: Ονοματεπώνυμο &bull; Ιανουάριος 2025</p>
+  </header>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 1: Εισαγωγή
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">1. Εισαγωγή</h2>
+
+  <h3 class="h3">1.1 Ιστορικό και Κίνητρο</h3>
+  <p>
+    Αυτό το template δημιουργήθηκε για να καλύψει τις ανάγκες παρουσίασης
+    <strong>ακαδημαϊκού</strong> ή <strong>τεχνικού</strong> κειμένου, χωρίς
+    εξωτερικές εξαρτήσεις. Χρησιμοποιεί <em>dark mode</em> με παλέτα
+    Catppuccin Mocha, φιλική σε άτομα με <u>αστιγματισμό ή αχρωματοψία</u>.
+    Το κείμενο δεν είναι αμιγώς λευκό (μειώνεται η αντίθεση), και τα accent
+    χρώματα επιλέχθηκαν ώστε να
+    <mark class="hl-yellow">ξεχωρίζουν χωρίς διάκριση κόκκινου-πράσινου</mark>.
+  </p>
+  <p>
+    Περισσότερα για προσβασιμότητα:
+    <a href="https://catppuccin.com" target="_blank" rel="noopener">Catppuccin palette</a>
+    και
+    <a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank" rel="noopener">WCAG 2.2 guidelines</a>.
+  </p>
+
+  <h3 class="h3">1.2 Στόχοι και Δομή</h3>
+  <p>
+    Ο <span class="c-lavender">πίνακας περιεχομένων</span> αριστερά
+    δημιουργείται <mark class="hl-blue">αυτόματα</mark> από τους τίτλους
+    <code>h2.h2</code> και <code>h3.h3</code> της σελίδας. Η ενεργή ενότητα
+    κατά την ανάγνωση <span class="c-blue">λάμπει (glow)</span> στον πίνακα.
+    Ο πίνακας μπορεί να κρυφτεί με <strong>☰ Περιεχόμενα</strong> στην κορυφή.
+  </p>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 2: Μορφοποίηση Κειμένου
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">2. Μορφοποίηση Κειμένου</h2>
+
+  <h3 class="h3">2.1 Στιλ Γραφής, Χρώματα και Σύνδεσμοι</h3>
+  <p>
+    <strong>Bold (έντονη γραφή)</strong>, <em>italic (πλαγιογράμματη)</em>,
+    <u>υπογράμμιση</u>. Highlights:
+    <mark class="hl-yellow">κίτρινο</mark>,
+    <mark class="hl-blue">μπλε</mark>,
+    <mark class="hl-green">πράσινο</mark>,
+    <mark class="hl-pink">ροζ</mark>,
+    <mark class="hl-teal">teal</mark>.
+  </p>
+  <p>
+    Χρώματα γραμματοσειράς:
+    <span class="c-blue">μπλε</span>,
+    <span class="c-lavender">λεβάντα</span>,
+    <span class="c-yellow">κίτρινο</span>,
+    <span class="c-teal">teal</span>,
+    <span class="c-pink">ροζ</span>,
+    <span class="c-green">πράσινο</span>,
+    <span class="c-peach">πορτοκαλί</span>,
+    <span class="c-sky">γαλάζιο</span>.
+    Inline κώδικας: <code>myFunction(x, y)</code>.
+  </p>
+  <p>
+    Εξωτερικοί σύνδεσμοι ανοίγουν σε νέο tab — το βέλος ↗ εμφανίζεται
+    αυτόματα:
+    <a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Docs</a>,
+    <a href="https://wikipedia.org" target="_blank" rel="noopener">Wikipedia</a>.
+  </p>
+
+  <h3 class="h3">2.2 Μαθηματικές Εκφράσεις (LaTeX)</h3>
+
+  <!-- Inline math: γράφετε $LaTeX$ απευθείας μέσα στο κείμενο -->
+  <p>
+    Inline εξισώσεις: η δευτεροβάθμια είναι
+    $\dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
+    και το Γκαουσιανό ολοκλήρωμα
+    $\displaystyle\int_{-\infty}^{+\infty} e^{-x^2}\,dx = \sqrt{\pi}$.
+    Η κανονική κατανομή $\mu \pm \sigma$ περιέχει το $68.3\%$ των τιμών.
+  </p>
+
+  <!-- Block math: <div class="mblock">$$LaTeX$$</div> -->
+  <p>Κεντρικές εξισώσεις σε ξεχωριστή γραμμή:</p>
+  <div class="mblock">
+    $$\bar{x} = \frac{1}{n}\sum_{i=1}^{n} x_i \qquad \Rightarrow \qquad \sigma^2 = \frac{1}{n}\sum_{i=1}^{n}\!\left(x_i - \bar{x}\right)^2$$
+  </div>
+  <p>Εξίσωση Maxwell (Ampère–Maxwell):</p>
+  <div class="mblock">
+    $$\nabla \times \mathbf{B} \;=\; \mu_0\,\mathbf{J} + \mu_0\epsilon_0\,\frac{\partial \mathbf{E}}{\partial t}$$
+  </div>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 3: Λίστες και Αρίθμηση
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">3. Λίστες και Αρίθμηση</h2>
+
+  <h3 class="h3">3.1 Λίστες Bullet με Υπο-λίστα</h3>
+
+  <!-- <ul class="lst"> ... <ul class="sublst"> ... -->
+  <ul class="lst">
+    <li>Πρώτο στοιχείο κύριας λίστας (●)</li>
+    <li>Δεύτερο στοιχείο — περιέχει υπο-λίστα:
+      <ul class="sublst">
+        <li>Υπο-στοιχείο α — σύμβολο ○, χαμηλότερη φωτεινότητα</li>
+        <li>Υπο-στοιχείο β — εμφανώς ξεχωριστό από την κύρια λίστα</li>
+        <li>Υπο-στοιχείο γ</li>
+      </ul>
+    </li>
+    <li>Τρίτο στοιχείο κύριας λίστας</li>
+    <li>Τέταρτο στοιχείο</li>
+  </ul>
+
+  <h3 class="h3">3.2 Αριθμημένες Λίστες με Υπο-αρίθμηση</h3>
+
+  <!-- <ol class="nlst"> ... <ol class="subnlst"> ... -->
+  <ol class="nlst">
+    <li>Πρώτο βήμα</li>
+    <li>Δεύτερο βήμα — με αλφαβητική υπο-αρίθμηση:
+      <ol class="subnlst">
+        <li>Υπο-βήμα 2α — λατινική αλφαβητική (a, b, c…)</li>
+        <li>Υπο-βήμα 2β — χαμηλότερη φωτεινότητα για διάκριση</li>
+        <li>Υπο-βήμα 2γ</li>
+      </ol>
+    </li>
+    <li>Τρίτο βήμα</li>
+    <li>Τέταρτο βήμα</li>
+  </ol>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 4: Ειδικά Πλαίσια
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">4. Ειδικά Πλαίσια</h2>
+
+  <h3 class="h3">4.1 Παράθεση (Quote)</h3>
+
+  <!-- <blockquote class="bq"><p>Κείμενο</p><cite>Πηγή</cite></blockquote> -->
+  <blockquote class="bq">
+    <p>Η γνώση μιλάει, αλλά η σοφία ακούει. Ο πιο σπουδαίος σταθμός
+    στο ταξίδι της εκπαίδευσης δεν είναι η τελική άφιξη αλλά η ίδια η πορεία.</p>
+    <cite>Jimi Hendrix</cite>
+  </blockquote>
+
+  <blockquote class="bq">
+    <p>Το μέτρο της νοημοσύνης είναι η ικανότητα να αλλάζεις.</p>
+    <cite>Albert Einstein, <em>Ideas and Opinions</em>, 1954</cite>
+  </blockquote>
+
+  <h3 class="h3">4.2 Σημειώσεις (Note)</h3>
+
+  <!-- NOTE σταθερό (χωρίς collapse) -->
+  <div class="note">
+    <div class="note-ttl">📌 Σταθερή Σημείωση</div>
+    <div class="note-body">
+      Πλαίσιο με φόντο που ξεχωρίζει από το κύριο κείμενο. Σταθερό
+      <code>max-height: 220px</code> — αν το κείμενο είναι μεγαλύτερο,
+      εμφανίζεται αυτόματα μπάρα κύλισης χωρίς να επηρεάζεται η υπόλοιπη
+      διάταξη. Μπορεί να περιέχει <strong>bold</strong>, <em>italic</em>,
+      <code>code</code>, λίστες και ό,τι άλλο χρειαστεί.
+    </div>
+  </div>
+
+  <!-- NOTE collapsible: class "col" + onclick="toggleNote(this)"
+       Αρχική κατάσταση: ΚΛΕΙΣΤΟ — ο χρήστης ανοίγει με κλικ. -->
+  <div class="note">
+    <div class="note-ttl col" onclick="toggleNote(this)">💡 Collapsible Σημείωση — Πατήστε για Άνοιγμα/Σύμπτυξη</div>
+    <div class="note-body">
+      <p>Αυτό το πλαίσιο ξεκινά <strong>κλειστό</strong> και ανοίγει με κλικ στον τίτλο.
+      Χρήσιμο για προαιρετικές πληροφορίες που δεν θέλετε να κατακλύζουν το κείμενο.</p>
+      <p>Για πολύ μεγάλο περιεχόμενο εμφανίζεται αυτόματα η μπάρα scroll.</p>
+      <p>Παράγραφος 3 — για δοκιμή του scroll.</p>
+      <p>Παράγραφος 4 — η μπάρα εμφανίζεται όταν ξεπεράσει τα 220px.</p>
+      <p>Παράγραφος 5 — scroll away!</p>
+    </div>
+  </div>
+
+  <h3 class="h3">4.3 Κώδικας (Code Block)</h3>
+
+  <!-- <div class="cb"><span class="cb-desc">...</span><pre><code>...</code></pre></div> -->
+  <div class="cb">
+    <span class="cb-desc">Python — στατιστικά χωρίς εξωτερικές βιβλιοθήκες</span>
+    <pre><code><span class="ck">import</span> math
+
+<span class="ck">def</span> <span class="cf">statistics</span>(data: <span class="ct">list</span>[<span class="ct">float</span>]) -> <span class="ct">dict</span>:
+    <span class="cc"># Υπολογισμός μέσης τιμής και τυπικής απόκλισης</span>
+    n       = <span class="cf">len</span>(data)
+    mean    = <span class="cf">sum</span>(data) / n
+    var     = <span class="cf">sum</span>((x - mean)**<span class="cn">2</span> <span class="ck">for</span> x <span class="ck">in</span> data) / n
+    std_dev = math.<span class="cf">sqrt</span>(var)
+    <span class="ck">return</span> {<span class="cs">"n"</span>: n, <span class="cs">"mean"</span>: <span class="cf">round</span>(mean, <span class="cn">4</span>), <span class="cs">"std"</span>: <span class="cf">round</span>(std_dev, <span class="cn">4</span>)}
+
+<span class="cc"># Παράδειγμα χρήσης</span>
+data = [<span class="cn">2.1</span>, <span class="cn">3.5</span>, <span class="cn">4.0</span>, <span class="cn">2.8</span>, <span class="cn">5.2</span>, <span class="cn">3.9</span>]
+res  = <span class="cf">statistics</span>(data)
+<span class="cf">print</span>(<span class="cs">f"Μ={res['mean']}  σ={res['std']}"</span>)  <span class="cc"># Μ=3.5833  σ=0.8975</span></code></pre>
+  </div>
+
+  <h3 class="h3">4.4 Πλαίσιο με Καρτέλες (Tabs)</h3>
+
+  <!-- TABS: IDs μοναδικά ανά σελίδα. Για 2ο σύνολο tabs χρησιμοποιήστε π.χ. B1, B2... -->
+  <div class="tbx">
+    <div class="tbnv">
+      <button class="tb on" onclick="tab(this,'A1')">📊 Δεδομένα</button>
+      <button class="tb"    onclick="tab(this,'A2')">📖 Ανάλυση</button>
+      <button class="tb"    onclick="tab(this,'A3')">⚙️ Κώδικας</button>
+    </div>
+
+    <div class="tbp on" id="A1">
+      <p>Η πρώτη καρτέλα περιέχει <strong>δεδομένα</strong>. Δοκιμαστικές τιμές:</p>
+      <ul class="lst">
+        <li>Σύνολο μετρήσεων: <span class="c-yellow">24 σημεία</span></li>
+        <li>Εύρος τιμών: <span class="c-teal">[0.1, 9.8]</span></li>
+        <li>Μέση τιμή: <span class="c-blue">4.35</span>, τυπική απόκλιση: <span class="c-lavender">2.11</span></li>
+      </ul>
+    </div>
+
+    <div class="tbp" id="A2">
+      <p>Ανάλυση: τα δεδομένα παρουσιάζουν
+      <mark class="hl-teal">κανονική κατανομή</mark>
+      με μέτρια διασπορά. Η τυπική απόκλιση είναι $\sigma = 2.11$.</p>
+      <blockquote class="bq">
+        <p>Η κατανομή υποδηλώνει ισχυρή κεντρικότητα γύρω από τη μέση τιμή.</p>
+        <cite>Ανάλυση 2025</cite>
+      </blockquote>
+    </div>
+
+    <div class="tbp" id="A3">
+      <div class="cb">
+        <span class="cb-desc">R — γρήγορη διερευνητική ανάλυση</span>
+        <pre><code><span class="cf">summary</span>(my_data)
+<span class="cf">hist</span>(my_data$value, main=<span class="cs">"Κατανομή"</span>, col=<span class="cs">"steelblue"</span>)
+<span class="cf">shapiro.test</span>(my_data$value)</code></pre>
+      </div>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 5: Πολυμέσα
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">5. Πολυμέσα</h2>
+
+  <h3 class="h3">5.1 Εικόνα με Λεζάντα</h3>
+  <p>
+    Τοποθετείτε την εικόνα σας στον ίδιο φάκελο με το HTML και
+    αλλάζετε <code>src="myPicture.png"</code>. Εαν η εικόνα λείπει
+    εμφανίζεται placeholder.
+  </p>
+
+  <!-- <figure class="fig"><img src="..."> + onerror placeholder + <figcaption> -->
+  <figure class="fig">
+    <img src="myPicture.png" alt="Παράδειγμα εικόνας"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+    <div class="img-ph" style="display:none">[ Εικόνα: myPicture.png — τοποθετήστε το αρχείο ]</div>
+    <figcaption>
+      <strong>Εικόνα 1.</strong> Λεζάντα — σύντομη περιγραφή του περιεχομένου.
+      Αναφορά πηγής εάν απαιτείται (π.χ. <em>Πηγή: Όνομα, 2024</em>).
+    </figcaption>
+  </figure>
+
+  <h3 class="h3">5.2 Ενσωματωμένο PDF</h3>
+
+  <!-- Αλλάξτε data="document.pdf" με τη διαδρομή του PDF σας -->
+  <div class="pdfbox">
+    <div class="pdf-lbl">
+      Άρθρο αναφοράς: «Τίτλος Άρθρου», Επώνυμο Α. κ.ά. (2024), Εκδότης.
+      Σύντομη περιγραφή του περιεχομένου και της συνάφειάς του με το κείμενο.
+    </div>
+    <object class="pdf-emb" data="document.pdf" type="application/pdf">
+      <p style="padding:28px;color:var(--txt-m);text-align:center;">
+        Ο browser δεν υποστηρίζει inline προβολή PDF.
+        <a href="document.pdf">Κατεβάστε το αρχείο</a>.
+      </p>
+    </object>
+  </div>
+
+  <h3 class="h3">5.3 Βίντεο</h3>
+  <p>
+    Υποστηρίζονται δύο τύποι: <strong>τοπικό αρχείο</strong> (mp4, webm, ogg —
+    στον ίδιο φάκελο ή υποφάκελο) και <strong>YouTube</strong> μέσω embed.
+    Και οι δύο χρησιμοποιούν το ίδιο πλαίσιο <code>.vidbox</code>.
+  </p>
+
+  <!-- ── Τοπικό βίντεο ───────────────────────────────────────────
+       Αλλάξτε src="video.mp4" με τη διαδρομή του αρχείου σας.
+       Υποστηριζόμενοι τύποι: .mp4 (H.264), .webm, .ogg
+       Χωρίς internet — δουλεύει offline.
+       ─────────────────────────────────────────────────────────── -->
+  <div class="vidbox">
+    <div class="vid-lbl">
+      Τοπικό βίντεο: παράδειγμα χρήσης του template σε tablet.
+      Τοποθετήστε το αρχείο <code>video.mp4</code> στον ίδιο φάκελο.
+    </div>
+    <video class="vid-emb" controls preload="metadata">
+      <source src="video.mp4" type="video/mp4">
+      <source src="video.webm" type="video/webm">
+      <p style="padding:28px;color:var(--txt-m);text-align:center;">
+        Ο browser δεν υποστηρίζει αναπαραγωγή video.
+        <a href="video.mp4">Κατεβάστε το αρχείο</a>.
+      </p>
+    </video>
+  </div>
+
+  <!-- ── YouTube embed ──────────────────────────────────────────
+       Αντικαταστήστε VIDEO_ID με το id του βίντεο από το URL:
+         youtube.com/watch?v=VIDEO_ID   →  VIDEO_ID = dQw4w9WgXcQ
+         youtu.be/VIDEO_ID              →  VIDEO_ID = dQw4w9WgXcQ
+
+       Προαιρετικές παράμετροι στο src (μετά το VIDEO_ID):
+         ?start=90        → ξεκινά στο 1:30
+         ?end=300         → σταματά στο 5:00
+         ?cc_load_policy=1 → ενεργοποιεί υπότιτλους
+         ?rel=0           → δεν εμφανίζει σχετικά βίντεο
+       Συνδυασμός: ?start=90&end=300&rel=0
+
+       Απαιτεί internet — δεν λειτουργεί offline.
+       ─────────────────────────────────────────────────────────── -->
+  <div class="vidbox">
+    <div class="vid-lbl">
+      YouTube: Τίτλος βίντεο — σύντομη περιγραφή ή πηγή αναφοράς.
+    </div>
+    <div class="yt-wrap">
+      <iframe class="yt-emb"
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
+              title="Τίτλος βίντεο"
+              allow="accelerometer; autoplay; clipboard-write;
+                     encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+  </div>
+
+  <h3 class="h3">5.4 Διάγραμμα SVG</h3>
+  <p>
+    Φορτώνει αρχεία <code>.svg</code> ή <code>.html</code> (που περιέχουν SVG)
+    από τον ίδιο φάκελο. Δουλεύει offline.
+    Το ύψος είναι ρυθμιζόμενο per-instance με <code>style="height:Xpx"</code>.
+  </p>
+
+  <!-- ── SVG αρχείο ─────────────────────────────────────────────
+       Δουλεύει με: .svg, .html (p.χ. export από matplotlib, D3, Inkscape).
+       Αντικαταστήστε src="diagram.svg" με τη διαδρομή του αρχείου σας.
+       ─────────────────────────────────────────────────────────── -->
+  <div class="svgbox">
+    <div class="svg-lbl">
+      Διάγραμμα: <code>diagram.svg</code> — τοποθετήστε το αρχείο στον ίδιο φάκελο.
+    </div>
+    <div class="svg-wrap">
+      <iframe class="svg-emb" src="diagram.svg"
+              title="Διάγραμμα SVG"></iframe>
+    </div>
+  </div>
+
+  <!-- ── HTML με SVG (π.χ. από Python/matplotlib, Plotly, D3) ──
+       Ίδια χρήση — απλώς αλλάζετε src σε .html
+       ─────────────────────────────────────────────────────────── -->
+  <div class="svgbox">
+    <div class="svg-lbl">
+      Διαδραστικό διάγραμμα: <code>chart.html</code> — HTML αρχείο που περιέχει SVG
+      (π.χ. Plotly export, matplotlib, D3.js).
+    </div>
+    <!-- Ύψος αυξημένο inline για διαδραστικά διαγράμματα -->
+    <div class="svg-wrap" style="height:520px">
+      <iframe class="svg-emb" src="chart.html"
+              title="Διαδραστικό διάγραμμα"></iframe>
+    </div>
+  </div>
+
+  <hr class="div">
+
+  <!-- ══════════════════════════════════════════════════════════════
+       ΕΝΟΤΗΤΑ 6: Πίνακας Δεδομένων
+       ══════════════════════════════════════════════════════════════ -->
+  <h2 class="h2">6. Πίνακας Δεδομένων</h2>
+
+  <h3 class="h3">6.1 Παράδειγμα Πίνακα</h3>
+
+  <!-- <div class="tblw"><p class="tbl-cap">...</p><table class="dtbl">...</table></div> -->
+  <div class="tblw">
+    <p class="tbl-cap">
+      <strong>Πίνακας 1.</strong> Σύγκριση μεθόδων ανάλυσης ως προς
+      ακρίβεια, ταχύτητα και πολυπλοκότητα υλοποίησης.
+      Εναλλαγή χρωμάτων γραμμών για ευκολότερη ανάγνωση.
+    </p>
+    <table class="dtbl">
+      <thead>
+        <tr>
+          <th>Μέθοδος</th>
+          <th>Ακρίβεια</th>
+          <th>Ταχύτητα</th>
+          <th>Πολυπλοκότητα</th>
+          <th>Σχόλια</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Α — Βηματική</strong></td>
+          <td><span class="c-green">Υψηλή</span></td>
+          <td><span class="c-yellow">Μέτρια</span></td>
+          <td>Χαμηλή</td>
+          <td>Ιδανική για μικρά δείγματα</td>
+        </tr>
+        <tr>
+          <td><strong>Β — Επαναληπτική</strong></td>
+          <td><span class="c-yellow">Μέτρια</span></td>
+          <td><span class="c-green">Υψηλή</span></td>
+          <td>Μέτρια</td>
+          <td>Κατάλληλη για πραγματικό χρόνο</td>
+        </tr>
+        <tr>
+          <td><strong>Γ — Αναλυτική</strong></td>
+          <td><span class="c-green">Πολύ Υψηλή</span></td>
+          <td><span class="c-pink">Χαμηλή</span></td>
+          <td>Υψηλή</td>
+          <td>Απαιτεί ισχυρό υπολογιστικό εξοπλισμό</td>
+        </tr>
+        <tr>
+          <td><strong>Δ — Υβριδική</strong></td>
+          <td><span class="c-teal">Υψηλή</span></td>
+          <td><span class="c-teal">Υψηλή</span></td>
+          <td>Μέτρια</td>
+          <td>Καλή ισορροπία απόδοσης-ταχύτητας</td>
+        </tr>
+        <tr>
+          <td><strong>Ε — Ευρετική</strong></td>
+          <td><span class="c-yellow">Χαμηλή</span></td>
+          <td><span class="c-green">Πολύ Υψηλή</span></td>
+          <td>Χαμηλή</td>
+          <td>Γρήγορη εκτίμηση, πρόχειρα αποτελέσματα</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</main><!-- /main -->
+
+
+<!-- ════════════════════════════════════════════════════════════════
+     JAVASCRIPT — όλη η λογική της σελίδας
+     ════════════════════════════════════════════════════════════════ -->
+<script>
+/* ════════════════════════════════════════════════════════════════════
+   1. SIDEBAR TOGGLE
+   ════════════════════════════════════════════════════════════════════ */
+var sbOpen = true; /* Αρχική κατάσταση: ανοιχτό σε desktop */
+
+function tocToggle() { sbOpen ? tocClose() : tocOpen(); }
+
+function tocOpen() {
+  var sb  = document.getElementById('sidebar'),
+      ov  = document.getElementById('ov'),
+      mn  = document.getElementById('main'),
+      btn = document.getElementById('btn-toc');
+  sb.classList.remove('closed');
+  if (window.innerWidth > 820) {
+    sb.classList.remove('mob-on');
+    mn.classList.remove('wide');
+  } else {
+    sb.classList.add('mob-on');
+    ov.classList.add('on');
+  }
+  btn.textContent = '⊲ Κρύψε';
+  sbOpen = true;
+}
+
+function tocClose() {
+  var sb  = document.getElementById('sidebar'),
+      ov  = document.getElementById('ov'),
+      mn  = document.getElementById('main'),
+      btn = document.getElementById('btn-toc');
+  sb.classList.add('closed');
+  sb.classList.remove('mob-on');
+  ov.classList.remove('on');
+  mn.classList.add('wide');
+  btn.textContent = '☰ Περιεχόμενα';
+  sbOpen = false;
+}
+
+/* Σε mobile, το sidebar αρχίζει κλειστό */
+window.addEventListener('resize', function() {
+  if (window.innerWidth > 820 && sbOpen)
+    document.getElementById('main').classList.remove('wide');
+});
+
+
+/* ════════════════════════════════════════════════════════════════════
+   2. ΑΥΤΟΜΑΤΟΣ ΠΙΝΑΚΑΣ ΠΕΡΙΕΧΟΜΕΝΩΝ
+   Σαρώνει h2.h2 και h3.h3, χτίζει δυναμικά τη λίστα πλοήγησης.
+   ════════════════════════════════════════════════════════════════════ */
+function buildTOC() {
+  var toc = document.getElementById('toc');
+  var hs  = document.querySelectorAll('h2.h2, h3.h3');
+  var sub = null; /* τρέχουσα υπο-λίστα για h3 */
+
+  hs.forEach(function(h, i) {
+    if (!h.id) h.id = 'sec-' + i; /* αυτόματο ID αν λείπει */
+
+    if (h.tagName === 'H2') {
+      var li = document.createElement('li');
+      li.className = 'toc-h2';
+      var sp = document.createElement('span');
+      sp.className = 'toc-h2-lbl';
+      sp.textContent = h.textContent;
+      (function(id) { sp.onclick = function() { goTo(id); }; })(h.id);
+      li.appendChild(sp);
+      sub = document.createElement('ul');
+      li.appendChild(sub);
+      toc.appendChild(li);
+
+    } else if (h.tagName === 'H3') {
+      var li = document.createElement('li');
+      var a  = document.createElement('a');
+      a.className = 'toc-h3-lnk';
+      a.textContent = h.textContent;
+      a.setAttribute('data-id', h.id);
+      (function(id) { a.onclick = function() { goTo(id); }; })(h.id);
+      li.appendChild(a);
+      (sub || toc).appendChild(li);
+    }
+  });
+
+  /* Εμφάνιση τίτλου εγγράφου στη topbar */
+  var dt = document.getElementById('doc-title');
+  if (dt) document.getElementById('topbar-doc').textContent = dt.textContent;
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   3. ΚΥΛΙΣΗ ΣΤΗΝ ΕΠΙΛΕΓΜΕΝΗ ΕΝΟΤΗΤΑ
+   Λαμβάνει υπόψη το ύψος topbar ώστε ο τίτλος να μη κρύβεται.
+   ════════════════════════════════════════════════════════════════════ */
+function goTo(id) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  var tbH = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue('--tb-h'), 10) || 46;
+  var y = el.getBoundingClientRect().top + window.pageYOffset - tbH - 6;
+  window.scrollTo({ top: y, behavior: 'smooth' });
+  if (window.innerWidth <= 820) tocClose(); /* κλείσιμο σε mobile */
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   4. ΕΝΕΡΓΟΠΟΙΗΣΗ (GLOW) ΣΤΟΝ ΠΙΝΑΚΑ ΚΑΤΑ ΤΗΝ ΑΝΑΓΝΩΣΗ
+   IntersectionObserver: εντοπίζει ποια h3 βρίσκεται στο viewport.
+   ════════════════════════════════════════════════════════════════════ */
+function setupGlow() {
+  var tbH = parseInt(
+    getComputedStyle(document.documentElement).getPropertyValue('--tb-h'), 10) || 46;
+
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      var lnk = document.querySelector('.toc-h3-lnk[data-id="' + entry.target.id + '"]');
+      if (!lnk) return;
+      if (entry.isIntersecting) {
+        document.querySelectorAll('.toc-h3-lnk.active')
+                .forEach(function(a) { a.classList.remove('active'); });
+        lnk.classList.add('active');
+        lnk.scrollIntoView({ block:'nearest', behavior:'smooth' });
+      }
+    });
+  }, {
+    rootMargin: '-' + (tbH + 4) + 'px 0px -62% 0px',
+    threshold: 0
+  });
+
+  document.querySelectorAll('h3.h3').forEach(function(h) { obs.observe(h); });
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   5. COLLAPSIBLE NOTES
+   Καλείται από onclick="toggleNote(this)" στο .note-ttl.col
+   Αρχική κατάσταση: ΚΛΕΙΣΤΟ (shut + gone) — ανοίγει με κλικ.
+   ════════════════════════════════════════════════════════════════════ */
+function toggleNote(ttl) {
+  ttl.classList.toggle('shut');
+  ttl.nextElementSibling.classList.toggle('gone');
+}
+
+/* Κλείνει ΟΛΕΣ τις collapsible notes κατά τη φόρτωση της σελίδας */
+document.addEventListener('DOMContentLoaded', function () {
+  document.querySelectorAll('.note-ttl.col').forEach(function (ttl) {
+    ttl.classList.add('shut');
+    ttl.nextElementSibling.classList.add('gone');
+  });
+});
+
+
+/* ════════════════════════════════════════════════════════════════════
+   6. TABS
+   Καλείται από onclick="tab(this,'ID')" στα .tb buttons
+   ════════════════════════════════════════════════════════════════════ */
+function tab(btn, pid) {
+  var box = btn.closest('.tbx');
+  box.querySelectorAll('.tb').forEach(function(b) { b.classList.remove('on'); });
+  box.querySelectorAll('.tbp').forEach(function(p) { p.classList.remove('on'); });
+  btn.classList.add('on');
+  var panel = document.getElementById(pid);
+  if (panel) panel.classList.add('on');
+}
+
+
+/* ════════════════════════════════════════════════════════════════════
+   7. ΑΡΧΙΚΟΠΟΙΗΣΗ — τρέχει μόλις φορτωθεί η σελίδα
+   ════════════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded', function() {
+  buildTOC();
+  setupGlow();
+  /* Σημ: το KaTeX φορτώνεται χωριστά στο τέλος του body */
+
+  /* Σε mobile, το sidebar ξεκινά κλειστό */
+  if (window.innerWidth <= 820) {
+    document.getElementById('sidebar').classList.add('closed');
+    document.getElementById('main').classList.add('wide');
+    document.getElementById('btn-toc').textContent = '☰ Περιεχόμενα';
+    sbOpen = false;
+  }
+});
+</script>
+
+<!-- ════════════════════════════════════════════════════════════════
+  KaTeX LOCAL LOADER — self-hosted, χωρίς internet, χωρίς CDN
+  ════════════════════════════════════════════════════════════════
+  ΕΓΚΑΤΑΣΤΑΣΗ (μία φορά, από τον ριζικό φάκελο των σημειώσεων):
+    bash setup-katex.sh
+
+  Αποτέλεσμα:
+    my-notes/
+      _katex/              ← μία εγκατάσταση για ΟΛΑ τα HTML
+        katex.min.js
+        auto-render.min.js
+        katex.min.css
+        fonts/  (50+ αρχεία .woff2)
+      template.html
+      physics/waves.html   ← βρίσκει αυτόματα ../_katex/
+      math/calc/notes.html ← βρίσκει αυτόματα ../../_katex/
+
+  Η σύνταξη παραμένει ίδια:
+    Inline:  $\frac{a}{b}$
+    Block:   <div class="mblock">$$\sum_{i=1}^n x_i$$</div>
+  ════════════════════════════════════════════════════════════════ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── Κτίζουμε λίστα σχετικών διαδρομών προς _katex/ ──────────
+     Ξεκινάμε από τον τρέχοντα φάκελο και ανεβαίνουμε έως 8 επίπεδα.
+     Το "../" είναι πάντα σχετικό ως προς τη θέση του HTML αρχείου,
+     ανεξάρτητα από πρωτόκολλο (file://, http://, https://).       */
+  var MAX = 8;
+  var candidates = [];
+  for (var d = 0; d <= MAX; d++) {
+    candidates.push('../'.repeat(d) + '_katex/');
+  }
+
+  /* ── Βοηθητικές: δυναμική φόρτωση CSS και JS ─────────────────  */
+  function injectCSS(href) {
+    var el  = document.createElement('link');
+    el.rel  = 'stylesheet';
+    el.href = href;
+    document.head.appendChild(el);
+  }
+
+  function injectScript(src, onload) {
+    var el    = document.createElement('script');
+    el.src    = src;
+    el.onload = onload;
+    document.head.appendChild(el);
+  }
+
+  /* ── Μόλις βρούμε τον σωστό φάκελο, φορτώνουμε όλα ──────────  */
+  function loadKaTeX(base) {
+    injectCSS(base + 'katex.min.css');
+    /* katex.min.js φορτώθηκε ήδη κατά τον έλεγχο — φορτώνουμε
+       το auto-render που εξαρτάται από αυτό                       */
+    injectScript(base + 'auto-render.min.js', function () {
+      if (typeof renderMathInElement === 'undefined') return;
+      renderMathInElement(document.body, {
+        delimiters: [
+          { left: '$$',  right: '$$',  display: true  },
+          { left: '$',   right: '$',   display: false },
+          { left: '\\[', right: '\\]', display: true  },
+          { left: '\\(', right: '\\)', display: false }
+        ],
+        /* Αγνοεί code/pre ώστε ο κώδικας να μην αποδίδεται ως LaTeX */
+        ignoredTags: ['script','noscript','style','textarea','pre','code','option'],
+        throwOnError: false   /* Λάθος LaTeX → εμφανίζει raw κείμενο, δεν σπάει */
+      });
+    });
+  }
+
+  /* ── Δοκιμάζουμε κάθε διαδρομή διαδοχικά ────────────────────
+     Φορτώνουμε katex.min.js ως probe: αν φορτωθεί → βρήκαμε τον
+     σωστό φάκελο. Αν αποτύχει (onerror) → δοκιμάζουμε την επόμενη. */
+  function tryNext(idx) {
+    if (idx >= candidates.length) {
+      console.warn(
+        '[KaTeX loader] Δεν βρέθηκε _katex/.\n' +
+        'Τρέξτε: bash setup-katex.sh  (από τον ριζικό φάκελο)'
+      );
+      return;
+    }
+    var probe = document.createElement('script');
+    probe.src = candidates[idx] + 'katex.min.js';
+
+    probe.onload  = function () { loadKaTeX(candidates[idx]); };
+    probe.onerror = function () {
+      document.head.removeChild(probe);
+      tryNext(idx + 1);
+    };
+    document.head.appendChild(probe);
+  }
+
+  /* ── Εκκίνηση ─────────────────────────────────────────────────
+     Περιμένει DOMContentLoaded για να υπάρχει body στο DOM        */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function () { tryNext(0); });
+  } else {
+    tryNext(0);   /* Το DOM είναι ήδη έτοιμο (π.χ. script defer)  */
+  }
+}());
+</script>
+</body>
+</html>

@@ -2150,14 +2150,12 @@ def parse_colors(css):
     def bg(sel):
         m=re.search(re.escape(sel)+r'\s*\{[^}]*?background\s*:\s*([^;!\}]+)',css,re.DOTALL)
         return m.group(1).strip() if m else None
-    cout_md_color = bg('.cout.markdown') or '#fffdd0'
     return {
-        'body':       (bg('body') or '#3c3a3d').replace('!important','').strip(),
-        'cin':        bg('.cin')               or '#e1e5ea',
-        'cout':       bg('.cout')              or '#c0d5eb',
-        'cin_md':     bg('.cin .clang-markdown') or '#f29083',
-        'cout_md':    cout_md_color,
-        'cout_latex': bg('.cout.latex')        or cout_md_color,
+        'body':    (bg('body') or '#3c3a3d').replace('!important','').strip(),
+        'cin':     bg('.cin')               or '#e1e5ea',
+        'cout':    bg('.cout')              or '#c0d5eb',
+        'cin_md':  bg('.cin .clang-markdown') or '#f29083',
+        'cout_md': bg('.cout.markdown')     or '#fffdd0',
     }
 
 
@@ -2434,14 +2432,10 @@ def convert(inp: str, out: str):
 
         # CSS class
         is_md_content = (display=='markdown' or data.startswith("'.md"))
-        is_latex_content = (display == 'latex')
         is_cin  = ctype=='Input'  and display!='markdown'
         is_cout = ctype=='Output'
 
-        if is_cout:
-            if is_md_content:        wcls = 'cout cout-md'
-            elif is_latex_content:   wcls = 'cout cout-latex'
-            else:                    wcls = 'cout'
+        if is_cout:   wcls='cout'+(' cout-md' if is_md_content else '')
         elif is_cin:  wcls='cin' +(' cin-md'  if is_md_content else '')
         else:         wcls='other'
 
@@ -2736,7 +2730,7 @@ a.toc-h3,.toc-h4{{color:#aaa}}
 /* ── Cells ── */
 .cell{{margin:.25rem 0;padding:.5em .75em;border-radius:6px}}
 .cin{{background:{C['cin']}}}.cout{{background:{C['cout']};overflow-x:auto}}
-.cin.cin-md{{background:{C['cin_md']}}}.cout.cout-md{{background:{C['cout_md']}}}.cout.cout-latex{{background:{C['cout_latex']}}}
+.cin.cin-md{{background:{C['cin_md']}}}.cout.cout-md{{background:{C['cout_md']}}}
 .other{{background:transparent}}
 
 /* ── Normal code ── */
@@ -2873,33 +2867,7 @@ a.toc-h3,.toc-h4{{color:#aaa}}
   #toc-btn{{display:none}}
   #toc-overlay{{display:none}}
 }}
-@media print{{#toc{{display:none}}#toc-btn{{display:none}}#notebook{{margin-left:0;max-width:none}}body{{background:#fff}}.cin{{background:#f0f0f0!important}}.cout{{background:#e8f0f8!important}}.sig-footer{{display:none}}}}
-
-/* ── Διακριτική υπογραφή (κάτω-δεξιά) ── */
-.sig-footer{{
-  position:fixed;
-  bottom:.6rem;right:.9rem;
-  z-index:150;
-  font-size:.7rem;
-  color:rgba(255,255,255,.32);
-  font-style:italic;
-  letter-spacing:.02em;
-  pointer-events:auto;
-  user-select:none;
-}}
-.sig-footer a{{
-  color:rgba(255,255,255,.48);
-  text-decoration:none;
-  border-bottom:1px dotted rgba(255,255,255,.3);
-  font-style:normal;
-  pointer-events:auto;
-}}
-.sig-footer a:hover{{color:rgba(255,255,255,.8)}}
-@media(max-width:700px){{
-  /* Στα κινητά το toc-btn είναι bottom-left, οπότε δεν υπάρχει σύγκρουση,
-     απλά μικραίνουμε λίγο τη γραμματοσειρά για να μη "πατάει" στο πλάι. */
-  .sig-footer{{font-size:.62rem;bottom:.5rem;right:.6rem}}
-}}
+@media print{{#toc{{display:none}}#toc-btn{{display:none}}#notebook{{margin-left:0;max-width:none}}body{{background:#fff}}.cin{{background:#f0f0f0!important}}.cout{{background:#e8f0f8!important}}}}
 """
 
     mathjax_cfg = """window.MathJax={tex:{inlineMath:[['$','$'],['\\\\(','\\\\)']],displayMath:[['$$','$$'],['\\\\[','\\\\]']],processEscapes:true},options:{skipHtmlTags:['script','noscript','style','textarea','pre']}};"""
@@ -2975,7 +2943,6 @@ a.toc-h3,.toc-h4{{color:#aaa}}
 <div id="notebook">
 {nb_html}
 </div>
-<div class="sig-footer">ἐπιψαύσεις - υλοποίηση με <a href="https://wljs.io/" target="_blank" rel="noopener noreferrer">WLJS</a></div>
 <script>{toc_js}</script>
 </body>
 </html>"""
