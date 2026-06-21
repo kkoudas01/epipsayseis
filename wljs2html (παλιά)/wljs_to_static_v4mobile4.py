@@ -2127,14 +2127,6 @@ def render_md(text):
     def sub(m):
         # Unescape double-backslash inside math: \\cmd → \cmd
         content = m.group(0).replace('\\\\', '\\')
-        # Bug #30: το $...$ περιεχόμενο μπαίνει ΩΜΟ (χωρίς escape) πίσω στο
-        # html ΜΕΤΑ το markdown rendering (βλ. παρακάτω 'for k,v in ph.items()').
-        # Αν περιέχει ανισότητες όπως $r<c^2/2$, το "<" περνάει raw στο τελικό
-        # HTML και ο browser το διαβάζει ως αρχή νέου tag (<c...), "καταπίνοντας"
-        # ό,τι ακολουθεί μέχρι το επόμενο πραγματικό ">". Κάνουμε escape εδώ·
-        # ο browser θα τα ξε-κάνει escape πάλι σε λεκτικό text node και η
-        # MathJax θα διαβάσει σωστά το πραγματικό "<".
-        content = content.replace('&','&amp;').replace('<','&lt;').replace('>','&gt;')
         k=f'MPHX{ctr[0]}X'; ph[k]=content; ctr[0]+=1; return k
     text=re.sub(r'\$\$(.+?)\$\$',sub,text,flags=re.DOTALL)
     text=re.sub(r'(?<!\$)\$(?!\$)(.+?)(?<!\$)\$(?!\$)',sub,text,flags=re.DOTALL)
