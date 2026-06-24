@@ -96,6 +96,8 @@
 
 [Αντίστροφο προβλήματος Frobenius-Perron](FrobeniusPerron (wljsRE).html)
 
+[Προβλέποντας τα θέματα των πανελληνίων](predictionsSchool.html)
+
 ## Φυσική
 
 [Custom Menu](#)
