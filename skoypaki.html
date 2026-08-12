@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Παραμετρική Καμπύλη & Ραντάρ</title>
+    
+    <style>
+        :root {
+            --bg-main: #121212;
+            --bg-panel: #1e1e1e;
+            --bg-input: #2d2d2d;
+            --border-color: #4b5563;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --accent: #3b82f6;
+            --accent-hover: #2563eb;
+            --error: #ff5555;
+            
+            --plot-p0: #ff5252;
+            --plot-dashed: #40c4ff;
+            --radar-stroke: #69f0ae;
+            --radar-fill: rgba(105, 240, 174, 0.3);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Κουμπί επιστροφής */
+        .back-btn {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            text-decoration: none;
+            color: var(--text-main);
+            background-color: var(--bg-panel);
+            padding: 8px 16px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            z-index: 10;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover {
+            background-color: var(--bg-input);
+        }
+
+        /* Διακριτική υπογραφή */
+        .signature {
+            position: fixed;
+            bottom: 10px;
+            right: 15px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            opacity: 0.8;
+            pointer-events: none;
+        }
+
+        /* Κύρια διάταξη */
+        .container {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            padding: 70px 20px 30px 20px;
+            gap: 20px;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                flex-direction: row;
+                padding: 60px 20px 20px 20px;
+            }
+        }
+
+        /* Πάνελ ελέγχου */
+        .controls-panel {
+            background-color: var(--bg-panel);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            width: 100%;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+
+        @media (min-width: 768px) {
+            .controls-panel {
+                width: 320px;
+                flex-shrink: 0;
+            }
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .form-group label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .form-group input {
+            background-color: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 1rem;
+            transition: border-color 0.2s, box-shadow 0.2s;
+            width: 100%;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.3);
+        }
+
+        .draw-btn {
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            margin-top: 10px;
+            min-height: 48px;
+        }
+
+        .draw-btn:hover {
+            background-color: var(--accent-hover);
+        }
+
+        .error-msg {
+            color: var(--error);
+            font-size: 0.9rem;
+            background: rgba(255, 85, 85, 0.1);
+            padding: 10px;
+            border-radius: 8px;
+            display: none;
+        }
+
+        /* Περιοχή SVG */
+        .svg-container {
+            flex: 1;
+            background-color: var(--bg-panel);
+            border-radius: 12px;
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            min-height: 400px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.5);
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        /* SVG Styles */
+        .path-p0 {
+            fill: none;
+            stroke: var(--plot-p0);
+            vector-effect: non-scaling-stroke;
+            stroke-width: 2.5;
+        }
+        .path-dashed {
+            fill: none;
+            stroke: var(--plot-dashed);
+            vector-effect: non-scaling-stroke;
+            stroke-width: 1.5;
+            stroke-dasharray: 6, 6;
+        }
+        .radar-circle {
+            fill: none;
+            stroke: var(--radar-stroke);
+            vector-effect: non-scaling-stroke;
+            stroke-width: 2;
+        }
+        .radar-wedge {
+            fill: var(--radar-fill);
+        }
+    </style>
+</head>
+<body>
+
+    <a href="index.html" class="back-btn">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="19" y1="12" x2="5" y2="12"></line>
+            <polyline points="12 19 5 12 12 5"></polyline>
+        </svg>
+        Αρχική
+    </a>
+
+    <div class="container">
+        <!-- Πάνελ ρυθμίσεων -->
+        <div class="controls-panel">
+            <div class="form-group">
+                <label>xc[t_] =</label>
+                <input type="text" id="input_xc" value="Cos[t]+1.5t">
+            </div>
+            <div class="form-group">
+                <label>yc[t_] =</label>
+                <input type="text" id="input_yc" value="Sin[0.07t^2]+1.1t">
+            </div>
+            <div class="form-group">
+                <label>r =</label>
+                <input type="text" id="input_r" value="1.5">
+            </div>
+            <div class="form-group">
+                <label>bound =</label>
+                <input type="text" id="input_bound" value="4Pi">
+            </div>
+            <div class="error-msg" id="error_box"></div>
+            <button class="draw-btn" id="btn_draw">Σχεδίασε</button>
+        </div>
+
+        <!-- Καμβάς SVG -->
+        <div class="svg-container">
+            <svg id="plot_svg" viewBox="-5 -5 10 10" preserveAspectRatio="xMidYMid meet">
+                <path id="path_p0" class="path-p0" d=""></path>
+                <path id="path_p1" class="path-dashed" d=""></path>
+                <path id="path_p2" class="path-dashed" d=""></path>
+                
+                <!-- Ομάδα Δίσκου και Ραντάρ -->
+                <g id="disk_group" style="display: none;">
+                    <circle id="disk_circle" class="radar-circle" cx="0" cy="0" r="1.5"></circle>
+                    <path id="radar_wedge" class="radar-wedge" d=""></path>
+                </g>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Υπογραφή -->
+    <div class="signature">ἐπιψαύσεις</div>
+
+    <script>
+        const btnDraw = document.getElementById('btn_draw');
+        const inputXc = document.getElementById('input_xc');
+        const inputYc = document.getElementById('input_yc');
+        const inputR = document.getElementById('input_r');
+        const inputBound = document.getElementById('input_bound');
+        const errorBox = document.getElementById('error_box');
+        
+        const pathP0 = document.getElementById('path_p0');
+        const pathP1 = document.getElementById('path_p1');
+        const pathP2 = document.getElementById('path_p2');
+        const plotSvg = document.getElementById('plot_svg');
+        const diskGroup = document.getElementById('disk_group');
+        const diskCircle = document.getElementById('disk_circle');
+        const radarWedge = document.getElementById('radar_wedge');
+
+        let animId = null;
+        let isAnimating = false;
+        let t_anim = 0;
+        let radar_angle = 0;
+        let anim_bound = 0;
+        let anim_r = 0;
+        let anim_fn_xc = null;
+        let anim_fn_yc = null;
+
+        /**
+         * Μετατρέπει συντάξεις Wolfram/Μαθηματικές σε JavaScript.
+         * Υποστηρίζει Cos, Sin, Tan, Cot, Ln, Exp, Sqrt, Sqrt[n, t], και δυνάμεις ^ (σε **).
+         */
+        function parseWolfram(str) {
+            let s = str;
+            
+            // 1. Μετατροπή n-οστής ρίζας Sqrt[n, t] -> Math.pow(t, 1/n)
+            s = s.replace(/Sqrt\[\s*([^,]+)\s*,\s*([^\]]+)\s*\]/g, 'Math.pow($2, 1/($1))');
+            
+            // 2. Μετατροπή σταθεράς Pi
+            s = s.replace(/Pi/g, 'Math.PI');
+            s = s.replace(/(\d+(\.\d+)?)Math\.PI/g, '$1*Math.PI');
+            
+            // 3. Μετατροπή πολλαπλασιασμού πριν το t (π.χ. 1.5t -> 1.5*t)
+            s = s.replace(/(\d+(\.\d+)?)t/g, '$1*t');
+            
+            // 4. Μετατροπή εκθέτη ^ σε ** (π.χ. 2^t, t^2, (t+1)^3)
+            s = s.replace(/\^/g, '**');
+            
+            // 5. Μετατροπή συναρτήσεων
+            s = s.replace(/Cos\[/g, 'Math.cos(');
+            s = s.replace(/Sin\[/g, 'Math.sin(');
+            s = s.replace(/Tan\[/g, 'Math.tan(');
+            s = s.replace(/Cot\[/g, '(1/Math.tan(');
+            s = s.replace(/Ln\[/g, 'Math.log(');
+            s = s.replace(/Exp\[/g, 'Math.exp(');
+            s = s.replace(/Sqrt\[/g, 'Math.sqrt(');
+            
+            // 6. Αντικατάσταση δεξιάς αγκύλης με παρένθεση
+            s = s.replace(/\]/g, ')');
+            
+            return s;
+        }
+
+        function createFunction(expr) {
+            const jsExpr = parseWolfram(expr);
+            return new Function('t', `return ${jsExpr};`);
+        }
+
+        function evaluateValue(expr) {
+            const jsExpr = parseWolfram(expr);
+            return new Function(`return ${jsExpr};`)();
+        }
+
+        function showError(msg) {
+            errorBox.textContent = msg;
+            errorBox.style.display = 'block';
+        }
+
+        function hideError() {
+            errorBox.style.display = 'none';
+        }
+
+        function drawPlots() {
+            if (animId) {
+                cancelAnimationFrame(animId);
+                isAnimating = false;
+            }
+            hideError();
+
+            try {
+                const fn_xc = createFunction(inputXc.value);
+                const fn_yc = createFunction(inputYc.value);
+                const r = evaluateValue(inputR.value);
+                const bound = evaluateValue(inputBound.value);
+
+                if (isNaN(r) || isNaN(bound) || bound <= 0) {
+                    throw new Error("Μη έγκυρες τιμές στα r ή bound.");
+                }
+
+                const steps = 500;
+                const dt = bound / steps;
+                const h = 1e-5;
+
+                let pathStr0 = [];
+                let pathStr1 = [];
+                let pathStr2 = [];
+
+                let minX = Infinity, maxX = -Infinity;
+                let minY = Infinity, maxY = -Infinity;
+
+                for (let i = 0; i <= steps; i++) {
+                    let t = i * dt;
+                    
+                    let x = fn_xc(t);
+                    let y = fn_yc(t);
+
+                    let dx = (fn_xc(t + h) - fn_xc(t - h)) / (2 * h);
+                    let dy = (fn_yc(t + h) - fn_yc(t - h)) / (2 * h);
+
+                    let norm = Math.sqrt(dx * dx + dy * dy);
+                    if (norm < 1e-9) norm = 1e-9;
+
+                    let nx = dy / norm;
+                    let ny = -dx / norm;
+
+                    let x1 = x + r * nx;
+                    let y1 = y + r * ny;
+
+                    let x2 = x - r * nx;
+                    let y2 = y - r * ny;
+
+                    let svgY = -y;
+                    let svgY1 = -y1;
+                    let svgY2 = -y2;
+
+                    minX = Math.min(minX, x, x1, x2);
+                    maxX = Math.max(maxX, x, x1, x2);
+                    minY = Math.min(minY, svgY, svgY1, svgY2);
+                    maxY = Math.max(maxY, svgY, svgY1, svgY2);
+
+                    const cmd = (i === 0) ? 'M' : 'L';
+                    pathStr0.push(`${cmd} ${x.toFixed(4)} ${svgY.toFixed(4)}`);
+                    pathStr1.push(`${cmd} ${x1.toFixed(4)} ${svgY1.toFixed(4)}`);
+                    pathStr2.push(`${cmd} ${x2.toFixed(4)} ${svgY2.toFixed(4)}`);
+                }
+
+                pathP0.setAttribute('d', pathStr0.join(' '));
+                pathP1.setAttribute('d', pathStr1.join(' '));
+                pathP2.setAttribute('d', pathStr2.join(' '));
+
+                const padX = (maxX - minX) * 0.15 || 2;
+                const padY = (maxY - minY) * 0.15 || 2;
+                const vbX = (minX - padX).toFixed(2);
+                const vbY = (minY - padY).toFixed(2);
+                const vbW = ((maxX - minX) + 2 * padX).toFixed(2);
+                const vbH = ((maxY - minY) + 2 * padY).toFixed(2);
+                
+                plotSvg.setAttribute('viewBox', `${vbX} ${vbY} ${vbW} ${vbH}`);
+
+                diskCircle.setAttribute('r', r);
+                diskGroup.style.display = 'inline';
+
+                anim_bound = bound;
+                anim_r = r;
+                anim_fn_xc = fn_xc;
+                anim_fn_yc = fn_yc;
+                t_anim = 0;
+                radar_angle = 0;
+                isAnimating = true;
+
+                requestAnimationFrame(animateDisk);
+
+            } catch (err) {
+                showError("Σφάλμα στην αξιολόγηση. Ελέγξτε τη σύνταξη (π.χ. παρενθέσεις, τύπους).");
+                console.error(err);
+            }
+        }
+
+        function getWedgePath(radius, angleDeg) {
+            const spread = 22.5; 
+            const a1 = (angleDeg - spread) * Math.PI / 180;
+            const a2 = (angleDeg + spread) * Math.PI / 180;
+
+            const x1 = radius * Math.cos(a1);
+            const y1 = radius * Math.sin(a1);
+            const x2 = radius * Math.cos(a2);
+            const y2 = radius * Math.sin(a2);
+
+            return `M 0 0 L ${x1.toFixed(4)} ${y1.toFixed(4)} A ${radius} ${radius} 0 0 1 ${x2.toFixed(4)} ${y2.toFixed(4)} Z`;
+        }
+
+        let lastTime = 0;
+        function animateDisk(timestamp) {
+            if (!isAnimating) return;
+            
+            const dt_frame = lastTime ? (timestamp - lastTime) : 16;
+            lastTime = timestamp;
+
+            const speed_t = anim_bound / 360; 
+            t_anim += speed_t * (dt_frame / 16);
+            if (t_anim > anim_bound) {
+                t_anim %= anim_bound;
+            }
+
+            /* Διπλάσια ταχύτητα περιστροφής ραντάρ (8 αντί για 4 μοίρες ανά frame) */
+            radar_angle += 8 * (dt_frame / 16);
+            if (radar_angle >= 360) {
+                radar_angle %= 360;
+            }
+
+            let x = anim_fn_xc(t_anim);
+            let y = -anim_fn_yc(t_anim);
+
+            diskGroup.setAttribute('transform', `translate(${x.toFixed(4)}, ${y.toFixed(4)})`);
+            radarWedge.setAttribute('d', getWedgePath(anim_r, radar_angle));
+
+            animId = requestAnimationFrame(animateDisk);
+        }
+
+        btnDraw.addEventListener('click', () => {
+            lastTime = 0;
+            drawPlots();
+        });
+
+        window.addEventListener('load', () => {
+            drawPlots();
+        });
+    </script>
+</body>
+</html>
