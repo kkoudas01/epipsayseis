@@ -1,0 +1,2717 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Αλγόριθμοι Γράφων &amp; Δικτύων — Διαδραστική Κονσόλα</title>
+<style>
+:root{
+  --bg:#080b0f;
+  --bg-panel:#0e141b;
+  --bg-panel-2:#131b24;
+  --bg-raised:#182029;
+  --border:#22303c;
+  --border-soft:#1a242e;
+  --text:#dce6ee;
+  --text-dim:#7c8a99;
+  --text-faint:#4b5967;
+  --amber:#ffb454;
+  --teal:#4fd1ae;
+  --blue:#5b9dd9;
+  --coral:#ff7a72;
+  --violet:#b18cff;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+  --sans: -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+*{box-sizing:border-box;}
+html,body{height:100%;}
+body{
+  margin:0;
+  background:
+    radial-gradient(circle at 12% 8%, rgba(79,209,174,0.05), transparent 40%),
+    radial-gradient(circle at 88% 92%, rgba(255,180,84,0.05), transparent 40%),
+    var(--bg);
+  color:var(--text);
+  font-family:var(--sans);
+  font-size:14px;
+  line-height:1.5;
+}
+::selection{background:rgba(255,180,84,0.3);}
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-track{background:var(--bg-panel);}
+::-webkit-scrollbar-thumb{background:#2a3844;border-radius:6px;}
+::-webkit-scrollbar-thumb:hover{background:#37485a;}
+
+/* ---------- corner-bracket panel motif ---------- */
+.bracket{position:relative;}
+.bracket::before,.bracket::after{
+  content:"";position:absolute;width:10px;height:10px;
+  border-color:var(--teal);opacity:.55;pointer-events:none;
+}
+.bracket::before{top:-1px;left:-1px;border-top:2px solid;border-left:2px solid;}
+.bracket::after{bottom:-1px;right:-1px;border-bottom:2px solid;border-right:2px solid;}
+
+/* ---------- app shell ---------- */
+#app{display:grid;grid-template-columns:280px 1fr;min-height:100vh;}
+#sidebar{
+  background:var(--bg-panel);
+  border-right:1px solid var(--border);
+  padding:18px 0 40px;
+  overflow-y:auto;
+  max-height:100vh;
+  position:sticky;top:0;
+}
+#brand{
+  padding:4px 20px 18px;
+  border-bottom:1px solid var(--border-soft);
+  margin-bottom:10px;
+}
+.back-home{
+  display:inline-flex;align-items:center;gap:5px;
+  font-family:var(--mono);font-size:11px;color:var(--text-dim);
+  text-decoration:none;margin-bottom:12px;
+  padding:4px 9px;border:1px solid var(--border);border-radius:4px;
+  transition:color .12s,border-color .12s,background .12s;
+}
+.back-home:hover{color:var(--teal);border-color:var(--teal);background:rgba(79,209,174,.06);}
+#brand .mark{
+  font-family:var(--mono);
+  font-size:11px;letter-spacing:.12em;color:var(--teal);
+  display:flex;align-items:center;gap:6px;
+}
+#brand .mark .dot{width:6px;height:6px;border-radius:50%;background:var(--teal);box-shadow:0 0 8px var(--teal);}
+#brand h1{font-size:16.5px;margin:8px 0 2px;font-weight:650;letter-spacing:.01em;}
+#brand p{margin:0;color:var(--text-dim);font-size:12px;}
+
+.cat{margin-bottom:4px;}
+.cat-head{
+  display:flex;align-items:center;gap:8px;
+  padding:10px 20px 6px;
+  cursor:pointer;
+  user-select:none;
+}
+.cat-head .idx{
+  font-family:var(--mono);font-size:10px;color:var(--text-faint);
+  border:1px solid var(--border);border-radius:3px;
+  width:18px;height:18px;display:flex;align-items:center;justify-content:center;
+  flex:none;
+}
+.cat-head h2{
+  font-size:12.5px;font-weight:600;margin:0;color:var(--text);
+  flex:1;
+}
+.cat-head .chev{color:var(--text-faint);font-size:10px;transition:transform .15s;}
+.cat.collapsed .chev{transform:rotate(-90deg);}
+.cat-list{padding:0 10px 10px 40px;display:flex;flex-direction:column;gap:1px;}
+.cat.collapsed .cat-list{display:none;}
+.algo-btn{
+  text-align:left;background:none;border:none;color:var(--text-dim);
+  font-family:var(--sans);font-size:12.5px;padding:6px 10px 6px 12px;
+  border-left:2px solid transparent;cursor:pointer;border-radius:0 4px 4px 0;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.algo-btn:hover{background:var(--bg-raised);color:var(--text);}
+.algo-btn.active{
+  background:rgba(79,209,174,0.09);
+  color:var(--teal);
+  border-left-color:var(--teal);
+  font-weight:600;
+}
+.algo-btn .tag{
+  display:inline-block;margin-left:6px;font-family:var(--mono);font-size:9px;
+  padding:1px 4px;border-radius:3px;letter-spacing:.03em;
+  color:var(--text-faint);border:1px solid var(--border);vertical-align:1px;
+}
+.algo-btn.worked .tag{color:var(--amber);border-color:rgba(255,180,84,.35);}
+
+/* ---------- main ---------- */
+#content{padding:26px 34px 60px;max-width:1180px;}
+#algo-header{margin-bottom:16px;}
+#algo-eyebrow{font-family:var(--mono);font-size:11px;color:var(--text-faint);letter-spacing:.04em;}
+#algo-title{font-size:26px;margin:4px 0 8px;font-weight:700;letter-spacing:-.01em;}
+#algo-desc{color:var(--text-dim);max-width:760px;margin:0;font-size:13.5px;}
+#worked-note{
+  display:none;margin-top:10px;padding:9px 12px;border-radius:6px;
+  background:rgba(255,180,84,.07);border:1px solid rgba(255,180,84,.25);
+  color:#e8c896;font-size:12.5px;
+}
+
+/* controls */
+#controls-bar{
+  display:flex;flex-wrap:wrap;gap:10px;align-items:center;
+  margin:18px 0 16px;padding:12px 14px;
+  background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;
+}
+.btn{
+  font-family:var(--sans);font-size:12.5px;font-weight:600;
+  background:var(--bg-raised);color:var(--text);
+  border:1px solid var(--border);border-radius:6px;
+  padding:8px 13px;cursor:pointer;transition:border-color .12s,color .12s,background .12s;
+  display:inline-flex;align-items:center;gap:6px;
+}
+.btn:hover{border-color:var(--teal);color:var(--teal);}
+.btn:active{transform:translateY(1px);}
+.btn.primary{background:rgba(79,209,174,0.1);border-color:rgba(79,209,174,.4);color:var(--teal);}
+.btn.primary:hover{background:rgba(79,209,174,0.18);}
+.btn.ghost{background:transparent;}
+.btn:disabled{opacity:.35;cursor:not-allowed;}
+.btn:disabled:hover{border-color:var(--border);color:var(--text);}
+.field{display:flex;align-items:center;gap:7px;font-size:12px;color:var(--text-dim);font-family:var(--mono);}
+.field input[type=range]{accent-color:var(--teal);}
+.spacer{flex:1;}
+
+/* viz area */
+#viz-area{
+  display:grid;grid-template-columns:1fr 300px;gap:14px;margin-bottom:14px;
+}
+@media (max-width:880px){#viz-area{grid-template-columns:1fr;}}
+#svg-wrap{
+  background:
+    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px) 0 0/28px 28px,
+    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px) 0 0/28px 28px,
+    var(--bg-panel);
+  border:1px solid var(--border);border-radius:8px;
+  padding:6px;position:relative;
+}
+#graph-svg{width:100%;height:auto;display:block;}
+.legend{
+  position:absolute;bottom:10px;left:14px;display:flex;gap:12px;flex-wrap:wrap;
+  font-family:var(--mono);font-size:10px;color:var(--text-dim);
+}
+.legend span{display:inline-flex;align-items:center;gap:5px;}
+.legend i{width:9px;height:9px;border-radius:50%;display:inline-block;}
+
+#side-panel{display:flex;flex-direction:column;gap:12px;}
+.panel{background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;padding:12px 14px;}
+.panel h3{margin:0 0 8px;font-size:11px;text-transform:none;letter-spacing:.03em;color:var(--text-dim);font-family:var(--mono);font-weight:600;border-bottom:1px solid var(--border-soft);padding-bottom:7px;}
+#data-table{overflow-x:auto;}
+#data-table table{width:100%;border-collapse:collapse;font-family:var(--mono);font-size:11.5px;}
+#data-table th,#data-table td{padding:4px 7px;text-align:center;border-bottom:1px solid var(--border-soft);white-space:nowrap;}
+#data-table th{color:var(--text-faint);font-weight:600;}
+#data-table td.hl{color:var(--amber);font-weight:700;}
+#data-table tr:last-child td{border-bottom:none;}
+
+/* player */
+#player-controls{
+  display:flex;align-items:center;gap:10px;
+  background:var(--bg-panel);border:1px solid var(--border);border-radius:8px;
+  padding:10px 14px;margin-bottom:14px;
+}
+#player-controls .btn{padding:7px 11px;}
+#step-counter{font-family:var(--mono);font-size:12px;color:var(--text-dim);min-width:74px;text-align:center;}
+#progress-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden;}
+#progress-fill{height:100%;background:linear-gradient(90deg,var(--teal),var(--amber));width:0%;transition:width .2s;}
+
+/* step log */
+#step-log-wrap{margin-bottom:14px;}
+#step-log-wrap > summary{
+  border-bottom:1px solid var(--border-soft);
+}
+#step-log{
+  max-height:230px;overflow-y:auto;
+  background:var(--bg-raised);border:1px solid var(--border-soft);border-radius:6px;
+  padding:4px 0;
+}
+.log-entry{
+  padding:8px 16px 8px 14px;border-left:2px solid var(--border);
+  font-size:12.5px;color:var(--text-dim);
+}
+.log-entry.current{border-left-color:var(--amber);color:var(--text);background:rgba(255,180,84,.05);}
+.log-entry b{color:var(--text);}
+.log-entry .n{font-family:var(--mono);color:var(--text-faint);font-size:10.5px;margin-right:8px;}
+
+/* details boxes */
+details.panel{padding:0;}
+details.panel summary{
+  list-style:none;cursor:pointer;padding:12px 14px;
+  font-family:var(--mono);font-size:11.5px;color:var(--text-dim);
+  display:flex;align-items:center;gap:8px;
+}
+details.panel summary::-webkit-details-marker{display:none;}
+details.panel summary::before{content:"▸";color:var(--teal);font-size:10px;transition:transform .15s;}
+details.panel[open] summary::before{transform:rotate(90deg);}
+details.panel .inner{padding:0 16px 16px;}
+pre#pseudocode{
+  font-family:var(--mono);font-size:12px;color:#c7d6de;
+  background:var(--bg-raised);border:1px solid var(--border-soft);border-radius:6px;
+  padding:12px 14px;overflow-x:auto;white-space:pre;line-height:1.6;
+}
+#complexity table{width:100%;border-collapse:collapse;font-size:12.5px;}
+#complexity td,#complexity th{padding:6px 8px;border-bottom:1px solid var(--border-soft);text-align:left;}
+#complexity th{color:var(--text-faint);font-family:var(--mono);font-weight:600;font-size:11px;}
+#notes-block{color:var(--text-dim);font-size:12.5px;margin-top:6px;}
+
+footer#pagefoot{margin-top:30px;color:var(--text-faint);font-size:11px;font-family:var(--mono);}
+
+/* signature bottom-right */
+#signature{
+  position:fixed;bottom:10px;right:14px;
+  font-family:var(--mono);font-size:10.5px;
+  color:var(--text-faint);opacity:.55;
+  letter-spacing:.08em;pointer-events:none;z-index:50;
+}
+
+/* graph svg element classes */
+.edge-line{stroke:#33424f;stroke-width:1.6;fill:none;}
+.edge-line.tree{stroke:var(--teal);stroke-width:3;}
+.edge-line.relax{stroke:var(--blue);stroke-width:2.2;stroke-dasharray:5 3;}
+.edge-line.reject{stroke:#3a4048;stroke-width:1.4;opacity:.45;}
+.edge-line.path{stroke:var(--coral);stroke-width:3.4;}
+.edge-line.cut{stroke:var(--coral);stroke-width:2;stroke-dasharray:3 3;}
+.edge-line.sat{stroke:var(--amber);stroke-width:2.6;}
+.edge-line.current{stroke:var(--amber);stroke-width:3;}
+.edge-label{font-family:var(--mono);font-size:10.5px;fill:var(--text-dim);}
+.edge-label.hl{fill:var(--amber);font-weight:700;}
+.node-circle{stroke:#0a1016;stroke-width:2;fill:#1c2733;}
+.node-circle.default{fill:#1c2733;}
+.node-circle.current{fill:var(--amber);}
+.node-circle.frontier{fill:var(--blue);}
+.node-circle.visited{fill:#26543f;stroke:var(--teal);}
+.node-circle.settled{fill:var(--teal);}
+.node-circle.path{fill:var(--coral);}
+.node-circle.source{fill:var(--violet);}
+.node-circle.target{fill:#7a4fd9;}
+.node-circle.inactive{fill:#151d24;opacity:.5;}
+.node-label{font-family:var(--mono);font-size:12px;fill:#0a0e13;font-weight:700;text-anchor:middle;dominant-baseline:central;}
+.node-label.light{fill:#eef4f8;}
+.node-sub{font-family:var(--mono);font-size:9px;fill:var(--text-dim);text-anchor:middle;}
+.arrowhead{fill:#33424f;}
+
+/* reset confirm popover */
+#reset-pop{
+  position:absolute;background:var(--bg-raised);border:1px solid var(--border);
+  border-radius:8px;padding:10px;display:none;z-index:20;box-shadow:0 8px 24px rgba(0,0,0,.4);
+  flex-direction:column;gap:6px;min-width:200px;
+}
+#reset-pop.show{display:flex;}
+#reset-pop p{margin:0 0 4px;font-size:11.5px;color:var(--text-dim);}
+
+@media (max-width:760px){
+  #app{grid-template-columns:1fr;}
+  #sidebar{position:relative;max-height:none;border-right:none;border-bottom:1px solid var(--border);}
+  #content{padding:20px;}
+}
+</style>
+</head>
+<body>
+<div id="app">
+  <nav id="sidebar">
+    <div id="brand">
+      <a href="index.html" class="back-home">← Αρχική</a>
+      <div class="mark"><span class="dot"></span>GRAPH::LAB</div>
+      <h1>Αλγόριθμοι Γράφων &amp; Δικτύων</h1>
+      <p>40 αλγόριθμοι · βήμα‑βήμα οπτικοποίηση</p>
+    </div>
+    <div id="cats"></div>
+  </nav>
+  <main id="content">
+    <div id="algo-header">
+      <div id="algo-eyebrow"></div>
+      <h1 id="algo-title"></h1>
+      <p id="algo-desc"></p>
+      <div id="worked-note"></div>
+    </div>
+
+    <div id="controls-bar">
+      <button class="btn primary" id="btn-new-graph">⟳ Νέο τυχαίο γράφημα</button>
+      <button class="btn ghost" id="btn-same-graph">↺ Επανεκκίνηση (ίδιο γράφημα)</button>
+      <div class="field" id="node-count-field"><span>κόμβοι</span><input type="range" id="node-count" min="4" max="9" value="6"><span id="node-count-val">6</span></div>
+      <div class="spacer"></div>
+      <div class="field" id="extra-opts"></div>
+    </div>
+
+    <div id="viz-area">
+      <div id="svg-wrap" class="bracket">
+        <svg id="graph-svg" viewBox="0 0 760 460" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" class="arrowhead"></path>
+            </marker>
+            <marker id="arrow-amber" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#ffb454"></path>
+            </marker>
+            <marker id="arrow-teal" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#4fd1ae"></path>
+            </marker>
+            <marker id="arrow-coral" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="#ff7a72"></path>
+            </marker>
+          </defs>
+          <g id="edges-g"></g>
+          <g id="nodes-g"></g>
+        </svg>
+        <div class="legend" id="legend"></div>
+      </div>
+      <div id="side-panel">
+        <div class="panel bracket">
+          <h3>Πίνακας κατάστασης</h3>
+          <div id="data-table"></div>
+        </div>
+        <div class="panel">
+          <h3>Λεπτομέρειες βήματος</h3>
+          <div id="step-detail" style="font-size:12.5px;color:var(--text);min-height:40px;"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="player-controls">
+      <button class="btn" id="btn-first" title="Αρχή">⏮</button>
+      <button class="btn" id="btn-prev" title="Προηγούμενο">◀</button>
+      <button class="btn primary" id="btn-play" title="Play/Pause">▶ Play</button>
+      <button class="btn" id="btn-next" title="Επόμενο">▶</button>
+      <button class="btn" id="btn-last" title="Τέλος">⏭</button>
+      <div id="progress-track"><div id="progress-fill"></div></div>
+      <span id="step-counter">0 / 0</span>
+      <div class="field"><span>ταχύτητα</span><input type="range" id="speed" min="200" max="1800" value="750"></div>
+    </div>
+
+    <details class="panel bracket" id="step-log-wrap">
+      <summary>Ημερολόγιο βημάτων</summary>
+      <div class="inner">
+        <div id="step-log"></div>
+      </div>
+    </details>
+
+    <details class="panel bracket" id="pseudocode-box">
+      <summary>Ψευδοκώδικας</summary>
+      <div class="inner"><pre id="pseudocode"></pre></div>
+    </details>
+
+    <details class="panel" id="complexity-box" style="margin-top:12px;">
+      <summary>Πολυπλοκότητα &amp; σημειώσεις</summary>
+      <div class="inner">
+        <div id="complexity"></div>
+        <div id="notes-block"></div>
+      </div>
+    </details>
+
+    <footer id="pagefoot">GRAPH::LAB — αυτόνομο αρχείο HTML, τρέχει πλήρως τοπικά, χωρίς εξωτερικές εξαρτήσεις.</footer>
+  </main>
+</div>
+
+<div id="signature">ἐπιψαύσεις</div>
+
+<script>
+/* ============================================================
+   GRAPH::LAB — engine core
+   ============================================================ */
+'use strict';
+
+/* ---------------- small utils ---------------- */
+function randInt(a,b){return a+Math.floor(Math.random()*(b-a+1));}
+function randFloat(a,b){return a+Math.random()*(b-a);}
+function choice(arr){return arr[randInt(0,arr.length-1)];}
+function shuffle(arr){for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}return arr;}
+function labelFor(i){return i<26?String.fromCharCode(65+i):('N'+i);}
+function fmt(x){ if(x===Infinity) return '∞'; if(x===-Infinity) return '-∞'; if(x===undefined||x===null||Number.isNaN(x)) return '–'; const r=Math.round(x*100)/100; return Object.is(r,-0)?'0':String(r);}
+function clamp01(v){return Math.max(0,Math.min(1,v));}
+function lerpColor(c1,c2,t){
+  const p=(h)=>[parseInt(h.slice(0,2),16),parseInt(h.slice(2,4),16),parseInt(h.slice(4,6),16)];
+  const a=p(c1),b=p(c2);
+  const r=Math.round(a[0]+(b[0]-a[0])*t), g=Math.round(a[1]+(b[1]-a[1])*t), bl=Math.round(a[2]+(b[2]-a[2])*t);
+  return `rgb(${r},${g},${bl})`;
+}
+function heatColor(v){ v=clamp01(v||0); return lerpColor('1c2733','ffb454', 0.15+0.85*v); }
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+/* ---------------- Union-Find ---------------- */
+class DSU{
+  constructor(n){this.p=[...Array(n).keys()];this.r=new Array(n).fill(0);this.n=n;}
+  find(x){while(this.p[x]!==x){this.p[x]=this.p[this.p[x]];x=this.p[x];} return x;}
+  union(a,b){a=this.find(a);b=this.find(b);if(a===b)return false;if(this.r[a]<this.r[b]){const t=a;a=b;b=t;}this.p[b]=a;if(this.r[a]===this.r[b])this.r[a]++;return true;}
+  connected(a,b){return this.find(a)===this.find(b);}
+  clone(){const d=new DSU(this.n);d.p=this.p.slice();d.r=this.r.slice();return d;}
+}
+
+/* ---------------- layouts ---------------- */
+function circleLayout(nodeIds,cx=380,cy=225,r=165){
+  const pos={}; const n=nodeIds.length;
+  nodeIds.forEach((id,i)=>{const a=-Math.PI/2+2*Math.PI*i/n; pos[id]={x:cx+r*Math.cos(a),y:cy+r*Math.sin(a)};});
+  return pos;
+}
+function bipartiteLayout(leftIds,rightIds,cfg={}){
+  const x1=cfg.x1??160, x2=cfg.x2??600, yTop=cfg.yTop??60, yBot=cfg.yBot??400;
+  const pos={};
+  leftIds.forEach((id,i)=>{ const y = leftIds.length===1?(yTop+yBot)/2:yTop+(yBot-yTop)*i/(leftIds.length-1); pos[id]={x:x1,y};});
+  rightIds.forEach((id,i)=>{ const y = rightIds.length===1?(yTop+yBot)/2:yTop+(yBot-yTop)*i/(rightIds.length-1); pos[id]={x:x2,y};});
+  return pos;
+}
+function gridLayout(cols,rows,idFn,cfg={}){
+  const x0=cfg.x0??110,x1=cfg.x1??670,y0=cfg.y0??70,y1=cfg.y1??390;
+  const pos={};
+  for(let c=0;c<cols;c++){
+    for(let r=0;r<rows;r++){
+      const x = cols===1?(x0+x1)/2:x0+(x1-x0)*c/(cols-1);
+      const y = rows===1?(y0+y1)/2:y0+(y1-y0)*r/(rows-1);
+      pos[idFn(c,r)]={x,y};
+    }
+  }
+  return pos;
+}
+function clusterLayout(clusters,cx=380,cy=225,R=155,r=48){
+  // clusters: array of arrays of node ids -> place clusters around a big circle, nodes in a small circle within
+  const pos={}; const k=clusters.length;
+  clusters.forEach((grp,ci)=>{
+    const a=-Math.PI/2+2*Math.PI*ci/k;
+    const gx=cx+R*Math.cos(a), gy=cy+R*Math.sin(a);
+    grp.forEach((id,i)=>{
+      const a2=2*Math.PI*i/Math.max(grp.length,1);
+      const rr = grp.length>1? r:0;
+      pos[id]={x:gx+rr*Math.cos(a2), y:gy+rr*Math.sin(a2)};
+    });
+  });
+  return pos;
+}
+
+/* ---------------- graph generators ---------------- */
+function baseNodes(n){return Array.from({length:n},(_,i)=>({id:i,label:labelFor(i)}));}
+
+function genConnectedUndirected(n,{weighted=true,minW=1,maxW=9,extraChance=0.35}={}){
+  const nodes=baseNodes(n); const edges=[]; let eid=0;
+  const seen=new Set();
+  const addEdge=(u,v,w)=>{ if(u===v) return; const k=u<v?u+'_'+v:v+'_'+u; if(seen.has(k))return; seen.add(k); edges.push({id:'e'+(eid++),u,v,w: weighted?w:1});};
+  const order=[...Array(n).keys()]; shuffle(order);
+  for(let i=1;i<n;i++){ const j=order[randInt(0,i-1)]; addEdge(order[i],j, randInt(minW,maxW)); }
+  for(let i=0;i<n;i++)for(let j=i+1;j<n;j++){ if(Math.random()<extraChance/Math.max(1,n/6)) addEdge(i,j,randInt(minW,maxW)); }
+  return {directed:false,nodes,edges,pos:circleLayout(nodes.map(x=>x.id)),meta:{}};
+}
+
+function genDAGpossiblyNegative(n,{allowNegCycle=true}={}){
+  const nodes=baseNodes(n); const edges=[]; let eid=0;
+  for(let i=1;i<n;i++){ const j=randInt(0,i-1); edges.push({id:'e'+(eid++),u:j,v:i,w:randInt(-3,9)}); }
+  for(let k=0;k<Math.floor(n/2);k++){ const i=randInt(0,n-2); const j=randInt(i+1,n-1); if(!edges.some(e=>e.u===i&&e.v===j)) edges.push({id:'e'+(eid++),u:i,v:j,w:randInt(-3,9)}); }
+  let negCycle=false;
+  if(allowNegCycle && Math.random()<0.32 && n>=3){
+    const v=randInt(1,n-1), u=randInt(0,v-1);
+    edges.push({id:'e'+(eid++),u:v,v:u,w:-randInt(2,6)});
+    negCycle=true;
+  }
+  return {directed:true,nodes,edges,pos:circleLayout(nodes.map(x=>x.id)),meta:{mayHaveNegCycle:negCycle}};
+}
+
+function genDirectedWithCycles(n){
+  const nodes=baseNodes(n); const edges=[]; let eid=0;
+  const k=Math.max(2,Math.min(4,Math.ceil(n/2.4)));
+  const ids=shuffle([...Array(n).keys()]);
+  const clusters=[]; let idx=0;
+  for(let c=0;c<k;c++){ const size=Math.max(1,Math.floor((n-idx)/(k-c))); clusters.push(ids.slice(idx,idx+size)); idx+=size; }
+  clusters.forEach(grp=>{
+    if(grp.length===1) return;
+    for(let i=0;i<grp.length;i++){ edges.push({id:'e'+(eid++),u:grp[i],v:grp[(i+1)%grp.length],w:randInt(1,9)}); }
+    if(grp.length>3 && Math.random()<0.5){ const a=randInt(0,grp.length-1); let b=randInt(0,grp.length-1); if(b===a)b=(b+1)%grp.length; edges.push({id:'e'+(eid++),u:grp[a],v:grp[b],w:randInt(1,9)}); }
+  });
+  for(let c=0;c<clusters.length;c++){
+    const nxt=(c+1)%clusters.length;
+    const u=choice(clusters[c]), v=choice(clusters[nxt]);
+    edges.push({id:'e'+(eid++),u,v,w:randInt(1,9)});
+  }
+  if(clusters.length>2 && Math.random()<0.5){
+    const c1=randInt(0,clusters.length-1); let c2=randInt(0,clusters.length-1);
+    if(c2===c1) c2=(c2+2)%clusters.length;
+    edges.push({id:'e'+(eid++),u:choice(clusters[c1]),v:choice(clusters[c2]),w:randInt(1,9)});
+  }
+  return {directed:true,nodes,edges,pos:clusterLayout(clusters),meta:{clusters}};
+}
+
+function genFlowNetwork(n){
+  n=Math.max(5,n);
+  const nodes=baseNodes(n); const edges=[]; let eid=0;
+  const mid=n-2; const l1n=Math.ceil(mid/2), l2n=mid-l1n;
+  const layer1=[...Array(l1n).keys()].map(i=>1+i);
+  const layer2=[...Array(l2n).keys()].map(i=>1+l1n+i);
+  const src=0, snk=n-1;
+  layer1.forEach(u=>edges.push({id:'e'+(eid++),u:src,v:u,w:randInt(4,12)}));
+  layer2.forEach(v=>edges.push({id:'e'+(eid++),u:v,v:snk,w:randInt(4,12)}));
+  layer1.forEach(u=>{
+    let connected=false;
+    layer2.forEach(v=>{ if(Math.random()<0.5){edges.push({id:'e'+(eid++),u,v,w:randInt(2,9)});connected=true;} });
+    if(!connected){ const v=choice(layer2); edges.push({id:'e'+(eid++),u,v,w:randInt(2,9)}); }
+  });
+  layer2.forEach(v=>{ if(!edges.some(e=>e.v===v && layer1.includes(e.u))){ const u=choice(layer1); edges.push({id:'e'+(eid++),u,v,w:randInt(2,9)}); } });
+  if(l1n>1 && Math.random()<0.4){ const a=choice(layer1); let b=choice(layer1); if(b!==a) edges.push({id:'e'+(eid++),u:a,v:b,w:randInt(2,6)}); }
+  const pos={}; pos[src]={x:70,y:230}; pos[snk]={x:690,y:230};
+  layer1.forEach((id,i)=>pos[id]={x:290,y: l1n===1?230:60+(400-60)*i/(l1n-1)});
+  layer2.forEach((id,i)=>pos[id]={x:470,y: l2n===1?230:60+(400-60)*i/(l2n-1)});
+  edges.forEach(e=>e.cap=e.w);
+  return {directed:true,nodes,edges,pos,meta:{src,snk,layer1,layer2}};
+}
+
+function genBipartite(n){
+  const nl=Math.ceil(n/2), nr=n-nl;
+  const nodes=[]; for(let i=0;i<nl;i++)nodes.push({id:i,label:'L'+(i+1)}); for(let i=0;i<nr;i++)nodes.push({id:nl+i,label:'R'+(i+1)});
+  const edges=[]; let eid=0;
+  for(let i=0;i<nl;i++){
+    let deg=0;
+    for(let j=0;j<nr;j++){ if(Math.random()<0.5){ edges.push({id:'e'+(eid++),u:i,v:nl+j,w:randInt(1,9)}); deg++; } }
+    if(deg===0){ const j=randInt(0,nr-1); edges.push({id:'e'+(eid++),u:i,v:nl+j,w:randInt(1,9)}); }
+  }
+  for(let j=0;j<nr;j++){ if(!edges.some(e=>e.v===nl+j)){ const i=randInt(0,nl-1); edges.push({id:'e'+(eid++),u:i,v:nl+j,w:randInt(1,9)}); } }
+  const leftIds=[...Array(nl).keys()], rightIds=[...Array(nr).keys()].map(i=>nl+i);
+  return {directed:false,nodes,edges,pos:bipartiteLayout(leftIds,rightIds),meta:{left:leftIds,right:rightIds}};
+}
+
+function genHMM(T){
+  T=T||5;
+  const S=2+ (Math.random()<0.35?1:0);
+  const states=[...Array(S).keys()].map(i=>'S'+i);
+  const O=2;
+  const trans=[]; for(let i=0;i<S;i++){ const row=[...Array(S)].map(()=>Math.random()+0.2); const s=row.reduce((a,b)=>a+b,0); trans.push(row.map(x=>x/s)); }
+  const emit=[]; for(let i=0;i<S;i++){ const row=[...Array(O)].map(()=>Math.random()+0.2); const s=row.reduce((a,b)=>a+b,0); emit.push(row.map(x=>x/s)); }
+  const init=[...Array(S)].map(()=>Math.random()+0.2); const si=init.reduce((a,b)=>a+b,0); const pi=init.map(x=>x/si);
+  const obsSeq=[]; { let cur=weightedChoice(pi); obsSeq.push(weightedChoice(emit[cur])); for(let t=1;t<T;t++){ cur=weightedChoice(trans[cur]); obsSeq.push(weightedChoice(emit[cur])); } }
+  const nodes=[]; const idFn=(t,s)=>t*S+s;
+  for(let t=0;t<T;t++)for(let s=0;s<S;s++) nodes.push({id:idFn(t,s),label:states[s]});
+  const edges=[]; let eid=0;
+  for(let t=0;t<T-1;t++)for(let s=0;s<S;s++)for(let s2=0;s2<S;s2++) edges.push({id:'e'+(eid++),u:idFn(t,s),v:idFn(t+1,s2),w:trans[s][s2]});
+  const pos=gridLayout(T,S,idFn);
+  return {directed:true,nodes,edges,pos,meta:{S,T,states,trans,emit,pi,obsSeq,idFn,O}};
+}
+function weightedChoice(w){ const s=w.reduce((a,b)=>a+b,0); let r=Math.random()*s; for(let i=0;i<w.length;i++){ r-=w[i]; if(r<=0) return i;} return w.length-1; }
+
+/* ---------------- SVG renderer ---------------- */
+const svgNS='http://www.w3.org/2000/svg';
+function el(tag,attrs){ const e=document.createElementNS(svgNS,tag); for(const k in attrs) e.setAttribute(k,attrs[k]); return e; }
+
+function drawGraph(graph, step){
+  step = step || {};
+  const edgesG = document.getElementById('edges-g');
+  const nodesG = document.getElementById('nodes-g');
+  edgesG.innerHTML=''; nodesG.innerHTML='';
+  const R = graph.nodeRadius || (graph.nodes.length>7?16:19);
+  const colors = step.colors || {nodes:{},edges:{}};
+  const markerFor = (cls)=>{
+    if(cls==='tree'||cls==='path') return 'url(#arrow-coral)'.replace('coral', cls==='tree'?'teal':'coral');
+    if(cls==='current'||cls==='sat') return 'url(#arrow-amber)';
+    return 'url(#arrow)';
+  };
+  graph.edges.forEach(e=>{
+    const p1=graph.pos[e.u], p2=graph.pos[e.v]; if(!p1||!p2) return;
+    const cls = (colors.edges && colors.edges[e.id]) || '';
+    let dx=p2.x-p1.x, dy=p2.y-p1.y; const len=Math.hypot(dx,dy)||1; const ux=dx/len,uy=dy/len;
+    let x1=p1.x+ux*R, y1=p1.y+uy*R, x2=p2.x-ux*R, y2=p2.y-uy*R;
+    let midx=(x1+x2)/2, midy=(y1+y2)/2;
+    const curve = e.curve || 0;
+    let d;
+    if(curve){
+      const nx=-uy, ny=ux;
+      const cxp=midx+nx*curve, cyp=midy+ny*curve;
+      d=`M${x1},${y1} Q${cxp},${cyp} ${x2},${y2}`;
+      midx=0.25*x1+0.5*cxp+0.25*x2; midy=0.25*y1+0.5*cyp+0.25*y2;
+    } else {
+      d=`M${x1},${y1} L${x2},${y2}`;
+    }
+    const path=el('path',{d,class:'edge-line'+(cls?' '+cls:''), fill:'none'});
+    if(graph.directed){ path.setAttribute('marker-end', markerFor(cls)); }
+    edgesG.appendChild(path);
+    let labelTxt='';
+    if(step.edgeLabel && step.edgeLabel[e.id]!==undefined) labelTxt=step.edgeLabel[e.id];
+    else if(e.cap!==undefined) labelTxt=fmt(e.w)+'/'+fmt(e.cap);
+    else if(e.w!==undefined && graph.showWeights!==false) labelTxt = (Math.abs(e.w)<1 && e.w!==0)? e.w.toFixed(2) : fmt(e.w);
+    if(labelTxt!==''){
+      const lbl=el('text',{x:midx,y:midy-5,class:'edge-label'+(cls==='current'||cls==='sat'||cls==='path'?' hl':'')});
+      lbl.textContent=labelTxt;
+      edgesG.appendChild(lbl);
+    }
+  });
+  graph.nodes.forEach(nd=>{
+    const p=graph.pos[nd.id]; if(!p) return;
+    const cls=(colors.nodes && colors.nodes[nd.id]) || 'default';
+    const g=el('g',{transform:`translate(${p.x},${p.y})`});
+    let fillOverride=null;
+    if(step.heat && step.heat[nd.id]!==undefined) fillOverride=heatColor(step.heat[nd.id]);
+    const c=el('circle',{r:R,class:'node-circle '+cls});
+    if(fillOverride) c.setAttribute('style','fill:'+fillOverride+';stroke:#0a1016;stroke-width:2;');
+    g.appendChild(c);
+    const light = (cls==='settled'||cls==='visited'||cls==='source'||cls==='target'||fillOverride);
+    const txt=el('text',{class:'node-label'+(light?' light':'')});
+    txt.textContent = (step.nodeText && step.nodeText[nd.id]!==undefined)? step.nodeText[nd.id] : nd.label;
+    g.appendChild(txt);
+    if(step.nodeSub && step.nodeSub[nd.id]!==undefined){
+      const sub=el('text',{y:R+13,class:'node-sub'});
+      sub.textContent=step.nodeSub[nd.id];
+      g.appendChild(sub);
+    }
+    nodesG.appendChild(g);
+  });
+}
+
+/* ---------------- global algorithm registry ---------------- */
+const ALGO_CATEGORIES=[
+  {id:'sp',name:'Συντομότερα μονοπάτια',algos:['dijkstra','bellman-ford','floyd-warshall','johnson','astar','bfs-sp','viterbi']},
+  {id:'tree',name:'Δέντρα Επικάλυψης / MST',algos:['prim','kruskal','boruvka','reverse-delete','chu-liu-edmonds','bfs-tree','dfs-tree','spt']},
+  {id:'flow',name:'Ροές σε Δίκτυα',algos:['ford-fulkerson','edmonds-karp','dinic','push-relabel','stoer-wagner']},
+  {id:'match',name:'Ταιριάσματα',algos:['hungarian','hopcroft-karp','blossom']},
+  {id:'conn',name:'Συνδεσιμότητα & Διάσχιση',algos:['tarjan','kosaraju','gabow','union-find']},
+  {id:'cent',name:'Κεντρικότητες',algos:['pagerank','hits','brandes','katz','eigenvector']},
+  {id:'comm',name:'Κοινότητες / Clustering',algos:['girvan-newman','louvain','label-propagation','spectral','mcl']},
+  {id:'route',name:'Δρομολόγηση Δικτύων',algos:['link-state','distance-vector','path-vector']}
+];
+const ALGORITHMS={};
+
+/* ---------------- app state ---------------- */
+const cur={id:null,graph:null,steps:[],idx:0,playing:false,timer:null,nodeCount:6,extra:{}};
+
+function currentOpts(){ return Object.assign({n:cur.nodeCount}, cur.extra||{}); }
+
+function loadAlgorithm(id, fresh){
+  const def=ALGORITHMS[id]; if(!def) return;
+  const changedAlgo = cur.id!==id;
+  cur.id=id;
+  if(fresh || changedAlgo || !cur.graph){
+    cur.extra = {};
+    (def.extraControls||[]).forEach(c=>cur.extra[c.id]=c.value);
+    cur.graph = def.gen(currentOpts());
+  }
+  cur.steps = def.compute(cur.graph, currentOpts());
+  cur.idx=0; stopPlay();
+  renderHeader(def);
+  renderControlsFor(def);
+  renderPseudocode(def);
+  renderComplexity(def);
+  renderLegend(def);
+  buildLog();
+  renderStep();
+  document.querySelectorAll('.algo-btn').forEach(b=>b.classList.toggle('active', b.dataset.id===id));
+}
+
+function renderHeader(def){
+  document.getElementById('algo-eyebrow').textContent = def.catName + (def.worked?'  ·  εις βάθος παράδειγμα':'');
+  document.getElementById('algo-title').textContent = def.name;
+  document.getElementById('algo-desc').textContent = def.blurb;
+  const wn=document.getElementById('worked-note');
+  if(def.worked){ wn.style.display='block'; wn.textContent = def.workedNote || 'Λόγω της αλγοριθμικής πολυπλοκότητας, αυτός ο αλγόριθμος παρουσιάζεται με ένα σταθερό, αναλυτικά επεξεργασμένο παράδειγμα αντί για πλήρως τυχαία παραγόμενο γράφημα σε κάθε βήμα.'; }
+  else wn.style.display='none';
+}
+function renderControlsFor(def){
+  document.getElementById('node-count-field').style.display = def.hideNodeCount? 'none':'flex';
+  const box=document.getElementById('extra-opts'); box.innerHTML='';
+  (def.extraControls||[]).forEach(c=>{
+    const wrap=document.createElement('span'); wrap.className='field'; wrap.style.marginLeft='8px';
+    const lab=document.createElement('span'); lab.textContent=c.label; wrap.appendChild(lab);
+    const inp=document.createElement('input'); inp.type='range'; inp.min=c.min; inp.max=c.max; inp.value=cur.extra[c.id]??c.value;
+    const val=document.createElement('span'); val.textContent=inp.value;
+    inp.addEventListener('input',()=>{ val.textContent=inp.value; cur.extra[c.id]=+inp.value; });
+    wrap.appendChild(inp); wrap.appendChild(val);
+    box.appendChild(wrap);
+  });
+}
+function renderPseudocode(def){ document.getElementById('pseudocode').textContent = def.pseudocode||''; }
+function renderComplexity(def){
+  const box=document.getElementById('complexity');
+  let html='<table><tr><th>Χρόνος</th><th>Χώρος</th><th>Τύπος γράφου</th></tr>';
+  html+=`<tr><td>${def.timeComplexity||'–'}</td><td>${def.spaceComplexity||'–'}</td><td>${def.graphNote||'–'}</td></tr></table>`;
+  box.innerHTML=html;
+  document.getElementById('notes-block').textContent = def.notes||'';
+}
+function renderLegend(def){
+  const box=document.getElementById('legend');
+  box.innerHTML='';
+  (def.legend||[]).forEach(it=>{
+    const s=document.createElement('span');
+    s.innerHTML=`<i style="background:${it.c}"></i>${it.t}`;
+    box.appendChild(s);
+  });
+}
+function renderTable(step){
+  const box=document.getElementById('data-table');
+  if(!step.table){ box.innerHTML='<div style="color:var(--text-faint);font-size:12px;">—</div>'; return; }
+  const t=step.table;
+  let html='<table><tr>'+t.headers.map(h=>'<th>'+esc(h)+'</th>').join('')+'</tr>';
+  t.rows.forEach(row=>{
+    html+='<tr>'+row.map(c=>{
+      if(c && typeof c==='object') return `<td class="${c.hl?'hl':''}">${esc(c.v)}</td>`;
+      return '<td>'+esc(c)+'</td>';
+    }).join('')+'</tr>';
+  });
+  html+='</table>';
+  box.innerHTML=html;
+}
+function renderDetail(step){
+  document.getElementById('step-detail').innerHTML = step.detail || step.log || '<span style="color:var(--text-faint)">—</span>';
+}
+function buildLog(){
+  const wrap=document.getElementById('step-log'); wrap.innerHTML='';
+  cur.steps.forEach((s,i)=>{
+    const d=document.createElement('div'); d.className='log-entry'+(i===cur.idx?' current':'');
+    d.dataset.i=i;
+    d.innerHTML=`<span class="n">#${i}</span>${s.log||''}`;
+    d.addEventListener('click',()=>{ cur.idx=i; renderStep(); });
+    wrap.appendChild(d);
+  });
+}
+function highlightLogEntry(){
+  const wrap=document.getElementById('step-log');
+  wrap.querySelectorAll('.log-entry').forEach(d=>d.classList.toggle('current', +d.dataset.i===cur.idx));
+  const active=wrap.querySelector('.log-entry.current');
+  if(active && typeof active.scrollIntoView==='function') active.scrollIntoView({block:'nearest'});
+}
+function updatePlayerUI(){
+  document.getElementById('step-counter').textContent = (cur.steps.length? (cur.idx+1):0)+' / '+cur.steps.length;
+  document.getElementById('progress-fill').style.width = (cur.steps.length? ((cur.idx+1)/cur.steps.length*100):0)+'%';
+  document.getElementById('btn-prev').disabled = cur.idx<=0;
+  document.getElementById('btn-first').disabled = cur.idx<=0;
+  document.getElementById('btn-next').disabled = cur.idx>=cur.steps.length-1;
+  document.getElementById('btn-last').disabled = cur.idx>=cur.steps.length-1;
+  document.getElementById('btn-play').textContent = cur.playing? '⏸ Pause':'▶ Play';
+}
+function renderStep(){
+  const step=cur.steps[cur.idx]||{};
+  drawGraph(cur.graph, step);
+  renderTable(step);
+  renderDetail(step);
+  updatePlayerUI();
+  highlightLogEntry();
+  if(step.extraRender) step.extraRender();
+}
+function stepNext(){ if(cur.idx<cur.steps.length-1){ cur.idx++; renderStep(); } else stopPlay(); }
+function stepPrev(){ if(cur.idx>0){ cur.idx--; renderStep(); } }
+function stopPlay(){ cur.playing=false; clearInterval(cur.timer); cur.timer=null; updatePlayerUI(); }
+function togglePlay(){
+  if(cur.playing){ stopPlay(); return; }
+  if(cur.idx>=cur.steps.length-1) cur.idx=0;
+  cur.playing=true; updatePlayerUI();
+  const speed=+document.getElementById('speed').value;
+  cur.timer=setInterval(()=>{ stepNext(); if(cur.idx>=cur.steps.length-1) stopPlay(); }, speed);
+}
+
+/* ---------------- sidebar ---------------- */
+function buildSidebar(){
+  const box=document.getElementById('cats');
+  ALGO_CATEGORIES.forEach((cat,ci)=>{
+    const catEl=document.createElement('div'); catEl.className='cat';
+    const head=document.createElement('div'); head.className='cat-head';
+    head.innerHTML=`<span class="idx">${String(ci+1).padStart(2,'0')}</span><h2>${esc(cat.name)}</h2><span class="chev">▾</span>`;
+    head.addEventListener('click',()=>catEl.classList.toggle('collapsed'));
+    catEl.appendChild(head);
+    const list=document.createElement('div'); list.className='cat-list';
+    cat.algos.forEach(aid=>{
+      const def=ALGORITHMS[aid]; if(!def) return;
+      def.catName=cat.name;
+      const b=document.createElement('button'); b.className='algo-btn'+(def.worked?' worked':''); b.dataset.id=aid;
+      b.innerHTML = esc(def.name) + (def.worked?'<span class="tag">παράδειγμα</span>':'');
+      b.addEventListener('click',()=>loadAlgorithm(aid,false));
+      list.appendChild(b);
+    });
+    catEl.appendChild(list);
+    box.appendChild(catEl);
+  });
+}
+
+/* ============================================================
+   Shared algorithm helpers
+   ============================================================ */
+function labelMap(graph){ const m={}; graph.nodes.forEach(n=>m[n.id]=n.label); return m; }
+function buildAdj(graph){
+  const adj={}; graph.nodes.forEach(n=>adj[n.id]=[]);
+  graph.edges.forEach(e=>{ adj[e.u].push({to:e.v,w:e.w,id:e.id}); if(!graph.directed) adj[e.v].push({to:e.u,w:e.w,id:e.id}); });
+  return adj;
+}
+function dijkstraPlain(graph, src){
+  const adj=buildAdj(graph); const dist={}; graph.nodes.forEach(n=>dist[n.id]=Infinity); dist[src]=0;
+  const done=new Set();
+  while(done.size<graph.nodes.length){
+    let u=null,best=Infinity;
+    graph.nodes.forEach(n=>{ if(!done.has(n.id) && dist[n.id]<best){best=dist[n.id];u=n.id;} });
+    if(u===null) break; done.add(u);
+    adj[u].forEach(({to,w})=>{ if(dist[u]+w<dist[to]) dist[to]=dist[u]+w; });
+  }
+  return dist;
+}
+function bellmanFordPlain(graph, src){
+  const dist={}; graph.nodes.forEach(n=>dist[n.id]=Infinity); dist[src]=0;
+  for(let i=0;i<graph.nodes.length-1;i++){
+    graph.edges.forEach(e=>{
+      if(dist[e.u]+e.w<dist[e.v]) dist[e.v]=dist[e.u]+e.w;
+      if(!graph.directed && dist[e.v]+e.w<dist[e.u]) dist[e.u]=dist[e.v]+e.w;
+    });
+  }
+  let negCycle=false;
+  graph.edges.forEach(e=>{
+    if(dist[e.u]+e.w<dist[e.v]-1e-9) negCycle=true;
+    if(!graph.directed && dist[e.v]+e.w<dist[e.u]-1e-9) negCycle=true;
+  });
+  return {dist,negCycle};
+}
+
+/* ---------- generic Dijkstra-family step generator (Dijkstra / A* / Link-State) ---------- */
+function dijkstraFamilySteps(graph, src, {heuristic=null, target=null, mode='plain'}={}){
+  const LM=labelMap(graph); const adj=buildAdj(graph);
+  const W = mode==='linkstate'? 'δρομολογητή' : 'κόμβο';
+  const Wc = mode==='linkstate'? 'Δρομολογητή' : 'Κόμβο';
+  const dist={}, prev={}; graph.nodes.forEach(n=>dist[n.id]=Infinity); dist[src]=0;
+  const settled=new Set(); const steps=[];
+  const h = heuristic || (()=>0);
+  const snap=(log,detail,cur,edgeColors)=>{
+    const nodeColors={}; graph.nodes.forEach(n=>{
+      if(n.id===src) nodeColors[n.id]='source';
+      else if(target!==null && n.id===target) nodeColors[n.id]= settled.has(n.id)?'settled':'target';
+      else if(settled.has(n.id)) nodeColors[n.id]='settled';
+      else if(dist[n.id]<Infinity) nodeColors[n.id]='frontier';
+      else nodeColors[n.id]='default';
+    });
+    if(cur!==undefined && cur!==null) nodeColors[cur]='current';
+    const rows=graph.nodes.map(n=>{
+      const r=[n.label, {v:fmt(dist[n.id]),hl:n.id===cur}, prev[n.id]!==undefined?LM[prev[n.id]]:'–'];
+      if(heuristic) r.push(fmt(h(n.id)));
+      return r;
+    });
+    const headers=['Κόμβος','dist','πρόγονος']; if(heuristic) headers.push('h (ευρ.)');
+    steps.push({log,detail,colors:{nodes:nodeColors,edges:edgeColors||{}},
+      table:{headers,rows},
+      nodeSub:Object.fromEntries(graph.nodes.map(n=>[n.id, dist[n.id]===Infinity?'∞':fmt(dist[n.id])]))});
+  };
+  snap(`Αρχικοποίηση: dist[${LM[src]}]=0, όλοι οι υπόλοιποι ${W}ς = ∞.`, `Ξεκινάμε από τον ${W} <b>${LM[src]}</b>. Όλες οι αποστάσεις αρχικοποιούνται σε ∞ εκτός από την πηγή.`, src, {});
+  while(true){
+    let u=null,best=Infinity;
+    graph.nodes.forEach(n=>{ if(!settled.has(n.id) && dist[n.id]<Infinity){ const f=dist[n.id]+h(n.id); if(f<best){best=f;u=n.id;} } });
+    if(u===null) break;
+    settled.add(u);
+    const treeEdges={}; if(prev[u]!==undefined){ const pe=graph.edges.find(e=>(e.u===prev[u]&&e.v===u)||(!graph.directed&&e.u===u&&e.v===prev[u])); if(pe) treeEdges[pe.id]='tree'; }
+    snap(`Εξαγωγή ${W}${mode==='linkstate'?'':'υ'} <b>${LM[u]}</b> με ελάχιστο ${heuristic?'f=g+h':'dist'} (${fmt(dist[u]+h(u))}).`,
+         `Ο ${W} <b>${LM[u]}</b> οριστικοποιείται. Εξετάζουμε τώρα όλες τις εξερχόμενες ακμές του.`, u, treeEdges);
+    if(target!==null && u===target){ snap(`Ο στόχος <b>${LM[target]}</b> οριστικοποιήθηκε — τερματισμός νωρίς.`, `Σε A* σταματάμε μόλις οριστικοποιηθεί ο στόχος, χωρίς να επεξεργαστούμε τους υπόλοιπους κόμβους.`, u, {}); break; }
+    for(const {to,w,id} of adj[u]){
+      if(settled.has(to)) continue;
+      const nd=dist[u]+w;
+      if(nd<dist[to]){
+        const old=dist[to]; dist[to]=nd; prev[to]=u;
+        snap(`Χαλάρωση ακμής ${LM[u]}→${LM[to]}: ${old===Infinity?'∞':fmt(old)} → <b>${fmt(nd)}</b>.`,
+             `dist[${LM[u]}] + βάρος(${LM[u]},${LM[to]}) = ${fmt(dist[u])}+${fmt(w)} = ${fmt(nd)} < παλιά τιμή. Ενημερώνουμε.`, u, {[id]:'relax'});
+      } else {
+        snap(`Ακμή ${LM[u]}→${LM[to]}: καμία βελτίωση (${fmt(nd)} ≥ ${dist[to]===Infinity?'∞':fmt(dist[to])}).`,
+             `Δεν χρειάζεται ενημέρωση αφού η νέα υποψήφια απόσταση δεν είναι μικρότερη.`, u, {[id]:'reject'});
+      }
+    }
+  }
+  const finalEdges={}; graph.nodes.forEach(n=>{ if(prev[n.id]!==undefined){ const pe=graph.edges.find(e=>(e.u===prev[n.id]&&e.v===n.id)||(!graph.directed&&e.u===n.id&&e.v===prev[n.id])); if(pe) finalEdges[pe.id]='tree'; } });
+  snap(`Ολοκληρώθηκε. Το δέντρο συντομότερων μονοπατιών από τον <b>${LM[src]}</b> έχει σχηματιστεί.`,
+       `Κάθε κόμβος δείχνει τώρα την τελική του απόσταση από την πηγή, καθώς και το δέντρο συντομότερων μονοπατιών (πράσινες ακμές).`, null, finalEdges);
+  return steps;
+}
+
+ALGORITHMS['dijkstra']={
+  name:'Dijkstra',
+  blurb:'Βρίσκει τα συντομότερα μονοπάτια από έναν κόμβο‑πηγή προς όλους τους άλλους κόμβους, επιλέγοντας άπληστα σε κάθε βήμα τον μη οριστικοποιημένο κόμβο με τη μικρότερη προσωρινή απόσταση. Απαιτεί μη αρνητικά βάρη.',
+  pseudocode:`Dijkstra(G, s):
+  dist[s] ← 0;  dist[v] ← ∞  για κάθε άλλο v
+  Q ← όλοι οι κόμβοι  (min-priority queue ως προς dist)
+  όσο Q ≠ ∅:
+    u ← extract-min(Q)                 // ο πλησιέστερος μη οριστικοποιημένος
+    για κάθε ακμή (u,v) με βάρος w:
+      αν dist[u] + w < dist[v]:
+        dist[v] ← dist[u] + w;  prev[v] ← u
+  επιστροφή dist, prev`,
+  timeComplexity:'O((V+E)·log V) με δυαδικό σωρό',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη αρνητικά βάρη ακμών',
+  notes:'Με αρνητικά βάρη ο Dijkstra μπορεί να δώσει λανθασμένη απάντηση, γιατί ένας ήδη «οριστικοποιημένος» κόμβος δεν επανεξετάζεται ποτέ ξανά.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#ffb454',t:'τρέχων'},{c:'#5b9dd9',t:'στην ουρά (γνωστή απόσταση)'},{c:'#4fd1ae',t:'οριστικοποιημένος'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true,minW:1,maxW:9}),
+  compute:(g)=>dijkstraFamilySteps(g,g.nodes[0].id)
+};
+
+ALGORITHMS['astar']={
+  name:'A* (A-star)',
+  blurb:'Ευριστική επέκταση του Dijkstra για εύρεση συντομότερου μονοπατιού προς έναν συγκεκριμένο στόχο. Σε κάθε βήμα επιλέγει τον κόμβο με το μικρότερο f = g (πραγματική απόσταση) + h (ευριστική εκτίμηση απόστασης έως τον στόχο), επιταχύνοντας την αναζήτηση προς τη σωστή κατεύθυνση.',
+  pseudocode:`A*(G, s, t):
+  g[s] ← 0;  g[v] ← ∞ αλλού
+  όσο υπάρχει μη οριστικοποιημένος κόμβος:
+    u ← ο κόμβος με ελάχιστο f(u) = g(u) + h(u)
+    αν u == t: τερματισμός (βρέθηκε το μονοπάτι)
+    για κάθε ακμή (u,v,w):
+      αν g[u]+w < g[v]: g[v] ← g[u]+w; prev[v] ← u
+  h(v): ευριστική — εκτίμηση απόστασης v → t
+        (πρέπει να είναι παραδεκτή: h(v) ≤ πραγματική απόσταση)`,
+  timeComplexity:'O((V+E)·log V) χειρότερη· πολύ ταχύτερος στην πράξη με καλή ευριστική',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη αρνητικά βάρη· χρειάζεται θέσεις/συντεταγμένες κόμβων για την ευριστική',
+  notes:'Η ευριστική εδώ υπολογίζεται από την ευκλείδεια απόσταση στο σχέδιο του γράφου, κλιμακωμένη ώστε να παραμένει αισιόδοξη στο συγκεκριμένο τυχαίο γράφημα. Με h(v)=0 για όλα τα v, ο A* ταυτίζεται με τον Dijkstra.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#ffb454',t:'τρέχων'},{c:'#5b9dd9',t:'στην ουρά'},{c:'#4fd1ae',t:'οριστικοποιημένος'},{c:'#7a4fd9',t:'στόχος'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true,minW:1,maxW:9}),
+  compute:(g)=>{
+    const src=g.nodes[0].id, tgt=g.nodes[g.nodes.length-1].id;
+    const minW=Math.min(...g.edges.map(e=>e.w));
+    const dxy=(a,b)=>Math.hypot(g.pos[a].x-g.pos[b].x, g.pos[a].y-g.pos[b].y);
+    const maxDxy=Math.max(...g.nodes.map(n=>dxy(n.id,tgt)))||1;
+    const heuristic=(v)=> (dxy(v,tgt)/maxDxy) * minW * 1.4;
+    return dijkstraFamilySteps(g,src,{heuristic,target:tgt});
+  }
+};
+
+ALGORITHMS['link-state']={
+  name:'Δρομολόγηση Link-State (π.χ. OSPF)',
+  blurb:'Κάθε δρομολογητής διαθέτει πλήρη χάρτη του δικτύου (μέσω διάχυσης LSA - Link State Advertisements) και τρέχει τοπικά τον Dijkstra για να υπολογίσει τα συντομότερα μονοπάτια προς όλους τους υπόλοιπους δρομολογητές.',
+  pseudocode:`Link-State (OSPF):
+  1. Κάθε δρομολογητής ανακαλύπτει τους άμεσους γείτονές του και το κόστος συνδέσμου.
+  2. Διαχέει (flood) αυτή την πληροφορία σε ολόκληρο το δίκτυο (LSA).
+  3. Κάθε δρομολογητής συγκεντρώνει έναν πλήρη χάρτη τοπολογίας.
+  4. Κάθε δρομολογητής τρέχει τοπικά Dijkstra πάνω στον χάρτη
+     για να χτίσει τον δικό του πίνακα δρομολόγησης.`,
+  timeComplexity:'O((V+E)·log V) ανά δρομολογητή',
+  spaceComplexity:'O(V+E) — πλήρης τοπολογία σε κάθε κόμβο',
+  graphNote:'Κατευθυνόμενο/μη γράφημα κόστους συνδέσμων',
+  notes:'Το OSPF είναι το πιο διαδεδομένο πρωτόκολλο link-state. Επειδή κάθε δρομολογητής γνωρίζει ολόκληρη την τοπολογία, συγκλίνει γρήγορα αλλά απαιτεί περισσότερη μνήμη/επεξεργασία από τα distance-vector πρωτόκολλα.',
+  legend:[{c:'#b18cff',t:'πηγαίος δρομολογητής'},{c:'#ffb454',t:'τρέχων'},{c:'#5b9dd9',t:'γνωστός'},{c:'#4fd1ae',t:'οριστικοποιημένος'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true,minW:1,maxW:9}),
+  compute:(g)=>dijkstraFamilySteps(g,g.nodes[0].id,{mode:'linkstate'})
+};
+
+ALGORITHMS['bfs-sp']={
+  name:'BFS (συντομότερα μονοπάτια, βάρη=1)',
+  blurb:'Όταν όλες οι ακμές έχουν το ίδιο (μοναδιαίο) βάρος, η αναζήτηση κατά πλάτος (BFS) βρίσκει τα συντομότερα μονοπάτια εξερευνώντας το γράφημα «κύμα-κύμα» ανά απόσταση (αριθμό ακμών) από την πηγή.',
+  pseudocode:`BFS(G, s):
+  dist[s] ← 0;  dist[v] ← ∞ αλλού
+  Q ← ουρά με μόνο το s
+  όσο Q ≠ ∅:
+    u ← dequeue(Q)
+    για κάθε γείτονα v του u:
+      αν dist[v] == ∞:
+        dist[v] ← dist[u] + 1;  prev[v] ← u
+        enqueue(Q, v)`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Μη σταθμισμένο (ή όλα τα βάρη = 1)',
+  notes:'Η BFS είναι ειδική περίπτωση του Dijkstra όταν όλα τα βάρη είναι ίσα, με την ουρά FIFO να αντικαθιστά την priority queue.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#ffb454',t:'τρέχων'},{c:'#5b9dd9',t:'στην ουρά'},{c:'#4fd1ae',t:'επισκεφθείς'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const adj=buildAdj(g); const src=g.nodes[0].id;
+    const dist={}; g.nodes.forEach(n=>dist[n.id]=Infinity); dist[src]=0;
+    const prev={}; const q=[src]; const inQ=new Set([src]); const visited=new Set([src]);
+    const steps=[];
+    const snap=(log,detail,cur,edgeColors)=>{
+      const nodeColors={}; g.nodes.forEach(n=>{
+        if(n.id===src) nodeColors[n.id]='source';
+        else if(inQ.has(n.id)) nodeColors[n.id]='frontier';
+        else if(visited.has(n.id)) nodeColors[n.id]='settled';
+        else nodeColors[n.id]='default';
+      });
+      if(cur!==undefined&&cur!==null) nodeColors[cur]='current';
+      steps.push({log,detail,colors:{nodes:nodeColors,edges:edgeColors||{}},
+        table:{headers:['Κόμβος','απόσταση (hops)','πρόγονος'],rows:g.nodes.map(n=>[n.label,{v:fmt(dist[n.id]),hl:n.id===cur},prev[n.id]!==undefined?LM[prev[n.id]]:'–'])},
+        nodeSub:Object.fromEntries(g.nodes.map(n=>[n.id,dist[n.id]===Infinity?'∞':dist[n.id]]))});
+    };
+    snap(`Αρχικοποίηση ουράς με την πηγή <b>${LM[src]}</b>.`,`Το BFS εξερευνά το γράφημα σε «κύματα» — πρώτα όλοι οι γείτονες σε απόσταση 1, μετά απόσταση 2, κ.ο.κ.`,src,{});
+    while(q.length){
+      const u=q.shift(); inQ.delete(u);
+      snap(`Εξαγωγή <b>${LM[u]}</b> από την ουρά (dist=${dist[u]}).`,`Εξετάζουμε όλους τους γείτονες του ${LM[u]}.`,u,{});
+      for(const {to,id} of adj[u]){
+        if(!visited.has(to)){
+          visited.add(to); dist[to]=dist[u]+1; prev[to]=u; q.push(to); inQ.add(to);
+          snap(`Ανακάλυψη <b>${LM[to]}</b> μέσω ${LM[u]}→${LM[to]}: dist=${dist[to]}.`,`Ο κόμβος μπαίνει στην ουρά για μελλοντική επεξεργασία.`,u,{[id]:'tree'});
+        }
+      }
+    }
+    snap(`Ολοκληρώθηκε. Όλα τα συντομότερα μονοπάτια (σε αριθμό ακμών) από τον <b>${LM[src]}</b> έχουν βρεθεί.`,`Οι πράσινες ακμές σχηματίζουν το δέντρο BFS.`,null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['bellman-ford']={
+  name:'Bellman-Ford',
+  blurb:'Υπολογίζει συντομότερα μονοπάτια από μία πηγή επιτρέποντας και αρνητικά βάρη ακμών, χαλαρώνοντας επαναληπτικά όλες τις ακμές του γράφου μέχρι V−1 φορές. Μπορεί επίσης να ανιχνεύσει αρνητικούς κύκλους.',
+  pseudocode:`Bellman-Ford(G, s):
+  dist[s] ← 0;  dist[v] ← ∞ αλλού
+  επανάλαβε V−1 φορές:
+    για κάθε ακμή (u,v,w):
+      αν dist[u] + w < dist[v]:
+        dist[v] ← dist[u] + w
+  // έλεγχος αρνητικού κύκλου:
+  για κάθε ακμή (u,v,w):
+    αν dist[u] + w < dist[v]:
+      ΑΝΙΧΝΕΥΤΗΚΕ ΑΡΝΗΤΙΚΟΣ ΚΥΚΛΟΣ`,
+  timeComplexity:'O(V·E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Επιτρέπει αρνητικά βάρη (όχι αρνητικούς κύκλους προσβάσιμους από την πηγή)',
+  notes:'Πιο αργός από τον Dijkstra αλλά πιο γενικός. Χρησιμοποιείται και ως το πρώτο στάδιο του αλγορίθμου Johnson, καθώς και ως βάση των πρωτοκόλλων distance-vector (π.χ. RIP).',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#5b9dd9',t:'χαλαρώθηκε σε αυτό το πέρασμα'},{c:'#ff7a72',t:'επηρεάζεται από αρνητικό κύκλο'}],
+  gen:(o)=>genDAGpossiblyNegative(o.n),
+  compute:(g)=>bellmanFordSteps(g,g.nodes[0].id)
+};
+
+function bellmanFordSteps(graph, src, mode){
+  const LM=labelMap(graph); const dist={}; graph.nodes.forEach(n=>dist[n.id]=Infinity); dist[src]=0;
+  const steps=[]; const V=graph.nodes.length;
+  const W = mode==='dv' ? 'δρομολογητή' : 'κόμβο';
+  const tableRows=()=>graph.nodes.map(n=>[n.label,{v:dist[n.id]===Infinity?'∞':fmt(dist[n.id])}]);
+  const snap=(log,detail,edgeColors,nodeColors)=>{
+    const nc=nodeColors || Object.fromEntries(graph.nodes.map(n=>[n.id, n.id===src?'source': dist[n.id]<Infinity?'settled':'default']));
+    steps.push({log,detail,colors:{nodes:nc,edges:edgeColors||{}},table:{headers:['Κόμβος','dist'],rows:tableRows()}});
+  };
+  snap(`Αρχικοποίηση: dist[${LM[src]}]=0, όλοι οι υπόλοιποι ${W}ς = ∞.`,`Ο Bellman-Ford θα κάνει έως ${V-1} πλήρη περάσματα πάνω σε όλες τις ακμές.`,{});
+  let anyChange=true, pass=0;
+  for(pass=1; pass<=V-1 && anyChange; pass++){
+    anyChange=false; const changed=[]; const edgeColors={};
+    graph.edges.forEach(e=>{
+      if(dist[e.u]+e.w<dist[e.v]){ dist[e.v]=dist[e.u]+e.w; changed.push(`${LM[e.u]}→${LM[e.v]} (νέο dist=${fmt(dist[e.v])})`); edgeColors[e.id]='relax'; anyChange=true; }
+      if(!graph.directed && dist[e.v]+e.w<dist[e.u]){ dist[e.u]=dist[e.v]+e.w; changed.push(`${LM[e.v]}→${LM[e.u]} (νέο dist=${fmt(dist[e.u])})`); edgeColors[e.id]='relax'; anyChange=true; }
+    });
+    snap(`Πέρασμα ${pass}/${V-1}: ${changed.length? changed.length+' χαλαρώσεις.':'καμία αλλαγή — σταθεροποιήθηκε νωρίτερα.'}`,
+         changed.length? ('Ενημερώθηκαν: '+changed.join(', ')) : 'Δεν βρέθηκε καμία βελτίωση σε αυτό το πέρασμα, οπότε ο αλγόριθμος έχει ήδη συγκλίνει.', edgeColors);
+  }
+  let negCycle=false; const badEdges={}; const badNodes=new Set();
+  graph.edges.forEach(e=>{
+    if(dist[e.u]+e.w<dist[e.v]-1e-9){ negCycle=true; badEdges[e.id]='cut'; badNodes.add(e.u);badNodes.add(e.v); }
+    if(!graph.directed && dist[e.v]+e.w<dist[e.u]-1e-9){ negCycle=true; badEdges[e.id]='cut'; badNodes.add(e.u);badNodes.add(e.v); }
+  });
+  if(negCycle){
+    const nc=Object.fromEntries(graph.nodes.map(n=>[n.id, badNodes.has(n.id)?'path': n.id===src?'source':'default']));
+    steps.push({log:`⚠ Ανιχνεύθηκε <b>αρνητικός κύκλος</b> προσβάσιμος από την πηγή!`,
+      detail:'Μετά το (V−1)-οστό πέρασμα, κάποιες ακμές συνεχίζουν να χαλαρώνουν — αυτό αποδεικνύει ότι υπάρχει κύκλος συνολικού αρνητικού βάρους. Σε αυτή την περίπτωση δεν ορίζεται «συντομότερο» μονοπάτι, αφού θα μπορούσαμε να μειώνουμε το κόστος επ’ άπειρον γυρνώντας στον κύκλο.',
+      colors:{nodes:nc,edges:badEdges}, table:{headers:['Κόμβος','dist'],rows:tableRows()}});
+  } else {
+    snap(`Ολοκληρώθηκε μετά από ${pass-1} περάσματα, χωρίς αρνητικό κύκλο.`,`Οι τελικές αποστάσεις είναι εγγυημένα σωστές.`,{});
+  }
+  return steps;
+}
+
+ALGORITHMS['distance-vector']={
+  name:'Δρομολόγηση Distance-Vector (π.χ. RIP)',
+  blurb:'Κάθε δρομολογητής γνωρίζει μόνο τους άμεσους γείτονές του και ανταλλάσσει με αυτούς πίνακες αποστάσεων (distance vectors). Μέσω επαναλαμβανόμενων χαλαρώσεων —όπως στον Bellman-Ford— οι πίνακες συγκλίνουν στις συντομότερες αποστάσεις.',
+  pseudocode:`Distance-Vector (RIP), δρομολογητής s:
+  D_s[s] ← 0 ;  D_s[v] ← ∞ για κάθε άλλο v
+  επανάλαβε μέχρι σύγκλιση:
+    για κάθε γείτονα n με κόστος συνδέσμου c:
+      για κάθε προορισμό v:
+        αν D_s[n] + c < D_s[v]:
+          D_s[v] ← D_s[n] + c   // «άκουσε» τον πίνακα του γείτονα n`,
+  timeComplexity:'O(V·E) στη χειρότερη περίπτωση σύγκλισης',
+  spaceComplexity:'O(V) ανά δρομολογητή',
+  graphNote:'Κατανεμημένη εκδοχή του Bellman-Ford',
+  notes:'Το RIP βασίζεται σε αυτή την ιδέα. Μειονέκτημα: το πρόβλημα «count-to-infinity» όταν χαθεί μια σύνδεση, καθώς οι δρομολογητές μπορεί να «κυνηγούν» παλιά, ξεπερασμένη πληροφορία.',
+  legend:[{c:'#b18cff',t:'πηγαίος δρομολογητής'},{c:'#5b9dd9',t:'ενημερώθηκε σε αυτόν τον γύρο ανταλλαγής'}],
+  gen:(o)=>genDAGpossiblyNegative(o.n,{allowNegCycle:false}),
+  compute:(g)=>bellmanFordSteps(g,g.nodes[0].id,'dv')
+};
+
+ALGORITHMS['floyd-warshall']={
+  name:'Floyd-Warshall',
+  blurb:'Υπολογίζει τις συντομότερες αποστάσεις για όλα τα ζεύγη κόμβων ταυτόχρονα, με δυναμικό προγραμματισμό: σε κάθε βήμα k εξετάζει αν η διέλευση μέσω του ενδιάμεσου κόμβου k βελτιώνει την απόσταση κάθε ζεύγους (i, j).',
+  pseudocode:`Floyd-Warshall(G):
+  dist[i][j] ← w(i,j)  αν υπάρχει ακμή, αλλιώς ∞ (dist[i][i]=0)
+  για k = 1..V:
+    για i = 1..V:
+      για j = 1..V:
+        αν dist[i][k] + dist[k][j] < dist[i][j]:
+          dist[i][j] ← dist[i][k] + dist[k][j]`,
+  timeComplexity:'O(V³)',
+  spaceComplexity:'O(V²)',
+  graphNote:'Επιτρέπει αρνητικά βάρη (όχι αρνητικούς κύκλους)· ιδανικό για πυκνά γραφήματα',
+  notes:'Απλή υλοποίηση με τρία εμφωλευμένα loops. Για αραιά γραφήματα με πολλά ζεύγη, ο αλγόριθμος Johnson (Bellman-Ford + πολλαπλός Dijkstra) είναι συνήθως ταχύτερος.',
+  legend:[{c:'#ffb454',t:'ενδιάμεσος κόμβος k'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true,minW:1,maxW:9}),
+  compute:(g)=>{
+    const n=g.nodes.length; const ids=g.nodes.map(x=>x.id); const idx=Object.fromEntries(ids.map((id,i)=>[id,i]));
+    const D=Array.from({length:n},()=>new Array(n).fill(Infinity));
+    for(let i=0;i<n;i++) D[i][i]=0;
+    g.edges.forEach(e=>{ const i=idx[e.u],j=idx[e.v]; D[i][j]=Math.min(D[i][j],e.w); if(!g.directed) D[j][i]=Math.min(D[j][i],e.w); });
+    const steps=[];
+    const matTable=(hlK)=>({headers:['', ...g.nodes.map(x=>x.label)], rows:g.nodes.map((ni,i)=>[ni.label, ...g.nodes.map((nj,j)=>({v:D[i][j]===Infinity?'∞':fmt(D[i][j]), hl:i===hlK||j===hlK}))])});
+    steps.push({log:'Αρχικοποίηση πίνακα αποστάσεων απευθείας από τις ακμές (∞ όπου δεν υπάρχει ακμή).',
+      detail:'Ο πίνακας V×V ξεκινά με τα βάρη των άμεσων ακμών· θα βελτιώνεται σταδιακά επιτρέποντας διελεύσεις μέσω ενδιάμεσων κόμβων.',
+      colors:{nodes:{},edges:{}}, table:matTable(-1)});
+    for(let k=0;k<n;k++){
+      const updates=[];
+      for(let i=0;i<n;i++)for(let j=0;j<n;j++){
+        if(D[i][k]+D[k][j]<D[i][j]){ const old=D[i][j]; D[i][j]=D[i][k]+D[k][j]; updates.push(`${g.nodes[i].label}→${g.nodes[j].label}: ${old===Infinity?'∞':fmt(old)}→${fmt(D[i][j])}`); }
+      }
+      const nc={}; nc[ids[k]]='current';
+      steps.push({log:`k=${g.nodes[k].label}: εξέταση διελεύσεων μέσω του κόμβου <b>${g.nodes[k].label}</b> (${updates.length} βελτιώσεις).`,
+        detail: updates.length? ('Βελτιώθηκαν: '+updates.join(', ')) : `Καμία απόσταση δεν βελτιώθηκε περνώντας μέσα από τον ${g.nodes[k].label}.`,
+        colors:{nodes:nc,edges:{}}, table:matTable(k)});
+    }
+    steps.push({log:'Ολοκληρώθηκε — ο πίνακας περιέχει τη συντομότερη απόσταση για κάθε ζεύγος κόμβων.',detail:'', colors:{nodes:{},edges:{}}, table:matTable(-1)});
+    return steps;
+  }
+};
+
+ALGORITHMS['johnson']={
+  name:'Johnson',
+  blurb:'Υπολογίζει συντομότερα μονοπάτια για όλα τα ζεύγη κόμβων σε αραιά γραφήματα με πιθανώς αρνητικά βάρη: πρώτα «επαναζυγίζει» τις ακμές (ώστε να γίνουν μη αρνητικές) μέσω μιας βοηθητικής εκτέλεσης Bellman-Ford, και έπειτα τρέχει Dijkstra από κάθε κόμβο.',
+  pseudocode:`Johnson(G):
+  προσθήκε βοηθητικό κόμβο q με ακμή βάρους 0 προς όλους τους κόμβους
+  h ← Bellman-Ford(G+q, q)          // αν βρεθεί αρνητικός κύκλος → ΑΠΟΤΥΧΙΑ
+  για κάθε ακμή (u,v,w): w'(u,v) ← w + h[u] − h[v]     // πάντα ≥ 0
+  για κάθε κόμβο s: τρέξε Dijkstra(G, s) με βάρη w'
+  πραγματική απόσταση: d(u,v) ← d'(u,v) − h[u] + h[v]`,
+  timeComplexity:'O(V²log V + VE)',
+  spaceComplexity:'O(V²)',
+  graphNote:'Αραιά γραφήματα, επιτρέπει αρνητικά βάρη (όχι αρνητικούς κύκλους)',
+  notes:'Πιο αποδοτικός από τον Floyd-Warshall όταν το γράφημα είναι αραιό (E ≪ V²), επειδή εκμεταλλεύεται την ταχύτητα του Dijkstra για κάθε πηγή.',
+  legend:[{c:'#ffb454',t:'τρέχουσα πηγή Dijkstra'}],
+  gen:(o)=>genDAGpossiblyNegative(o.n,{allowNegCycle:true}),
+  compute:(g)=>{
+    const LM=labelMap(g); const steps=[]; const ids=g.nodes.map(x=>x.id);
+    const q='Q';
+    const gAux={directed:true,nodes:[...g.nodes,{id:q,label:'q'}],edges:[...g.edges, ...ids.map(id=>({id:'qz'+id,u:q,v:id,w:0}))]};
+    const bf=bellmanFordPlain(gAux,q);
+    steps.push({log:'Προσθήκη βοηθητικού κόμβου q με ακμές βάρους 0 προς όλους τους κόμβους, και εκτέλεση Bellman-Ford από το q.',
+      detail: bf.negCycle? '⚠ Ο Bellman-Ford ανίχνευσε αρνητικό κύκλο — ο αλγόριθμος Johnson δεν μπορεί να προχωρήσει σε αυτό το γράφημα.' :
+        'Προκύπτουν οι τιμές h(v) = απόσταση από το q: '+ids.map(id=>`h(${LM[id]})=${fmt(bf.dist[id])}`).join(', '),
+      colors:{nodes:{},edges:{}}, table:{headers:['Κόμβος','h(v)'],rows:ids.map(id=>[LM[id],fmt(bf.dist[id])])}});
+    if(bf.negCycle) return steps;
+    const h=bf.dist;
+    const gW={directed:true,nodes:g.nodes,edges:g.edges.map(e=>({...e, w:e.w+h[e.u]-h[e.v]}))};
+    steps.push({log:'Επαναζύγιση ακμών: w′(u,v) = w(u,v) + h(u) − h(v) — όλα τα νέα βάρη είναι πλέον ≥ 0.',
+      detail:'Αυτή η μετατροπή διατηρεί τα σχετικά συντομότερα μονοπάτια, επιτρέποντας ασφαλή χρήση του Dijkstra.',
+      colors:{nodes:{},edges:{}}, table:{headers:['Ακμή','αρχικό w','νέο w′'],rows:g.edges.map(e=>[`${LM[e.u]}→${LM[e.v]}`,fmt(e.w),fmt(e.w+h[e.u]-h[e.v])])}});
+    const D=Array.from({length:g.nodes.length},()=>({}));
+    ids.forEach((s,i)=>{
+      const dW=dijkstraPlain(gW,s);
+      const real={}; ids.forEach(v=>real[v]= dW[v]===Infinity?Infinity: dW[v]-h[s]+h[v]);
+      D[i]=real;
+      const nc={}; nc[s]='current';
+      steps.push({log:`Dijkstra από την πηγή <b>${LM[s]}</b> στο επαναζυγισμένο γράφημα.`,
+        detail:'Οι πραγματικές αποστάσεις υπολογίζονται αναστρέφοντας την επαναζύγιση: d(u,v) = d′(u,v) − h(u) + h(v).',
+        colors:{nodes:nc,edges:{}},
+        table:{headers:['', ...g.nodes.map(x=>x.label)], rows:[[LM[s], ...ids.map(v=>({v:real[v]===Infinity?'∞':fmt(real[v]),hl:true}))]]}});
+    });
+    steps.push({log:'Ολοκληρώθηκε — προέκυψε ο πλήρης πίνακας αποστάσεων για όλα τα ζεύγη.',detail:'',colors:{nodes:{},edges:{}},
+      table:{headers:['', ...g.nodes.map(x=>x.label)], rows:ids.map((s,i)=>[LM[s], ...ids.map(v=>D[i][v]===Infinity?'∞':fmt(D[i][v]))])}});
+    return steps;
+  }
+};
+
+ALGORITHMS['viterbi']={
+  name:'Viterbi',
+  blurb:'Βρίσκει την πιο πιθανή ακολουθία κρυφών καταστάσεων σε ένα κρυφό μοντέλο Markov (HMM), δεδομένης μιας ακολουθίας παρατηρήσεων. Λειτουργεί με δυναμικό προγραμματισμό πάνω σε ένα «πλέγμα» (trellis) καταστάσεων × χρόνου, ουσιαστικά αναζητώντας το μονοπάτι μέγιστης πιθανότητας.',
+  pseudocode:`Viterbi(obs, states, π, A, B):
+  δ₁(s) ← π(s)·B(s,obs₁)  για κάθε κατάσταση s
+  για t = 2..T:
+    για κάθε κατάσταση s:
+      δ_t(s) ← max_{s'} [ δ_{t-1}(s')·A(s',s) ] · B(s,obs_t)
+      ψ_t(s) ← argmax_{s'} [ δ_{t-1}(s')·A(s',s) ]
+  τελική κατάσταση ← argmax_s δ_T(s)
+  οπισθοανίχνευση μέσω ψ για ανάκτηση της βέλτιστης ακολουθίας`,
+  timeComplexity:'O(T·S²)  (T=χρονικά βήματα, S=καταστάσεις)',
+  spaceComplexity:'O(T·S)',
+  graphNote:'Πλέγμα (trellis) καταστάσεων × χρόνου — κατευθυνόμενο ασυκλικό',
+  notes:'Το "βάρος" κάθε ακμής στο πλέγμα είναι η πιθανότητα μετάβασης A(s\',s). Ο αλγόριθμος είναι ουσιαστικά "συντομότερο μονοπάτι" αν δουλέψουμε με −log(πιθανότητα) αντί για γινόμενο πιθανοτήτων.',
+  legend:[{c:'#ff7a72',t:'βέλτιστο μονοπάτι (πιο πιθανή ακολουθία)'},{c:'#ffb454',t:'τρέχουσα χρονική στήλη'}],
+  hideNodeCount:true,
+  extraControls:[{id:'T',label:'χρονικά βήματα',min:3,max:7,value:5}],
+  gen:(o)=>genHMM(o.T||5),
+  compute:(g)=>{
+    const {S,T,states,trans,emit,pi,obsSeq,idFn}=g.meta;
+    const steps=[]; const delta=Array.from({length:T},()=>new Array(S).fill(0)); const psi=Array.from({length:T},()=>new Array(S).fill(-1));
+    for(let s=0;s<S;s++) delta[0][s]=pi[s]*emit[s][obsSeq[0]];
+    const colFor=(t)=>{ const nc={}; for(let s=0;s<S;s++) nc[idFn(t,s)]='current'; return nc; };
+    steps.push({log:`t=1: αρχικοποίηση δ₁(s) = π(s)·B(s, παρατήρηση=${obsSeq[0]}).`,
+      detail:'Η πιθανότητα κάθε κατάστασης στο πρώτο χρονικό βήμα προκύπτει απευθείας από την αρχική κατανομή π και την πιθανότητα εκπομπής της παρατήρησης.',
+      colors:{nodes:colFor(0),edges:{}},
+      table:{headers:['κατάσταση','δ₁'],rows:states.map((s,i)=>[s,fmt(delta[0][i])])},
+      nodeText:Object.fromEntries(states.map((s,i)=>[idFn(0,i), fmt(delta[0][i])]))});
+    for(let t=1;t<T;t++){
+      for(let s=0;s<S;s++){
+        let best=-1,bestV=-Infinity;
+        for(let sp=0;sp<S;sp++){ const v=delta[t-1][sp]*trans[sp][s]; if(v>bestV){bestV=v;best=sp;} }
+        delta[t][s]=bestV*emit[s][obsSeq[t]]; psi[t][s]=best;
+      }
+      const edgeColors={}; for(let s=0;s<S;s++) edgeColors[g.edges.find(e=>e.u===idFn(t-1,psi[t][s])&&e.v===idFn(t,s)).id]='relax';
+      steps.push({log:`t=${t+1}: υπολογισμός δ_${t+1}(s) = max_{s'}[δ_${t}(s')·A(s',s)]·B(s,obs=${obsSeq[t]}).`,
+        detail:'Για κάθε κατάσταση κρατάμε τη μέγιστη προερχόμενη τιμή (ψ - δείκτης οπισθοανίχνευσης) πολλαπλασιασμένη με την πιθανότητα εκπομπής της τρέχουσας παρατήρησης.',
+        colors:{nodes:colFor(t),edges:edgeColors},
+        table:{headers:['κατάσταση','δ_'+(t+1),'ψ (προηγ.)'],rows:states.map((s,i)=>[s,fmt(delta[t][i]),states[psi[t][i]]])},
+        nodeText:Object.fromEntries(states.map((s,i)=>[idFn(t,i), fmt(delta[t][i])]))});
+    }
+    let bestFinal=0; for(let s=1;s<S;s++) if(delta[T-1][s]>delta[T-1][bestFinal]) bestFinal=s;
+    const path=new Array(T); path[T-1]=bestFinal;
+    for(let t=T-1;t>0;t--) path[t-1]=psi[t][path[t]];
+    const pathNodes={}; const pathEdges={};
+    for(let t=0;t<T;t++){ pathNodes[idFn(t,path[t])]='path'; if(t>0) pathEdges[g.edges.find(e=>e.u===idFn(t-1,path[t-1])&&e.v===idFn(t,path[t])).id]='path'; }
+    steps.push({log:`Οπισθοανίχνευση: η πιο πιθανή ακολουθία καταστάσεων είναι <b>${path.map(s=>states[s]).join(' → ')}</b>.`,
+      detail:`Ξεκινώντας από την κατάσταση με το μέγιστο δ_${T}, ακολουθούμε τους δείκτες ψ προς τα πίσω.`,
+      colors:{nodes:pathNodes,edges:pathEdges},
+      table:{headers:['t','παρατήρηση','επιλεγμένη κατάσταση'],rows:path.map((s,t)=>[t+1,obsSeq[t],states[s]])}});
+    return steps;
+  }
+};
+
+/* ============================================================
+   Category 2 — Δέντρα Επικάλυψης / MST
+   ============================================================ */
+function genRootedDigraph(n){
+  const nodes=baseNodes(n); const edges=[]; let eid=0;
+  for(let i=1;i<n;i++){ const j=randInt(0,i-1); edges.push({id:'e'+(eid++),u:j,v:i,w:randInt(1,9)}); }
+  const seen=new Set(edges.map(e=>e.u+'_'+e.v));
+  const extra=randInt(Math.floor(n/2),n);
+  for(let k=0;k<extra;k++){ const u=randInt(0,n-1),v=randInt(0,n-1); if(u===v) continue; const key=u+'_'+v; if(seen.has(key)) continue; seen.add(key); edges.push({id:'e'+(eid++),u,v,w:randInt(1,9)}); }
+  return {directed:true,nodes,edges,pos:circleLayout(nodes.map(x=>x.id)),meta:{root:0}};
+}
+
+ALGORITHMS['prim']={
+  name:'Prim',
+  blurb:'Χτίζει το ελάχιστο δέντρο επικάλυψης (MST) «μεγαλώνοντάς» το από έναν αρχικό κόμβο: σε κάθε βήμα προσθέτει τη φθηνότερη ακμή που συνδέει το τρέχον δέντρο με έναν κόμβο εκτός δέντρου.',
+  pseudocode:`Prim(G):
+  key[s] ← 0 (αρχικός κόμβος)·  key[v] ← ∞ αλλού
+  όσο υπάρχουν κόμβοι εκτός δέντρου:
+    u ← ο κόμβος εκτός δέντρου με ελάχιστο key
+    προσθήκη u στο δέντρο
+    για κάθε ακμή (u,v,w):
+      αν v εκτός δέντρου και w < key[v]:
+        key[v] ← w;  parent[v] ← u`,
+  timeComplexity:'O(E log V) με δυαδικό σωρό',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο, σταθμισμένο γράφημα',
+  notes:'Ο Prim μοιάζει πολύ με τον Dijkstra — και οι δύο «μεγαλώνουν» ένα δέντρο άπληστα, με τη διαφορά ότι ο Prim κοιτάζει το βάρος της μεμονωμένης ακμής (όχι τη συνολική απόσταση από τη ρίζα).',
+  legend:[{c:'#4fd1ae',t:'στο δέντρο'},{c:'#5b9dd9',t:'υποψήφιος (γνωστό key)'},{c:'#ffb454',t:'μόλις προστέθηκε'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const inTree=new Set(); const key={}; g.nodes.forEach(nd=>key[nd.id]=Infinity);
+    const parent={}; const start=g.nodes[0].id; key[start]=0; const steps=[]; const treeEdges=new Set(); const adj=buildAdj(g);
+    const snap=(log,detail,cur,edgeExtra)=>{
+      const nc={}; g.nodes.forEach(nd=>{ nc[nd.id]= inTree.has(nd.id)?'settled': key[nd.id]<Infinity?'frontier':'default'; });
+      if(cur!==undefined&&cur!==null) nc[cur]='current';
+      const ec={}; treeEdges.forEach(id=>ec[id]='tree'); Object.assign(ec, edgeExtra||{});
+      steps.push({log,detail,colors:{nodes:nc,edges:ec},
+        table:{headers:['Κόμβος','key','πρόγονος'],rows:g.nodes.map(nd=>[nd.label,{v:key[nd.id]===Infinity?'∞':fmt(key[nd.id]),hl:nd.id===cur},parent[nd.id]!==undefined?LM[parent[nd.id]]:'–'])}});
+    };
+    snap(`Ξεκινάμε από τον κόμβο <b>${LM[start]}</b> (key=0).`,'Το δέντρο μεγαλώνει προσθέτοντας κάθε φορά τη φθηνότερη «γέφυρα» προς έναν νέο κόμβο.',start,{});
+    while(inTree.size<n){
+      let u=null,best=Infinity;
+      g.nodes.forEach(nd=>{ if(!inTree.has(nd.id) && key[nd.id]<best){best=key[nd.id];u=nd.id;} });
+      if(u===null) break;
+      inTree.add(u);
+      if(parent[u]!==undefined){ const pe=g.edges.find(e=>(e.u===parent[u]&&e.v===u)||(e.u===u&&e.v===parent[u])); if(pe) treeEdges.add(pe.id); }
+      snap(`Προσθήκη κόμβου <b>${LM[u]}</b> στο δέντρο${parent[u]!==undefined?` (μέσω ${LM[parent[u]]}–${LM[u]})`:''}.`,'',u,{});
+      for(const {to,w,id} of adj[u]){
+        if(!inTree.has(to) && w<key[to]){ key[to]=w; parent[to]=u;
+          snap(`Ενημέρωση key[${LM[to]}] = ${w} μέσω της ακμής ${LM[u]}–${LM[to]}.`,'Βρέθηκε φθηνότερος τρόπος σύνδεσης αυτού του κόμβου με το δέντρο.',u,{[id]:'relax'}); }
+      }
+    }
+    snap('Ολοκληρώθηκε — σχηματίστηκε το ελάχιστο δέντρο επικάλυψης (MST).','',null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['kruskal']={
+  name:'Kruskal',
+  blurb:'Χτίζει το ελάχιστο δέντρο επικάλυψης εξετάζοντας όλες τις ακμές σε αύξουσα σειρά βάρους και προσθέτοντας άπληστα κάθε ακμή που δεν σχηματίζει κύκλο, χρησιμοποιώντας δομή Union-Find για γρήγορο έλεγχο συνεκτικότητας.',
+  pseudocode:`Kruskal(G):
+  ταξινόμησε τις ακμές κατά αύξον βάρος
+  DSU ← κάθε κόμβος στο δικό του σύνολο
+  για κάθε ακμή (u,v,w) με τη σειρά:
+    αν find(u) ≠ find(v):
+      πρόσθεσε την ακμή στο MST
+      union(u, v)`,
+  timeComplexity:'O(E log E)',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο, σταθμισμένο γράφημα',
+  notes:'Σε αντίθεση με τον Prim που μεγαλώνει ένα ενιαίο δέντρο, ο Kruskal μπορεί να δουλεύει με πολλά «δασάκια» (forest) ταυτόχρονα που ενώνονται σταδιακά.',
+  legend:[{c:'#4fd1ae',t:'προστέθηκε στο MST'},{c:'#3a4048',t:'απορρίφθηκε (κύκλος)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>{
+    const LM=labelMap(g); const sorted=[...g.edges].sort((a,b)=>a.w-b.w);
+    const idOf={}; g.nodes.forEach((n,i)=>idOf[n.id]=i); const dsu=new DSU(g.nodes.length);
+    const steps=[]; const treeEdges=new Set(); const rejected=new Set(); let totalW=0;
+    const snap=(log,detail,edgeExtra)=>{
+      const ec={}; treeEdges.forEach(id=>ec[id]='tree'); rejected.forEach(id=>ec[id]='reject'); Object.assign(ec, edgeExtra||{});
+      steps.push({log,detail,colors:{nodes:{},edges:ec},
+        table:{headers:['Ακμή','βάρος','κατάσταση'],rows:sorted.map(e=>[`${LM[e.u]}–${LM[e.v]}`,e.w, treeEdges.has(e.id)?'✓ MST': rejected.has(e.id)?'✗ κύκλος':'…'])}});
+    };
+    snap('Ταξινόμηση όλων των ακμών κατά αύξον βάρος.','Θα εξετάσουμε τις ακμές από τη φθηνότερη στην ακριβότερη.',{});
+    for(const e of sorted){
+      if(dsu.connected(idOf[e.u],idOf[e.v])){
+        rejected.add(e.id);
+        snap(`Ακμή ${LM[e.u]}–${LM[e.v]} (w=${e.w}): απορρίπτεται — θα σχημάτιζε κύκλο.`,'Οι δύο κόμβοι είναι ήδη συνδεδεμένοι μέσω άλλων ακμών του MST.', {[e.id]:'reject'});
+      } else {
+        dsu.union(idOf[e.u],idOf[e.v]); treeEdges.add(e.id); totalW+=e.w;
+        snap(`Ακμή ${LM[e.u]}–${LM[e.v]} (w=${e.w}): προστίθεται στο MST.`,'Ενώνει δύο διαφορετικά συστατικά χωρίς να σχηματίζει κύκλο.', {[e.id]:'tree'});
+      }
+    }
+    snap(`Ολοκληρώθηκε. Συνολικό βάρος MST = ${totalW}.`,'',{});
+    return steps;
+  }
+};
+
+ALGORITHMS['boruvka']={
+  name:'Borůvka',
+  blurb:'Ο πρώτος ιστορικά αλγόριθμος MST (1926). Δουλεύει σε γύρους: σε κάθε γύρο, κάθε συνεκτικό συστατικό βρίσκει τη φθηνότερη ακμή που το συνδέει με διαφορετικό συστατικό, και όλες αυτές οι ακμές προστίθενται ταυτόχρονα.',
+  pseudocode:`Borůvka(G):
+  κάθε κόμβος ξεκινά ως δικό του συστατικό
+  όσο υπάρχει > 1 συστατικό:
+    για κάθε συστατικό C: βρες τη φθηνότερη ακμή που βγαίνει από το C
+    πρόσθεσε όλες αυτές τις (μοναδικές) ακμές ταυτόχρονα
+    ενημέρωσε τα συστατικά (union-find)`,
+  timeComplexity:'O(E log V)',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο, σταθμισμένο γράφημα',
+  notes:'Επειδή κάθε γύρος τουλάχιστον υποδιπλασιάζει τον αριθμό των συστατικών, χρειάζονται το πολύ O(log V) γύροι — ιδιότητα χρήσιμη και για παράλληλες/κατανεμημένες υλοποιήσεις.',
+  legend:[{c:'#4fd1ae',t:'στο MST'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i); const dsu=new DSU(n);
+    const steps=[]; const treeEdges=new Set(); let round=0,totalW=0;
+    const snap=(log,detail)=>{ const ec={}; treeEdges.forEach(id=>ec[id]='tree'); steps.push({log,detail,colors:{nodes:{},edges:ec}}); };
+    snap('Αρχικά κάθε κόμβος είναι το δικό του ξεχωριστό συστατικό.','Σε κάθε γύρο, όλα τα συστατικά επιλέγουν ταυτόχρονα τη φθηνότερή τους εξερχόμενη ακμή.');
+    let numComp=n;
+    while(numComp>1){
+      round++;
+      const cheapest={};
+      g.edges.forEach(e=>{
+        const cu=dsu.find(idOf[e.u]),cv=dsu.find(idOf[e.v]); if(cu===cv) return;
+        if(!cheapest[cu]||e.w<cheapest[cu].w) cheapest[cu]=e;
+        if(!cheapest[cv]||e.w<cheapest[cv].w) cheapest[cv]=e;
+      });
+      const chosen=new Set(); const added=[];
+      Object.values(cheapest).forEach(e=>{
+        const cu=dsu.find(idOf[e.u]),cv=dsu.find(idOf[e.v]); if(cu===cv||chosen.has(e.id)) return;
+        dsu.union(idOf[e.u],idOf[e.v]); treeEdges.add(e.id); chosen.add(e.id); added.push(`${labelMap(g)[e.u]}–${labelMap(g)[e.v]}`); totalW+=e.w;
+      });
+      numComp=new Set(g.nodes.map(nd=>dsu.find(idOf[nd.id]))).size;
+      snap(`Γύρος ${round}: προστέθηκαν ${added.length} ακμές ταυτόχρονα.`, added.length?('Προστέθηκαν: '+added.join(', ')):'Καμία νέα ακμή — ολοκληρώθηκε.');
+      if(added.length===0) break;
+    }
+    snap(`Ολοκληρώθηκε μετά από ${round} γύρους. Συνολικό βάρος MST = ${totalW}.`,'O(log V) γύροι αρκούν, αφού τα συστατικά τουλάχιστον υποδιπλασιάζονται κάθε φορά.');
+    return steps;
+  }
+};
+
+ALGORITHMS['reverse-delete']={
+  name:'Reverse-Delete',
+  blurb:'Το «αντίστροφο» του Kruskal: ξεκινά με όλες τις ακμές παρούσες και τις αφαιρεί με φθίνουσα σειρά βάρους, όσο η αφαίρεση δεν αποσυνδέει το γράφημα.',
+  pseudocode:`Reverse-Delete(G):
+  T ← όλες οι ακμές του G
+  ταξινόμησε τις ακμές κατά φθίνον βάρος
+  για κάθε ακμή e (από την ακριβότερη στη φθηνότερη):
+    αν T − e παραμένει συνεκτικό:
+      T ← T − e   (αφαίρεσε την ακμή)
+  επίστρεψε T  (είναι το MST)`,
+  timeComplexity:'O(E·(V+E)) — απλή υλοποίηση με έλεγχο συνεκτικότητας ανά ακμή',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο, σταθμισμένο γράφημα',
+  notes:'Εννοιολογικά κομψός αλλά συνήθως πιο αργός στην πράξη από τον Kruskal/Prim, καθώς κάθε αφαίρεση απαιτεί έλεγχο συνεκτικότητας.',
+  legend:[{c:'#4fd1ae',t:'παραμένει (MST)'},{c:'#3a4048',t:'αφαιρέθηκε'},{c:'#ffb454',t:'κρίσιμη — δεν αφαιρείται'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>{
+    const LM=labelMap(g); const sorted=[...g.edges].sort((a,b)=>b.w-a.w); const present=new Set(g.edges.map(e=>e.id));
+    const steps=[]; let totalW=g.edges.reduce((a,e)=>a+e.w,0);
+    const isConnected=(excludeId)=>{
+      const adj={}; g.nodes.forEach(nd=>adj[nd.id]=[]);
+      g.edges.forEach(e=>{ if(present.has(e.id) && e.id!==excludeId){ adj[e.u].push(e.v); adj[e.v].push(e.u); } });
+      const seen=new Set([g.nodes[0].id]); const stack=[g.nodes[0].id];
+      while(stack.length){ const u=stack.pop(); adj[u].forEach(v=>{ if(!seen.has(v)){seen.add(v);stack.push(v);} }); }
+      return seen.size===g.nodes.length;
+    };
+    const snap=(log,detail,edgeExtra)=>{ const ec={}; present.forEach(id=>ec[id]='tree'); Object.assign(ec,edgeExtra||{}); steps.push({log,detail,colors:{nodes:{},edges:ec}}); };
+    snap('Ξεκινάμε με όλες τις ακμές παρούσες, ταξινομημένες κατά φθίνον βάρος.','Θα αφαιρούμε την πιο ακριβή ακμή κάθε φορά, εφόσον το γράφημα παραμένει συνεκτικό χωρίς αυτήν.',{});
+    for(const e of sorted){
+      if(isConnected(e.id)){
+        present.delete(e.id); totalW-=e.w;
+        snap(`Αφαίρεση ${LM[e.u]}–${LM[e.v]} (w=${e.w}): το γράφημα παραμένει συνεκτικό.`,'Η ακμή δεν ήταν απαραίτητη.', {[e.id]:'reject'});
+      } else {
+        snap(`Διατήρηση ${LM[e.u]}–${LM[e.v]} (w=${e.w}): η αφαίρεση θα αποσυνέδεε το γράφημα.`,'Αυτή η ακμή είναι κρίσιμη για τη συνεκτικότητα.', {[e.id]:'sat'});
+      }
+    }
+    snap(`Ολοκληρώθηκε. Συνολικό βάρος MST = ${totalW}.`,'',{});
+    return steps;
+  }
+};
+
+ALGORITHMS['chu-liu-edmonds']={
+  name:'Chu-Liu / Edmonds',
+  blurb:'Βρίσκει το ελάχιστο κατευθυνόμενο δέντρο επικάλυψης (minimum arborescence) ριζωμένο σε έναν κόμβο: κάθε άλλος κόμβος επιλέγει τη φθηνότερη εισερχόμενη ακμή του· αν προκύψουν κύκλοι, συστέλλονται σε υπερκόμβους και ο αλγόριθμος επαναλαμβάνεται αναδρομικά.',
+  pseudocode:`Edmonds(G, root):
+  για κάθε κόμβο v ≠ root: επίλεξε τη φθηνότερη εισερχόμενη ακμή minIn[v]
+  αν οι επιλογές δεν σχηματίζουν κύκλο: επίστρεψε τις minIn[v]
+  αλλιώς, για κάθε κύκλο C:
+    συστολή του C σε έναν υπερκόμβο c
+    για κάθε ακμή (u,v,w) με v ∈ C: w′ ← w − minIn[v].w
+    λύσε αναδρομικά στο συνεσταλμένο γράφημα
+    επέκτεινε: ο κύκλος «σπάει» στο σημείο που μπαίνει η επιλεγμένη εξωτερική ακμή`,
+  timeComplexity:'O(V·E) — απλή αναδρομική υλοποίηση',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο, σταθμισμένο γράφημα· η ρίζα πρέπει να μπορεί να φτάσει σε όλους τους κόμβους',
+  notes:'Είναι το κατευθυνόμενο ανάλογο του MST. Χρησιμοποιείται π.χ. σε επεξεργασία φυσικής γλώσσας (dependency parsing) για την εύρεση του βέλτιστου συντακτικού δέντρου.',
+  legend:[{c:'#b18cff',t:'ρίζα'},{c:'#ffb454',t:'μέλη κύκλου προς συστολή'},{c:'#ff7a72',t:'ακμές κύκλου (θα σπάσει)'},{c:'#4fd1ae',t:'τελικό arborescence'}],
+  gen:(o)=>genRootedDigraph(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const root=g.meta.root;
+    const groupOf={}; g.nodes.forEach(n=>groupOf[n.id]=[n.id]);
+    const trace=[]; const ctr={c:0};
+    function solve(nodesList, edgesList){
+      const minIn={};
+      for(const v of nodesList){ if(v===root) continue; let best=null; for(const e of edgesList){ if(e.v===v && (!best||e.w<best.w)) best=e; } minIn[v]=best; }
+      const color={}; let foundCycle=null;
+      for(const v of nodesList){
+        if(v===root||color[v]) continue; const path=[]; let u=v;
+        while(u!==root && color[u]!==2){ if(color[u]===1){ const idx=path.indexOf(u); foundCycle=path.slice(idx); break; } color[u]=1; path.push(u); u=minIn[u].u; }
+        if(foundCycle) break; path.forEach(x=>color[x]=2);
+      }
+      if(!foundCycle) return {edges:Object.values(minIn)};
+      const cyc=foundCycle, cycSet=new Set(cyc);
+      const superId='C'+(ctr.c++);
+      const origMembers=cyc.flatMap(v=>groupOf[v]);
+      const cycEdgeIds=cyc.map(v=>minIn[v].id);
+      trace.push({origMembers,cycEdgeIds});
+      groupOf[superId]=origMembers;
+      const newNodes=nodesList.filter(v=>!cycSet.has(v)).concat([superId]);
+      const cycInWeight={}; cyc.forEach(v=>cycInWeight[v]=minIn[v].w);
+      const newEdges=[];
+      edgesList.forEach(e=>{
+        const uIn=cycSet.has(e.u), vIn=cycSet.has(e.v);
+        if(uIn&&vIn) return;
+        if(!uIn&&!vIn){ newEdges.push(e); return; }
+        if(uIn&&!vIn){ const uStack=(e._uStack||[]).concat([{u:e.u}]); newEdges.push(Object.assign({},e,{u:superId,_uStack:uStack})); return; }
+        if(!uIn&&vIn){ const w2=e.w-cycInWeight[e.v]; const vStack=(e._vStack||[]).concat([{v:e.v,w:e.w}]); newEdges.push(Object.assign({},e,{v:superId,w:w2,_vStack:vStack})); return; }
+      });
+      const sub=solve(newNodes,newEdges);
+      const resultEdges=[]; let brokenNode=null;
+      sub.edges.forEach(e=>{
+        if(e.v===superId){ const st=e._vStack.slice(); const top=st.pop(); brokenNode=top.v; resultEdges.push(Object.assign({},e,{v:top.v,w:top.w,_vStack:st})); }
+        else if(e.u===superId){ const st=e._uStack.slice(); const top=st.pop(); resultEdges.push(Object.assign({},e,{u:top.u,_uStack:st})); }
+        else resultEdges.push(e);
+      });
+      cyc.forEach(v=>{ if(v!==brokenNode) resultEdges.push(minIn[v]); });
+      return {edges:resultEdges};
+    }
+    const nodeIds=g.nodes.map(n=>n.id);
+    const finalRes=solve(nodeIds, g.edges.map(e=>({...e})));
+    const finalEdgeIds=new Set(finalRes.edges.map(e=>e.id));
+    const totalW=finalRes.edges.reduce((a,e)=>a+e.w,0);
+    const steps=[];
+    steps.push({log:`Ρίζα του ελάχιστου κατευθυνόμενου δέντρου: <b>${LM[root]}</b>.`,
+      detail:'Για κάθε άλλο κόμβο ψάχνουμε τη φθηνότερη εισερχόμενη ακμή του.',
+      colors:{nodes:{[root]:'source'},edges:{}}});
+    trace.forEach(t=>{
+      const nc={[root]:'source'}; t.origMembers.forEach(id=>nc[id]='current');
+      const ec={}; t.cycEdgeIds.forEach(id=>ec[id]='cut');
+      steps.push({log:`Βρέθηκε κύκλος στις φθηνότερες εισερχόμενες ακμές μεταξύ: <b>${t.origMembers.map(id=>LM[id]).join(', ')}</b>.`,
+        detail:'Οι κόμβοι αυτοί «δείχνουν» ο ένας στον άλλο κυκλικά. Συστέλλουμε τον κύκλο σε έναν υπερκόμβο, αφαιρώντας από κάθε εισερχόμενη ακμή προς μέλος του κύκλου το κόστος της τοπικά φθηνότερης επιλογής του, και λύνουμε αναδρομικά.',
+        colors:{nodes:nc,edges:ec}});
+    });
+    const finalNc={}; g.nodes.forEach(n=>finalNc[n.id]= n.id===root?'source':'settled');
+    const finalEc={}; finalEdgeIds.forEach(id=>finalEc[id]='tree');
+    steps.push({log:`Ολοκληρώθηκε. Συνολικό βάρος του ελάχιστου arborescence = ${totalW}.`,
+      detail:'Κάθε κόμβος εκτός ρίζας έχει πλέον ακριβώς μία εισερχόμενη ακμή, χωρίς κύκλους.',
+      colors:{nodes:finalNc,edges:finalEc},
+      table:{headers:['Κόμβος','εισερχόμενη ακμή'],rows:finalRes.edges.map(e=>[LM[e.v],`${LM[e.u]}→${LM[e.v]} (w=${e.w})`])}});
+    return steps;
+  }
+};
+
+ALGORITHMS['bfs-tree']={
+  name:'BFS Tree',
+  blurb:'Το δέντρο που προκύπτει φυσικά από μια αναζήτηση κατά πλάτος (BFS): κάθε κόμβος συνδέεται με τον «γονέα» μέσω του οποίου ανακαλύφθηκε πρώτα, δίνοντας το δέντρο ελάχιστου αριθμού «αλμάτων» (hops) από τη ρίζα.',
+  pseudocode:`BFS-Tree(G, s):
+  δημιούργησε ουρά με το s· parent[s] ← κενό
+  όσο η ουρά δεν είναι κενή:
+    u ← dequeue
+    για κάθε μη επισκεφθέντα γείτονα v του u:
+      parent[v] ← u   // η ακμή (u,v) γίνεται ακμή δέντρου
+      enqueue(v)`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Οποιοδήποτε γράφημα (κατευθυνόμενο ή μη)',
+  notes:'Το δέντρο BFS είναι το ίδιο δέντρο που παράγεται από τον αλγόριθμο συντομότερων μονοπατιών BFS — εδώ η έμφαση δίνεται στη δομή του δέντρου, όχι στις αποστάσεις.',
+  legend:[{c:'#b18cff',t:'ρίζα'},{c:'#4fd1ae',t:'ακμή δέντρου'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const adj=buildAdj(g); const start=g.nodes[0].id;
+    const visited=new Set([start]); const q=[start]; const parent={}; const treeEdges=new Set(); const steps=[];
+    const snap=(log,detail,cur,edgeExtra)=>{
+      const nc={}; g.nodes.forEach(n=>nc[n.id]= n.id===start?'source': visited.has(n.id)?'settled':'default');
+      if(cur!==undefined&&cur!==null) nc[cur]='current';
+      const ec={}; treeEdges.forEach(id=>ec[id]='tree'); Object.assign(ec,edgeExtra||{});
+      steps.push({log,detail,colors:{nodes:nc,edges:ec}});
+    };
+    snap(`Ρίζα του δέντρου BFS: <b>${LM[start]}</b>.`,'',start,{});
+    while(q.length){
+      const u=q.shift();
+      for(const {to,id} of adj[u]){
+        if(!visited.has(to)){ visited.add(to); parent[to]=u; treeEdges.add(id); q.push(to);
+          snap(`Το ${LM[to]} γίνεται παιδί του ${LM[u]} στο δέντρο BFS.`,'',u,{[id]:'tree'});
+        }
+      }
+    }
+    snap('Ολοκληρώθηκε το δέντρο BFS.','',null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['dfs-tree']={
+  name:'DFS Tree',
+  blurb:'Το δέντρο που προκύπτει από μια αναζήτηση κατά βάθος (DFS): ο αλγόριθμος προχωράει όσο πιο «βαθιά» γίνεται πριν κάνει οπισθοδρόμηση (backtrack), σχηματίζοντας ένα δέντρο με χαρακτηριστικά «μακριά και στενά» κλαδιά.',
+  pseudocode:`DFS-Tree(G, u):
+  σήμανε u ως επισκεφθέντα
+  για κάθε γείτονα v του u:
+    αν v δεν έχει επισκεφθεί:
+      parent[v] ← u   // ακμή δέντρου
+      DFS-Tree(G, v)
+    αλλιώς αν v ≠ parent[u]:
+      // ακμή οπισθοδρόμησης (back edge) — όχι μέρος του δέντρου`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V) (στοίβα αναδρομής)',
+  graphNote:'Οποιοδήποτε γράφημα (κατευθυνόμενο ή μη)',
+  notes:'Το δέντρο DFS είναι θεμέλιο για αλγορίθμους όπως ο Tarjan (SCC) και ο εντοπισμός κρίσιμων ακμών/κόμβων (bridges/articulation points), μέσω της ταξινόμησης ακμών σε tree/back/forward/cross.',
+  legend:[{c:'#b18cff',t:'ρίζα'},{c:'#4fd1ae',t:'ακμή δέντρου'},{c:'#3a4048',t:'ακμή οπισθοδρόμησης (back edge)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const adj=buildAdj(g); const start=g.nodes[0].id;
+    const visited=new Set(); const steps=[]; const treeEdges=new Set(); const parent={}; const loggedBack=new Set();
+    const snap=(log,detail,cur,edgeExtra)=>{
+      const nc={}; g.nodes.forEach(n=>nc[n.id]= n.id===start?'source': visited.has(n.id)?'settled':'default');
+      if(cur!==undefined&&cur!==null) nc[cur]='current';
+      const ec={}; treeEdges.forEach(id=>ec[id]='tree'); Object.assign(ec,edgeExtra||{});
+      steps.push({log,detail,colors:{nodes:nc,edges:ec}});
+    };
+    snap(`Ρίζα του δέντρου DFS: <b>${LM[start]}</b>.`,'',start,{});
+    (function dfs(u){
+      visited.add(u);
+      for(const {to,id} of adj[u]){
+        if(!visited.has(to)){
+          parent[to]=u; treeEdges.add(id);
+          snap(`Επίσκεψη ${LM[to]} μέσω ${LM[u]}–${LM[to]} (ακμή δέντρου).`,'',to,{[id]:'tree'});
+          dfs(to);
+        } else if(to!==parent[u] && !loggedBack.has(id)){
+          loggedBack.add(id);
+          snap(`Η ακμή ${LM[u]}–${LM[to]} οδηγεί σε ήδη επισκεφθέντα κόμβο — back edge (αγνοείται).`,'',u,{[id]:'reject'});
+        }
+      }
+    })(start);
+    snap('Ολοκληρώθηκε το δέντρο DFS.','',null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['spt']={
+  name:'Shortest Path Tree (SPT)',
+  blurb:'Το δέντρο συντομότερων μονοπατιών από μία πηγή: συνδυάζοντας τις ακμές (prev[v], v) που παράγει ο Dijkstra (ή ο Bellman-Ford σε γράφημα με αρνητικά βάρη), προκύπτει ένα δέντρο όπου η απόσταση ρίζας→v μέσα στο δέντρο ισούται με τη συντομότερη απόσταση στο αρχικό γράφημα.',
+  pseudocode:`Shortest-Path-Tree(G, s):
+  (dist, prev) ← Dijkstra(G, s)     // ή Bellman-Ford αν υπάρχουν αρνητικά βάρη
+  T ← { (prev[v], v) : για κάθε προσβάσιμο v ≠ s }
+  επίστρεψε T`,
+  timeComplexity:'O((V+E)·log V) μέσω Dijkstra',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη αρνητικά βάρη (εδώ)· γενικεύεται με Bellman-Ford',
+  notes:'Ένα MST ελαχιστοποιεί το ΣΥΝΟΛΙΚΟ βάρος όλων των ακμών· ένα SPT ελαχιστοποιεί την απόσταση ΑΠΟ ΤΗ ΡΙΖΑ προς κάθε κόμβο ξεχωριστά. Συνήθως πρόκειται για διαφορετικά δέντρα στο ίδιο γράφημα!',
+  legend:[{c:'#b18cff',t:'πηγή/ρίζα'},{c:'#ffb454',t:'τρέχων'},{c:'#5b9dd9',t:'στην ουρά'},{c:'#4fd1ae',t:'οριστικοποιημένος'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>dijkstraFamilySteps(g,g.nodes[0].id)
+};
+
+/* ============================================================
+   Category 3 — Ροές σε Δίκτυα
+   ============================================================ */
+function maxFlowSteps(graph, strategy){
+  const LM=labelMap(graph); const src=graph.meta.src, snk=graph.meta.snk;
+  const flow={}; graph.edges.forEach(e=>flow[e.id]=0);
+  const steps=[]; let totalFlow=0;
+  const edgeLabelAll=()=>Object.fromEntries(graph.edges.map(e=>[e.id,`${flow[e.id]}/${e.cap}`]));
+  const snap=(log,detail,edgeExtra,nodeExtra)=>{
+    steps.push({log,detail,colors:{nodes:nodeExtra||{[src]:'source',[snk]:'target'},edges:edgeExtra||{}},edgeLabel:edgeLabelAll(),
+      table:{headers:['Ακμή','ροή/χωρ.'],rows:graph.edges.map(e=>[`${LM[e.u]}→${LM[e.v]}`,`${flow[e.id]}/${e.cap}`])}});
+  };
+  snap('Αρχικοποίηση: μηδενική ροή σε όλες τις ακμές.',
+    `Θα αναζητούμε επαναλαμβανόμενα «αυξητικά μονοπάτια» (augmenting paths) από την πηγή στην καταβόθρα μέσα στο υπολειπόμενο γράφημα, χρησιμοποιώντας ${strategy==='bfs'?'BFS (πάντα το συντομότερο μονοπάτι — Edmonds-Karp)':'DFS (οποιοδήποτε έγκυρο μονοπάτι — γενικός Ford-Fulkerson)'}.`, {});
+  let iter=0;
+  while(iter++<60){
+    const adj={}; graph.nodes.forEach(n=>adj[n.id]=[]);
+    graph.edges.forEach(e=>{ const f=flow[e.id]; if(f<e.cap) adj[e.u].push({to:e.v,edgeId:e.id,dir:'f',cap:e.cap-f}); if(f>0) adj[e.v].push({to:e.u,edgeId:e.id,dir:'b',cap:f}); });
+    const parent={}; let found=false;
+    if(strategy==='bfs'){
+      const q=[src]; const seen=new Set([src]);
+      while(q.length){ const u=q.shift(); if(u===snk){found=true;break;} for(const ed of adj[u]){ if(!seen.has(ed.to)){ seen.add(ed.to); parent[ed.to]={from:u,...ed}; q.push(ed.to); } } }
+    } else {
+      const stack=[src]; const seen=new Set([src]);
+      while(stack.length){ const u=stack.pop(); if(u===snk){found=true;break;} for(const ed of adj[u]){ if(!seen.has(ed.to)){ seen.add(ed.to); parent[ed.to]={from:u,...ed}; stack.push(ed.to); } } }
+    }
+    if(!found) break;
+    const pathEdges=[]; let curN=snk; while(curN!==src){ const p=parent[curN]; pathEdges.push(p); curN=p.from; } pathEdges.reverse();
+    const bottleneck=Math.min(...pathEdges.map(p=>p.cap));
+    const ec={}; pathEdges.forEach(p=>ec[p.edgeId]='path');
+    const pathStr=pathEdges.map(p=>(p.dir==='f'?`${LM[p.from]}→${LM[p.to]}`:`${LM[p.from]}⇠${LM[p.to]}(αντ.)`)).join(', ');
+    snap(`Βρέθηκε αυξητικό μονοπάτι με bottleneck = ${bottleneck}.`,`Μονοπάτι: ${pathStr}. Το bottleneck είναι η ελάχιστη υπολειπόμενη χωρητικότητα κατά μήκος του.`, ec, {[src]:'source',[snk]:'target'});
+    pathEdges.forEach(p=>{ if(p.dir==='f') flow[p.edgeId]+=bottleneck; else flow[p.edgeId]-=bottleneck; });
+    totalFlow+=bottleneck;
+    const ec2={}; pathEdges.forEach(p=>{ const e=graph.edges.find(x=>x.id===p.edgeId); ec2[p.edgeId]= flow[p.edgeId]>=e.cap?'sat':'tree'; });
+    snap(`Αύξηση ροής κατά ${bottleneck}. Συνολική ροή μέχρι στιγμής: ${totalFlow}.`,'Ενημερώνουμε τη ροή σε κάθε ακμή του μονοπατιού.', ec2, {[src]:'source',[snk]:'target'});
+  }
+  snap(`Δεν υπάρχει άλλο αυξητικό μονοπάτι. Μέγιστη ροή = ${totalFlow}.`,'Από το θεώρημα max-flow/min-cut, αυτή η τιμή ισούται με τη χωρητικότητα της ελάχιστης τομής του δικτύου.',{}, {[src]:'source',[snk]:'target'});
+  return steps;
+}
+
+ALGORITHMS['ford-fulkerson']={
+  name:'Ford-Fulkerson',
+  blurb:'Υπολογίζει τη μέγιστη ροή από πηγή σε καταβόθρα βρίσκοντας επαναλαμβανόμενα ένα οποιοδήποτε αυξητικό μονοπάτι (μέσω DFS) στο υπολειπόμενο γράφημα (residual graph) και «σπρώχνοντας» ροή ίση με τη μικρότερη υπολειπόμενη χωρητικότητα κατά μήκος του.',
+  pseudocode:`Ford-Fulkerson(G, s, t):
+  ροή(e) ← 0 για κάθε ακμή e
+  όσο υπάρχει μονοπάτι p από s σε t στο residual γράφημα (DFS):
+    bottleneck ← ελάχιστη residual χωρητικότητα κατά μήκος του p
+    για κάθε ακμή του p: αύξησε τη ροή (ή μείωσε αν είναι residual-αντίστροφη)
+  επίστρεψε τη συνολική ροή`,
+  timeComplexity:'O(E · max_flow) στη χειρότερη περίπτωση με ακέραιες χωρητικότητες',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα χωρητικοτήτων',
+  notes:'Χωρίς συγκεκριμένη στρατηγική επιλογής μονοπατιού (π.χ. τυχαία DFS), ο αριθμός επαναλήψεων μπορεί να είναι πολύ μεγάλος με μη ακέραιες/κακές χωρητικότητες· ο Edmonds-Karp διορθώνει αυτό επιλέγοντας πάντα το συντομότερο μονοπάτι.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#7a4fd9',t:'καταβόθρα'},{c:'#ff7a72',t:'αυξητικό μονοπάτι'},{c:'#ffb454',t:'κορεσμένη ακμή'},{c:'#4fd1ae',t:'ενεργή ακμή ροής'}],
+  gen:(o)=>genFlowNetwork(o.n),
+  compute:(g)=>maxFlowSteps(g,'dfs')
+};
+
+ALGORITHMS['edmonds-karp']={
+  name:'Edmonds-Karp',
+  blurb:'Ειδική περίπτωση του Ford-Fulkerson όπου το αυξητικό μονοπάτι επιλέγεται πάντα με BFS (το συντομότερο σε αριθμό ακμών στο residual γράφημα), εγγυώντας πολυωνυμική πολυπλοκότητα.',
+  pseudocode:`Edmonds-Karp(G, s, t):
+  ροή(e) ← 0 για κάθε ακμή e
+  όσο υπάρχει μονοπάτι p από s σε t στο residual γράφημα (BFS — συντομότερο):
+    bottleneck ← ελάχιστη residual χωρητικότητα κατά μήκος του p
+    ενημέρωσε τις ροές κατά μήκος του p
+  επίστρεψε τη συνολική ροή`,
+  timeComplexity:'O(V·E²)',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα χωρητικοτήτων',
+  notes:'Η χρήση BFS εγγυάται ότι κάθε ακμή γίνεται «κρίσιμη» (bottleneck) το πολύ O(E) φορές συνολικά, δίνοντας αυστηρό πολυωνυμικό φράγμα ανεξαρτήτως των τιμών χωρητικότητας.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#7a4fd9',t:'καταβόθρα'},{c:'#ff7a72',t:'αυξητικό μονοπάτι (BFS)'},{c:'#ffb454',t:'κορεσμένη ακμή'},{c:'#4fd1ae',t:'ενεργή ακμή ροής'}],
+  gen:(o)=>genFlowNetwork(o.n),
+  compute:(g)=>maxFlowSteps(g,'bfs')
+};
+
+ALGORITHMS['dinic']={
+  name:"Dinic",
+  blurb:'Υπολογίζει τη μέγιστη ροή σε φάσεις: σε κάθε φάση χτίζει με BFS ένα «επίπεδο γράφημα» (κρατώντας μόνο ακμές που προχωρούν κατά ένα επίπεδο) και έπειτα βρίσκει μέσα σε αυτό μια «blocking flow» με DFS — πολλά αυξητικά μονοπάτια ταυτόχρονα ανά φάση.',
+  pseudocode:`Dinic(G, s, t):
+  όσο true:
+    χτίσε level graph με BFS από το s στο residual γράφημα
+    αν το t δεν είναι προσβάσιμο: τερματισμός
+    βρες blocking flow στο level graph (πολλαπλά μονοπάτια με DFS)
+    πρόσθεσε τη blocking flow στη συνολική ροή`,
+  timeComplexity:'O(V²·E) γενικά· O(E·√V) σε δικτυα με μοναδιαίες χωρητικότητες',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα χωρητικοτήτων',
+  notes:'Ταχύτερος στην πράξη από τον Edmonds-Karp επειδή βρίσκει πολλά μονοπάτια ανά «φάση» αντί για ένα-ένα, μειώνοντας δραστικά τον αριθμό των φάσεων (το πολύ V φάσεις).',
+  legend:[{c:'#5b9dd9',t:'κόμβος στο επίπεδο γράφημα'},{c:'#ff7a72',t:'μονοπάτι blocking flow'},{c:'#b18cff',t:'πηγή'},{c:'#7a4fd9',t:'καταβόθρα'}],
+  gen:(o)=>genFlowNetwork(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const src=g.meta.src, snk=g.meta.snk;
+    const flow={}; g.edges.forEach(e=>flow[e.id]=0);
+    const steps=[]; let totalFlow=0;
+    const edgeLabelAll=()=>Object.fromEntries(g.edges.map(e=>[e.id,`${flow[e.id]}/${e.cap}`]));
+    const snap=(log,detail,edgeExtra,nodeExtra)=>{ steps.push({log,detail,colors:{nodes:nodeExtra||{[src]:'source',[snk]:'target'},edges:edgeExtra||{}},edgeLabel:edgeLabelAll()}); };
+    snap('Αρχικοποίηση: μηδενική ροή.','Ο Dinic δουλεύει σε φάσεις: (1) BFS για επίπεδο γράφημα, (2) DFS για blocking flow μέσα σε αυτό.',{});
+    let phase=0;
+    while(phase++<20){
+      let radj={}; g.nodes.forEach(n=>radj[n.id]=[]);
+      g.edges.forEach(e=>{ const f=flow[e.id]; if(f<e.cap) radj[e.u].push({to:e.v,edgeId:e.id,dir:'f',cap:e.cap-f}); if(f>0) radj[e.v].push({to:e.u,edgeId:e.id,dir:'b',cap:f}); });
+      const level={}; g.nodes.forEach(n=>level[n.id]=-1); level[src]=0; const q=[src];
+      while(q.length){ const u=q.shift(); for(const ed of radj[u]) if(level[ed.to]===-1 && ed.cap>0){ level[ed.to]=level[u]+1; q.push(ed.to); } }
+      if(level[snk]===-1){ snap('Δεν υπάρχει πλέον μονοπάτι προς την καταβόθρα — τερματισμός.',`Μέγιστη ροή = ${totalFlow}.`, {}, {}); break; }
+      const nc={}; g.nodes.forEach(n=>{ if(level[n.id]>=0) nc[n.id]='frontier'; }); nc[src]='source'; nc[snk]='target';
+      snap(`Φάση ${phase}: επίπεδο γράφημα με BFS.`,'Θα χρησιμοποιήσουμε μόνο ακμές που προχωρούν από επίπεδο k σε επίπεδο k+1.', {}, nc);
+      let progressed=0, guard=0;
+      while(guard++<40){
+        function dfs(u,cap,visited){
+          if(u===snk) return {cap,path:[]};
+          for(const ed of radj[u]){
+            if(ed.cap>0 && level[ed.to]===level[u]+1){
+              const res=dfs(ed.to, Math.min(cap,ed.cap));
+              if(res && res.cap>0) return {cap:res.cap, path:[ed,...res.path]};
+            }
+          }
+          return null;
+        }
+        const found=dfs(src, Infinity);
+        if(!found) break;
+        const bottleneck=found.cap; const path=found.path;
+        path.forEach(p=>{ if(p.dir==='f') flow[p.edgeId]+=bottleneck; else flow[p.edgeId]-=bottleneck; });
+        totalFlow+=bottleneck; progressed++;
+        const ec={}; path.forEach(p=>ec[p.edgeId]='path');
+        snap(`Blocking flow: μονοπάτι μέσα στο επίπεδο γράφημα με bottleneck=${bottleneck}.`,`Συνολική ροή μέχρι στιγμής: ${totalFlow}.`, ec, {[src]:'source',[snk]:'target'});
+        radj={}; g.nodes.forEach(n=>radj[n.id]=[]);
+        g.edges.forEach(e=>{ const f=flow[e.id]; if(f<e.cap) radj[e.u].push({to:e.v,edgeId:e.id,dir:'f',cap:e.cap-f}); if(f>0) radj[e.v].push({to:e.u,edgeId:e.id,dir:'b',cap:f}); });
+      }
+      if(progressed===0) break;
+    }
+    snap(`Ολοκληρώθηκε. Μέγιστη ροή = ${totalFlow}.`,'',{}, {});
+    return steps;
+  }
+};
+
+ALGORITHMS['push-relabel']={
+  name:'Push-Relabel (Goldberg-Tarjan)',
+  blurb:'Υπολογίζει τη μέγιστη ροή τοπικά: κάθε κόμβος έχει ένα «ύψος» (height) και μπορεί να έχει πλεόνασμα ροής (excess). Ο αλγόριθμος «σπρώχνει» (push) πλεόνασμα προς γειτονικούς κόμβους με μικρότερο ύψος, ή «ανυψώνει» (relabel) έναν κόμβο όταν δεν μπορεί να σπρώξει άλλο.',
+  pseudocode:`Push-Relabel(G, s, t):
+  height[s] ← V,  height[v] ← 0 αλλού
+  αρχικό preflow: κόρεσε όλες τις ακμές από το s
+  όσο υπάρχει ενεργός κόμβος u (u≠s,t, excess[u]>0):
+    αν υπάρχει επιτρεπτή ακμή (u,v): height[u]=height[v]+1 και residual(u,v)>0:
+      push(u,v): μετέφερε min(excess[u], residual(u,v))
+    αλλιώς:
+      relabel(u): height[u] ← 1 + min{height[v] : residual(u,v)>0}`,
+  timeComplexity:'O(V²·E) γενικά· O(V³) με FIFO επιλογή',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα χωρητικοτήτων',
+  notes:'Σε αντίθεση με τις μεθόδους αυξητικού μονοπατιού, ο push-relabel δουλεύει τοπικά (χωρίς να ψάχνει ολόκληρα μονοπάτια), κάτι που τον κάνει ιδιαίτερα κατάλληλο για παράλληλες υλοποιήσεις.',
+  legend:[{c:'#b18cff',t:'πηγή'},{c:'#7a4fd9',t:'καταβόθρα'},{c:'#ffb454',t:'ενεργός κόμβος (excess>0)'},{c:'#4fd1ae',t:'ακμή push'}],
+  gen:(o)=>genFlowNetwork(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const src=g.meta.src, snk=g.meta.snk; const n=g.nodes.length;
+    const flow={}; g.edges.forEach(e=>flow[e.id]=0);
+    const height={}; g.nodes.forEach(nd=>height[nd.id]=0); height[src]=n;
+    const excess={}; g.nodes.forEach(nd=>excess[nd.id]=0);
+    const steps=[];
+    const resCap=(a,b)=>{ let c=0; g.edges.forEach(e=>{ if(e.u===a&&e.v===b) c+=e.cap-flow[e.id]; if(e.u===b&&e.v===a) c+=flow[e.id]; }); return c; };
+    const edgeLabelAll=()=>Object.fromEntries(g.edges.map(e=>[e.id,`${flow[e.id]}/${e.cap}`]));
+    const heightTable=()=>({headers:['Κόμβος','height','excess'],rows:g.nodes.map(nd=>[nd.label,height[nd.id], excess[nd.id]])});
+    const snap=(log,detail,edgeExtra,nodeExtra)=>{ steps.push({log,detail,colors:{nodes:nodeExtra||{},edges:edgeExtra||{}},edgeLabel:edgeLabelAll(),table:heightTable()}); };
+    const baseNC=()=>{ const nc={}; g.nodes.forEach(nd=>{ nc[nd.id]= excess[nd.id]>0 && nd.id!==src && nd.id!==snk ? 'current' : 'default'; }); nc[src]='source'; nc[snk]='target'; return nc; };
+    g.edges.forEach(e=>{ if(e.u===src){ flow[e.id]=e.cap; excess[e.v]+=e.cap; excess[src]-=e.cap; } });
+    snap(`Αρχικό preflow: κορεσμός όλων των ακμών από την πηγή <b>${LM[src]}</b> (height=${n}).`,'Κάθε ακμή που ξεκινά από την πηγή γεμίζει πλήρως, δημιουργώντας πλεόνασμα στους γείτονές της.', {}, baseNC());
+    let iter=0;
+    while(iter++<400){
+      const act=g.nodes.filter(nd=>nd.id!==src&&nd.id!==snk&&excess[nd.id]>0).map(nd=>nd.id);
+      if(act.length===0) break;
+      const u=act[0]; let pushed=false;
+      for(const v of g.nodes.map(nd=>nd.id)){
+        if(v===u) continue;
+        if(height[u]===height[v]+1 && resCap(u,v)>0){
+          const d=Math.min(excess[u],resCap(u,v));
+          let rem=d; const ec={};
+          g.edges.forEach(e=>{ if(rem<=0) return; if(e.u===u&&e.v===v){ const avail=e.cap-flow[e.id]; const use=Math.min(avail,rem); flow[e.id]+=use; rem-=use; ec[e.id]='tree'; } });
+          g.edges.forEach(e=>{ if(rem<=0) return; if(e.u===v&&e.v===u){ const avail=flow[e.id]; const use=Math.min(avail,rem); flow[e.id]-=use; rem-=use; ec[e.id]='reject'; } });
+          excess[u]-=d; excess[v]+=d;
+          snap(`Push: ${LM[u]}→${LM[v]} μεταφέρει ${d} μονάδες πλεονάσματος (height[${LM[u]}]=${height[u]} = height[${LM[v]}]+1).`,'Το πλεόνασμα «ρέει» προς κόμβο με μικρότερο ύψος — επιτρεπτή κίνηση.', ec, baseNC());
+          pushed=true; break;
+        }
+      }
+      if(!pushed){
+        let minH=Infinity;
+        g.nodes.forEach(nd=>{ if(nd.id!==u && resCap(u,nd.id)>0) minH=Math.min(minH,height[nd.id]); });
+        if(minH===Infinity) break;
+        height[u]=minH+1;
+        snap(`Relabel: ο κόμβος <b>${LM[u]}</b> ανυψώνεται σε height=${height[u]}.`,'Καμία γειτονική ακμή δεν ήταν επιτρεπτή (μικρότερο ύψος) — ανεβάζουμε το ύψος ώστε να ξεκλειδώσουμε νέα push.', {}, baseNC());
+      }
+    }
+    snap(`Ολοκληρώθηκε. Μέγιστη ροή = excess[καταβόθρα] = ${excess[snk]}.`,'', {}, baseNC());
+    return steps;
+  }
+};
+
+ALGORITHMS['stoer-wagner']={
+  name:'Stoer-Wagner',
+  blurb:'Βρίσκει την ελάχιστη τομή (global min-cut) ενός μη κατευθυνόμενου σταθμισμένου γράφου — τον διαχωρισμό των κόμβων σε δύο μη κενά σύνολα με ελάχιστο συνολικό βάρος διασυνδετικών ακμών — χωρίς να χρειάζεται να καθοριστούν πηγή/καταβόθρα.',
+  pseudocode:`Stoer-Wagner(G):
+  όσο υπάρχουν > 1 (υπερ)κόμβοι:
+    «μέγιστη αναζήτηση γειτνίασης»: ξεκίνα από τυχαίο κόμβο,
+       πρόσθεσε επαναλαμβανόμενα τον πιο «σφιχτά» συνδεδεμένο κόμβο στο ήδη επιλεγμένο σύνολο A
+    cut-of-the-phase ← βάρος σύνδεσης του τελευταίου κόμβου που προστέθηκε
+    συγχώνευσε τους δύο τελευταίους κόμβους (s,t) σε έναν
+    κράτα το ελάχιστο cut-of-the-phase που βρέθηκε συνολικά
+  επίστρεψε το ελάχιστο cut-of-the-phase`,
+  timeComplexity:'O(V³) απλή υλοποίηση',
+  spaceComplexity:'O(V²)',
+  graphNote:'Μη κατευθυνόμενο, μη αρνητικό σταθμισμένο γράφημα',
+  notes:'Σε αντίθεση με τον max-flow min-cut (που βρίσκει την ελάχιστη τομή ΑΝΑΜΕΣΑ σε συγκεκριμένη πηγή/καταβόθρα), ο Stoer-Wagner βρίσκει την καθολικά ελάχιστη τομή του γράφου, χωρίς να χρειάζεται να δοκιμάσει όλα τα ζεύγη κόμβων.',
+  legend:[{c:'#5b9dd9',t:'στο σύνολο A (μέγιστη αναζήτηση γειτνίασης)'},{c:'#ffb454',t:'τελευταίος κόμβος που προστέθηκε'},{c:'#ff7a72',t:'η ελάχιστη τομή που βρέθηκε'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:true}),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const ids=g.nodes.map(x=>x.id);
+    const idx={}; ids.forEach((id,i)=>idx[id]=i);
+    let W=Array.from({length:n},()=>new Array(n).fill(0));
+    g.edges.forEach(e=>{ W[idx[e.u]][idx[e.v]]+=e.w; W[idx[e.v]][idx[e.u]]+=e.w; });
+    let active=[...Array(n).keys()];
+    let groups=active.map(v=>[v]);
+    let best=Infinity, bestPair=null;
+    const steps=[];
+    steps.push({log:'Ξεκινάμε με όλους τους κόμβους ξεχωριστά.',detail:'Σε κάθε φάση θα κάνουμε μια «μέγιστη αναζήτηση γειτνίασης» και θα συγχωνεύουμε τους δύο τελευταίους κόμβους που προστέθηκαν.',colors:{nodes:{},edges:{}}});
+    let phase=0;
+    while(active.length>1){
+      phase++;
+      const A=[active[0]]; const inA=new Set(A);
+      const weight={}; active.forEach(v=>weight[v]=W[active[0]][v]);
+      let s=active[0], t=active[0];
+      const order=[active[0]];
+      while(A.length<active.length){
+        let bv=null,bw=-Infinity;
+        for(const v of active){ if(inA.has(v)) continue; if(weight[v]>bw){bw=weight[v];bv=v;} }
+        s=t; t=bv; A.push(bv); inA.add(bv); order.push(bv);
+        for(const v of active){ if(!inA.has(v)) weight[v]+=W[bv][v]; }
+      }
+      const cutOfPhase=weight[t];
+      const nc2={};
+      order.forEach(v=>{ groups.find(gr=>gr.includes(v)).forEach(orig=>{ nc2[ids[orig]]='frontier'; }); });
+      groups.find(gr=>gr.includes(t)).forEach(orig=>{ nc2[ids[orig]]='current'; });
+      steps.push({log:`Φάση ${phase}: μέγιστη αναζήτηση γειτνίασης — σειρά προσθήκης ${order.map(v=>groups.find(gr=>gr.includes(v)).map(o=>LM[ids[o]]).join('+')).join(' → ')}. Cut-of-the-phase = ${cutOfPhase}.`,
+        detail:`Ο τελευταίος κόμβος (${groups.find(gr=>gr.includes(t)).map(o=>LM[ids[o]]).join('+')}) είχε τη μικρότερη «σύνδεση» με το υπόλοιπο σύνολο· θα συγχωνευτεί με τον προτελευταίο.`,
+        colors:{nodes:nc2,edges:{}}});
+      if(cutOfPhase<best){ best=cutOfPhase; bestPair=groups.find(gr=>gr.includes(t)).map(o=>ids[o]); }
+      for(const v of active){ if(v!==s&&v!==t){ W[s][v]+=W[t][v]; W[v][s]+=W[v][t]; } }
+      const gs=groups.find(gr=>gr.includes(s)); const gt=groups.find(gr=>gr.includes(t));
+      gs.push(...gt); groups=groups.filter(gr=>gr!==gt);
+      active=active.filter(v=>v!==t);
+    }
+    const cutNc={}; g.nodes.forEach(n2=>cutNc[n2.id]= bestPair && bestPair.map(o=>ids[o]).includes(n2.id) ? 'path':'settled');
+    const cutEc={};
+    g.edges.forEach(e=>{ const aIn=bestPair.map(o=>ids[o]).includes(e.u), bIn=bestPair.map(o=>ids[o]).includes(e.v); if(aIn!==bIn) cutEc[e.id]='cut'; });
+    steps.push({log:`Ολοκληρώθηκε. Η ελάχιστη τομή έχει βάρος ${best}.`,
+      detail:`Διαχωρίζει τους κόμβους {${bestPair.map(o=>LM[ids[o]]).join(', ')}} από τους υπόλοιπους.`,
+      colors:{nodes:cutNc,edges:cutEc}});
+    return steps;
+  }
+};
+
+/* ============================================================
+   Category 4 — Ταιριάσματα (Matching)
+   ============================================================ */
+function genAssignment(n){
+  const k=Math.max(2,Math.min(5,Math.round(n/2)));
+  const nodes=[]; for(let i=0;i<k;i++) nodes.push({id:i,label:'L'+(i+1)}); for(let i=0;i<k;i++) nodes.push({id:k+i,label:'R'+(i+1)});
+  const edges=[]; let eid=0;
+  for(let i=0;i<k;i++) for(let j=0;j<k;j++) edges.push({id:'e'+(eid++),u:i,v:k+j,w:randInt(1,9)});
+  const left=[...Array(k).keys()], right=[...Array(k).keys()].map(i=>k+i);
+  return {directed:false,nodes,edges,pos:bipartiteLayout(left,right),meta:{left,right}};
+}
+
+ALGORITHMS['hungarian']={
+  name:'Hungarian (Kuhn-Munkres)',
+  blurb:'Λύνει το πρόβλημα ανάθεσης (assignment problem): βρίσκει την πλήρη αντιστοίχιση σε ένα πλήρες διμερές σταθμισμένο γράφημα με το ελάχιστο δυνατό συνολικό κόστος, χρησιμοποιώντας «δυναμικά» (potentials) και επαυξητικά μονοπάτια.',
+  pseudocode:`Hungarian(cost[n][n]):
+  u[i] ← 0, v[j] ← 0  (δυναμικά γραμμών/στηλών)
+  για κάθε γραμμή i:
+    βρες επαυξητικό μονοπάτι από το i προς μια ελεύθερη στήλη,
+      χρησιμοποιώντας μόνο «σφιχτές» ακμές (cost[i][j] = u[i]+v[j])
+    αν δεν υπάρχει άμεσα, μείωσε το ελάχιστο slack και ενημέρωσε τα u, v
+      ώστε να «ξεκλειδωθεί» νέα σφιχτή ακμή
+    ανάστρεψε (augment) το μονοπάτι
+  επίστρεψε την πλήρη αντιστοίχιση`,
+  timeComplexity:'O(n³)',
+  spaceComplexity:'O(n²)',
+  graphNote:'Πλήρες διμερές γράφημα n×n με βάρη (κόστη)',
+  notes:'Τα δυναμικά u,v εγγυώνται ότι το κόστος κάθε αντιστοίχισης δεν είναι ποτέ φθηνότερο από ό,τι υποδεικνύει η τρέχουσα «χαλάρωση» — όταν βρεθεί πλήρης αντιστοίχιση με σφιχτές ακμές, είναι εγγυημένα βέλτιστη (ισχυρή δυϊκότητα γραμμικού προγραμματισμού).',
+  legend:[{c:'#ffb454',t:'γραμμή υπό επεξεργασία'},{c:'#4fd1ae',t:'τρέχουσα ανάθεση'}],
+  gen:(o)=>genAssignment(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const left=g.meta.left, right=g.meta.right; const n=left.length;
+    const cost=Array.from({length:n},()=>new Array(n).fill(0));
+    const edgeOf=Array.from({length:n},()=>new Array(n).fill(null));
+    g.edges.forEach(e=>{ const i=left.indexOf(e.u), j=right.indexOf(e.v); if(i>=0&&j>=0){ cost[i][j]=e.w; edgeOf[i][j]=e.id; } });
+    const u=new Array(n+1).fill(0), v=new Array(n+1).fill(0);
+    const p=new Array(n+1).fill(0), way=new Array(n+1).fill(0);
+    const steps=[];
+    const matchTable=()=>({headers:['Αριστερά','ανάθεση'],rows:left.map((lid,i)=>{ let col='–'; for(let j=1;j<=n;j++){ if(p[j]===i+1) col=LM[right[j-1]]; } return [LM[lid],col]; })});
+    const edgeColorsFromP=()=>{ const ec={}; for(let j=1;j<=n;j++){ if(p[j]>0){ const i=p[j]-1, jj=j-1; if(edgeOf[i][jj]) ec[edgeOf[i][jj]]='tree'; } } return ec; };
+    steps.push({log:'Αρχικοποίηση: μηδενικά δυναμικά (potentials) για γραμμές και στήλες.',
+      detail:'Ο αλγόριθμος επεξεργάζεται μία γραμμή (αριστερό κόμβο) τη φορά, ψάχνοντας επαυξητικό μονοπάτι μέσω σφιχτών ακμών.',
+      colors:{nodes:{},edges:{}}, table:matchTable()});
+    for(let i=1;i<=n;i++){
+      p[0]=i; let j0=0; const minv=new Array(n+1).fill(Infinity); const used=new Array(n+1).fill(false); let iterCount=0;
+      do{
+        used[j0]=true; iterCount++;
+        let i0=p[j0], delta=Infinity, j1=-1;
+        for(let j=1;j<=n;j++){
+          if(!used[j]){
+            const curv=cost[i0-1][j-1]-u[i0]-v[j];
+            if(curv<minv[j]){ minv[j]=curv; way[j]=j0; }
+            if(minv[j]<delta){ delta=minv[j]; j1=j; }
+          }
+        }
+        for(let j=0;j<=n;j++){ if(used[j]){ u[p[j]]+=delta; v[j]-=delta; } else minv[j]-=delta; }
+        j0=j1;
+      } while(p[j0]!==0);
+      do{ const j1=way[j0]; p[j0]=p[j1]; j0=j1; } while(j0);
+      const nc={}; nc[left[i-1]]='current';
+      steps.push({log:`Γραμμή <b>${LM[left[i-1]]}</b>: αναζήτηση επαυξητικού μονοπατιού μέσω σφιχτών ακμών (${iterCount} εσωτερικές επαναλήψεις ενημέρωσης δυναμικών).`,
+        detail:'Το μονοπάτι μπορεί να «ξαναδιευθετήσει» προηγούμενες αναθέσεις ώστε το σύνολο να παραμένει βέλτιστο.',
+        colors:{nodes:nc,edges:edgeColorsFromP()}, table:matchTable()});
+    }
+    let total=0; const finalEc={};
+    for(let j=1;j<=n;j++){ if(p[j]>0){ const i=p[j]-1, jj=j-1; total+=cost[i][jj]; if(edgeOf[i][jj]) finalEc[edgeOf[i][jj]]='tree'; } }
+    steps.push({log:`Ολοκληρώθηκε. Ελάχιστο συνολικό κόστος αντιστοίχισης = ${total}.`,detail:'',colors:{nodes:{},edges:finalEc},table:matchTable()});
+    return steps;
+  }
+};
+
+ALGORITHMS['hopcroft-karp']={
+  name:'Hopcroft-Karp',
+  blurb:'Βρίσκει τη μέγιστη πληθικότητας αντιστοίχιση (maximum cardinality matching) σε διμερές γράφημα, δουλεύοντας σε φάσεις: BFS υπολογίζει το μήκος του συντομότερου ελεύθερου μονοπατιού, και DFS βρίσκει πολλά ξένα μεταξύ τους τέτοια μονοπάτια ταυτόχρονα σε κάθε φάση.',
+  pseudocode:`Hopcroft-Karp(G = L ∪ R):
+  M ← ∅
+  επανάλαβε:
+    BFS από όλους τους ελεύθερους κόμβους του L,
+      υπολόγισε επίπεδα (layers) μέχρι να βρεθεί ελεύθερος κόμβος του R
+    αν δεν βρέθηκε: τερματισμός
+    για κάθε ελεύθερο κόμβο u ∈ L:
+      DFS(u) — βρες ξένο εναλλασσόμενο μονοπάτι μήκους = συντομότερο, augment
+  επίστρεψε M`,
+  timeComplexity:'O(E·√V)',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Διμερές γράφημα (όχι απαραίτητα πλήρες)',
+  notes:'Είναι το διμερές ανάλογο του Dinic — και οι δύο δουλεύουν σε φάσεις με BFS+DFS. Χρειάζεται το πολύ O(√V) φάσεις, γεγονός που δίνει τη βελτιωμένη πολυπλοκότητα σε σχέση με απλή επαναληπτική αναζήτηση ενός μονοπατιού τη φορά (Kuhn, O(V·E)).',
+  legend:[{c:'#5b9dd9',t:'ελεύθερος κόμβος (L)'},{c:'#4fd1ae',t:'τρέχουσα αντιστοίχιση'}],
+  gen:(o)=>genBipartite(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const left=g.meta.left, right=g.meta.right; const nL=left.length, nR=right.length;
+    const adjIdx=left.map(u=>g.edges.filter(e=>e.u===u).map(e=>right.indexOf(e.v)));
+    const edgeIdOf={}; g.edges.forEach(e=>{ edgeIdOf[e.u+'_'+e.v]=e.id; });
+    const matchL=new Array(nL).fill(-1), matchR=new Array(nR).fill(-1);
+    const steps=[];
+    const matchTable=()=>({headers:['Αριστερά','↔ Δεξιά'],rows:left.map((lid,i)=>[LM[lid],matchL[i]>=0?LM[right[matchL[i]]]:'–'])});
+    const edgeColorsFromMatch=()=>{ const ec={}; matchL.forEach((vv,i)=>{ if(vv>=0){ const id=edgeIdOf[left[i]+'_'+right[vv]]; if(id) ec[id]='tree'; } }); return ec; };
+    steps.push({log:'Αρχικοποίηση: κενή αντιστοίχιση.',
+      detail:'Ο Hopcroft-Karp δουλεύει σε φάσεις: BFS βρίσκει το μήκος του συντομότερου ελεύθερου μονοπατιού, DFS βρίσκει πολλά τέτοια μονοπάτια ταυτόχρονα.',
+      colors:{nodes:{},edges:{}}, table:matchTable()});
+    const dist=new Array(nL).fill(0);
+    function bfs(){
+      const queue=[]; for(let u=0;u<nL;u++){ if(matchL[u]===-1){ dist[u]=0; queue.push(u); } else dist[u]=Infinity; }
+      let found=false,qi=0;
+      while(qi<queue.length){ const u=queue[qi++]; for(const vv of adjIdx[u]){ const w=matchR[vv]; if(w===-1) found=true; else if(dist[w]===Infinity){ dist[w]=dist[u]+1; queue.push(w); } } }
+      return found;
+    }
+    function dfs(u){
+      for(const vv of adjIdx[u]){ const w=matchR[vv]; if(w===-1 || (dist[w]===dist[u]+1 && dfs(w))){ matchL[u]=vv; matchR[vv]=u; return true; } }
+      dist[u]=Infinity; return false;
+    }
+    let phase=0;
+    while(bfs()){
+      phase++;
+      const nc={}; for(let u=0;u<nL;u++) if(matchL[u]===-1) nc[left[u]]='frontier';
+      steps.push({log:`Φάση ${phase}: BFS υπολογίζει το μήκος του συντομότερου ελεύθερου μονοπατιού.`,detail:'',colors:{nodes:nc,edges:edgeColorsFromMatch()},table:matchTable()});
+      let progressed=0;
+      for(let u=0;u<nL;u++){ if(matchL[u]===-1 && dfs(u)) progressed++; }
+      steps.push({log:`Φάση ${phase}: DFS βρήκε ${progressed} νέα ξένα μεταξύ τους επαυξητικά μονοπάτια.`,detail:`Η αντιστοίχιση μεγαλώνει κατά ${progressed}.`,colors:{nodes:{},edges:edgeColorsFromMatch()},table:matchTable()});
+      if(progressed===0) break;
+    }
+    const total=matchL.filter(x=>x>=0).length;
+    steps.push({log:`Ολοκληρώθηκε. Μέγιστη αντιστοίχιση μεγέθους ${total}.`,detail:'',colors:{nodes:{},edges:edgeColorsFromMatch()},table:matchTable()});
+    return steps;
+  }
+};
+
+ALGORITHMS['blossom']={
+  name:'Blossom (Edmonds)',
+  blurb:'Γενικεύει την εύρεση μέγιστου ταιριάσματος από διμερή σε ΟΠΟΙΟΔΗΠΟΤΕ γράφημα. Η δυσκολία σε μη διμερή γραφήματα είναι οι κύκλοι περιττού μήκους («άνθη», blossoms) — όταν η αναζήτηση εναλλασσόμενου μονοπατιού «κλείνει» σε έναν τέτοιο κύκλο, ο αλγόριθμος τον συστέλλει προσωρινά σε έναν υπερκόμβο ώστε η αναζήτηση να συνεχίσει σωστά.',
+  worked:true,
+  workedNote:'Ο αλγόριθμος Blossom έχει ιδιαίτερα περίπλοκη εσωτερική λογική (συστολή/επέκταση ανθέων). Αντί για πλήρως τυχαία γραφήματα, παρουσιάζεται εδώ σε ένα σταθερό παράδειγμα που δείχνει καθαρά πώς μοιάζει ένα «άνθος» και ποιο είναι το τελικό (επαληθευμένο) μέγιστο ταίριασμα.',
+  hideNodeCount:true,
+  pseudocode:`Blossom(G):
+  M ← ∅ (ή αρχικό ταίριασμα)
+  όσο υπάρχει εκτεθειμένος (unmatched) κόμβος r:
+    χτίσε εναλλασσόμενο δέντρο αναζήτησης από το r
+    αν βρεθεί εναλλασσόμενο μονοπάτι σε άλλο εκτεθειμένο κόμβο:
+      augment(M, μονοπάτι)
+    αλλιώς αν δύο κλαδιά του δέντρου συναντηθούν σε κύκλο περιττού μήκους:
+      συστολή του κύκλου («άνθος») σε έναν υπερκόμβο· συνέχισε αναδρομικά
+      αν βρεθεί μονοπάτι μέσω του υπερκόμβου: «ξεδίπλωσε» το άνθος κατάλληλα
+  επίστρεψε M`,
+  timeComplexity:'O(V³) (κλασική υλοποίηση)· O(E√V) με βελτιστοποιήσεις',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Οποιοδήποτε μη κατευθυνόμενο γράφημα (όχι απαραίτητα διμερές)',
+  notes:'Χωρίς τη διαχείριση ανθέων, μια απλή αναζήτηση εναλλασσόμενου μονοπατιού μπορεί να «κολλήσει» ή να δώσει λάθος αποτέλεσμα μέσα σε περιττούς κύκλους. Ο Edmonds έδειξε (1965) πώς να τους χειριστεί σωστά σε πολυωνυμικό χρόνο — ένα θεμελιώδες αποτέλεσμα στη συνδυαστική βελτιστοποίηση.',
+  legend:[{c:'#b18cff',t:'εκτεθειμένος κόμβος (A)'},{c:'#ffb454',t:'κόμβοι του κύκλου / «άνθους»'},{c:'#4fd1ae',t:'τελικό μέγιστο ταίριασμα'}],
+  gen:()=>{
+    const nodes=[{id:0,label:'A'},{id:1,label:'B'},{id:2,label:'C'},{id:3,label:'D'},{id:4,label:'E'},{id:5,label:'F'},{id:6,label:'G'}];
+    const edges=[
+      {id:'e0',u:0,v:1,w:1},{id:'e1',u:1,v:2,w:1},{id:'e2',u:2,v:3,w:1},{id:'e3',u:3,v:4,w:1},
+      {id:'e4',u:4,v:5,w:1},{id:'e5',u:5,v:1,w:1},{id:'e6',u:3,v:6,w:1}
+    ];
+    const pos={0:{x:420,y:30},1:{x:420,y:120},2:{x:525,y:196},3:{x:485,y:319},4:{x:355,y:319},5:{x:315,y:196},6:{x:538,y:392}};
+    return {directed:false,nodes,edges,pos,meta:{},showWeights:false};
+  },
+  compute:(g)=>{
+    const steps=[];
+    steps.push({log:'Το γράφημα περιέχει έναν κύκλο περιττού μήκους <b>B–C–D–E–F–B</b> (5 ακμές) με δύο «κρεμαστούς» κόμβους: A (στο B) και G (στο D).',
+      detail:'Ξεκινάμε με κενό ταίριασμα. Ο κόμβος A είναι εκτεθειμένος (unmatched) — θα προσπαθήσουμε να βρούμε γι\' αυτόν εναλλασσόμενο μονοπάτι.',
+      colors:{nodes:{0:'source'},edges:{}}});
+    steps.push({log:'Αναζήτηση εναλλασσόμενου μονοπατιού από το <b>A</b>: το δέντρο αναζήτησης μπαίνει στον κύκλο B–C–D–E–F.',
+      detail:'Αν η αναζήτηση έφτανε στον κύκλο και από τις δύο κατευθύνσεις ταυτόχρονα μέσω εναλλασσόμενων ακμών, θα σχηματιζόταν «άνθος» — ένας περιττός κύκλος μέσα στο δέντρο αναζήτησης.',
+      colors:{nodes:{0:'source',1:'current',2:'current',3:'current',4:'current',5:'current'},edges:{e0:'relax',e1:'cut',e5:'cut'}}});
+    steps.push({log:'Το «άνθος» B–C–D–E–F συστέλλεται (νοητά) σε έναν υπερκόμβο, ώστε η αναζήτηση να συνεχίσει σαν να επρόκειτο για έναν απλό κόμβο.',
+      detail:'Μέσα από τον υπερκόμβο, η αναζήτηση φτάνει τελικά στον εκτεθειμένο κόμβο G — άρα υπάρχει εναλλασσόμενο μονοπάτι. Στη συνέχεια το άνθος «ξεδιπλώνεται», επιλέγοντας το σωστό μισό του κύκλου ώστε να προκύψει έγκυρο ταίριασμα.',
+      colors:{nodes:{0:'source',1:'current',2:'current',3:'current',4:'current',5:'current',6:'target'},edges:{e6:'relax'}}});
+    steps.push({log:'Επαληθευμένο μέγιστο ταίριασμα (με εξαντλητικό έλεγχο): <b>{B–C, E–F, D–G}</b>, μεγέθους 3 — ο κόμβος A παραμένει εκτεθειμένος.',
+      detail:'Δεν υπάρχει ταίριασμα μεγαλύτερου μεγέθους σε αυτό το γράφημα των 7 κόμβων: κάθε ταίριασμα με 4 ακμές θα απαιτούσε 8 διαφορετικούς κόμβους, αλλά υπάρχουν μόνο 7.',
+      colors:{nodes:{0:'default',1:'settled',2:'settled',3:'settled',4:'settled',5:'settled',6:'settled'},edges:{e1:'tree',e4:'tree',e6:'tree'}}});
+    return steps;
+  }
+};
+
+/* ============================================================
+   Category 5 — Συνδεσιμότητα & Διάσχιση
+   ============================================================ */
+ALGORITHMS['tarjan']={
+  name:'Tarjan (SCC)',
+  blurb:'Βρίσκει όλα τα ισχυρά συνεκτικά συστατικά (Strongly Connected Components) ενός κατευθυνόμενου γραφήματος σε ΜΙΑ μόνο διάσχιση DFS, κρατώντας για κάθε κόμβο το index (σειρά ανακάλυψης) και το low-link (μικρότερο προσβάσιμο index μέσω back-edges).',
+  pseudocode:`Tarjan-SCC(G):
+  index ← 0· stack ← κενή
+  για κάθε μη επισκεφθέντα κόμβο v: strongconnect(v)
+
+  strongconnect(v):
+    index[v] ← low[v] ← index++·  push(v)· onStack[v] ← true
+    για κάθε ακμή (v,w):
+      αν w μη επισκεφθέν: strongconnect(w); low[v] ← min(low[v], low[w])
+      αλλιώς αν onStack[w]: low[v] ← min(low[v], index[w])
+    αν low[v] == index[v]:
+      άδειασε τη στοίβα μέχρι το v → αυτό είναι ένα SCC`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Κατευθυνόμενο γράφημα',
+  notes:'Χρειάζεται μόνο ΜΙΑ διάσχιση DFS (σε αντίθεση με τον Kosaraju που χρειάζεται δύο), κάτι που τον κάνει συνήθως την πιο δημοφιλή επιλογή στην πράξη.',
+  legend:[{c:'#5b9dd9',t:'στη στοίβα (onStack)'},{c:'#ffb454',t:'τρέχων'},{c:'#4fd1ae',t:'ολοκληρωμένο SCC'}],
+  gen:(o)=>genDirectedWithCycles(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>adj[idOf[e.u]].push(idOf[e.v]));
+    let idx=0; const index=new Array(n).fill(-1), low=new Array(n).fill(0), onStack=new Array(n).fill(false);
+    const stk=[]; const comp=new Array(n).fill(-1); let compCount=0;
+    const steps=[];
+    const nodeState=()=>{ const nc={}; for(let i=0;i<n;i++){ const id=g.nodes[i].id; if(comp[i]!==-1) nc[id]='settled'; else if(onStack[i]) nc[id]='frontier'; else if(index[i]!==-1) nc[id]='current'; else nc[id]='default'; } return nc; };
+    const snap=(log,detail,cur,edgeExtra)=>{ const nc=nodeState(); if(cur!==undefined&&cur!==null) nc[g.nodes[cur].id]='current';
+      steps.push({log,detail,colors:{nodes:nc,edges:edgeExtra||{}}, table:{headers:['Κόμβος','index','low','SCC'],rows:g.nodes.map((nd,i)=>[nd.label,index[i]===-1?'–':index[i],index[i]===-1?'–':low[i],comp[i]===-1?'–':('#'+(comp[i]+1))])}}); };
+    snap('Αρχικοποίηση. Θα διασχίσουμε το γράφημα με DFS, κρατώντας index (σειρά ανακάλυψης) και low (μικρότερο προσβάσιμο index).','Όταν low[v]=index[v], ο v είναι ρίζα ενός ισχυρά συνεκτικού συστατικού.',null,{});
+    function strongconnect(v){
+      index[v]=idx; low[v]=idx; idx++; stk.push(v); onStack[v]=true;
+      snap(`Ανακάλυψη <b>${LM[g.nodes[v].id]}</b>: index=low=${index[v]}. Μπαίνει στη στοίβα.`,'',v,{});
+      for(const w of adj[v]){
+        const edgeId=g.edges.find(e=>idOf[e.u]===v&&idOf[e.v]===w).id;
+        if(index[w]===-1){
+          strongconnect(w); low[v]=Math.min(low[v],low[w]);
+          snap(`Επιστροφή στον ${LM[g.nodes[v].id]} από τον ${LM[g.nodes[w].id]}: low[${LM[g.nodes[v].id]}]=${low[v]}.`,'',v,{[edgeId]:'tree'});
+        } else if(onStack[w]){
+          low[v]=Math.min(low[v],index[w]);
+          snap(`Ακμή ${LM[g.nodes[v].id]}→${LM[g.nodes[w].id]}: back edge (ο ${LM[g.nodes[w].id]} είναι στη στοίβα) — low[${LM[g.nodes[v].id]}]=${low[v]}.`,'',v,{[edgeId]:'relax'});
+        } else {
+          snap(`Ακμή ${LM[g.nodes[v].id]}→${LM[g.nodes[w].id]}: ο ${LM[g.nodes[w].id]} ανήκει ήδη σε ολοκληρωμένο SCC — αγνοείται.`,'',v,{[edgeId]:'reject'});
+        }
+      }
+      if(low[v]===index[v]){
+        const members=[]; while(true){ const w=stk.pop(); onStack[w]=false; comp[w]=compCount; members.push(LM[g.nodes[w].id]); if(w===v) break; } compCount++;
+        snap(`Ο <b>${LM[g.nodes[v].id]}</b> είναι ρίζα SCC — SCC #${compCount} = {${members.join(', ')}}.`,'',null,{});
+      }
+    }
+    for(let v=0;v<n;v++) if(index[v]===-1) strongconnect(v);
+    snap(`Ολοκληρώθηκε. Βρέθηκαν ${compCount} ισχυρά συνεκτικά συστατικά.`,'',null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['kosaraju']={
+  name:'Kosaraju (SCC)',
+  blurb:'Βρίσκει τα ισχυρά συνεκτικά συστατικά με δύο διασχίσεις DFS: πρώτα υπολογίζει τη σειρά ολοκλήρωσης (finish order) στο αρχικό γράφημα, έπειτα διασχίζει το ΑΝΤΕΣΤΡΑΜΜΕΝΟ γράφημα με αυτή τη σειρά — κάθε νέο δέντρο DFS είναι ένα SCC.',
+  pseudocode:`Kosaraju-SCC(G):
+  1) DFS στο G, κατέγραψε τη σειρά ολοκλήρωσης (finish order) των κόμβων
+  2) Gᵀ ← το ανάστροφο γράφημα (αντιστροφή όλων των ακμών)
+  3) για κάθε κόμβο v με φθίνουσα σειρά ολοκλήρωσης:
+       αν μη επισκεφθέν στο Gᵀ: DFS(Gᵀ, v) → όλα όσα βρέθηκαν = ένα SCC`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα',
+  notes:'Εννοιολογικά απλούστερος από τον Tarjan αλλά χρειάζεται δύο πλήρεις διασχίσεις και την κατασκευή του ανάστροφου γράφου.',
+  legend:[{c:'#5b9dd9',t:'1η DFS (finish order)'},{c:'#4fd1ae',t:'2η DFS στο ανάστροφο — SCC'}],
+  gen:(o)=>genDirectedWithCycles(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>adj[idOf[e.u]].push(idOf[e.v]));
+    const radj=g.nodes.map(()=>[]); g.edges.forEach(e=>radj[idOf[e.v]].push(idOf[e.u]));
+    const steps=[]; const visited=new Array(n).fill(false); const order=[];
+    const snap1=(log,cur)=>{ const nc={}; for(let i=0;i<n;i++) nc[g.nodes[i].id]= visited[i]?'settled':'default'; if(cur!==undefined) nc[g.nodes[cur].id]='current';
+      steps.push({log,detail:'',colors:{nodes:nc,edges:{}},table:{headers:['Σειρά ολοκλήρωσης'],rows:order.slice().reverse().map(i=>[LM[g.nodes[i].id]])}}); };
+    snap1('Βήμα 1: DFS στο αρχικό γράφημα, καταγράφοντας τη σειρά ολοκλήρωσης κάθε κόμβου.');
+    function dfs1(u){ visited[u]=true; for(const v of adj[u]) if(!visited[v]) dfs1(v); order.push(u); snap1(`Ολοκλήρωση κόμβου ${LM[g.nodes[u].id]} (μπαίνει στη σειρά ολοκλήρωσης).`,u); }
+    for(let v=0;v<n;v++) if(!visited[v]) dfs1(v);
+    const comp=new Array(n).fill(-1); let compCount=0;
+    const snap2=(log,cur,edgeExtra)=>{ const nc={}; for(let i=0;i<n;i++) nc[g.nodes[i].id]= comp[i]!==-1?'settled': comp[i]===-1&&cur!==undefined&&i===cur?'current':'default'; if(cur!==undefined) nc[g.nodes[cur].id]='current';
+      steps.push({log,detail:'',colors:{nodes:nc,edges:edgeExtra||{}},table:{headers:['Κόμβος','SCC'],rows:g.nodes.map((nd,i)=>[nd.label,comp[i]===-1?'–':('#'+(comp[i]+1))])}}); };
+    steps.push({log:'Βήμα 2: κατασκευή του ανάστροφου γραφήματος Gᵀ (όλες οι ακμές αντεστραμμένες).',detail:'',colors:{nodes:{},edges:{}}});
+    function dfs2(u,c){ comp[u]=c; for(const v of radj[u]) if(comp[v]===-1) dfs2(v,c); }
+    for(let i=order.length-1;i>=0;i--){
+      const u=order[i];
+      if(comp[u]===-1){
+        snap2(`Βήμα 3: DFS στο Gᵀ ξεκινώντας από τον <b>${LM[g.nodes[u].id]}</b> (επόμενος στη φθίνουσα σειρά ολοκλήρωσης) — νέο SCC #${compCount+1}.`,u,{});
+        dfs2(u,compCount); compCount++;
+        snap2(`Ολοκληρώθηκε SCC #${compCount}.`,undefined,{});
+      }
+    }
+    snap2(`Ολοκληρώθηκε. Βρέθηκαν ${compCount} ισχυρά συνεκτικά συστατικά.`,undefined,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['gabow']={
+  name:'Gabow (SCC)',
+  blurb:'Εναλλακτικός αλγόριθμος μίας διάσχισης DFS για ισχυρά συνεκτικά συστατικά, ο οποίος αντί για low-link τιμές χρησιμοποιεί δύο στοίβες: μία με όλους τους κόμβους υπό εξέταση (S) και μία με «υποψήφιες ρίζες» συστατικών (B).',
+  pseudocode:`Gabow-SCC(G):
+  για κάθε μη επισκεφθέντα κόμβο v: dfs(v)
+
+  dfs(v):
+    pre[v] ← contador++·  push(v, S)·  push(v, B)
+    για κάθε ακμή (v,w):
+      αν w μη επισκεφθέν: dfs(w)
+      αλλιώς αν w δεν ανήκει ακόμη σε SCC:
+        όσο pre[top(B)] > pre[w]: pop(B)
+    αν top(B) == v:
+      pop(B)
+      άδειασε το S μέχρι το v → αυτό είναι ένα SCC`,
+  timeComplexity:'O(V+E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Κατευθυνόμενο γράφημα',
+  notes:'Αποφεύγει τον υπολογισμό low-link τιμών, χρησιμοποιώντας αντ’ αυτού τη δομή δύο στοιβών (path-based) — εννοιολογικά διαφορετική προσέγγιση που καταλήγει στο ίδιο αποτέλεσμα με τον Tarjan, στον ίδιο ασυμπτωτικό χρόνο.',
+  legend:[{c:'#5b9dd9',t:'στη στοίβα S'},{c:'#ffb454',t:'τρέχων'},{c:'#4fd1ae',t:'ολοκληρωμένο SCC'}],
+  gen:(o)=>genDirectedWithCycles(o.n),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>adj[idOf[e.u]].push(idOf[e.v]));
+    let idx=0; const pre=new Array(n).fill(-1); const S=[],B=[]; const comp=new Array(n).fill(-1); let compCount=0;
+    const steps=[];
+    const nodeState=()=>{ const nc={}; for(let i=0;i<n;i++){ const id=g.nodes[i].id; if(comp[i]!==-1) nc[id]='settled'; else if(S.includes(i)) nc[id]='frontier'; else if(pre[i]!==-1) nc[id]='current'; else nc[id]='default'; } return nc; };
+    const snap=(log,cur,edgeExtra)=>{ const nc=nodeState(); if(cur!==undefined&&cur!==null) nc[g.nodes[cur].id]='current';
+      steps.push({log,detail:'',colors:{nodes:nc,edges:edgeExtra||{}}, table:{headers:['Κόμβος','pre','SCC'],rows:g.nodes.map((nd,i)=>[nd.label,pre[i]===-1?'–':pre[i],comp[i]===-1?'–':('#'+(comp[i]+1))])}}); };
+    snap('Αρχικοποίηση. Δύο στοίβες: S (όλοι οι υπό εξέταση κόμβοι) και B (υποψήφιες ρίζες SCC).',null,{});
+    function dfs(v){
+      pre[v]=idx++; S.push(v); B.push(v);
+      snap(`Ανακάλυψη <b>${LM[g.nodes[v].id]}</b> (pre=${pre[v]}). Μπαίνει και στις δύο στοίβες S, B.`,v,{});
+      for(const w of adj[v]){
+        const edgeId=g.edges.find(e=>idOf[e.u]===v&&idOf[e.v]===w).id;
+        if(pre[w]===-1){ dfs(w); }
+        else if(comp[w]===-1){
+          let popped=0;
+          while(pre[B[B.length-1]]>pre[w]){ B.pop(); popped++; }
+          snap(`Ακμή ${LM[g.nodes[v].id]}→${LM[g.nodes[w].id]}: ο ${LM[g.nodes[w].id]} δεν έχει ακόμη SCC — αφαιρούμε ${popped} υποψήφιες ρίζες από το B με pre > pre[${LM[g.nodes[w].id]}].`,v,{[edgeId]:'relax'});
+        } else {
+          snap(`Ακμή ${LM[g.nodes[v].id]}→${LM[g.nodes[w].id]}: ο ${LM[g.nodes[w].id]} ανήκει ήδη σε ολοκληρωμένο SCC — αγνοείται.`,v,{[edgeId]:'reject'});
+        }
+      }
+      if(B[B.length-1]===v){
+        B.pop(); const members=[];
+        while(true){ const w=S.pop(); comp[w]=compCount; members.push(LM[g.nodes[w].id]); if(w===v) break; }
+        compCount++;
+        snap(`Ο <b>${LM[g.nodes[v].id]}</b> παραμένει κορυφή του B — SCC #${compCount} = {${members.join(', ')}}.`,null,{});
+      }
+    }
+    for(let v=0;v<n;v++) if(pre[v]===-1) dfs(v);
+    snap(`Ολοκληρώθηκε. Βρέθηκαν ${compCount} ισχυρά συνεκτικά συστατικά.`,null,{});
+    return steps;
+  }
+};
+
+ALGORITHMS['union-find']={
+  name:'Union-Find (Disjoint Set Union)',
+  blurb:'Δομή δεδομένων που διατηρεί μια διαμέριση στοιχείων σε ξένα μεταξύ τους σύνολα, υποστηρίζοντας γρήγορα δύο πράξεις: find (ποιο σύνολο ανήκει ένα στοιχείο) και union (ένωση δύο συνόλων). Με «ένωση κατά τάξη» και «συμπίεση διαδρομής», κάθε πράξη κοστίζει σχεδόν O(1).',
+  pseudocode:`MakeSet(x):  parent[x] ← x·  rank[x] ← 0
+
+Find(x):
+  αν parent[x] ≠ x: parent[x] ← Find(parent[x])   // συμπίεση διαδρομής
+  επίστρεψε parent[x]
+
+Union(x, y):
+  rx ← Find(x)·  ry ← Find(y)
+  αν rx == ry: επίστρεψε
+  αν rank[rx] < rank[ry]: αντάλλαξε rx,ry
+  parent[ry] ← rx
+  αν rank[rx] == rank[ry]: rank[rx]++`,
+  timeComplexity:'O(α(V)) ανά πράξη (σχεδόν σταθερό — αντίστροφη συνάρτηση Ackermann)',
+  spaceComplexity:'O(V)',
+  graphNote:'Δεν απαιτεί γράφημα — εδώ οι ακμές αναπαριστούν μια ακολουθία πράξεων union',
+  notes:'Θεμέλιο πολλών αλγορίθμων γράφων: ο Kruskal και ο Borůvka το χρησιμοποιούν για γρήγορο έλεγχο συνεκτικότητας, και είναι κεντρικό σε προβλήματα δυναμικής συνεκτικότητας.',
+  legend:[{c:'#ffb454',t:'στοιχεία της τρέχουσας πράξης'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const dsu=new DSU(n); const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const steps=[];
+    const compTable=()=>({headers:['Στοιχείο','ρίζα'],rows:g.nodes.map(nd=>[nd.label,LM[g.nodes[dsu.find(idOf[nd.id])].id]])});
+    const heatOf=()=>{ const roots=[...new Set(g.nodes.map(nd=>dsu.find(idOf[nd.id])))]; const h={}; g.nodes.forEach(nd=>{ const r=dsu.find(idOf[nd.id]); h[nd.id]=roots.indexOf(r)/Math.max(1,roots.length-1); }); return h; };
+    steps.push({log:'Αρχικά κάθε στοιχείο είναι η δική του ρίζα (Ν ξεχωριστά σύνολα).',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:compTable()});
+    g.edges.forEach(e=>{
+      const a=idOf[e.u], b=idOf[e.v]; const ra=dsu.find(a), rb=dsu.find(b);
+      if(ra===rb){
+        steps.push({log:`find(${LM[e.u]}) = find(${LM[e.v]}) = <b>${LM[g.nodes[ra].id]}</b> — ήδη στο ίδιο σύνολο· το union(${LM[e.u]},${LM[e.v]}) δεν κάνει τίποτα.`,detail:'',colors:{nodes:{[e.u]:'current',[e.v]:'current'},edges:{[e.id]:'reject'}},heat:heatOf(),table:compTable()});
+      } else {
+        dsu.union(a,b);
+        steps.push({log:`union(${LM[e.u]}, ${LM[e.v]}): ενώνονται τα σύνολα με ρίζες ${LM[g.nodes[ra].id]} και ${LM[g.nodes[rb].id]}.`,detail:'Χρησιμοποιείται ένωση κατά τάξη και συμπίεση διαδρομής.',colors:{nodes:{[e.u]:'current',[e.v]:'current'},edges:{[e.id]:'tree'}},heat:heatOf(),table:compTable()});
+      }
+    });
+    steps.push({log:'Ολοκληρώθηκε η ακολουθία πράξεων.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:compTable()});
+    return steps;
+  }
+};
+
+/* ============================================================
+   Category 6 — Κεντρικότητες
+   ============================================================ */
+ALGORITHMS['pagerank']={
+  name:'PageRank',
+  blurb:'Κατατάσσει τους κόμβους ενός κατευθυνόμενου γραφήματος με βάση την ιδέα ότι «ένας κόμβος είναι σημαντικός αν δέχεται συνδέσμους από άλλους σημαντικούς κόμβους». Κάθε κόμβος μοιράζει την κατάταξή του ισόποσα στους κόμβους στους οποίους δείχνει, επαναληπτικά μέχρι σύγκλιση.',
+  pseudocode:`PageRank(G, d=0.85):
+  PR(v) ← 1/N για κάθε κόμβο
+  επανάλαβε μέχρι σύγκλιση:
+    για κάθε κόμβο v:
+      PR′(v) ← (1−d)/N + d · Σ_{u→v} PR(u)/outdeg(u)
+                          + d · (μάζα από κόμβους χωρίς εξερχόμενες ακμές)/N
+    PR ← PR′`,
+  timeComplexity:'O(k·(V+E)) για k επαναλήψεις',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο γράφημα (το πρωτότυπο παράδειγμα: ο ιστός)',
+  notes:'Ο παράγοντας απόσβεσης d μοντελοποιεί έναν «τυχαίο περιηγητή» που ακολουθεί συνδέσμους με πιθανότητα d και αλλιώς «τηλεμεταφέρεται» σε τυχαία σελίδα — αυτό εγγυάται σύγκλιση ακόμη και σε γραφήματα με «παγίδες» (dangling nodes, κύκλους χωρίς έξοδο).',
+  legend:[{c:'#ffb454',t:'υψηλότερη κατάταξη (θερμοχρωματισμός)'}],
+  gen:(o)=>genDirectedWithCycles(o.n),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const outAdj=g.nodes.map(()=>[]); g.edges.forEach(e=>outAdj[idOf[e.u]].push(idOf[e.v]));
+    const inAdj=g.nodes.map(()=>[]); g.edges.forEach(e=>inAdj[idOf[e.v]].push(idOf[e.u]));
+    const outDeg=outAdj.map(a=>a.length);
+    const d=0.85; let rank=new Array(n).fill(1/n);
+    const steps=[];
+    const heatOf=(r)=>{ const mx=Math.max(...r); const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=mx>0?r[i]/mx:0); return h; };
+    const table=(r)=>({headers:['Κόμβος','PageRank'],rows:g.nodes.map((nd,i)=>[nd.label,r[i].toFixed(3)])});
+    steps.push({log:'Αρχικοποίηση: όλοι οι κόμβοι ξεκινούν με ίση κατάταξη 1/N.',detail:`Συντελεστής απόσβεσης d=${d}.`,colors:{nodes:{},edges:{}},heat:heatOf(rank),table:table(rank)});
+    for(let iter=1;iter<=6;iter++){
+      let danglingMass=0; rank.forEach((r,i)=>{ if(outDeg[i]===0) danglingMass+=r; });
+      const newRank=new Array(n).fill(0);
+      for(let v=0;v<n;v++){ let s=0; inAdj[v].forEach(u=>{ s+=rank[u]/outDeg[u]; }); newRank[v]=(1-d)/n + d*(s+danglingMass/n); }
+      rank=newRank;
+      steps.push({log:`Επανάληψη ${iter}: κάθε κόμβος συλλέγει κατάταξη από τους εισερχόμενους γείτονές του.`,detail:'PR(v) = (1−d)/N + d·Σ PR(u)/outdeg(u).',colors:{nodes:{},edges:{}},heat:heatOf(rank),table:table(rank)});
+    }
+    steps.push({log:'Ολοκληρώθηκε (σταθεροποίηση).',detail:'Το άθροισμα όλων των τιμών PageRank παραμένει πάντα ≈ 1.',colors:{nodes:{},edges:{}},heat:heatOf(rank),table:table(rank)});
+    return steps;
+  }
+};
+
+ALGORITHMS['hits']={
+  name:'HITS',
+  blurb:'Δίνει σε κάθε κόμβο δύο βαθμολογίες: hub (πόσο καλά «δείχνει» σε σημαντικούς κόμβους) και authority (πόσο σημαντικός είναι επειδή δέχεται συνδέσμους από καλά hubs) — οι δύο έννοιες ενισχύουν η μία την άλλη επαναληπτικά.',
+  pseudocode:`HITS(G):
+  hub(v) ← 1, authority(v) ← 1  για κάθε κόμβο
+  επανάλαβε k φορές:
+    authority(v) ← Σ_{u→v} hub(u)     για κάθε v
+    hub(v)       ← Σ_{v→w} authority(w)  για κάθε v
+    κανονικοποίησε (hub, authority) ώστε ||·||₂ = 1`,
+  timeComplexity:'O(k·E)',
+  spaceComplexity:'O(V)',
+  graphNote:'Κατευθυνόμενο γράφημα',
+  notes:'Οι τιμές authority και hub συγκλίνουν στα κύρια ιδιοδιανύσματα των πινάκων AᵀA και AAᵀ αντίστοιχα, όπου A ο πίνακας γειτνίασης.',
+  legend:[{c:'#ffb454',t:'υψηλότερη authority (θερμοχρωματισμός)'}],
+  gen:(o)=>genDirectedWithCycles(o.n),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const outAdj=g.nodes.map(()=>[]); g.edges.forEach(e=>outAdj[idOf[e.u]].push(idOf[e.v]));
+    const inAdj=g.nodes.map(()=>[]); g.edges.forEach(e=>inAdj[idOf[e.v]].push(idOf[e.u]));
+    let hub=new Array(n).fill(1), auth=new Array(n).fill(1);
+    const steps=[]; const norm=(arr)=>{ const s=Math.sqrt(arr.reduce((a,x)=>a+x*x,0))||1; return arr.map(x=>x/s); };
+    const heatOf=(arr)=>{ const mx=Math.max(...arr,1e-9); const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=arr[i]/mx); return h; };
+    const table=()=>({headers:['Κόμβος','hub','authority'],rows:g.nodes.map((nd,i)=>[nd.label,hub[i].toFixed(3),auth[i].toFixed(3)])});
+    steps.push({log:'Αρχικοποίηση: hub=authority=1 για όλους.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(auth),table:table()});
+    for(let iter=1;iter<=6;iter++){
+      const newAuth=g.nodes.map((nd,v)=>inAdj[v].reduce((s,u)=>s+hub[u],0));
+      const newHub=g.nodes.map((nd,v)=>outAdj[v].reduce((s,w)=>s+newAuth[w],0));
+      auth=norm(newAuth); hub=norm(newHub);
+      steps.push({log:`Επανάληψη ${iter}: authority(v)=Σhub(u) για u→v, hub(v)=Σauthority(w) για v→w, κανονικοποίηση.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(auth),table:table()});
+    }
+    steps.push({log:'Ολοκληρώθηκε.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(auth),table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['brandes']={
+  name:'Brandes (Betweenness Centrality)',
+  blurb:'Υπολογίζει τη διαμεσολαβητικότητα (betweenness) κάθε κόμβου — σε πόσο μεγάλο ποσοστό των συντομότερων μονοπατιών (μεταξύ όλων των άλλων ζευγών κόμβων) βρίσκεται «στη μέση». Ο αλγόριθμος Brandes το υπολογίζει αποδοτικά με μία BFS ανά κόμβο-πηγή και «οπισθοδιάδοση» συνεισφορών.',
+  pseudocode:`Brandes(G):
+  C(v) ← 0 για κάθε v
+  για κάθε κόμβο s:
+    BFS από το s: υπολόγισε σ(v) (πλήθος συντ. μονοπατιών) και P(v) (προκάτοχοι)
+    δ(v) ← 0 για κάθε v
+    για κάθε v με φθίνουσα σειρά απόστασης από το s:
+      για κάθε προκάτοχο u ∈ P(v):
+        δ(u) ← δ(u) + (σ(u)/σ(v))·(1+δ(v))
+      αν v ≠ s: C(v) ← C(v) + δ(v)`,
+  timeComplexity:'O(V·E) σε μη σταθμισμένα γραφήματα',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο (ή κατευθυνόμενο) γράφημα',
+  notes:'Χωρίς αυτόν τον αλγόριθμο, ο απλός ορισμός betweenness θα απαιτούσε απαρίθμηση ΟΛΩΝ των συντομότερων μονοπατιών μεταξύ όλων των ζευγών — εκθετικά ακριβό. Ο Brandes το κάνει σε πολυωνυμικό χρόνο.',
+  legend:[{c:'#ffb454',t:'υψηλότερη betweenness (θερμοχρωματισμός)'},{c:'#b18cff',t:'τρέχουσα πηγή BFS'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    const C=new Array(n).fill(0); const steps=[];
+    const heatOf=()=>{ const mx=Math.max(...C,1e-9); const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=C[i]/mx); return h; };
+    const table=()=>({headers:['Κόμβος','betweenness'],rows:g.nodes.map((nd,i)=>[nd.label,C[i].toFixed(2)])});
+    steps.push({log:'Θα υπολογίσουμε τη betweenness κάθε κόμβου εξετάζοντας κάθε πιθανή πηγή s.',detail:'Για κάθε s: BFS, μετά οπισθοδιάδοση συνεισφορών δ.',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    for(let s=0;s<n;s++){
+      const S=[]; const P=Array.from({length:n},()=>[]); const sigma=new Array(n).fill(0); sigma[s]=1;
+      const dist=new Array(n).fill(-1); dist[s]=0; const Q=[s]; let qi=0;
+      while(qi<Q.length){ const v=Q[qi++]; S.push(v); for(const w of adj[v]){ if(dist[w]<0){ dist[w]=dist[v]+1; Q.push(w); } if(dist[w]===dist[v]+1){ sigma[w]+=sigma[v]; P[w].push(v); } } }
+      const delta=new Array(n).fill(0);
+      for(let i=S.length-1;i>=0;i--){ const w=S[i]; for(const v of P[w]){ delta[v]+=(sigma[v]/sigma[w])*(1+delta[w]); } if(w!==s) C[w]+=delta[w]/2; }
+      const nc={}; nc[g.nodes[s].id]='source';
+      steps.push({log:`Πηγή <b>${LM[g.nodes[s].id]}</b>: BFS + οπισθοδιάδοση συνεισφορών betweenness.`,detail:'',colors:{nodes:nc,edges:{}},heat:heatOf(),table:table()});
+    }
+    steps.push({log:'Ολοκληρώθηκε.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['katz']={
+  name:'Katz Centrality',
+  blurb:'Μετρά την επιρροή ενός κόμβου αθροίζοντας ΟΛΑ τα μονοπάτια που καταλήγουν σε αυτόν (όχι μόνο τους άμεσους γείτονες), με μονοπάτια μήκους k να ζυγίζουν αᵏ (εκθετικά λιγότερο όσο μεγαλώνει το μήκος).',
+  pseudocode:`Katz(G, α, β=1):
+  x ← 0
+  επανάλαβε μέχρι σύγκλιση:
+    x′(v) ← β + α · Σ_{u γείτονας του v} x(u)
+    x ← x′
+  // απαιτείται α < 1/λ_max(A) για σύγκλιση`,
+  timeComplexity:'O(k·E) για k επαναλήψεις',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Κατευθυνόμενο ή μη γράφημα',
+  notes:'Σε αντίθεση με την κεντρικότητα βαθμού (μόνο άμεσοι γείτονες), η Katz «βλέπει» ολόκληρο το γράφημα — χρήσιμη σε δίκτυα όπου η έμμεση σύνδεση έχει επίσης αξία (π.χ. δίκτυα συστάσεων).',
+  legend:[{c:'#ffb454',t:'υψηλότερη κεντρικότητα Katz'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    const maxDeg=Math.max(1,...adj.map(a=>a.length));
+    const alpha=0.9/(maxDeg+1), beta=1;
+    let x=new Array(n).fill(0); const steps=[];
+    const heatOf=(arr)=>{ const mx=Math.max(...arr,1e-9); const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=arr[i]/mx); return h; };
+    const table=()=>({headers:['Κόμβος','Katz'],rows:g.nodes.map((nd,i)=>[nd.label,x[i].toFixed(3)])});
+    steps.push({log:`Αρχικοποίηση x=0. α=${alpha.toFixed(3)} (< 1/max-βαθμό για εγγυημένη σύγκλιση), β=1.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    for(let iter=1;iter<=8;iter++){
+      const nx=g.nodes.map((nd,v)=>beta+alpha*adj[v].reduce((s,u)=>s+x[u],0));
+      x=nx;
+      steps.push({log:`Επανάληψη ${iter}: x(v) = β + α·Σ x(u) για γείτονες u.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    }
+    steps.push({log:'Ολοκληρώθηκε (σύγκλιση).',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['eigenvector']={
+  name:'Eigenvector Centrality',
+  blurb:'Δίνει σε κάθε κόμβο βαθμολογία ανάλογη του αθροίσματος των βαθμολογιών των γειτόνων του — «είσαι σημαντικός αν συνδέεσαι με σημαντικούς κόμβους». Υπολογίζεται με επαναληπτική μέθοδο δυνάμεων (power iteration) πάνω στον πίνακα γειτνίασης.',
+  pseudocode:`Eigenvector-Centrality(G):
+  x ← τυχαίο/ομοιόμορφο διάνυσμα
+  επανάλαβε μέχρι σύγκλιση:
+    x′ ← A · x        (A: πίνακας γειτνίασης)
+    x ← x′ / ||x′||₂
+  επίστρεψε x   // συγκλίνει στο κύριο ιδιοδιάνυσμα του A`,
+  timeComplexity:'O(k·E) για k επαναλήψεις',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Συνεκτικό, μη κατευθυνόμενο γράφημα (για εγγυημένη σύγκλιση μέσω Perron-Frobenius)',
+  notes:'Το Google PageRank είναι ιστορικά μια παραλλαγή της κεντρικότητας ιδιοδιανύσματος, προσαρμοσμένη για κατευθυνόμενα γραφήματα με τον παράγοντα απόσβεσης.',
+  legend:[{c:'#ffb454',t:'υψηλότερη κεντρικότητα ιδιοδιανύσματος'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    let x=new Array(n).fill(1/Math.sqrt(n)); const steps=[];
+    const heatOf=(arr)=>{ const mx=Math.max(...arr,1e-9); const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=arr[i]/mx); return h; };
+    const table=()=>({headers:['Κόμβος','eigenvector'],rows:g.nodes.map((nd,i)=>[nd.label,x[i].toFixed(3)])});
+    steps.push({log:'Αρχικοποίηση: ομοιόμορφο διάνυσμα.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    for(let iter=1;iter<=8;iter++){
+      const nx=g.nodes.map((nd,v)=>adj[v].reduce((s,u)=>s+x[u],0));
+      const nrm=Math.sqrt(nx.reduce((a,val)=>a+val*val,0))||1;
+      x=nx.map(val=>val/nrm);
+      steps.push({log:`Επανάληψη ${iter}: x ← A·x, κανονικοποίηση (||x||=1) — μέθοδος δυνάμεων.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    }
+    steps.push({log:'Ολοκληρώθηκε — το x συγκλίνει στο κύριο ιδιοδιάνυσμα (θεώρημα Perron-Frobenius).',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(x),table:table()});
+    return steps;
+  }
+};
+
+/* ============================================================
+   Category 7 — Κοινότητες / Clustering
+   ============================================================ */
+function edgeBetweennessCalc(n, adjList){
+  const eb={};
+  for(let s=0;s<n;s++){
+    const S=[]; const P=Array.from({length:n},()=>[]); const sigma=new Array(n).fill(0); sigma[s]=1;
+    const dist=new Array(n).fill(-1); dist[s]=0; const Q=[s]; let qi=0;
+    while(qi<Q.length){ const v=Q[qi++]; S.push(v); for(const {to,id} of adjList[v]){ if(dist[to]<0){ dist[to]=dist[v]+1; Q.push(to); } if(dist[to]===dist[v]+1){ sigma[to]+=sigma[v]; P[to].push([v,id]); } } }
+    const delta=new Array(n).fill(0);
+    for(let i=S.length-1;i>=0;i--){ const w=S[i]; for(const [v,id] of P[w]){ const contrib=(sigma[v]/sigma[w])*(1+delta[w]); delta[v]+=contrib; eb[id]=(eb[id]||0)+contrib; } }
+  }
+  Object.keys(eb).forEach(k=>eb[k]/=2);
+  return eb;
+}
+
+ALGORITHMS['girvan-newman']={
+  name:'Girvan-Newman',
+  blurb:'Εντοπίζει κοινότητες αφαιρώντας επαναληπτικά τις ακμές με τη ΜΕΓΑΛΥΤΕΡΗ διαμεσολαβητικότητα ακμής (edge betweenness) — τις ακμές δηλαδή που λειτουργούν σαν «γέφυρες» ανάμεσα σε πυκνές περιοχές. Κάθε φορά που το γράφημα διασπάται σε περισσότερα συστατικά, αποκαλύπτεται μια νέα δομή κοινοτήτων.',
+  pseudocode:`Girvan-Newman(G):
+  όσο υπάρχουν ακμές:
+    υπολόγισε τη διαμεσολαβητικότητα κάθε ακμής (μέσω Brandes σε ακμές)
+    αφαίρεσε την ακμή με τη μεγαλύτερη τιμή
+    αν το γράφημα μόλις διασπάστηκε σε περισσότερα συστατικά:
+      κατέγραψε τη νέα διαμέριση κοινοτήτων`,
+  timeComplexity:'O(E²·V) — χρειάζεται επανυπολογισμό betweenness μετά από κάθε αφαίρεση',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο γράφημα',
+  notes:'Είναι εννοιολογικά το «αντίστροφο» του Kruskal/Reverse-Delete: αντί να αφαιρούμε ακμές με βάση το βάρος, αφαιρούμε ακμές με βάση πόσο «κρίσιμες» είναι για τη συνδεσιμότητα μεταξύ διαφορετικών περιοχών του γράφου.',
+  legend:[{c:'#ff7a72',t:'ακμή που αφαιρείται (γέφυρα)'},{c:'#ffb454',t:'κοινότητα (θερμοχρωματισμός)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false,extraChance:0.25}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    let activeEdges=new Set(g.edges.map(e=>e.id));
+    const steps=[];
+    const buildAdjList=()=>{ const adjList=g.nodes.map(()=>[]); g.edges.forEach(e=>{ if(activeEdges.has(e.id)){ adjList[idOf[e.u]].push({to:idOf[e.v],id:e.id}); adjList[idOf[e.v]].push({to:idOf[e.u],id:e.id}); } }); return adjList; };
+    const countComponents=(adjList)=>{ const comp=new Array(n).fill(-1); let cc=0; for(let i=0;i<n;i++){ if(comp[i]!==-1) continue; const st=[i]; comp[i]=cc; while(st.length){ const u=st.pop(); adjList[u].forEach(({to})=>{ if(comp[to]===-1){ comp[to]=cc; st.push(to); } }); } cc++; } return {comp,cc}; };
+    let {comp,cc}=countComponents(buildAdjList());
+    const heatOf=()=>{ const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=cc>1?comp[i]/(cc-1):0); return h; };
+    steps.push({log:`Αρχικά το γράφημα έχει ${cc} συνεκτικό/ά συστατικό/ά.`,detail:'Θα αφαιρούμε επαναληπτικά την ακμή με τη μεγαλύτερη διαμεσολαβητικότητα.',colors:{nodes:{},edges:{}},heat:heatOf()});
+    let round=0;
+    while(activeEdges.size>0 && round<12){
+      round++;
+      const adjList=buildAdjList();
+      const eb=edgeBetweennessCalc(n,adjList);
+      let maxE=null,maxV=-1;
+      activeEdges.forEach(id=>{ const val=eb[id]||0; if(val>maxV){ maxV=val; maxE=id; } });
+      if(maxE===null) break;
+      activeEdges.delete(maxE);
+      const edgeObj=g.edges.find(e=>e.id===maxE);
+      const res=countComponents(buildAdjList());
+      const grew=res.cc>cc; comp=res.comp; cc=res.cc;
+      steps.push({log:`Γύρος ${round}: αφαίρεση ακμής ${g.nodes[idOf[edgeObj.u]].label}–${g.nodes[idOf[edgeObj.v]].label} (betweenness ≈ ${maxV.toFixed(1)}, η μεγαλύτερη).`,
+        detail: grew? `Το γράφημα μόλις διασπάστηκε σε ${cc} συστατικά!` : `Το γράφημα παραμένει σε ${cc} συστατικό/ά.`,
+        colors:{nodes:{},edges:{[maxE]:'cut'}}, heat:heatOf()});
+      if(cc>=Math.min(n,4)) break;
+    }
+    steps.push({log:`Ολοκληρώθηκε με ${cc} κοινότητες.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf()});
+    return steps;
+  }
+};
+
+ALGORITHMS['louvain']={
+  name:'Louvain',
+  blurb:'Βρίσκει κοινότητες μεγιστοποιώντας άπληστα τη «modularity» (πόσο πυκνότερες είναι οι συνδέσεις ΕΝΤΟΣ κοινοτήτων σε σχέση με ό,τι θα περίμενε κανείς τυχαία): κάθε κόμβος μετακινείται στη γειτονική κοινότητα που αυξάνει περισσότερο τη modularity, μέχρι να μην υπάρχει βελτίωση.',
+  pseudocode:`Louvain — Φάση 1 (τοπική βελτιστοποίηση):
+  κάθε κόμβος ξεκινά ως δική του κοινότητα
+  επανάλαβε μέχρι σύγκλιση:
+    για κάθε κόμβο i (τυχαία σειρά):
+      υπολόγισε το κέρδος modularity ΔQ για μετακίνηση στην κοινότητα κάθε γείτονα
+      μετακίνησε το i στην κοινότητα με το μεγαλύτερο ΔQ>0
+  (η πλήρης εκδοχή επαναλαμβάνει, συμπτύσσοντας κάθε κοινότητα σε υπερκόμβο — Φάση 2)`,
+  timeComplexity:'O(V log V) τυπικά ανά επίπεδο',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Μη κατευθυνόμενο γράφημα',
+  notes:'Αυτή η οπτικοποίηση δείχνει μόνο τη ΜΙΑ φάση (τοπική βελτιστοποίηση) — ο πλήρης αλγόριθμος επαναλαμβάνει συμπτύσσοντας κάθε κοινότητα σε υπερκόμβο και ξανατρέχοντας, πετυχαίνοντας ιεραρχική ανίχνευση κοινοτήτων σε πολύ μεγάλα δίκτυα.',
+  legend:[{c:'#ffb454',t:'κοινότητα (θερμοχρωματισμός)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false,extraChance:0.3}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    const deg=adj.map(a=>a.length); const m=Math.max(1,g.edges.length);
+    let comm=g.nodes.map((nd,i)=>i);
+    const steps=[];
+    const sigmaTot=()=>{ const s={}; for(let i=0;i<n;i++) s[comm[i]]=(s[comm[i]]||0)+deg[i]; return s; };
+    const heatOf=()=>{ const uniq=[...new Set(comm)]; const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=uniq.length>1?uniq.indexOf(comm[i])/(uniq.length-1):0); return h; };
+    const table=()=>({headers:['Κόμβος','κοινότητα'],rows:g.nodes.map((nd,i)=>[nd.label,'C'+comm[i]])});
+    steps.push({log:'Αρχικά κάθε κόμβος είναι η δική του κοινότητα.',detail:`m=${m} συνολικές ακμές.`,colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    let improved=true, round=0;
+    while(improved && round<8){
+      improved=false; round++;
+      const order=[...Array(n).keys()]; shuffle(order);
+      const moves=[];
+      order.forEach(i=>{
+        const st=sigmaTot(); const origC=comm[i]; st[origC]-=deg[i];
+        const neighComms={};
+        adj[i].forEach(j=>{ if(j!==i) neighComms[comm[j]]=(neighComms[comm[j]]||0)+1; });
+        let bestC=origC, bestGain=0;
+        Object.keys(neighComms).forEach(cStr=>{
+          const c=+cStr, kiC=neighComms[c], sTot=st[c]||0;
+          const gain=kiC-(sTot*deg[i])/(2*m);
+          if(gain>bestGain+1e-9){ bestGain=gain; bestC=c; }
+        });
+        if(bestC!==origC){ comm[i]=bestC; moves.push(`${g.nodes[i].label}→C${bestC}`); improved=true; }
+      });
+      steps.push({log:`Γύρος ${round}: ${moves.length} κόμβοι μετακινήθηκαν για μεγαλύτερη modularity.`,detail:moves.length?moves.join(', '):'Καμία βελτιωτική μετακίνηση — τοπικό βέλτιστο.',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    }
+    const uniq=[...new Set(comm)];
+    steps.push({log:`Ολοκληρώθηκε. Βρέθηκαν ${uniq.length} κοινότητες (μονο-επίπεδη εκδοχή).`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['label-propagation']={
+  name:'Label Propagation',
+  blurb:'Απλός και γρήγορος αλγόριθμος κοινοτήτων: κάθε κόμβος ξεκινά με μοναδική ετικέτα και, σε κάθε γύρο, υιοθετεί την πιο συχνή ετικέτα ανάμεσα στους γείτονές του. Οι πυκνά συνδεδεμένες ομάδες συγκλίνουν φυσικά σε κοινή ετικέτα.',
+  pseudocode:`Label-Propagation(G):
+  label(v) ← μοναδική ετικέτα για κάθε v
+  επανάλαβε μέχρι σταθεροποίηση:
+    για κάθε κόμβο v (τυχαία σειρά):
+      label(v) ← η πιο συχνή ετικέτα ανάμεσα στους γείτονες του v
+      (τυχαία επιλογή σε ισοπαλία)`,
+  timeComplexity:'O(E) ανά γύρο· τυπικά συγκλίνει σε λίγους γύρους',
+  spaceComplexity:'O(V)',
+  graphNote:'Μη κατευθυνόμενο γράφημα',
+  notes:'Δεν βελτιστοποιεί ρητά κάποια συνάρτηση (όπως η modularity στον Louvain) — είναι καθαρά τοπικός κανόνας πλειοψηφίας, γι\' αυτό είναι εξαιρετικά γρήγορος αλλά μπορεί να δώσει διαφορετικά αποτελέσματα σε διαφορετικές εκτελέσεις.',
+  legend:[{c:'#ffb454',t:'κοινότητα (θερμοχρωματισμός)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false,extraChance:0.3}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    let label=g.nodes.map((nd,i)=>i);
+    const steps=[];
+    const heatOf=()=>{ const uniq=[...new Set(label)]; const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=uniq.length>1?uniq.indexOf(label[i])/(uniq.length-1):0); return h; };
+    const table=()=>({headers:['Κόμβος','ετικέτα'],rows:g.nodes.map((nd,i)=>[nd.label,'C'+label[i]])});
+    steps.push({log:'Αρχικά κάθε κόμβος έχει τη δική του μοναδική ετικέτα.',detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    let round=0, changed=true; const order=[...Array(n).keys()];
+    while(changed && round<10){
+      changed=false; round++; shuffle(order); const changesLog=[];
+      order.forEach(v=>{
+        if(adj[v].length===0) return;
+        const counts={}; adj[v].forEach(u=>{ counts[label[u]]=(counts[label[u]]||0)+1; });
+        let best=label[v], bestC=-1;
+        Object.entries(counts).forEach(([l,c])=>{ if(c>bestC || (c===bestC && Math.random()<0.5)){ bestC=c; best=+l; } });
+        if(best!==label[v]){ changesLog.push(`${g.nodes[v].label}:C${label[v]}→C${best}`); label[v]=best; changed=true; }
+      });
+      steps.push({log:`Γύρος ${round}: ${changesLog.length} κόμβοι άλλαξαν ετικέτα.`,detail:changesLog.length?changesLog.join(', '):'Καμία αλλαγή — σταθεροποιήθηκε.',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    }
+    steps.push({log:`Ολοκληρώθηκε μετά από ${round} γύρους. Βρέθηκαν ${new Set(label).size} κοινότητες.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['spectral']={
+  name:'Spectral Clustering',
+  blurb:'Διαχωρίζει το γράφημα σε δύο κοινότητες χρησιμοποιώντας το «διάνυσμα Fiedler» — το ιδιοδιάνυσμα που αντιστοιχεί στη μικρότερη μη μηδενική ιδιοτιμή του Λαπλασιανού πίνακα (L = D − A). Το πρόσημο κάθε συντεταγμένης του διανύσματος δείχνει σε ποια πλευρά της «φυσικότερης τομής» βρίσκεται ο αντίστοιχος κόμβος.',
+  pseudocode:`Spectral-Bisection(G):
+  L ← D − A   (Λαπλασιανός πίνακας)
+  βρες το ιδιοδιάνυσμα Fiedler v: το ιδιοδιάνυσμα με τη 2η μικρότερη ιδιοτιμή του L
+    (υπολογίζεται εδώ με «απαλοιφή» (deflation) του σταθερού ιδιοδιανύσματος
+     και επαναληπτική μέθοδο δυνάμεων πάνω στο (cI − L))
+  για κάθε κόμβο v: αν v[i] > 0 → κοινότητα A, αλλιώς → κοινότητα B`,
+  timeComplexity:'O(k·E) για k επαναλήψεις (πλήρης decomposition: O(V³))',
+  spaceComplexity:'O(V+E)',
+  graphNote:'Συνεκτικό, μη κατευθυνόμενο γράφημα',
+  notes:'Η γενίκευση σε k>2 κοινότητες γίνεται υπολογίζοντας τα k μικρότερα ιδιοδιανύσματα και τρέχοντας k-means πάνω σε αυτά. Η μέθοδος «βλέπει» καθολική δομή του γράφου, σε αντίθεση με τοπικούς κανόνες όπως η Label Propagation.',
+  legend:[{c:'#4fd1ae',t:'θετική πλευρά Fiedler'},{c:'#ff7a72',t:'αρνητική πλευρά Fiedler'},{c:'#ff7a72',t:'ακμή-τομή'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false,extraChance:0.2}),
+  compute:(g)=>{
+    const LM=labelMap(g); const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    const adj=g.nodes.map(()=>[]); g.edges.forEach(e=>{ adj[idOf[e.u]].push(idOf[e.v]); adj[idOf[e.v]].push(idOf[e.u]); });
+    const deg=adj.map(a=>a.length); const maxDeg=Math.max(...deg,1); const c=2*maxDeg+1;
+    function Lmul(v){ const r=new Array(n).fill(0); for(let i=0;i<n;i++){ r[i]=deg[i]*v[i]; for(const j of adj[i]) r[i]-=v[j]; } return r; }
+    let v=g.nodes.map((nd,i)=>Math.sin(i*2.3+0.7)+0.001*i);
+    const steps=[];
+    const table=()=>({headers:['Κόμβος','v (Fiedler, προσ.)'],rows:g.nodes.map((nd,i)=>[nd.label,v[i].toFixed(3)])});
+    const sideColors=()=>{ const nc={}; g.nodes.forEach((nd,i)=>nc[nd.id]= v[i]>0?'settled':'path'); return nc; };
+    steps.push({log:'Αρχικοποίηση διανύσματος, κάθετου στο σταθερό (deflation) διάνυσμα.',detail:'Θα εφαρμόσουμε επαναληπτική μέθοδο δυνάμεων πάνω στο (cI − L) για να βρούμε το διάνυσμα Fiedler.',colors:{nodes:{},edges:{}},table:table()});
+    for(let iter=1;iter<=8;iter++){
+      const mean=v.reduce((a,b)=>a+b,0)/n; v=v.map(x=>x-mean);
+      const Lv=Lmul(v);
+      let nv=v.map((x,i)=>c*x-Lv[i]);
+      const norm=Math.sqrt(nv.reduce((a,x)=>a+x*x,0))||1;
+      v=nv.map(x=>x/norm);
+      steps.push({log:`Επανάληψη ${iter}: v ← (cI−L)·v, απαλοιφή σταθερής συνιστώσας, κανονικοποίηση.`,detail:'',colors:{nodes:sideColors(),edges:{}},table:table()});
+    }
+    const ec={}; g.edges.forEach(e=>{ if((v[idOf[e.u]]>0)!==(v[idOf[e.v]]>0)) ec[e.id]='cut'; });
+    steps.push({log:'Ολοκληρώθηκε. Η τομή στο πρόσημο του διανύσματος Fiedler δίνει τη φυσικότερη διμερή διαμέριση.',detail:'Οι κόκκινες (διακεκομμένες) ακμές είναι αυτές που «κόβει» η διαμέριση — όσο λιγότερες, τόσο καλύτερος ο διαχωρισμός.',colors:{nodes:sideColors(),edges:ec},table:table()});
+    return steps;
+  }
+};
+
+ALGORITHMS['mcl']={
+  name:'Markov Clustering (MCL)',
+  blurb:'Προσομοιώνει τυχαίους περιπάτους πάνω στο γράφημα, εναλλάσσοντας δύο πράξεις σε έναν στοχαστικό πίνακα: «επέκταση» (ύψωση σε δύναμη — επιτρέπει ροή σε μεγαλύτερες αποστάσεις) και «διόγκωση» (ενίσχυση ισχυρών ροών, εξασθένιση ασθενών). Μετά από λίγες επαναλήψεις, το γράφημα «σπάει» φυσικά σε πυκνές συστάδες.',
+  pseudocode:`MCL(G):
+  M ← στοχαστικός πίνακας γειτνίασης (+ self-loops, κανονικοποίηση στηλών)
+  επανάλαβε k φορές:
+    M ← M × M                     // expansion
+    M ← inflate(M, p)· κανονικοποίηση στηλών   // inflation
+  τα συνεκτικά συστατικά των επιζωσών (μη μηδενικών) ροών = οι συστάδες`,
+  timeComplexity:'O(k·V³) απλή υλοποίηση με πυκνούς πίνακες',
+  spaceComplexity:'O(V²)',
+  graphNote:'Μη κατευθυνόμενο γράφημα',
+  notes:'Ευρέως διαδεδομένος στη βιοπληροφορική (π.χ. ομαδοποίηση πρωτεϊνών σε δίκτυα αλληλεπίδρασης) επειδή δεν χρειάζεται να οριστεί εκ των προτέρων ο αριθμός συστάδων.',
+  legend:[{c:'#ffb454',t:'cluster (θερμοχρωματισμός)'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false,extraChance:0.25}),
+  compute:(g)=>{
+    const n=g.nodes.length; const idOf={}; g.nodes.forEach((nd,i)=>idOf[nd.id]=i);
+    let M=Array.from({length:n},()=>new Array(n).fill(0));
+    g.edges.forEach(e=>{ const i=idOf[e.u],j=idOf[e.v]; M[i][j]=1; M[j][i]=1; });
+    for(let i=0;i<n;i++) M[i][i]=1;
+    const colNormalize=(mat)=>{ for(let j=0;j<n;j++){ let s=0; for(let i=0;i<n;i++) s+=mat[i][j]; if(s>0) for(let i=0;i<n;i++) mat[i][j]/=s; } };
+    colNormalize(M);
+    const steps=[];
+    const edgeLabelFrom=(mat)=>{ const el={}; g.edges.forEach(e=>{ const i=idOf[e.u],j=idOf[e.v]; el[e.id]=((mat[i][j]+mat[j][i])/2).toFixed(2); }); return el; };
+    steps.push({log:'Αρχικοποίηση: πίνακας γειτνίασης + self-loops, κανονικοποιημένος ανά στήλη (στοχαστικός πίνακας τυχαίου περιπάτου).',detail:'',colors:{nodes:{},edges:{}},edgeLabel:edgeLabelFrom(M)});
+    const matMul=(A,B)=>{ const R=Array.from({length:n},()=>new Array(n).fill(0)); for(let i=0;i<n;i++)for(let k=0;k<n;k++){ if(A[i][k]===0) continue; for(let j=0;j<n;j++) R[i][j]+=A[i][k]*B[k][j]; } return R; };
+    const inflate=(mat,p)=>{ const R=mat.map(row=>row.map(x=>Math.pow(x,p))); colNormalize(R); return R; };
+    for(let iter=1;iter<=4;iter++){
+      M=matMul(M,M);
+      steps.push({log:`Επανάληψη ${iter}α: επέκταση — M ← M².`,detail:'Επιτρέπει ροή σε έμμεσους (μεγαλύτερου μήκους) γείτονες.',colors:{nodes:{},edges:{}},edgeLabel:edgeLabelFrom(M)});
+      M=inflate(M,2);
+      steps.push({log:`Επανάληψη ${iter}β: διόγκωση (p=2) — ενισχύει ισχυρές ροές, εξασθενεί ασθενείς.`,detail:'',colors:{nodes:{},edges:{}},edgeLabel:edgeLabelFrom(M)});
+    }
+    const thresh=0.05; const adjFinal=Array.from({length:n},()=>[]);
+    for(let i=0;i<n;i++)for(let j=0;j<n;j++) if(i!==j && M[i][j]>thresh) adjFinal[i].push(j);
+    const clusterOf=new Array(n).fill(-1); let cc=0;
+    for(let i=0;i<n;i++){ if(clusterOf[i]!==-1) continue; const stack=[i]; clusterOf[i]=cc; while(stack.length){ const u=stack.pop(); adjFinal[u].forEach(v2=>{ if(clusterOf[v2]===-1){ clusterOf[v2]=cc; stack.push(v2); } }); } cc++; }
+    const heatOf=()=>{ const h={}; g.nodes.forEach((nd,i)=>h[nd.id]=cc>1?clusterOf[i]/(cc-1):0); return h; };
+    steps.push({log:`Ολοκληρώθηκε. Οι επιζώσες ισχυρές ροές αποκαλύπτουν ${cc} συστάδες.`,detail:'',colors:{nodes:{},edges:{}},heat:heatOf(),table:{headers:['Κόμβος','cluster'],rows:g.nodes.map((nd,i)=>[nd.label,'#'+(clusterOf[i]+1)])}});
+    return steps;
+  }
+};
+
+ALGORITHMS['path-vector']={
+  name:'Δρομολόγηση Path-Vector (π.χ. BGP)',
+  blurb:'Κάθε δρομολογητής (Αυτόνομο Σύστημα) διαφημίζει στους γείτονές του ΟΛΟΚΛΗΡΟ το μονοπάτι που θα ακολουθήσει η κίνηση προς κάθε προορισμό — όχι μόνο την απόσταση. Αυτό επιτρέπει άμεσο εντοπισμό και αποφυγή βρόχων, και ανοίγει τον δρόμο για πολύπλοκες πολιτικές δρομολόγησης.',
+  pseudocode:`Path-Vector (BGP), προορισμός d:
+  path[d] ← [d]
+  επανάλαβε μέχρι σύγκλιση:
+    για κάθε δρομολογητή v και γείτονα u:
+      αν το path[u] (προς d) ΔΕΝ περιέχει το v:
+        υποψήφιο μονοπάτι ← [v] + path[u]
+        αν είναι καλύτερο (π.χ. συντομότερο, ή κατά πολιτική): path[v] ← υποψήφιο`,
+  timeComplexity:'O(V·E) στη χειρότερη περίπτωση σύγκλισης',
+  spaceComplexity:'O(V²) — κάθε δρομολογητής αποθηκεύει ολόκληρα μονοπάτια',
+  graphNote:'Δίκτυο Αυτόνομων Συστημάτων (AS)',
+  notes:'Το πραγματικό BGP επιλέγει μονοπάτι όχι απλώς με βάση το μήκος αλλά με πολύπλοκες πολιτικές (εμπορικές συμφωνίες, προτιμήσεις τοπικού διαχειριστή) — εδώ απλοποιούμε σε «προτίμησε το συντομότερο μονοπάτι» για εποπτικούς λόγους.',
+  legend:[{c:'#b18cff',t:'προορισμός/πηγή διαφήμισης'}],
+  gen:(o)=>genConnectedUndirected(o.n,{weighted:false}),
+  compute:(g)=>{
+    const LM=labelMap(g); const src=g.nodes[0].id; const adj=buildAdj(g);
+    const paths={}; g.nodes.forEach(nd=>paths[nd.id]=null); paths[src]=[src];
+    const steps=[];
+    const table=()=>({headers:['Δρομολογητής','μονοπάτι προς '+LM[src]],rows:g.nodes.map(nd=>[nd.label,paths[nd.id]?paths[nd.id].map(id=>LM[id]).join(' → '):'άγνωστο'])});
+    steps.push({log:`Ο δρομολογητής <b>${LM[src]}</b> διαφημίζει τον εαυτό του ως προορισμό, με μονοπάτι [${LM[src]}].`,
+      detail:'Κάθε δρομολογητής θα διαφημίζει σταδιακά στους γείτονές του το πλήρες μονοπάτι που γνωρίζει προς αυτόν τον προορισμό.',
+      colors:{nodes:{[src]:'source'},edges:{}}, table:table()});
+    let round=0, changed=true;
+    while(changed && round<10){
+      changed=false; round++;
+      const newPaths=Object.assign({},paths);
+      const announces=[];
+      g.nodes.forEach(nd=>{
+        const v=nd.id;
+        adj[v].forEach(({to:u})=>{
+          if(paths[u] && !paths[u].includes(v)){
+            const candidate=[v,...paths[u]];
+            if(!newPaths[v] || candidate.length<newPaths[v].length){
+              newPaths[v]=candidate; changed=true; announces.push(`${LM[v]} ← ${LM[u]}: [${candidate.map(id=>LM[id]).join(',')}]`);
+            }
+          }
+        });
+      });
+      Object.assign(paths,newPaths);
+      steps.push({log:`Γύρος ${round}: ανταλλαγή path-vectors μεταξύ γειτόνων (${announces.length} ενημερώσεις).`,
+        detail:announces.length?announces.join(' · '):'Καμία αλλαγή — σταθεροποιήθηκε.', colors:{nodes:{},edges:{}}, table:table()});
+    }
+    steps.push({log:'Ολοκληρώθηκε. Κάθε δρομολογητής γνωρίζει πλέον ολόκληρο το μονοπάτι προς την πηγή.',
+      detail:'Ο έλεγχος «δεν περιέχει ήδη το v» είναι ακριβώς ο μηχανισμός αποφυγής βρόχων του path-vector routing.',
+      colors:{nodes:{},edges:{}}, table:table()});
+    return steps;
+  }
+};
+
+/* ---------------- boot ---------------- */
+function wireControls(){
+  document.getElementById('btn-new-graph').addEventListener('click',()=>loadAlgorithm(cur.id,true));
+  document.getElementById('btn-same-graph').addEventListener('click',()=>loadAlgorithm(cur.id,false));
+  document.getElementById('node-count').addEventListener('input',(e)=>{ cur.nodeCount=+e.target.value; document.getElementById('node-count-val').textContent=e.target.value; });
+  document.getElementById('btn-first').addEventListener('click',()=>{cur.idx=0;renderStep();});
+  document.getElementById('btn-last').addEventListener('click',()=>{cur.idx=cur.steps.length-1;renderStep();});
+  document.getElementById('btn-prev').addEventListener('click',stepPrev);
+  document.getElementById('btn-next').addEventListener('click',()=>{stopPlay();stepNext();});
+  document.getElementById('btn-play').addEventListener('click',togglePlay);
+  document.getElementById('speed').addEventListener('change',()=>{ if(cur.playing){ stopPlay(); togglePlay(); } });
+}
+
+window.addEventListener('DOMContentLoaded', ()=>{
+  buildSidebar();
+  wireControls();
+  const firstId = ALGO_CATEGORIES[0].algos.find(a=>ALGORITHMS[a]);
+  if(firstId) loadAlgorithm(firstId,true);
+});
+
+</script>
+</body>
+</html>

@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Δέντρο Αναζήτησης — Λειτουργίες Βήμα-Βήμα</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0d0f16;
+    --surface:#161a25;
+    --surface-2:#1e2432;
+    --border:#2b3143;
+    --ink:#e7eaf2;
+    --muted:#8b94ac;
+    --accent:#4fd0e8;
+    --accent-dim:#173842;
+    --amber:#f5b342;
+    --emerald:#3ddc97;
+    --violet:#b18cf7;
+    --rose:#f97186;
+    --radius-sm:7px;
+    --radius-md:14px;
+    --font-mono:'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+    --font-sans:'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px);
+  }
+  *{box-sizing:inherit;}
+  html{scroll-padding-top:env(safe-area-inset-top,0px);}
+  html,body{height:100%;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink);
+    font-family:var(--font-sans);
+    -webkit-font-smoothing:antialiased;
+  }
+  button{font:inherit;}
+  :focus-visible{outline:2px solid var(--accent); outline-offset:2px;}
+
+  .app{
+    display:grid;
+    grid-template-columns:260px 1fr;
+    min-height:100%;
+    animation:appFade .5s ease;
+  }
+  @keyframes appFade{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);}}
+
+  .sidebar{
+    border-right:1px solid var(--border);
+    background:var(--surface);
+    padding:28px 22px;
+    position:sticky;
+    top:0;
+    align-self:start;
+    height:100dvh;
+    overflow-y:auto;
+    padding-top:calc(28px + env(safe-area-inset-top,0px));
+  }
+  .brand{display:flex; align-items:center; gap:12px; margin-bottom:30px;}
+  .brand-emoji{font-size:28px; line-height:1;}
+  .brand-title{font-family:var(--font-mono); font-size:16px; font-weight:600; letter-spacing:-0.01em;}
+  .brand-sub{font-size:12.5px; color:var(--muted); margin-top:2px;}
+
+  /* ---------- Κουμπί Επιστροφής στην Αρχική ---------- */
+  .home-link{
+    display:inline-flex; align-items:center; gap:7px;
+    margin-bottom:22px;
+    padding:8px 14px;
+    background:var(--surface-2);
+    border:1px solid var(--border);
+    border-radius:var(--radius-sm);
+    color:var(--muted);
+    font-size:13px; font-weight:500;
+    text-decoration:none;
+    transition:border-color .15s ease, color .15s ease, background .15s ease;
+  }
+  .home-link:hover{
+    color:var(--accent);
+    border-color:var(--accent);
+    background:var(--accent-dim);
+  }
+  .home-link:active{transform:scale(.98);}
+
+  .nav-list{
+    list-style:none; margin:0; padding-left:14px;
+    border-left:1px dashed var(--border);
+    display:flex; flex-direction:column; gap:2px;
+  }
+  .nav-item{
+    position:relative;
+    display:block; width:100%; text-align:left;
+    background:none; border:none; color:var(--muted);
+    padding:10px 12px 10px 18px;
+    border-radius:var(--radius-sm);
+    font-size:14.5px;
+    cursor:pointer;
+    transition:background .15s, color .15s;
+  }
+  .nav-item::before{
+    content:''; position:absolute; left:-14px; top:50%;
+    width:12px; height:1px; background:var(--border);
+  }
+  .nav-item:hover{color:var(--ink); background:var(--surface-2);}
+  .nav-item.active{color:var(--accent); background:var(--accent-dim); font-weight:600;}
+  .nav-item.active::before{background:var(--accent);}
+
+  .reset-section{margin-top:26px; padding-top:20px; border-top:1px solid var(--border);}
+  .reset-title{font-size:12px; color:var(--muted); margin-bottom:10px;}
+  .reset-btn{
+    display:block; width:100%; text-align:left;
+    background:var(--surface-2); border:1px solid var(--border); color:var(--ink);
+    padding:9px 12px; border-radius:var(--radius-sm); font-size:13.5px;
+    cursor:pointer; margin-bottom:8px; transition:border-color .15s, color .15s;
+  }
+  .reset-btn:last-child{margin-bottom:0;}
+  .reset-btn:hover{border-color:var(--accent); color:var(--accent);}
+
+  .legend{
+    margin-top:26px; padding-top:20px; border-top:1px solid var(--border);
+    display:flex; flex-direction:column; gap:10px; font-size:12.5px; color:var(--muted);
+  }
+  .legend-item{display:flex; align-items:center; gap:9px;}
+  .legend-swatch{width:11px; height:11px; border-radius:50%; flex:none;}
+
+  .content{padding:40px 48px 40px; max-width:980px;}
+  .op-header h2{
+    font-family:var(--font-mono); font-size:27px; margin:0 0 10px;
+    letter-spacing:-0.01em; font-weight:600;
+  }
+  .op-intro{color:var(--muted); max-width:660px; line-height:1.65; font-size:15px; margin:0;}
+
+  .case-switch{display:flex; gap:8px; margin:20px 0 0; flex-wrap:wrap;}
+  .case-btn{
+    padding:8px 15px; border:1px solid var(--border); border-radius:999px;
+    background:transparent; color:var(--muted); font-size:13px; cursor:pointer;
+    transition:border-color .15s, color .15s, background .15s;
+  }
+  .case-btn:hover{color:var(--ink);}
+  .case-btn.active{border-color:var(--accent); color:var(--accent); background:var(--accent-dim);}
+
+  .stage{
+    background:var(--surface); border:1px solid var(--border);
+    border-radius:var(--radius-md); padding:22px 26px 26px; margin-top:22px;
+  }
+  .stage-toolbar{
+    display:flex; align-items:center; justify-content:space-between;
+    gap:12px; flex-wrap:wrap; margin-bottom:14px;
+  }
+  .step-counter{font-family:var(--font-mono); font-size:12.5px; color:var(--muted);}
+  .stage-buttons{display:flex; gap:10px;}
+  .step-btn{
+    background:var(--surface-2); border:1px solid var(--border); color:var(--ink);
+    padding:9px 16px; border-radius:var(--radius-sm); font-size:13.5px; cursor:pointer;
+    transition:border-color .15s, opacity .15s, filter .15s;
+  }
+  .step-btn:hover:not(:disabled){border-color:var(--accent);}
+  .step-btn:disabled{opacity:.35; cursor:default;}
+  .step-btn-primary{background:var(--accent); color:#0a1620; border-color:var(--accent); font-weight:600;}
+  .step-btn-primary:hover:not(:disabled){filter:brightness(1.08); border-color:var(--accent);}
+
+  .tree-svg{width:100%; height:auto; display:block; max-height:440px;}
+
+  .caption{
+    margin:16px 2px 0; font-size:15.5px; color:var(--ink);
+    min-height:46px; line-height:1.6;
+  }
+
+  .dots{display:flex; gap:6px; align-items:center; justify-content:center; margin-top:14px;}
+  .dot{width:8px; height:8px; border-radius:50%; background:var(--border); border:none; cursor:pointer; padding:0;}
+  .dot.active{background:var(--accent); width:22px; border-radius:5px; transition:width .2s, background .2s;}
+
+  .code-panel{
+    margin-top:22px; background:#0a0c12; border:1px solid var(--border);
+    border-radius:var(--radius-md); padding:18px 22px; overflow-x:auto;
+  }
+  .code-panel h3{
+    font-family:var(--font-mono); font-size:11.5px; color:var(--muted);
+    margin:0 0 12px; font-weight:500; letter-spacing:.02em;
+  }
+  .code-panel pre{margin:0; font-family:var(--font-mono); font-size:13px; color:#c7cfdc; line-height:1.65; white-space:pre;}
+
+  /* ---------- Υπογραφή στο κάτω μέρος ---------- */
+  .page-footer{
+    margin-top:56px;
+    padding-top:22px;
+    border-top:1px solid var(--border);
+    text-align:center;
+  }
+  .signature{
+    font-family:var(--font-mono);
+    font-size:12px;
+    color:var(--muted);
+    letter-spacing:.09em;
+    opacity:.55;
+    font-style:italic;
+  }
+
+  /* SVG node & edge states */
+  .edge{transition:stroke .3s, opacity .3s;}
+  .edge.default{stroke:var(--border); stroke-width:2;}
+  .edge.path{stroke:var(--accent); stroke-width:3;}
+  .edge.new{stroke:var(--violet); stroke-width:3; stroke-dasharray:5 4;}
+  .edge.removed{stroke:var(--rose); stroke-width:2; stroke-dasharray:3 3; opacity:.4;}
+
+  .node-circle{transition:fill .3s, stroke .3s, opacity .3s; stroke-width:2; transform-box:fill-box; transform-origin:center;}
+  .node-circle.default{fill:var(--surface-2); stroke:var(--border);}
+  .node-circle.visited{fill:var(--accent-dim); stroke:var(--accent);}
+  .node-circle.current{fill:var(--amber); stroke:var(--amber); animation:pulse 1.15s ease-in-out infinite;}
+  .node-circle.found{fill:var(--emerald); stroke:var(--emerald);}
+  .node-circle.new{fill:var(--violet); stroke:var(--violet); animation:popIn .35s ease;}
+  .node-circle.removed{fill:var(--rose); stroke:var(--rose); opacity:.5;}
+
+  .node-text{font-family:var(--font-mono); font-weight:700; font-size:17px; pointer-events:none;}
+  .node-text.default, .node-text.visited{fill:var(--ink);}
+  .node-text.current, .node-text.found{fill:#171a24;}
+  .node-text.new, .node-text.removed{fill:#fff;}
+
+  .node-tag{font-family:var(--font-sans); font-size:11px; font-weight:500; pointer-events:none;}
+  .node-tag.current{fill:var(--amber);}
+  .node-tag.found{fill:var(--emerald);}
+  .node-tag.new{fill:var(--violet);}
+  .node-tag.removed{fill:var(--rose);}
+
+  @keyframes pulse{0%,100%{opacity:1;} 50%{opacity:.7;}}
+  @keyframes popIn{from{transform:scale(0); opacity:0;} to{transform:scale(1); opacity:1;}}
+
+  @media (max-width:860px){
+    .app{grid-template-columns:1fr;}
+    .sidebar{
+      position:static; height:auto; width:100%;
+      display:flex; flex-direction:column;
+      border-right:none; border-bottom:1px solid var(--border);
+    }
+    .nav-list{flex-direction:row; overflow-x:auto; border-left:none; padding-left:0; gap:6px; padding-bottom:4px;}
+    .nav-item::before{display:none;}
+    .nav-item{white-space:nowrap;}
+    .reset-section{display:flex; gap:8px; align-items:center; border-top:none; border-left:1px solid var(--border); margin-top:0; padding-top:0; padding-left:16px; margin-left:8px;}
+    .reset-title{display:none;}
+    .reset-btn{margin-bottom:0; white-space:nowrap; width:auto;}
+    .legend{flex-direction:row; flex-wrap:wrap; gap:14px;}
+    .content{padding:28px 20px 40px;}
+    .stage-toolbar{flex-direction:row;}
+    .home-link{margin-bottom:16px; align-self:flex-start;}
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <a class="home-link" href="index.html" title="Επιστροφή στην αρχική σελίδα">🏠 Αρχική</a>
+
+    <div class="brand">
+      <span class="brand-emoji">🌳</span>
+      <div>
+        <div class="brand-title">Δέντρο Αναζήτησης</div>
+        <div class="brand-sub">Λειτουργίες βήμα-βήμα</div>
+      </div>
+    </div>
+    <ul class="nav-list" role="tablist">
+      <li><button class="nav-item" data-op="search">Αναζήτηση</button></li>
+      <li><button class="nav-item" data-op="minmax">Ελάχιστο / Μέγιστο</button></li>
+      <li><button class="nav-item" data-op="predecessor">Προηγούμενος</button></li>
+      <li><button class="nav-item" data-op="successor">Επόμενος</button></li>
+      <li><button class="nav-item" data-op="insert">Εισαγωγή</button></li>
+      <li><button class="nav-item" data-op="delete">Διαγραφή</button></li>
+    </ul>
+
+    <div class="reset-section">
+      <div class="reset-title">Επαναφορά δέντρου</div>
+      <button class="reset-btn" id="resetSame">Ίδιοι αριθμοί</button>
+      <button class="reset-btn" id="resetNew">Νέοι αριθμοί</button>
+    </div>
+
+    <div class="legend">
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--accent-dim);border:1px solid var(--accent)"></span>Μονοπάτι διαδρομής</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--amber)"></span>Τρέχων κόμβος</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--emerald)"></span>Αποτέλεσμα</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--violet)"></span>Νέος κόμβος</div>
+      <div class="legend-item"><span class="legend-swatch" style="background:var(--rose)"></span>Διαγραφή κόμβου</div>
+    </div>
+  </aside>
+
+  <main class="content">
+    <header class="op-header">
+      <h2 id="opTitle">Αναζήτηση</h2>
+      <p class="op-intro" id="opIntro"></p>
+    </header>
+
+    <div class="case-switch" id="caseSwitch" hidden role="tablist"></div>
+
+    <section class="stage">
+      <div class="stage-toolbar">
+        <span class="step-counter" id="stepCounter"></span>
+        <div class="stage-buttons">
+          <button class="step-btn" id="prevBtn">Προηγούμενο</button>
+          <button class="step-btn step-btn-primary" id="nextBtn">Επόμενο βήμα</button>
+        </div>
+      </div>
+      <div id="svgHost"></div>
+      <p class="caption" id="caption" aria-live="polite"></p>
+      <div class="dots" id="dots"></div>
+    </section>
+
+    <section class="code-panel">
+      <h3>Ψευδοκώδικας</h3>
+      <pre id="codeBlock"></pre>
+    </section>
+
+    <footer class="page-footer">
+      <span class="signature">ἐπιψαύσεις</span>
+    </footer>
+  </main>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // ---- Fixed tree structure (slot positions never change; only the numbers assigned to slots change) ----
+  var SLOT_POS = {
+    root:{x:400,y:56}, L:{x:220,y:156}, R:{x:580,y:156},
+    LL:{x:120,y:256}, LR:{x:320,y:256}, RL:{x:480,y:256}, RR:{x:680,y:256},
+    LRL:{x:270,y:356}, RRR:{x:730,y:356}
+  };
+  var SLOT_ORDER = ['root','L','R','LL','LR','RL','RR','LRL','RRR'];
+  var SLOT_EDGES = [['root','L'],['root','R'],['L','LL'],['L','LR'],['R','RL'],['R','RR'],['LR','LRL'],['RR','RRR']];
+  var NEWNODE_POS = {x:560,y:356};
+
+  var STATE_TAGS = {current:'συγκρίνουμε', found:'βρέθηκε', 'new':'νέος', removed:'αφαιρείται'};
+
+  var ORIGINAL_VALUES = {root:50, L:30, R:70, LL:20, LR:40, RL:60, RR:80, LRL:35, RRR:90};
+  var ORIGINAL_INSERT = 65;
+
+  function generateNewNumbers(){
+    var vals = [];
+    var current = 10 + Math.floor(Math.random()*8);
+    for (var i=0;i<9;i++){
+      vals.push(current);
+      current += 4 + Math.floor(Math.random()*5);
+    }
+    var V = {
+      root:vals[4], L:vals[1], R:vals[6],
+      LL:vals[0], LR:vals[3], RL:vals[5], RR:vals[7],
+      LRL:vals[2], RRR:vals[8]
+    };
+    var gap = V.R - V.RL;
+    var insertVal = V.RL + 1 + Math.floor(Math.random()*(gap-1));
+    return {V:V, insertVal:insertVal};
+  }
+
+  // ---- Frame resolver: turns a step spec + current numbers into drawable nodes/edges ----
+  function resolveFrame(nodeStates, edgeStates, opts, V, INS){
+    nodeStates = nodeStates || {};
+    edgeStates = edgeStates || {};
+    opts = opts || {};
+    var exclude = opts.exclude || [];
+    var reposition = opts.reposition || {};
+    var extraNodes = opts.extraNodes || [];
+    var edgeExclude = opts.edgeExclude || [];
+    var edgeExtra = opts.edgeExtra || [];
+    var labelOverride = opts.labelOverride || {};
+
+    var nodes = SLOT_ORDER.filter(function(id){ return exclude.indexOf(id) === -1; }).map(function(id){
+      var pos = reposition[id] || SLOT_POS[id];
+      var labelSrc = labelOverride[id] || id;
+      return {id:id, x:pos.x, y:pos.y, state: nodeStates[id] || 'default', label: V[labelSrc]};
+    });
+    extraNodes.forEach(function(e){
+      var pos = e.pos || NEWNODE_POS;
+      nodes.push({id:e.id, x:pos.x, y:pos.y, state:e.state||'new', label: (e.valueFrom==='INSERT') ? INS : V[e.valueFrom]});
+    });
+
+    var edges = SLOT_EDGES.filter(function(pair){
+      var f=pair[0], t=pair[1];
+      if (exclude.indexOf(f)!==-1 || exclude.indexOf(t)!==-1) return false;
+      for (var i=0;i<edgeExclude.length;i++){ if(edgeExclude[i][0]===f && edgeExclude[i][1]===t) return false; }
+      return true;
+    }).map(function(pair){
+      var f=pair[0], t=pair[1];
+      return {from:f, to:t, state: edgeStates[f+'-'+t] || 'default'};
+    });
+    edgeExtra.forEach(function(e){ edges.push(e); });
+
+    return {nodes:nodes, edges:edges};
+  }
+
+  function mkStep(captionFn, nodeStates, edgeStates, opts){
+    return {captionFn:captionFn, nodeStates:nodeStates||{}, edgeStates:edgeStates||{}, opts:opts||{}};
+  }
+
+  function svgMarkup(f){
+    var byId = {};
+    f.nodes.forEach(function(n){ byId[n.id] = n; });
+
+    var edgesSvg = f.edges.map(function(e){
+      var a = byId[e.from], b = byId[e.to];
+      if (!a || !b) return '';
+      return '<line x1="'+a.x+'" y1="'+a.y+'" x2="'+b.x+'" y2="'+b.y+'" class="edge '+e.state+'"></line>';
+    }).join('');
+
+    var nodesSvg = f.nodes.map(function(n){
+      var tag = STATE_TAGS[n.state]
+        ? '<text class="node-tag '+n.state+'" x="'+n.x+'" y="'+(n.y-38)+'" text-anchor="middle">'+STATE_TAGS[n.state]+'</text>'
+        : '';
+      return '<g class="node-g '+n.state+'">' +
+        '<circle cx="'+n.x+'" cy="'+n.y+'" r="26" class="node-circle '+n.state+'"></circle>' +
+        '<text x="'+n.x+'" y="'+n.y+'" class="node-text '+n.state+'" text-anchor="middle" dominant-baseline="central">'+n.label+'</text>' +
+        '</g>' + tag;
+    }).join('');
+
+    return '<svg viewBox="0 0 800 420" xmlns="http://www.w3.org/2000/svg" class="tree-svg">' + edgesSvg + nodesSvg + '</svg>';
+  }
+
+  // ---- Content: every op below is defined structurally (slot ids), so it re-draws correctly for any set of numbers ----
+  var DATA = {};
+
+  DATA.search = {
+    label:"Αναζήτηση",
+    intro:"Η αναζήτηση εκμεταλλεύεται τη θεμελιώδη ιδιότητα του δέντρου: κάθε αριστερό υποδέντρο κρατά μικρότερες τιμές, κάθε δεξί μεγαλύτερες. Σε κάθε κόμβο συγκρίνουμε την τιμή που ψάχνουμε και κατευθυνόμαστε αριστερά ή δεξιά.",
+    code:[
+      "def search(node, key):",
+      "    if node is None:",
+      "        return None            # δεν βρέθηκε",
+      "    if key == node.value:",
+      "        return node             # βρέθηκε",
+      "    if key < node.value:",
+      "        return search(node.left, key)",
+      "    return search(node.right, key)"
+    ],
+    steps:[
+      mkStep(function(V){ return "Αρχικό δέντρο. Θέλουμε να ελέγξουμε αν υπάρχει η τιμή "+V.LRL+"."; }),
+      mkStep(function(V){ return "Ξεκινάμε από τη ρίζα: "+V.root+". Είναι "+V.LRL+" < "+V.root+"; Ναι → πάμε αριστερά."; }, {root:'current'}),
+      mkStep(function(V){ return "Βρισκόμαστε στο "+V.L+". Είναι "+V.LRL+" < "+V.L+"; Όχι, άρα "+V.LRL+" > "+V.L+" → πάμε δεξιά."; }, {root:'visited',L:'current'}, {'root-L':'path'}),
+      mkStep(function(V){ return "Βρισκόμαστε στο "+V.LR+". Είναι "+V.LRL+" < "+V.LR+"; Ναι → πάμε αριστερά."; }, {root:'visited',L:'visited',LR:'current'}, {'root-L':'path','L-LR':'path'}),
+      mkStep(function(V){ return "Φτάσαμε στο "+V.LRL+". Είναι "+V.LRL+" = "+V.LRL+"; Ναι → η τιμή βρέθηκε."; }, {root:'visited',L:'visited',LR:'visited',LRL:'found'}, {'root-L':'path','L-LR':'path','LR-LRL':'path'})
+    ]
+  };
+
+  DATA.minmax = {
+    label:"Ελάχιστο / Μέγιστο",
+    intro:"Το ελάχιστο στοιχείο ενός υποδέντρου βρίσκεται ακολουθώντας συνεχώς τα αριστερά παιδιά μέχρι να μην υπάρχει άλλο. Το μέγιστο βρίσκεται συμμετρικά, ακολουθώντας συνεχώς τα δεξιά παιδιά.",
+    code:[
+      "def find_min(node):",
+      "    while node.left is not None:",
+      "        node = node.left",
+      "    return node",
+      "",
+      "def find_max(node):",
+      "    while node.right is not None:",
+      "        node = node.right",
+      "    return node"
+    ],
+    steps:[
+      mkStep(function(){ return "Θα εντοπίσουμε πρώτα το ελάχιστο, και μετά το μέγιστο, στοιχείο του δέντρου."; }),
+      mkStep(function(V){ return "Ελάχιστο: ξεκινάμε από τη ρίζα, το "+V.root+"."; }, {root:'current'}),
+      mkStep(function(V){ return "Το "+V.root+" έχει αριστερό παιδί → πάμε αριστερά, στο "+V.L+"."; }, {root:'visited',L:'current'}, {'root-L':'path'}),
+      mkStep(function(V){ return "Το "+V.L+" έχει αριστερό παιδί → πάμε αριστερά, στο "+V.LL+"."; }, {root:'visited',L:'visited',LL:'current'}, {'root-L':'path','L-LL':'path'}),
+      mkStep(function(V){ return "Το "+V.LL+" δεν έχει αριστερό παιδί → Ελάχιστο = "+V.LL+"."; }, {root:'visited',L:'visited',LL:'found'}, {'root-L':'path','L-LL':'path'}),
+      mkStep(function(V){ return "Μέγιστο: ξεκινάμε ξανά από τη ρίζα, το "+V.root+"."; }, {root:'current'}),
+      mkStep(function(V){ return "Το "+V.root+" έχει δεξί παιδί → πάμε δεξιά, στο "+V.R+"."; }, {root:'visited',R:'current'}, {'root-R':'path'}),
+      mkStep(function(V){ return "Το "+V.R+" έχει δεξί παιδί → πάμε δεξιά, στο "+V.RR+"."; }, {root:'visited',R:'visited',RR:'current'}, {'root-R':'path','R-RR':'path'}),
+      mkStep(function(V){ return "Το "+V.RR+" έχει δεξί παιδί → πάμε δεξιά, στο "+V.RRR+". Δεν έχει δεξί παιδί → Μέγιστο = "+V.RRR+"."; }, {root:'visited',R:'visited',RR:'visited',RRR:'found'}, {'root-R':'path','R-RR':'path','RR-RRR':'path'})
+    ]
+  };
+
+  DATA.predecessor = {
+    label:"Εύρεση Προηγουμένου",
+    intro:"Ο προηγούμενος (predecessor) ενός κόμβου είναι το αμέσως μικρότερο στοιχείο στην in-order διάταξη. Η διαδικασία διαφέρει ανάλογα με το αν ο κόμβος έχει αριστερό υποδέντρο. Επίλεξε μια περίπτωση.",
+    code:[
+      "def predecessor(node):",
+      "    if node.left is not None:",
+      "        return find_max(node.left)",
+      "    while node.parent is not None and node is node.parent.left:",
+      "        node = node.parent",
+      "    return node.parent   # ή None, αν δεν υπάρχει"
+    ],
+    cases:{
+      hasLeft:{
+        label:"Έχει αριστερό υποδέντρο",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε τον προηγούμενο (predecessor) του κόμβου "+V.root+"."; }, {root:'current'}),
+          mkStep(function(V){ return "Το "+V.root+" έχει αριστερό παιδί ("+V.L+") → ο προηγούμενος είναι το μέγιστο του αριστερού υποδέντρου."; }, {root:'current'}),
+          mkStep(function(V){ return "Μπαίνουμε στο αριστερό υποδέντρο: το "+V.L+"."; }, {root:'visited',L:'current'}, {'root-L':'path'}),
+          mkStep(function(V){ return "Από το "+V.L+", προχωράμε συνεχώς δεξιά → "+V.LR+"."; }, {root:'visited',L:'visited',LR:'current'}, {'root-L':'path','L-LR':'path'}),
+          mkStep(function(V){ return "Το "+V.LR+" δεν έχει δεξί παιδί → Προηγούμενος("+V.root+") = "+V.LR+"."; }, {root:'visited',L:'visited',LR:'found'}, {'root-L':'path','L-LR':'path'})
+        ]
+      },
+      noLeft:{
+        label:"Δεν έχει αριστερό υποδέντρο",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε τον προηγούμενο (predecessor) του κόμβου "+V.RL+"."; }, {RL:'current'}),
+          mkStep(function(V){ return "Το "+V.RL+" δεν έχει αριστερό υποδέντρο, άρα δεν μπορούμε να κατέβουμε. Ανεβαίνουμε στους προγόνους."; }, {RL:'current'}),
+          mkStep(function(V){ return "Το "+V.RL+" είναι αριστερό παιδί του "+V.R+" → συνεχίζουμε να ανεβαίνουμε."; }, {RL:'visited',R:'current'}, {'R-RL':'path'}),
+          mkStep(function(V){ return "Το "+V.R+" είναι δεξί παιδί του "+V.root+" → σταματάμε εδώ."; }, {RL:'visited',R:'visited',root:'current'}, {'R-RL':'path','root-R':'path'}),
+          mkStep(function(V){ return "Προηγούμενος("+V.RL+") = "+V.root+"."; }, {RL:'visited',R:'visited',root:'found'}, {'R-RL':'path','root-R':'path'})
+        ]
+      }
+    }
+  };
+
+  DATA.successor = {
+    label:"Εύρεση Επομένου",
+    intro:"Ο επόμενος (successor) ενός κόμβου είναι το αμέσως μεγαλύτερο στοιχείο στην in-order διάταξη. Η διαδικασία διαφέρει ανάλογα με το αν ο κόμβος έχει δεξί υποδέντρο. Επίλεξε μια περίπτωση.",
+    code:[
+      "def successor(node):",
+      "    if node.right is not None:",
+      "        return find_min(node.right)",
+      "    while node.parent is not None and node is node.parent.right:",
+      "        node = node.parent",
+      "    return node.parent   # ή None, αν δεν υπάρχει"
+    ],
+    cases:{
+      hasRight:{
+        label:"Έχει δεξί υποδέντρο",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε τον επόμενο (successor) του κόμβου "+V.root+"."; }, {root:'current'}),
+          mkStep(function(V){ return "Το "+V.root+" έχει δεξί παιδί ("+V.R+") → ο επόμενος είναι το ελάχιστο του δεξιού υποδέντρου."; }, {root:'current'}),
+          mkStep(function(V){ return "Μπαίνουμε στο δεξί υποδέντρο: το "+V.R+"."; }, {root:'visited',R:'current'}, {'root-R':'path'}),
+          mkStep(function(V){ return "Από το "+V.R+", προχωράμε συνεχώς αριστερά → "+V.RL+"."; }, {root:'visited',R:'visited',RL:'current'}, {'root-R':'path','R-RL':'path'}),
+          mkStep(function(V){ return "Το "+V.RL+" δεν έχει αριστερό παιδί → Επόμενος("+V.root+") = "+V.RL+"."; }, {root:'visited',R:'visited',RL:'found'}, {'root-R':'path','R-RL':'path'})
+        ]
+      },
+      noRight:{
+        label:"Δεν έχει δεξί υποδέντρο",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε τον επόμενο (successor) του κόμβου "+V.LR+"."; }, {LR:'current'}),
+          mkStep(function(V){ return "Το "+V.LR+" δεν έχει δεξί υποδέντρο, άρα δεν μπορούμε να κατέβουμε. Ανεβαίνουμε στους προγόνους."; }, {LR:'current'}),
+          mkStep(function(V){ return "Το "+V.LR+" είναι δεξί παιδί του "+V.L+" → συνεχίζουμε να ανεβαίνουμε."; }, {LR:'visited',L:'current'}, {'L-LR':'path'}),
+          mkStep(function(V){ return "Το "+V.L+" είναι αριστερό παιδί του "+V.root+" → σταματάμε εδώ."; }, {LR:'visited',L:'visited',root:'current'}, {'L-LR':'path','root-L':'path'}),
+          mkStep(function(V){ return "Επόμενος("+V.LR+") = "+V.root+"."; }, {LR:'visited',L:'visited',root:'found'}, {'L-LR':'path','root-L':'path'})
+        ]
+      }
+    }
+  };
+
+  DATA.insert = {
+    label:"Εισαγωγή",
+    intro:"Η εισαγωγή ακολουθεί ακριβώς το ίδιο μονοπάτι με την αναζήτηση, μέχρι να φτάσει σε ένα κενό σημείο του δέντρου — εκεί τοποθετείται ο νέος κόμβος, πάντα ως φύλλο.",
+    code:[
+      "def insert(node, key):",
+      "    if node is None:",
+      "        return Node(key)",
+      "    if key < node.value:",
+      "        node.left = insert(node.left, key)",
+      "    elif key > node.value:",
+      "        node.right = insert(node.right, key)",
+      "    return node"
+    ],
+    steps:[
+      mkStep(function(V,INS){ return "Θέλουμε να εισάγουμε την τιμή "+INS+" στο δέντρο."; }),
+      mkStep(function(V,INS){ return "Ξεκινάμε από τη ρίζα: "+INS+" > "+V.root+" → πάμε δεξιά."; }, {root:'current'}),
+      mkStep(function(V,INS){ return "Στο "+V.R+": "+INS+" < "+V.R+" → πάμε αριστερά."; }, {root:'visited',R:'current'}, {'root-R':'path'}),
+      mkStep(function(V,INS){ return "Στο "+V.RL+": "+INS+" > "+V.RL+" → θέλουμε δεξί παιδί, αλλά το "+V.RL+" δεν έχει."; }, {root:'visited',R:'visited',RL:'current'}, {'root-R':'path','R-RL':'path'}),
+      mkStep(function(V,INS){ return "Εδώ δεν υπάρχει κόμβος (None) — εισάγουμε το "+INS+" ως δεξί παιδί του "+V.RL+"."; },
+        {root:'visited',R:'visited',RL:'visited'},
+        {'root-R':'path','R-RL':'path'},
+        {extraNodes:[{id:'newnode', state:'new', valueFrom:'INSERT'}], edgeExtra:[{from:'RL',to:'newnode',state:'new'}]}
+      )
+    ]
+  };
+
+  DATA.delete = {
+    label:"Διαγραφή",
+    intro:"Η διαγραφή έχει τρεις περιπτώσεις, ανάλογα με το πλήθος των παιδιών του κόμβου προς διαγραφή. Επίλεξε μια περίπτωση για να δεις τα βήματα.",
+    code:[
+      "def delete(node, key):",
+      "    if node is None: return None",
+      "    if key < node.value:",
+      "        node.left = delete(node.left, key)",
+      "    elif key > node.value:",
+      "        node.right = delete(node.right, key)",
+      "    else:",
+      "        if node.left is None:",
+      "            return node.right     # 0 ή 1 παιδί (δεξί)",
+      "        if node.right is None:",
+      "            return node.left      # 1 παιδί (αριστερό)",
+      "        succ = find_min(node.right)   # 2 παιδιά",
+      "        node.value = succ.value",
+      "        node.right = delete(node.right, succ.value)",
+      "    return node"
+    ],
+    cases:{
+      leaf:{
+        label:"Κόμβος-φύλλο",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε να διαγράψουμε το "+V.LL+" — είναι κόμβος-φύλλο, χωρίς παιδιά."; }),
+          mkStep(function(V){ return "Ξεκινάμε από τη ρίζα "+V.root+": "+V.LL+" < "+V.root+" → πάμε αριστερά."; }, {root:'current'}),
+          mkStep(function(V){ return "Στο "+V.L+": "+V.LL+" < "+V.L+" → πάμε αριστερά."; }, {root:'visited',L:'current'}, {'root-L':'path'}),
+          mkStep(function(V){ return "Βρήκαμε το "+V.LL+". Είναι φύλλο, δεν έχει παιδιά."; }, {root:'visited',L:'visited',LL:'found'}, {'root-L':'path','L-LL':'path'}),
+          mkStep(function(V){ return "Αφού δεν έχει παιδιά, το αφαιρούμε απευθείας."; }, {root:'visited',L:'visited',LL:'removed'}, {'root-L':'path','L-LL':'removed'}),
+          mkStep(function(V){ return "Το "+V.LL+" έχει διαγραφεί. Το δέντρο παραμένει έγκυρο δέντρο αναζήτησης."; }, {}, {}, {exclude:['LL']})
+        ]
+      },
+      one:{
+        label:"Ένα παιδί",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε να διαγράψουμε το "+V.LR+" — έχει μόνο ένα παιδί, το "+V.LRL+"."; }),
+          mkStep(function(V){ return "Ξεκινάμε από τη ρίζα "+V.root+": "+V.LR+" < "+V.root+" → πάμε αριστερά."; }, {root:'current'}),
+          mkStep(function(V){ return "Στο "+V.L+": "+V.LR+" > "+V.L+" → πάμε δεξιά."; }, {root:'visited',L:'current'}, {'root-L':'path'}),
+          mkStep(function(V){ return "Βρήκαμε το "+V.LR+". Έχει μόνο ένα παιδί (το "+V.LRL+")."; }, {root:'visited',L:'visited',LR:'found'}, {'root-L':'path','L-LR':'path'}),
+          mkStep(function(V){ return "Συνδέουμε τον πατέρα του "+V.LR+" (το "+V.L+") απευθείας με το μοναδικό παιδί του (το "+V.LRL+"), παρακάμπτοντας το "+V.LR+"."; }, {root:'visited',L:'visited',LR:'removed'}, {'root-L':'path','L-LR':'path'}),
+          mkStep(function(V){ return "Το "+V.LRL+" παίρνει τη θέση του "+V.LR+". Το δέντρο παραμένει έγκυρο."; },
+            {LRL:'found'}, {'root-L':'path'},
+            {exclude:['LR'], reposition:{LRL:{x:SLOT_POS.LR.x,y:SLOT_POS.LR.y}}, edgeExtra:[{from:'L',to:'LRL',state:'path'}]}
+          )
+        ]
+      },
+      two:{
+        label:"Δύο παιδιά",
+        steps:[
+          mkStep(function(V){ return "Θέλουμε να διαγράψουμε το "+V.L+" — έχει δύο παιδιά, το "+V.LL+" και το "+V.LR+"."; }),
+          mkStep(function(V){ return "Ξεκινάμε από τη ρίζα "+V.root+": "+V.L+" < "+V.root+" → πάμε αριστερά."; }, {root:'current'}),
+          mkStep(function(V){ return "Βρήκαμε το "+V.L+". Έχει δύο παιδιά, άρα χρειαζόμαστε τον επόμενό του (successor)."; }, {root:'visited',L:'found'}, {'root-L':'path'}),
+          mkStep(function(V){ return "Ο επόμενος είναι το ελάχιστο του δεξιού υποδέντρου. Μπαίνουμε στο "+V.LR+"."; }, {root:'visited',L:'visited',LR:'current'}, {'root-L':'path','L-LR':'path'}),
+          mkStep(function(V){ return "Το "+V.LR+" έχει αριστερό παιδί ("+V.LRL+") που δεν έχει δικό του αριστερό παιδί → Successor = "+V.LRL+"."; }, {root:'visited',L:'visited',LR:'visited',LRL:'found'}, {'root-L':'path','L-LR':'path','LR-LRL':'path'}),
+          mkStep(function(V){ return "Αντιγράφουμε την τιμή "+V.LRL+" στη θέση του "+V.L+", και διαγράφουμε το αρχικό (φύλλο) "+V.LRL+"."; },
+            {L:'new'}, {'root-L':'path'}, {labelOverride:{L:'LRL'}, exclude:['LRL']}
+          ),
+          mkStep(function(V){ return "Το δέντρο παραμένει έγκυρο: ο κόμβος στη θέση του "+V.L+" έχει πλέον τιμή "+V.LRL+", και το "+V.LR+" δεν έχει πια αριστερό παιδί."; },
+            {}, {}, {labelOverride:{L:'LRL'}, exclude:['LRL']}
+          )
+        ]
+      }
+    }
+  };
+
+  var OPS = ["search","minmax","predecessor","successor","insert","delete"];
+
+  // ---- Runtime state ----
+  var VALUES = Object.assign({}, ORIGINAL_VALUES);
+  var INSERT_VALUE = ORIGINAL_INSERT;
+  var currentOp = "search";
+  var currentCase = null;
+  var stepIndex = 0;
+
+  try{
+    var saved = localStorage.getItem('bst-last-op');
+    if (saved && OPS.indexOf(saved) !== -1) currentOp = saved;
+  }catch(e){}
+  currentCase = DATA[currentOp].cases ? Object.keys(DATA[currentOp].cases)[0] : null;
+
+  function currentSteps(){
+    var op = DATA[currentOp];
+    return op.cases ? op.cases[currentCase].steps : op.steps;
+  }
+
+  function renderCaseSwitch(){
+    var host = document.getElementById('caseSwitch');
+    var op = DATA[currentOp];
+    host.innerHTML = '';
+    if (!op.cases){ host.hidden = true; return; }
+    host.hidden = false;
+    Object.keys(op.cases).forEach(function(key){
+      var b = document.createElement('button');
+      b.className = 'case-btn' + (key === currentCase ? ' active' : '');
+      b.type = 'button';
+      b.textContent = op.cases[key].label;
+      b.addEventListener('click', function(){
+        currentCase = key;
+        stepIndex = 0;
+        render();
+      });
+      host.appendChild(b);
+    });
+  }
+
+  function render(){
+    document.querySelectorAll('.nav-item').forEach(function(btn){
+      btn.classList.toggle('active', btn.getAttribute('data-op') === currentOp);
+    });
+
+    renderCaseSwitch();
+
+    var op = DATA[currentOp];
+    document.getElementById('opTitle').textContent = op.cases ? (op.label + ' — ' + op.cases[currentCase].label) : op.label;
+    document.getElementById('opIntro').textContent = op.intro;
+
+    var steps = currentSteps();
+    if (stepIndex >= steps.length) stepIndex = steps.length - 1;
+    if (stepIndex < 0) stepIndex = 0;
+    var spec = steps[stepIndex];
+    var f = resolveFrame(spec.nodeStates, spec.edgeStates, spec.opts, VALUES, INSERT_VALUE);
+
+    document.getElementById('svgHost').innerHTML = svgMarkup(f);
+    document.getElementById('caption').textContent = spec.captionFn(VALUES, INSERT_VALUE);
+    document.getElementById('stepCounter').textContent = 'Βήμα ' + (stepIndex+1) + ' από ' + steps.length;
+
+    document.getElementById('prevBtn').disabled = stepIndex === 0;
+    document.getElementById('nextBtn').disabled = stepIndex === steps.length - 1;
+
+    var dotsHost = document.getElementById('dots');
+    dotsHost.innerHTML = '';
+    steps.forEach(function(s, i){
+      var d = document.createElement('button');
+      d.type = 'button';
+      d.className = 'dot' + (i === stepIndex ? ' active' : '');
+      d.setAttribute('aria-label', 'Βήμα ' + (i+1));
+      d.addEventListener('click', function(){ stepIndex = i; render(); });
+      dotsHost.appendChild(d);
+    });
+
+    document.getElementById('codeBlock').textContent = op.code.join('\n');
+
+    try{ localStorage.setItem('bst-last-op', currentOp); }catch(e){}
+  }
+
+  document.querySelectorAll('.nav-item').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      currentOp = btn.getAttribute('data-op');
+      var op = DATA[currentOp];
+      currentCase = op.cases ? Object.keys(op.cases)[0] : null;
+      stepIndex = 0;
+      render();
+    });
+  });
+
+  document.getElementById('prevBtn').addEventListener('click', function(){
+    if (stepIndex > 0){ stepIndex--; render(); }
+  });
+  document.getElementById('nextBtn').addEventListener('click', function(){
+    var steps = currentSteps();
+    if (stepIndex < steps.length - 1){ stepIndex++; render(); }
+  });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'ArrowRight') document.getElementById('nextBtn').click();
+    if (e.key === 'ArrowLeft') document.getElementById('prevBtn').click();
+  });
+
+  document.getElementById('resetSame').addEventListener('click', function(){
+    VALUES = Object.assign({}, ORIGINAL_VALUES);
+    INSERT_VALUE = ORIGINAL_INSERT;
+    stepIndex = 0;
+    render();
+  });
+  document.getElementById('resetNew').addEventListener('click', function(){
+    var gen = generateNewNumbers();
+    VALUES = gen.V;
+    INSERT_VALUE = gen.insertVal;
+    stepIndex = 0;
+    render();
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
