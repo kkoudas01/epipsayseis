@@ -146,6 +146,8 @@
 
 [Όγκος τομής κώνου](short/conicCut.html)
 
+[Όγκος στριφτού πρίσματος](short/twistedprism.html)
+
 # Hero <hero>
 
 ἐπιψαύσεις
