@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Turbulent Dissolve — click to toggle</title>
+<style>
+  html, body {
+    margin: 0;
+    height: 100%;
+    background: black;
+    overflow: hidden;
+  }
+  svg {
+    display: block;
+    width: 100vw;
+    height: 100vh;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<svg viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <filter id="turbulent-dissolve" x="0%" y="0%" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency=".012"/>
+      <feColorMatrix type="luminanceToAlpha"/>
+
+      <feComponentTransfer>
+        <feFuncA id="slopeControl" type="linear" slope="0"/>
+      </feComponentTransfer>
+
+      <feComponentTransfer>
+        <feFuncA type="discrete" tableValues="0 1"/>
+      </feComponentTransfer>
+
+      <feGaussianBlur stdDeviation="1"/>
+      <feComposite operator="in" in="SourceGraphic" result="overlay"/>
+
+      <feImage
+        href="https://ykob.github.io/glsl-dissolve/img/osaka02.jpg"
+        width="800" height="600"
+        result="underlay"/>
+
+      <feComposite operator="over" in="overlay" in2="underlay"/>
+    </filter>
+  </defs>
+
+  <image
+    filter="url(#turbulent-dissolve)"
+    width="800" height="600" x="0" y="0"
+    href="https://ykob.github.io/glsl-dissolve/img/osaka01.jpg"/>
+</svg>
+
+<script>
+(function () {
+  const slopeEl     = document.getElementById('slopeControl');
+  const MAX_SLOPE   = 2;      // 0 = πρώτη εικόνα, 2 = δεύτερη εικόνα
+  const DURATION_MS = 2000;   // πόσο διαρκεί η αλλαγή
+
+  let current = 0;
+  let target  = 0;
+  let lastT   = performance.now();
+
+  function loop(now) {
+    const dt   = now - lastT;
+    lastT      = now;
+
+    const step = (dt / DURATION_MS) * MAX_SLOPE;
+
+    if (current < target)      current = Math.min(target, current + step);
+    else if (current > target) current = Math.max(target, current - step);
+
+    if (slopeEl.getAttribute('slope') !== String(current)) {
+      slopeEl.setAttribute('slope', current);
+    }
+
+    requestAnimationFrame(loop);
+  }
+
+  // Κλικ -> εναλλαγή κατεύθυνσης
+  document.querySelector('svg').addEventListener('click', function () {
+    target = target === 0 ? MAX_SLOPE : 0;
+  });
+
+  requestAnimationFrame(loop);
+})();
+</script>
+
+</body>
+</html>

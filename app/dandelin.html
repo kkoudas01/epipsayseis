@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Κωνικές τομές &amp; σφαίρες Dandelin</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg-0:#0a0f1a;
+    --bg-1:#0d1626;
+    --panel:rgba(14,22,38,0.74);
+    --panel-border:rgba(150,185,224,0.16);
+    --ink:#edf1f7;
+    --ink-dim:#8fa0ba;
+    --blue:#4b98e8;
+    --amber:#e8a23d;
+    --rose:#e8628a;
+    --gold:#eccd7c;
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0; padding:0; height:100%;
+    background:
+      radial-gradient(ellipse at 70% 15%, #14233c 0%, transparent 55%),
+      radial-gradient(ellipse at 15% 85%, #101d33 0%, transparent 50%),
+      var(--bg-0);
+    color:var(--ink);
+    font-family:'Space Grotesk', sans-serif;
+    overflow:hidden;
+  }
+  #scene-container{ position:fixed; inset:0; z-index:0; touch-action:none; }
+  #scene-container canvas{ display:block; }
+
+  a.back-link{
+    position:fixed; top:22px; left:22px; z-index:10;
+    display:inline-flex; align-items:center; gap:8px;
+    padding:9px 16px 9px 13px;
+    font-family:'Space Grotesk', sans-serif;
+    font-size:13.5px; letter-spacing:.01em;
+    color:var(--ink-dim);
+    text-decoration:none;
+    background:var(--panel);
+    border:1px solid var(--panel-border);
+    border-radius:8px;
+    backdrop-filter:blur(10px);
+    -webkit-backdrop-filter:blur(10px);
+    transition:color .15s ease, border-color .15s ease;
+  }
+  a.back-link:hover{ color:var(--ink); border-color:rgba(150,185,224,0.36); }
+  a.back-link svg{ width:14px; height:14px; flex:none; }
+
+  header.title{
+    position:fixed; top:22px; left:50%; transform:translateX(-50%);
+    z-index:8; text-align:center; pointer-events:none;
+  }
+  header.title h1{
+    margin:0; font-family:'EB Garamond', serif; font-weight:500;
+    font-size:22px; letter-spacing:.01em; color:var(--ink);
+  }
+  header.title p{
+    margin:3px 0 0; font-size:12.5px; color:var(--ink-dim);
+    font-family:'Space Grotesk',sans-serif;
+  }
+
+  #panel{
+    position:fixed; top:96px; right:22px; bottom:22px; z-index:10;
+    width:296px; max-height:calc(100% - 118px);
+    background:var(--panel); border:1px solid var(--panel-border);
+    border-radius:12px; backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+    padding:18px 18px 16px;
+    display:flex; flex-direction:column; gap:14px;
+    overflow-y:auto;
+  }
+  #panel::-webkit-scrollbar{ width:6px; }
+  #panel::-webkit-scrollbar-thumb{ background:rgba(150,185,224,0.25); border-radius:3px; }
+
+  .section-label{
+    font-size:11px; text-transform:none; color:var(--ink-dim);
+    font-family:'Space Grotesk',sans-serif; letter-spacing:.02em;
+    margin:0 0 8px;
+  }
+
+  .type-row{ display:flex; flex-direction:column; gap:7px; }
+  button.type-btn{
+    appearance:none; border:1px solid var(--panel-border);
+    background:rgba(255,255,255,0.02);
+    color:var(--ink); font-family:'Space Grotesk',sans-serif;
+    font-size:14.5px; text-align:left;
+    padding:10px 12px; border-radius:8px; cursor:pointer;
+    display:flex; align-items:center; gap:10px;
+    transition:background .15s ease, border-color .15s ease;
+  }
+  button.type-btn .dot{ width:8px; height:8px; border-radius:50%; background:var(--blue); flex:none; opacity:.55; }
+  button.type-btn:hover{ background:rgba(255,255,255,0.05); }
+  button.type-btn.active{
+    background:rgba(75,152,232,0.14); border-color:rgba(75,152,232,0.55);
+  }
+  button.type-btn.active .dot{ opacity:1; box-shadow:0 0 8px rgba(75,152,232,.9); }
+
+  #info-text{
+    font-family:'EB Garamond', serif; font-size:15.5px; line-height:1.55;
+    color:#cdd8e8; margin:0; font-style:italic;
+  }
+
+  #note-text{
+    font-family:'EB Garamond', serif; font-size:14px; line-height:1.5;
+    color:var(--ink-dim); margin:0; display:none;
+  }
+  #note-text.show{ display:block; }
+
+  button#dandelin-btn{
+    appearance:none; border:1px solid rgba(236,205,124,0.4);
+    background:rgba(236,205,124,0.09);
+    color:#f2e2ae; font-family:'Space Grotesk',sans-serif;
+    font-size:14.5px; font-weight:500;
+    padding:11px 14px; border-radius:8px; cursor:pointer;
+    transition:background .15s ease, transform .1s ease;
+  }
+  button#dandelin-btn:hover{ background:rgba(236,205,124,0.16); }
+  button#dandelin-btn:active{ transform:scale(.98); }
+  button#dandelin-btn.active{ background:rgba(236,205,124,0.22); }
+
+  #legend{ display:flex; flex-direction:column; gap:6px; margin-top:2px; }
+  .legend-row{ display:flex; align-items:center; gap:9px; font-size:12.5px; color:var(--ink-dim); }
+  .legend-row .sw{ width:11px; height:11px; border-radius:3px; flex:none; }
+  .legend-row.hidden{ display:none; }
+
+  hr.rule{ border:none; border-top:1px solid var(--panel-border); margin:2px 0; }
+
+  #hint{
+    position:fixed; left:22px; bottom:22px; z-index:8;
+    font-family:'Space Grotesk',sans-serif; font-size:12px; color:var(--ink-dim);
+    opacity:.7;
+  }
+
+  #signature{
+    position:fixed; right:22px; bottom:16px; z-index:8;
+    font-family:'EB Garamond', serif; font-style:italic; font-size:14px;
+    letter-spacing:.03em; color:var(--ink-dim); opacity:.55;
+    pointer-events:none; user-select:none;
+  }
+
+  @media (max-width:760px){
+    header.title{ display:none; }
+    a.back-link{ top:14px; left:14px; padding:7px 12px 7px 10px; font-size:12.5px; }
+    #panel{
+      top:auto; left:14px; right:14px; bottom:14px; width:auto;
+      max-height:46vh;
+    }
+    #hint{ display:none; }
+    #signature{ bottom:calc(46vh + 22px); right:16px; font-size:12px; }
+  }
+</style>
+</head>
+<body>
+
+<div id="scene-container"></div>
+
+<a class="back-link" href="../index.html">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+  Αρχική
+</a>
+
+<header class="title">
+  <h1>Κωνικές τομές &amp; σφαίρες Dandelin</h1>
+  <p>Ο κώνος, το τέμνον επίπεδο, και η απόδειξη μέσω εγγεγραμμένων σφαιρών</p>
+</header>
+
+<div id="panel">
+  <div>
+    <p class="section-label">Επίπεδο τομής</p>
+    <div class="type-row">
+      <button class="type-btn active" data-type="ellipse"><span class="dot"></span>Έλλειψη</button>
+      <button class="type-btn" data-type="parabola"><span class="dot"></span>Παραβολή</button>
+      <button class="type-btn" data-type="hyperbola"><span class="dot"></span>Υπερβολή</button>
+    </div>
+  </div>
+
+  <p id="info-text"></p>
+
+  <hr class="rule">
+
+  <button id="dandelin-btn">Εμφάνιση σφαιρών Dandelin</button>
+  <p id="note-text"></p>
+
+  <div id="legend">
+    <div class="legend-row" data-row="curve"><span class="sw" style="background:#eef1f6"></span>Κωνική τομή</div>
+    <div class="legend-row" data-row="plane"><span class="sw" style="background:#4b98e8"></span>Τέμνον επίπεδο</div>
+    <div class="legend-row hidden" data-row="spheres"><span class="sw" style="background:#eccd7c"></span>Σφαίρες Dandelin &amp; σημεία επαφής</div>
+    <div class="legend-row hidden" data-row="tplane"><span class="sw" style="background:#e8a23d"></span>Επίπεδο σημείων επαφής</div>
+    <div class="legend-row hidden" data-row="directrix"><span class="sw" style="background:#e8628a"></span>Διευθετούσα ευθεία</div>
+  </div>
+</div>
+
+<div id="hint">σύρετε για περιστροφή · κύλιση για ζουμ</div>
+<div id="signature">ἐπιψαύσεις</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<script>
+(function(){
+
+  // ---------- Geometry constants (verified analytically) ----------
+  const ALPHA = THREE.MathUtils.degToRad(30);   // cone half-angle
+  const sinA = Math.sin(ALPHA), cosA = Math.cos(ALPHA);
+  const H = 9.5;                                 // rendered nappe height
+  const R = H * Math.tan(ALPHA);                 // rim radius at y = ±H
+  const TMAX = H / cosA;                         // max slant parameter within frustum
+
+  const CONFIG = {
+    ellipse:   { phiDeg: 58, h0: -3.1 },
+    parabola:  { phiDeg: 30, h0: -4.5 },   // phi == ALPHA exactly: plane parallel to one generator
+    hyperbola: { phiDeg: 12, h0: -3.0 },
+  };
+
+  const COL = {
+    cone:      0x6f93b8,
+    curve:     0xeef1f6,
+    plane:     0x4b98e8,
+    tplane:    0xe8a23d,
+    directrix: 0xe8628a,
+    sphere:    0xeccd7c,
+    ring:      0xf3da9c,
+  };
+
+  const INFO = {
+    ellipse:  "Το επίπεδο τέμνει όλες τις γενέτειρες του κώνου, χωρίς να είναι παράλληλο σε καμία από αυτές. Η τομή είναι μία κλειστή καμπύλη: η έλλειψη.",
+    parabola: "Το επίπεδο είναι παράλληλο σε ακριβώς μία γενέτειρα του κώνου. Η τομή είναι μία ανοιχτή καμπύλη που εκτείνεται στο άπειρο: η παραβολή.",
+    hyperbola:"Το επίπεδο δεν είναι παράλληλο σε καμία γενέτειρα και τέμνει και τις δύο χοάνες του κώνου. Προκύπτουν δύο ανοιχτοί κλάδοι: η υπερβολή.",
+  };
+
+  const NOTE_PARABOLA = "Το πορτοκαλί επίπεδο περιέχει τον κύκλο επαφής της σφαίρας με τον κώνο. Η τομή του με το γαλάζιο επίπεδο δίνει τη διευθετούσα ευθεία (ροζ).";
+
+  // ---------- Math helpers ----------
+  function nappeDir(theta, sign){
+    return new THREE.Vector3(
+      Math.sin(ALPHA)*Math.cos(theta),
+      sign*Math.cos(ALPHA),
+      Math.sin(ALPHA)*Math.sin(theta)
+    );
+  }
+
+  function computeCurvePoints(sign, N, P0, steps){
+    steps = steps || 720;
+    const pts = [];
+    for(let i=0;i<=steps;i++){
+      const theta = (i/steps)*Math.PI*2;
+      const g = nappeDir(theta, sign);
+      const denom = N.dot(g);
+      if(Math.abs(denom) < 1e-4){ pts.push(null); continue; }
+      const t = N.dot(P0)/denom;
+      if(t < 0.03 || t > TMAX){ pts.push(null); continue; }
+      pts.push(g.multiplyScalar(t));
+    }
+    return pts;
+  }
+
+  function extractRuns(pts){
+    const out = []; let cur = [];
+    for(const p of pts){
+      if(p){ cur.push(p); } else { if(cur.length>1) out.push(cur); cur=[]; }
+    }
+    if(cur.length>1) out.push(cur);
+    return out;
+  }
+
+  // ---------- Three.js setup ----------
+  const container = document.getElementById('scene-container');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(45, window.innerWidth/window.innerHeight, 0.1, 300);
+  camera.position.set(16, 7.5, 16);
+
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  container.appendChild(renderer.domElement);
+
+  const controls = new THREE.OrbitControls(camera, renderer.domElement);
+  controls.enableDamping = true;
+  controls.dampingFactor = 0.07;
+  controls.minDistance = 7;
+  controls.maxDistance = 42;
+  controls.target.set(0, -3.3, 0);
+  const animTarget = new THREE.Vector3(0, -3.3, 0);
+
+  scene.add(new THREE.HemisphereLight(0x9fc4ff, 0x0b1220, 0.65));
+  const dl1 = new THREE.DirectionalLight(0xffffff, 0.85); dl1.position.set(11,16,9); scene.add(dl1);
+  const dl2 = new THREE.DirectionalLight(0x8fb4ff, 0.3); dl2.position.set(-9,-6,-8); scene.add(dl2);
+  scene.add(new THREE.AmbientLight(0x445566, 0.35));
+
+  // ---------- Cone (double nappe) ----------
+  const coneGroup = new THREE.Group();
+
+  const geoDown = new THREE.ConeGeometry(R, H, 96, 1, true);
+  geoDown.translate(0, -H/2, 0); // apex at origin, opens toward -y
+
+  const geoUp = new THREE.ConeGeometry(R, H, 96, 1, true);
+  geoUp.rotateX(Math.PI);
+  geoUp.translate(0, H/2, 0); // apex at origin, opens toward +y
+
+  const coneMat = new THREE.MeshStandardMaterial({
+    color: COL.cone, transparent:true, opacity:0.15, side:THREE.DoubleSide,
+    roughness:0.65, metalness:0.05, depthWrite:false
+  });
+  coneGroup.add(new THREE.Mesh(geoDown, coneMat));
+  coneGroup.add(new THREE.Mesh(geoUp, coneMat.clone()));
+
+  function buildWireNappe(sign){
+    const g = new THREE.Group();
+    const segs = 72, rimPts = [];
+    for(let i=0;i<=segs;i++){
+      const theta = (i/segs)*Math.PI*2;
+      rimPts.push(nappeDir(theta, sign).multiplyScalar(TMAX));
+    }
+    const rimMat = new THREE.LineBasicMaterial({ color:0x9fc0e6, transparent:true, opacity:0.4 });
+    g.add(new THREE.LineLoop(new THREE.BufferGeometry().setFromPoints(rimPts), rimMat));
+
+    const genCount = 20, genPts = [];
+    for(let i=0;i<genCount;i++){
+      const theta = (i/genCount)*Math.PI*2;
+      genPts.push(new THREE.Vector3(0,0,0), nappeDir(theta, sign).multiplyScalar(TMAX));
+    }
+    const genMat = new THREE.LineBasicMaterial({ color:0x7ea3cf, transparent:true, opacity:0.22 });
+    g.add(new THREE.LineSegments(new THREE.BufferGeometry().setFromPoints(genPts), genMat));
+    return g;
+  }
+  coneGroup.add(buildWireNappe(-1));
+  coneGroup.add(buildWireNappe(+1));
+
+  // axis + apex marker
+  const axisMat = new THREE.LineBasicMaterial({ color:0x5c7699, transparent:true, opacity:0.35 });
+  coneGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints([
+    new THREE.Vector3(0,-H-0.6,0), new THREE.Vector3(0,H+0.6,0)
+  ]), axisMat));
+  const apexMat = new THREE.MeshStandardMaterial({ color:0xb9cbe4, emissive:0x2a3d57 });
+  const apex = new THREE.Mesh(new THREE.SphereGeometry(0.055,16,16), apexMat);
+  coneGroup.add(apex);
+
+  scene.add(coneGroup);
+
+  // ---------- Dynamic groups ----------
+  const planeGroup = new THREE.Group();  scene.add(planeGroup);
+  const curveGroup = new THREE.Group();  scene.add(curveGroup);
+  const sphereGroup = new THREE.Group(); scene.add(sphereGroup);
+
+  function clearGroup(g){
+    while(g.children.length){
+      const c = g.children.pop();
+      if(c.geometry) c.geometry.dispose();
+      if(c.material) c.material.dispose();
+    }
+  }
+
+  function makePlaneMesh(normal, point, size, color, opacity){
+    const geo = new THREE.PlaneGeometry(size, size);
+    const mat = new THREE.MeshStandardMaterial({
+      color, transparent:true, opacity, side:THREE.DoubleSide,
+      roughness:0.95, metalness:0, depthWrite:false
+    });
+    const mesh = new THREE.Mesh(geo, mat);
+    const q = new THREE.Quaternion().setFromUnitVectors(new THREE.Vector3(0,0,1), normal.clone().normalize());
+    mesh.quaternion.copy(q);
+    mesh.position.copy(point);
+    return mesh;
+  }
+
+  function makeTube(points, radius, color, closed){
+    const curve = new THREE.CatmullRomCurve3(points, !!closed);
+    const tSeg = Math.min(420, Math.max(32, points.length));
+    const geo = new THREE.TubeGeometry(curve, tSeg, radius, 8, !!closed);
+    const mat = new THREE.MeshStandardMaterial({
+      color, emissive:color, emissiveIntensity:0.3, roughness:0.35, metalness:0.1
+    });
+    return new THREE.Mesh(geo, mat);
+  }
+
+  // ---------- State ----------
+  let currentType = 'ellipse';
+  let spheresVisible = false;
+
+  function currentPlaneVectors(type){
+    const cfg = CONFIG[type];
+    const phi = THREE.MathUtils.degToRad(cfg.phiDeg);
+    return {
+      cfg, phi,
+      N: new THREE.Vector3(Math.cos(phi), Math.sin(phi), 0),
+      P0: new THREE.Vector3(0, cfg.h0, 0)
+    };
+  }
+
+  function setType(type){
+    currentType = type;
+    spheresVisible = false;
+    clearGroup(planeGroup); clearGroup(curveGroup); clearGroup(sphereGroup);
+
+    const dBtn = document.getElementById('dandelin-btn');
+    dBtn.textContent = 'Εμφάνιση σφαιρών Dandelin';
+    dBtn.classList.remove('active');
+
+    const { N, P0 } = currentPlaneVectors(type);
+
+    planeGroup.add(makePlaneMesh(N, P0, 13, COL.plane, 0.32));
+
+    const p1 = computeCurvePoints(-1, N, P0);
+    const p2 = computeCurvePoints(+1, N, P0);
+
+    if(type === 'ellipse'){
+      const pts = p1.filter(Boolean);
+      curveGroup.add(makeTube(pts, 0.045, COL.curve, true));
+    } else {
+      extractRuns(p1).forEach(run => curveGroup.add(makeTube(run, 0.045, COL.curve, false)));
+      extractRuns(p2).forEach(run => curveGroup.add(makeTube(run, 0.045, COL.curve, false)));
+    }
+
+    document.getElementById('info-text').textContent = INFO[type];
+    document.getElementById('note-text').classList.remove('show');
+
+    const targets = { ellipse:[0,-3.3,0], parabola:[0,-3.6,0], hyperbola:[0,0,0] };
+    animTarget.set(...targets[type]);
+
+    document.querySelectorAll('.type-btn').forEach(b=>{
+      b.classList.toggle('active', b.dataset.type === type);
+    });
+
+    updateLegend();
+  }
+
+  function buildSpheres(type){
+    const { cfg, phi, N, P0 } = currentPlaneVectors(type);
+    const sinPhi = Math.sin(phi);
+
+    const ycList = [ sinPhi*cfg.h0/(sinPhi+sinA) ];
+    if(type !== 'parabola') ycList.push( sinPhi*cfg.h0/(sinPhi-sinA) );
+
+    ycList.forEach(yc=>{
+      const r = Math.abs(yc)*sinA;
+      const yTangent = yc*cosA*cosA;
+      const center = new THREE.Vector3(0, yc, 0);
+
+      const sMat = new THREE.MeshPhysicalMaterial({
+        color: COL.sphere, transparent:true, opacity:0.48,
+        roughness:0.2, metalness:0.05, side:THREE.DoubleSide, clearcoat:0.4
+      });
+      const sMesh = new THREE.Mesh(new THREE.SphereGeometry(r, 44, 30), sMat);
+      sMesh.position.copy(center);
+      sphereGroup.add(sMesh);
+
+      const ringR = Math.abs(yTangent) * Math.tan(ALPHA);
+      const ringMat = new THREE.MeshStandardMaterial({ color:COL.ring, emissive:COL.ring, emissiveIntensity:0.55 });
+      const ring = new THREE.Mesh(new THREE.TorusGeometry(Math.max(ringR,0.02), 0.032, 10, 90), ringMat);
+      ring.rotation.x = Math.PI/2;
+      ring.position.set(0, yTangent, 0);
+      sphereGroup.add(ring);
+
+      const d = N.dot(center.clone().sub(P0));
+      const tangentPt = center.clone().sub(N.clone().multiplyScalar(d));
+      const markMat = new THREE.MeshStandardMaterial({ color:COL.ring, emissive:COL.ring, emissiveIntensity:0.7 });
+      const mark = new THREE.Mesh(new THREE.SphereGeometry(0.1, 18, 18), markMat);
+      mark.position.copy(tangentPt);
+      sphereGroup.add(mark);
+
+      if(type === 'parabola'){
+        sphereGroup.add(makePlaneMesh(new THREE.Vector3(0,1,0), new THREE.Vector3(0,yTangent,0), 9.5, COL.tplane, 0.30));
+
+        const xd = Math.tan(phi) * (cfg.h0 - yTangent);
+        const dGeo = new THREE.CylinderGeometry(0.045, 0.045, 15, 14);
+        const dMat = new THREE.MeshStandardMaterial({ color:COL.directrix, emissive:COL.directrix, emissiveIntensity:0.45 });
+        const dMesh = new THREE.Mesh(dGeo, dMat);
+        dMesh.rotation.x = Math.PI/2;
+        dMesh.position.set(xd, yTangent, 0);
+        sphereGroup.add(dMesh);
+      }
+    });
+  }
+
+  function updateLegend(){
+    const rows = document.querySelectorAll('#legend .legend-row');
+    rows.forEach(row=>{
+      const key = row.dataset.row;
+      let show = true;
+      if(key === 'spheres') show = spheresVisible;
+      if(key === 'tplane' || key === 'directrix') show = spheresVisible && currentType === 'parabola';
+      row.classList.toggle('hidden', !show);
+    });
+  }
+
+  // ---------- UI wiring ----------
+  document.querySelectorAll('.type-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=> setType(btn.dataset.type));
+  });
+
+  document.getElementById('dandelin-btn').addEventListener('click', ()=>{
+    spheresVisible = !spheresVisible;
+    clearGroup(sphereGroup);
+    const dBtn = document.getElementById('dandelin-btn');
+    const note = document.getElementById('note-text');
+    if(spheresVisible){
+      buildSpheres(currentType);
+      dBtn.textContent = 'Απόκρυψη σφαιρών Dandelin';
+      dBtn.classList.add('active');
+      if(currentType === 'parabola'){ note.textContent = NOTE_PARABOLA; note.classList.add('show'); }
+      else note.classList.remove('show');
+    } else {
+      dBtn.textContent = 'Εμφάνιση σφαιρών Dandelin';
+      dBtn.classList.remove('active');
+      note.classList.remove('show');
+    }
+    updateLegend();
+  });
+
+  window.addEventListener('resize', ()=>{
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ---------- Init & loop ----------
+  setType('ellipse');
+
+  function animate(){
+    requestAnimationFrame(animate);
+    controls.target.lerp(animTarget, 0.05);
+    controls.update();
+    renderer.render(scene, camera);
+  }
+  animate();
+
+})();
+</script>
+</body>
+</html>

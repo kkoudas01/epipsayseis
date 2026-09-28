@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Όγκος συνδυασμού 3 κυλίνδρων</title>
+
+<!-- MathJax: μία μόνο εξάρτηση για LaTeX -->
+<script>
+  window.MathJax = {
+    tex: { inlineMath: [['$', '$'], ['\\(', '\\)']],
+           displayMath: [['$$','$$'], ['\\[','\\]']] },
+    svg: { fontCache: 'global' }
+  };
+</script>
+<script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+
+<style>
+  :root {
+    --bg:     #121212;
+    --fg:     #e0e0e0;
+    --muted:  #888;
+    --accent: #7fd1ff;   /* χρώμα για τα μαθηματικά */
+    --box:    #1c1c1c;
+    --border: #2e2e2e;
+  }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+    min-height: 100vh;
+    padding: 3.5rem 1rem 4rem;
+    box-sizing: border-box;
+  }
+  h1 {
+    text-align: center;
+    font-weight: 400;
+    letter-spacing: 3px;
+    margin: 0 0 2rem;
+  }
+  .container { max-width: 780px; margin: 0 auto; }
+
+  /* Πλαίσιο εικόνας */
+  #picbox {
+    background: var(--box);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem;
+    min-height: 220px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+  }
+  #picbox img { max-width: 100%; height: auto; border-radius: 4px; display: block; }
+
+  .text { margin-top: 1.6rem; line-height: 1.7; }
+
+  /* Τα μαθηματικά με ξεχωριστό χρώμα */
+  .mjx-container, mjx-container { color: var(--accent) !important; }
+
+  /* Κουμπί επιστροφής */
+  .back {
+    position: fixed; top: 1rem; left: 1rem;
+    color: var(--muted);
+    text-decoration: none;
+    padding: .35rem .8rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: rgba(0,0,0,.35);
+    font-size: .9rem;
+    transition: color .2s, border-color .2s;
+  }
+  .back:hover { color: var(--accent); border-color: var(--accent); }
+
+  /* Διακριτική υπογραφή */
+  .signature {
+    position: fixed; bottom: .8rem; right: 1rem;
+    color: #4d4d4d;
+    font-size: .85rem;
+    font-style: italic;
+    letter-spacing: 1px;
+    user-select: none;
+    pointer-events: none;
+  }
+</style>
+</head>
+<body>
+
+<a href="../index.html" class="back">← Αρχική</a>
+
+<div class="container">
+  <h1>Όγκος συνδυασμού 3 κυλίνδρων</h1>
+
+  <div id="picbox"></div>
+
+  <div class="text">
+    Χωρίζοντας το μεγάλο στερεό σε $6$ «σφήνες» που ενόνονται στο κέντρο του έχουμε ότι ο όγκος του δίνεται από τον τύπο:
+
+    $$V=6\left(\pi-\frac{4\sqrt{2}}{3}\right)r^3,$$
+	
+	όπου $r$ η ακτίνα του κάθε κυλίνδρου.
+
+  </div>
+  
+    <div class="text">
+   
+	Όσον αφορά την τομή των τριών κυλίνδρων, το ασημένιο στερεό Steinmetz αυτό έχει όγκο:
+	
+	$$V=8(2-\sqrt{2})r^3$$
+	
+	Αυτό αποδεικνύεται εύκολα χρησιμοποιώντας τον όγκο της τομής δύο κυλίνδρων ($\frac{16}{3}r^3$) και την Αρχή Εγκλεισμού-Αποκλεισμού από την Θεωρία Πιθανοτήτων.
+
+  </div>
+</div>
+
+<div class="signature">ἐπιψαύσεις</div>
+
+<script>
+  /* Απλή συνάρτηση για να βάλεις εικόνα στο πλαίσιο */
+  function showPic(src, alt = '') {
+    const box = document.getElementById('picbox');
+    box.innerHTML = '';
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = alt;
+    box.appendChild(img);
+  }
+
+  /* Χρήση: */
+  showPic('tricylinder.png', 'My picture');
+</script>
+
+</body>
+</html>
