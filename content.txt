@@ -148,6 +148,8 @@
 
 [Όγκος στριφτού πρίσματος](short/twistedprism.html)
 
+[Όγκος «κώνου»](short/tetartokyklio.html)
+
 # Hero <hero>
 
 ἐπιψαύσεις
