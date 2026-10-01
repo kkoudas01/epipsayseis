@@ -968,14 +968,72 @@ hr.div { border:none; border-top:1px solid var(--brd); margin:42px 0; }
 \dfrac{κ}{λ}\dfrac{\vec{v}}{\vec{w}}=\dfrac{κ}{λ}\dfrac{\vec{v}\vec{w}}{\norm{\vec{w}}^2}=\dfrac{(κ\vec{v})(λ\vec{w})}{λ^2\norm{\vec{w}}^2}=\dfrac{(κ\vec{v})(λ\vec{w})}{\norm{λ\vec{w}}^2}=\dfrac{κ\vec{v}}{λ\vec{w}}
     \end{equation}
   </div>
+  
+  
+
 
 
   
   <h3 class="h3">2.5 Δυνάμεις</h3>
   
+        <p>
+Είναι $\left(\dfrac{κ}{\vec{v}}\right)^2=\dfrac{κ^2}{\vec{v}^2}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{power}
+\left(\dfrac{κ}{\vec{v}}\right)^2=\dfrac{κ}{\vec{v}}\cdot \dfrac{κ}{\vec{v}}=\dfrac{κ\vec{v}}{\norm{\vec{v}}^2}\cdot \dfrac{κ\vec{v}}{\norm{\vec{v}}^2}=
+\dfrac{κ^2\vec{v}^2}{\norm{\vec{v}}^4}=\dfrac{κ^2 \vec{v}^2}{\vec{v}^2\vec{v}^2}=\dfrac{κ^2}{\vec{v}^2}
+    \end{equation}
+  </div>
+  
   <h3 class="h3">2.6 Νόρμες και απόλυτες τιμές</h3>
   
+<p>
+Είναι $\norm{\dfrac{κ}{\vec{v}}}=\dfrac{|κ|}{\norm{\vec{v}}}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{abs}
+\norm{\dfrac{κ}{\vec{v}}}=\norm{\dfrac{κ\vec{v}}{\norm{\vec{v}}^2}}=\left|\dfrac{κ}{\norm{\vec{v}}^2}\right|\cdot\norm{\vec{v}}=
+\dfrac{|κ|}{\norm{\vec{v}}^2}\cdot\norm{\vec{v}}=\dfrac{|κ|}{\norm{\vec{v}}}
+    \end{equation}
+  </div>
+  
   <h3 class="h3">2.7 Διαιρέσεις</h3>
+  
+  <p>
+Είναι $\dfrac{\dfrac{κ}{λ}}{\dfrac{μ}{\vec{v}}}=\dfrac{κ\vec{v}}{λμ}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{frac1}
+\dfrac{\dfrac{κ}{λ}}{\dfrac{μ}{\vec{v}}}=\dfrac{\dfrac{κ}{λ}}{\dfrac{μ\vec{v}}{\norm{\vec{v}}^2}}=\dfrac{\dfrac{κ}{λ}}{\dfrac{μ}{\norm{\vec{v}}^2}\vec{v}}\overset{Θ.2.4}{=}
+\dfrac{\dfrac{κ}{λ}}{\dfrac{μ}{\norm{\vec{v}}^2}}\dfrac{1}{\vec{v}}=\dfrac{\dfrac{κ}{λ}}{\dfrac{μ}{\norm{\vec{v}}^2}}\dfrac{\vec{v}}{\norm{\vec{v}}^2}=\dfrac{κ\vec{v}}{λμ}
+    \end{equation}
+  </div>
+  
+    <p>
+Είναι $\dfrac{\dfrac{κ}{\vec{v}}}{\dfrac{λ}{μ}}=\dfrac{κμ}{λ\vec{v}}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{frac2}
+\dfrac{\dfrac{κ}{\vec{v}}}{\dfrac{λ}{μ}}=\dfrac{\dfrac{κ\vec{v}}{\norm{\vec{v}}^2}}{\dfrac{λ}{μ}}=\dfrac{\dfrac{κ}{\norm{\vec{v}}^2}\vec{v}}{\dfrac{λ}{μ}}=
+\dfrac{\dfrac{κ}{\norm{\vec{v}}^2}}{\dfrac{λ}{μ}}\vec{v}=\dfrac{κμ}{λ}\dfrac{\vec{v}}{\norm{\vec{v}}^2}=\dfrac{κμ}{λ}\dfrac{1}{\vec{v}}\overset{Θ.2.4}{=}\dfrac{κμ}{λ\vec{v}}
+    \end{equation}
+  </div>
+  
+    <p>
+Είναι $\dfrac{\dfrac{\vec{v}}{κ}}{\dfrac{λ}{\vec{w}}}=\dfrac{\vec{v}\vec{w}}{κλ}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{frac3}
+\dfrac{\dfrac{\vec{v}}{κ}}{\dfrac{λ}{\vec{w}}}=\dfrac{\dfrac{\vec{v}}{κ}}{\dfrac{λ\vec{w}}{\norm{\vec{w}}^2}}=\dfrac{\dfrac{1}{κ}\vec{v}}{\dfrac{λ}{\norm{\vec{w}}^2}\vec{w}}
+\overset{Θ.2.4}{=}\dfrac{\dfrac{1}{κ}}{\dfrac{λ}{\norm{\vec{w}}^2}}\dfrac{\vec{v}}{\vec{w}}=\dfrac{\norm{\vec{w}}^2}{κλ}\dfrac{\vec{v}\vec{w}}{\norm{\vec{w}}^2}=\dfrac{\vec{v}\vec{w}}{κλ}
+    \end{equation}
+  </div>
 
   
   <h2 class="h2">3. Εφαρμογή στις εξισώσεις</h2>
