@@ -1046,501 +1046,91 @@ hr.div { border:none; border-top:1px solid var(--brd); margin:42px 0; }
 =\dfrac{κ\norm{\vec{w}}^2}{λ}\dfrac{1}{\vec{v}}\dfrac{\vec{w}}{\norm{\vec{w}}^2}=\dfrac{κ}{λ}\dfrac{1}{\vec{v}}\dfrac{\vec{w}}{1}\overset{Θ.2.4}{=}\dfrac{κ\vec{w}}{λ\vec{v}}
     \end{equation}
   </div>
+  
+      <p>
+Είναι $\dfrac{\dfrac{\vec{v}}{κ}}{\dfrac{\vec{w}}{λ}}=\dfrac{λ\vec{v}}{κ\vec{w}}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{frac5}
+\dfrac{\dfrac{\vec{v}}{κ}}{\dfrac{\vec{w}}{λ}}=\dfrac{\dfrac{1}{κ}\vec{v}}{\dfrac{1}{λ}\vec{w}}\overset{Θ.2.4}{=}\dfrac{\dfrac{1}{κ}}{\dfrac{1}{λ}}\dfrac{\vec{v}}{\vec{w}}=
+\dfrac{λ}{κ}\dfrac{\vec{v}}{\vec{w}}\overset{Θ.2.4}{=}\dfrac{λ\vec{v}}{κ\vec{w}}
+    \end{equation}
+  </div>
+  
+        <p>
+Είναι $\dfrac{\dfrac{\vec{v}}{\vec{w}}}{\dfrac{κ}{λ}}=\dfrac{λ\vec{v}}{κ\vec{w}}$, αφού:
+  </p>
+	
+<div class="mblock">
+    \begin{equation} \label{frac6}
+\dfrac{\dfrac{\vec{v}}{\vec{w}}}{\dfrac{κ}{λ}}=\dfrac{\dfrac{\vec{v}\vec{w}}{\norm{\vec{w}}^2}}{\dfrac{κ}{λ}}=\dfrac{(λ\vec{v})(κ\vec{w})}{\norm{κ\vec{w}}^2}=\dfrac{λ\vec{v}}{κ\vec{w}}
+    \end{equation}
+  </div>
 
   
   <h2 class="h2">3. Εφαρμογή στις εξισώσεις</h2>
   
-  <p>
-    Αυτό το template δημιουργήθηκε για να καλύψει τις ανάγκες παρουσίασης
-    <strong>ακαδημαϊκού</strong> ή <strong>τεχνικού</strong> κειμένου, χωρίς
-    εξωτερικές εξαρτήσεις. Χρησιμοποιεί <em>dark mode</em> με παλέτα
-    Catppuccin Mocha, φιλική σε άτομα με <u>αστιγματισμό ή αχρωματοψία</u>.
-    Το κείμενο δεν είναι αμιγώς λευκό (μειώνεται η αντίθεση), και τα accent
-    χρώματα επιλέχθηκαν ώστε να
-    <mark class="hl-yellow">ξεχωρίζουν χωρίς διάκριση κόκκινου-πράσινου</mark>.
-  </p>
-  <p>
-    Περισσότερα για προσβασιμότητα:
-    <a href="https://catppuccin.com" target="_blank" rel="noopener">Catppuccin palette</a>
-    και
-    <a href="https://www.w3.org/WAI/WCAG22/quickref/" target="_blank" rel="noopener">WCAG 2.2 guidelines</a>.
-  </p>
-
-  <h3 class="h3">1.2 Στόχοι και Δομή</h3>
-  <p>
-    Ο <span class="c-lavender">πίνακας περιεχομένων</span> αριστερά
-    δημιουργείται <mark class="hl-blue">αυτόματα</mark> από τους τίτλους
-    <code>h2.h2</code> και <code>h3.h3</code> της σελίδας. Η ενεργή ενότητα
-    κατά την ανάγνωση <span class="c-blue">λάμπει (glow)</span> στον πίνακα.
-    Ο πίνακας μπορεί να κρυφτεί με <strong>☰ Περιεχόμενα</strong> στην κορυφή.
-  </p>
-
-  <!-- ◄── ΝΕΟ: παράδειγμα h4 με κείμενο, για να φαίνεται η λειτουργία -->
-  <h4 class="h4">1.2.1 Πώς εμφανίζονται τα h4 στο TOC</h4>
-  <p>
-    Τα <code>h4.h4</code> δεν φαίνονται αρχικά στο sidebar. Όταν πατήσετε
-    το <code>h3.h3</code> στο οποίο ανήκουν, τα h4 του ξεδιπλώνονται με
-    ομαλό animation. Δεύτερο κλικ στο ίδιο h3 τα ξανακρύβει. Ένα μικρό
-    βελάκι <code>▸/▾</code> δίπλα στο h3 δείχνει αν έχει κρυφά παιδιά.
-  </p>
-
-  <h4 class="h4">1.2.2 Δεύτερο παράδειγμα h4</h4>
-  <p>
-    Μπορείτε να προσθέσετε όσα <code>h4.h4</code> θέλετε κάτω από ένα h3.
-    Αν βάλετε h4 χωρίς προηγούμενο h3, αγνοείται σιωπηλά στο TOC για να
-    μη σπάει η δενδρική δομή.
-  </p>
-
-  <hr class="div">
+        <div class="note">
+    <div class="note-ttl">Εξίσωση με άγνωστο διάνυσμα</div>
+    <div class="note-body">
+      Αν $\vec{α}\neq 0$, τότε η εξίσωση $\vec{α}\vec{x}=\vec{β}$ έχει άπειρες λύσεις, τις $\vec{x}=\dfrac{\vec{β}}{\vec{α}}+\vec{α}_{\perp}$, όπου $\vec{α}_{\perp}$ 
+	  αυθαίρετο κάθετο διάνυσμα στο $\vec{α}$.
+    </div>
+  </div>
   
-
-  <!-- ══════════════════════════════════════════════════════════════
-       ΕΝΟΤΗΤΑ 2: Μορφοποίηση Κειμένου
-       ══════════════════════════════════════════════════════════════ -->
-  <h2 class="h2">2. Μορφοποίηση Κειμένου</h2>
-
-  <h3 class="h3">2.1 Στιλ Γραφής, Χρώματα και Σύνδεσμοι</h3>
-  <p>
-    <strong>Bold (έντονη γραφή)</strong>, <em>italic (πλαγιογράμματη)</em>,
-    <u>υπογράμμιση</u>. Highlights:
-    <mark class="hl-yellow">κίτρινο</mark>,
-    <mark class="hl-blue">μπλε</mark>,
-    <mark class="hl-green">πράσινο</mark>,
-    <mark class="hl-pink">ροζ</mark>,
-    <mark class="hl-teal">teal</mark>.
-  </p>
-  <p>
-    Χρώματα γραμματοσειράς:
-    <span class="c-blue">μπλε</span>,
-    <span class="c-lavender">λεβάντα</span>,
-    <span class="c-yellow">κίτρινο</span>,
-    <span class="c-teal">teal</span>,
-    <span class="c-pink">ροζ</span>,
-    <span class="c-green">πράσινο</span>,
-    <span class="c-peach">πορτοκαλί</span>,
-    <span class="c-sky">γαλάζιο</span>.
-    Inline κώδικας: <code>myFunction(x, y)</code>.
-  </p>
-  <p>
-    Εξωτερικοί σύνδεσμοι ανοίγουν σε νέο tab — το βέλος ↗ εμφανίζεται
-    αυτόματα:
-    <a href="https://developer.mozilla.org" target="_blank" rel="noopener">MDN Web Docs</a>,
-    <a href="https://wikipedia.org" target="_blank" rel="noopener">Wikipedia</a>.
-  </p>
-
-  <h3 class="h3">2.2 Μαθηματικές Εκφράσεις (LaTeX)</h3>
-
-  <!-- Inline math: $...$ απευθείας στο κείμενο -->
-  <p>
-    Inline: η δευτεροβάθμια είναι
-    $\dfrac{-b \pm \sqrt{b^2 - 4ac}}{2a}$
-    και το ολοκλήρωμα Gauss
-    $\displaystyle\int_{-\infty}^{+\infty} e^{-x^2}\,dx = \sqrt{\pi}$.
-  </p>
-
-  <!-- Macros που ορίσαμε στη ρύθμιση MathJax:
-       \bv{} → bold vector, \norm{} → ||·||, \pd{}{} → ∂/∂ κλπ -->
-  <p>
-    Με τα custom macros: έστω $\bv{x} \in \RR^n$, τότε
-    $\norm{\bv{x}}^2 = \bv{x}^\top \bv{x}$.
-    Η βαθμίδα της απώλειας είναι $\pd{\mathcal{L}}{\bv{w}}$.
-    Αναμενόμενη τιμή: $\EE[X] = \int x\,p(x)\,dx$.
-  </p>
-
-  <!-- Αριθμημένη εξίσωση με \label — ΜΟΝΟ MathJax -->
-  <p>Αριθμημένη εξίσωση (το \label επιτρέπει αναφορά αλλού):</p>
-  <div class="mblock">
-    \begin{equation} \label{eq:bayes}
-      P(A \mid B) = \frac{P(B \mid A)\,P(A)}{P(B)}
+ <p>
+ <strong><u>Απόδειξη</u></strong>
+ </p>
+ 
+ <p>
+ Έστω $\vec{α}, \vec{v_k}$ ($k\in I$) μια ορθογώνια βάση του $\mathcal{V}$, η οποία περιλαμβάνει το $\vec{α}$.
+ </p>
+ 
+ <p>
+ Αφού πρόκειται περί βάσης $\vec{x}=λ\vec{α}+\sum_k \vec{v_k}$. Αντικαθιστώντας στην $\vec{α}\vec{x}=\vec{β}$ έχουμε λόγω της ορθογωνιότητας της βάσης:
+ </p>
+ 
+ <div class="mblock">
+    \begin{equation} \label{eq1}
+\vec{α}\left(λ\vec{α}+\sum_k \vec{v_k}\right)=\vec{β}\Leftrightarrow λ\vec{α}^2+\sum_k \vec{α}\vec{v_k}=\vec{β}
+\Leftrightarrow λ\norm{\vec{α}}^2=\vec{β}\Leftrightarrow λ=\dfrac{\vec{β}}{\norm{\vec{α}}^2}
     \end{equation}
   </div>
-
-  <p>
-    Αναφορά με <code>\eqref</code>: όπως αποδεικνύεται στην
-    \eqref{eq:bayes}, η εκ των υστέρων κατανομή είναι ανάλογη
-    της πιθανοφάνειας επί την εκ των προτέρων.
-  </p>
-
-  <!-- align environment — πολλές εξισώσεις στοιχισμένες, καθεμία με label -->
-  <p>Οι τέσσερις εξισώσεις Maxwell (align με αριθμό ανά γραμμή):</p>
-  <div class="mblock">
-    \begin{align}
-      \nabla \cdot \bv{E}  &= \frac{\rho}{\epsilon_0}                               \label{eq:gauss-e} \\[4pt]
-      \nabla \cdot \bv{B}  &= 0                                                      \label{eq:gauss-b} \\[4pt]
-      \nabla \times \bv{E} &= -\pd{\bv{B}}{t}                                       \label{eq:faraday} \\[4pt]
-      \nabla \times \bv{B} &= \mu_0\bv{J} + \mu_0\epsilon_0\,\pd{\bv{E}}{t}        \label{eq:ampere}
-    \end{align}
+  
+   <p>
+Άρα, αφού κάθε κάθετο διάνυσμα στο $\vec{α}$ γράφεται ως γραμμικός συνδυασμός των $v_k$, έχουμε:
+ </p>
+ 
+ <div class="mblock">
+    \begin{equation} \label{eq2}
+\vec{x}=\dfrac{\vec{β}}{\norm{\vec{α}}^2}\vec{α}+\sum_k \vec{v_k}=\dfrac{\vec{β}}{\vec{α}}+\vec{α}_{\perp}
+    \end{equation}
   </div>
-
-  <p>
-    Η εξίσωση \eqref{eq:faraday} (Faraday) και η \eqref{eq:ampere}
-    (Ampère–Maxwell) αποτελούν τον πυρήνα του ηλεκτρομαγνητισμού.
-    Το \eqref{eq:gauss-b} εκφράζει την απουσία μαγνητικών μονοπόλων.
-  </p>
-
-  <!-- cases environment -->
-  <p>Περιβάλλον <code>cases</code>:</p>
-  <div class="mblock">
-    $$f(x) = \begin{cases}
-      \phantom{-}x^2  & \text{αν } x \geq 0 \\[4pt]
-      -x^2            & \text{αν } x < 0
-    \end{cases}$$
-  </div>
-
-  <!-- Matrix environment -->
-  <p>Πίνακας (bmatrix) και ορίζουσα:</p>
-  <div class="mblock">
-    $$\mathbf{A} = \begin{bmatrix} a & b \\ c & d \end{bmatrix}, \qquad
-      \det(\mathbf{A}) = ad - bc, \qquad
-      \mathbf{A}^{-1} = \frac{1}{\det(\mathbf{A})}
-        \begin{bmatrix} \phantom{-}d & -b \\ -c & \phantom{-}a \end{bmatrix}$$
-  </div>
-
-  <hr class="div">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       ΕΝΟΤΗΤΑ 3: Λίστες και Αρίθμηση
-       ══════════════════════════════════════════════════════════════ -->
-  <h2 class="h2">3. Λίστες και Αρίθμηση</h2>
-
-  <h3 class="h3">3.1 Λίστες Bullet με Υπο-λίστα</h3>
-
-  <!-- <ul class="lst"> ... <ul class="sublst"> ... -->
-  <ul class="lst">
-    <li>Πρώτο στοιχείο κύριας λίστας (●)</li>
-    <li>Δεύτερο στοιχείο — περιέχει υπο-λίστα:
-      <ul class="sublst">
-        <li>Υπο-στοιχείο α — σύμβολο ○, χαμηλότερη φωτεινότητα</li>
-        <li>Υπο-στοιχείο β — εμφανώς ξεχωριστό από την κύρια λίστα</li>
-        <li>Υπο-στοιχείο γ</li>
-      </ul>
-    </li>
-    <li>Τρίτο στοιχείο κύριας λίστας</li>
-    <li>Τέταρτο στοιχείο</li>
-  </ul>
-
-  <h3 class="h3">3.2 Αριθμημένες Λίστες με Υπο-αρίθμηση</h3>
-
-  <!-- <ol class="nlst"> ... <ol class="subnlst"> ... -->
-  <ol class="nlst">
-    <li>Πρώτο βήμα</li>
-    <li>Δεύτερο βήμα — με αλφαβητική υπο-αρίθμηση:
-      <ol class="subnlst">
-        <li>Υπο-βήμα 2α — λατινική αλφαβητική (a, b, c…)</li>
-        <li>Υπο-βήμα 2β — χαμηλότερη φωτεινότητα για διάκριση</li>
-        <li>Υπο-βήμα 2γ</li>
-      </ol>
-    </li>
-    <li>Τρίτο βήμα</li>
-    <li>Τέταρτο βήμα</li>
-  </ol>
-
-  <hr class="div">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       ΕΝΟΤΗΤΑ 4: Ειδικά Πλαίσια
-       ══════════════════════════════════════════════════════════════ -->
-  <h2 class="h2">4. Ειδικά Πλαίσια</h2>
-
-  <h3 class="h3">4.1 Παράθεση (Quote)</h3>
-
-  <!-- <blockquote class="bq"><p>Κείμενο</p><cite>Πηγή</cite></blockquote> -->
-  <blockquote class="bq">
-    <p>Η γνώση μιλάει, αλλά η σοφία ακούει. Ο πιο σπουδαίος σταθμός
-    στο ταξίδι της εκπαίδευσης δεν είναι η τελική άφιξη αλλά η ίδια η πορεία.</p>
-    <cite>Jimi Hendrix</cite>
-  </blockquote>
-
-  <blockquote class="bq">
-    <p>Το μέτρο της νοημοσύνης είναι η ικανότητα να αλλάζεις.</p>
-    <cite>Albert Einstein, <em>Ideas and Opinions</em>, 1954</cite>
-  </blockquote>
-
-  <h3 class="h3">4.2 Σημειώσεις (Note)</h3>
-
-  <!-- NOTE σταθερό (χωρίς collapse) -->
-  <div class="note">
-    <div class="note-ttl">📌 Σταθερή Σημείωση</div>
+  
+    <div class="note">
+    <div class="note-ttl">Εξίσωση με άγνωστο αριθμό</div>
     <div class="note-body">
-      Πλαίσιο με φόντο που ξεχωρίζει από το κύριο κείμενο. Σταθερό
-      <code>max-height: 220px</code> — αν το κείμενο είναι μεγαλύτερο,
-      εμφανίζεται αυτόματα μπάρα κύλισης χωρίς να επηρεάζεται η υπόλοιπη
-      διάταξη. Μπορεί να περιέχει <strong>bold</strong>, <em>italic</em>,
-      <code>code</code>, λίστες και ό,τι άλλο χρειαστεί.
+      Αν $\vec{α}\neq 0$ και $\vec{α}\parallel\vec{β}$, τότε η εξίσωση $\vec{α}x=\vec{β}$ έχει μοναδική λύση την $x=\dfrac{\vec{β}}{\vec{α}}$.
     </div>
   </div>
-
-  <!-- NOTE collapsible: class "col" + onclick="toggleNote(this)"
-       Αρχική κατάσταση: ΚΛΕΙΣΤΟ — ο χρήστης ανοίγει με κλικ. -->
-  <div class="note">
-    <div class="note-ttl col" onclick="toggleNote(this)">💡 Collapsible Σημείωση — Πατήστε για Άνοιγμα/Σύμπτυξη</div>
-    <div class="note-body">
-      <p>Αυτό το πλαίσιο ξεκινά <strong>κλειστό</strong> και ανοίγει με κλικ στον τίτλο.
-      Χρήσιμο για προαιρετικές πληροφορίες που δεν θέλετε να κατακλύζουν το κείμενο.</p>
-      <p>Για πολύ μεγάλο περιεχόμενο εμφανίζεται αυτόματα η μπάρα scroll.</p>
-      <p>Παράγραφος 3 — για δοκιμή του scroll.</p>
-      <p>Παράγραφος 4 — η μπάρα εμφανίζεται όταν ξεπεράσει τα 220px.</p>
-      <p>Παράγραφος 5 — scroll away!</p>
-    </div>
-  </div>
-
-  <h3 class="h3">4.3 Κώδικας (Code Block)</h3>
-
-  <!-- <div class="cb"><span class="cb-desc">...</span><pre><code>...</code></pre></div> -->
-  <div class="cb">
-    <span class="cb-desc">Python — στατιστικά χωρίς εξωτερικές βιβλιοθήκες</span>
-    <pre><code><span class="ck">import</span> math
-
-<span class="ck">def</span> <span class="cf">statistics</span>(data: <span class="ct">list</span>[<span class="ct">float</span>]) -> <span class="ct">dict</span>:
-    <span class="cc"># Υπολογισμός μέσης τιμής και τυπικής απόκλισης</span>
-    n       = <span class="cf">len</span>(data)
-    mean    = <span class="cf">sum</span>(data) / n
-    var     = <span class="cf">sum</span>((x - mean)**<span class="cn">2</span> <span class="ck">for</span> x <span class="ck">in</span> data) / n
-    std_dev = math.<span class="cf">sqrt</span>(var)
-    <span class="ck">return</span> {<span class="cs">"n"</span>: n, <span class="cs">"mean"</span>: <span class="cf">round</span>(mean, <span class="cn">4</span>), <span class="cs">"std"</span>: <span class="cf">round</span>(std_dev, <span class="cn">4</span>)}
-
-<span class="cc"># Παράδειγμα χρήσης</span>
-data = [<span class="cn">2.1</span>, <span class="cn">3.5</span>, <span class="cn">4.0</span>, <span class="cn">2.8</span>, <span class="cn">5.2</span>, <span class="cn">3.9</span>]
-res  = <span class="cf">statistics</span>(data)
-<span class="cf">print</span>(<span class="cs">f"Μ={res['mean']}  σ={res['std']}"</span>)  <span class="cc"># Μ=3.5833  σ=0.8975</span></code></pre>
-  </div>
-
-  <h3 class="h3">4.4 Πλαίσιο με Καρτέλες (Tabs)</h3>
-
-  <!-- TABS: IDs μοναδικά ανά σελίδα. Για 2ο σύνολο tabs χρησιμοποιήστε π.χ. B1, B2... -->
-  <div class="tbx">
-    <div class="tbnv">
-      <button class="tb on" onclick="tab(this,'A1')">📊 Δεδομένα</button>
-      <button class="tb"    onclick="tab(this,'A2')">📖 Ανάλυση</button>
-      <button class="tb"    onclick="tab(this,'A3')">⚙️ Κώδικας</button>
-    </div>
-
-    <div class="tbp on" id="A1">
-      <p>Η πρώτη καρτέλα περιέχει <strong>δεδομένα</strong>. Δοκιμαστικές τιμές:</p>
-      <ul class="lst">
-        <li>Σύνολο μετρήσεων: <span class="c-yellow">24 σημεία</span></li>
-        <li>Εύρος τιμών: <span class="c-teal">[0.1, 9.8]</span></li>
-        <li>Μέση τιμή: <span class="c-blue">4.35</span>, τυπική απόκλιση: <span class="c-lavender">2.11</span></li>
-      </ul>
-    </div>
-
-    <div class="tbp" id="A2">
-      <p>Ανάλυση: τα δεδομένα παρουσιάζουν
-      <mark class="hl-teal">κανονική κατανομή</mark>
-      με μέτρια διασπορά. Τυπική απόκλιση: $\sigma = 2.11$,
-      αναμενόμενη τιμή $\EE[X] = \mu = 4.35$.</p>
-      <blockquote class="bq">
-        <p>Η κατανομή υποδηλώνει ισχυρή κεντρικότητα γύρω από τη μέση τιμή.</p>
-        <cite>Ανάλυση 2025</cite>
-      </blockquote>
-    </div>
-
-    <div class="tbp" id="A3">
-      <div class="cb">
-        <span class="cb-desc">R — γρήγορη διερευνητική ανάλυση</span>
-        <pre><code><span class="cf">summary</span>(my_data)
-<span class="cf">hist</span>(my_data$value, main=<span class="cs">"Κατανομή"</span>, col=<span class="cs">"steelblue"</span>)
-<span class="cf">shapiro.test</span>(my_data$value)</code></pre>
-      </div>
-    </div>
-  </div>
-
-  <hr class="div">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       ΕΝΟΤΗΤΑ 5: Πολυμέσα
-       ══════════════════════════════════════════════════════════════ -->
-  <h2 class="h2">5. Πολυμέσα</h2>
-
-  <h3 class="h3">5.1 Εικόνα με Λεζάντα</h3>
+  
+    <p>
+ <strong><u>Απόδειξη</u></strong>
+ </p>
+  
   <p>
-    Τοποθετείτε την εικόνα σας στον ίδιο φάκελο με το HTML και
-    αλλάζετε <code>src="myPicture.png"</code>. Εαν η εικόνα λείπει
-    εμφανίζεται placeholder.
+  Πολλαπλασιάζοντας και τα δύο μέλη του $\vec{α}x=\vec{β}$ με $\frac{1}{\vec{α}}$ έχουμε:
   </p>
-
-  <!-- <figure class="fig"><img src="..."> + onerror placeholder + <figcaption> -->
-  <figure class="fig">
-    <img src="myPicture.png" alt="Παράδειγμα εικόνας"
-         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
-    <div class="img-ph" style="display:none">[ Εικόνα: myPicture.png — τοποθετήστε το αρχείο ]</div>
-    <figcaption>
-      <strong>Εικόνα 1.</strong> Λεζάντα — σύντομη περιγραφή του περιεχομένου.
-      Αναφορά πηγής εάν απαιτείται (π.χ. <em>Πηγή: Όνομα, 2024</em>).
-    </figcaption>
-  </figure>
-
-  <h3 class="h3">5.2 Ενσωματωμένο PDF</h3>
-
-  <!-- Αλλάξτε data="document.pdf" με τη διαδρομή του PDF σας -->
-  <div class="pdfbox">
-    <div class="pdf-lbl">
-      Άρθρο αναφοράς: «Τίτλος Άρθρου», Επώνυμο Α. κ.ά. (2024), Εκδότης.
-      Σύντομη περιγραφή του περιεχομένου και της συνάφειάς του με το κείμενο.
-    </div>
-    <object class="pdf-emb" data="document.pdf" type="application/pdf">
-      <p style="padding:28px;color:var(--txt-m);text-align:center;">
-        Ο browser δεν υποστηρίζει inline προβολή PDF.
-        <a href="document.pdf">Κατεβάστε το αρχείο</a>.
-      </p>
-    </object>
+  
+  <div class="mblock">
+    \begin{equation} \label{eq3}
+\dfrac{1}{\vec{α}}\vec{α}x=\dfrac{1}{\vec{α}}\vec{β}\overset{Θ.2.4}{\Longleftrightarrow}\dfrac{\vec{α}}{\vec{α}}x=\dfrac{\vec{β}}{\vec{α}}
+\overset{Θ.2.2}{\Longleftrightarrow}1x=\dfrac{\vec{β}}{\vec{α}}\Leftrightarrow x=\dfrac{\vec{β}}{\vec{α}}
+    \end{equation}
   </div>
+  
 
-  <h3 class="h3">5.3 Βίντεο</h3>
-  <p>
-    Υποστηρίζονται δύο τύποι: <strong>τοπικό αρχείο</strong> (mp4, webm, ogg —
-    στον ίδιο φάκελο ή υποφάκελο) και <strong>YouTube</strong> μέσω embed.
-    Και οι δύο χρησιμοποιούν το ίδιο πλαίσιο <code>.vidbox</code>.
-  </p>
-
-  <!-- ── Τοπικό βίντεο ───────────────────────────────────────────
-       Αλλάξτε src="video.mp4" με τη διαδρομή του αρχείου σας.
-       Υποστηριζόμενοι τύποι: .mp4 (H.264), .webm, .ogg
-       Χωρίς internet — δουλεύει offline.
-       ─────────────────────────────────────────────────────────── -->
-  <div class="vidbox">
-    <div class="vid-lbl">
-      Τοπικό βίντεο: παράδειγμα χρήσης του template σε tablet.
-      Τοποθετήστε το αρχείο <code>video.mp4</code> στον ίδιο φάκελο.
-    </div>
-    <video class="vid-emb" controls preload="metadata">
-      <source src="video.mp4" type="video/mp4">
-      <source src="video.webm" type="video/webm">
-      <p style="padding:28px;color:var(--txt-m);text-align:center;">
-        Ο browser δεν υποστηρίζει αναπαραγωγή video.
-        <a href="video.mp4">Κατεβάστε το αρχείο</a>.
-      </p>
-    </video>
-  </div>
-
-  <!-- ── YouTube embed ──────────────────────────────────────────
-       Αντικαταστήστε VIDEO_ID με το id του βίντεο από το URL:
-         youtube.com/watch?v=VIDEO_ID   →  VIDEO_ID = dQw4w9WgXcQ
-         youtu.be/VIDEO_ID              →  VIDEO_ID = dQw4w9WgXcQ
-
-       Προαιρετικές παράμετροι στο src (μετά το VIDEO_ID):
-         ?start=90        → ξεκινά στο 1:30
-         ?end=300         → σταματά στο 5:00
-         ?cc_load_policy=1 → ενεργοποιεί υπότιτλους
-         ?rel=0           → δεν εμφανίζει σχετικά βίντεο
-       Συνδυασμός: ?start=90&end=300&rel=0
-
-       Απαιτεί internet — δεν λειτουργεί offline.
-       ─────────────────────────────────────────────────────────── -->
-  <div class="vidbox">
-    <div class="vid-lbl">
-      YouTube: Τίτλος βίντεο — σύντομη περιγραφή ή πηγή αναφοράς.
-    </div>
-    <div class="yt-wrap">
-      <iframe class="yt-emb"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0"
-              title="Τίτλος βίντεο"
-              allow="accelerometer; autoplay; clipboard-write;
-                     encrypted-media; gyroscope; picture-in-picture"
-              allowfullscreen></iframe>
-    </div>
-  </div>
-
-  <h3 class="h3">5.4 Διάγραμμα SVG</h3>
-  <p>
-    Φορτώνει αρχεία <code>.svg</code> ή <code>.html</code> (που περιέχουν SVG)
-    από τον ίδιο φάκελο. Δουλεύει offline.
-    Το ύψος είναι ρυθμιζόμενο per-instance με <code>style="height:Xpx"</code>.
-  </p>
-
-  <!-- ── SVG αρχείο ─────────────────────────────────────────────
-       Δουλεύει με: .svg, .html (π.χ. export από matplotlib, D3, Inkscape).
-       Αντικαταστήστε src="diagram.svg" με τη διαδρομή του αρχείου σας.
-       ─────────────────────────────────────────────────────────── -->
-  <div class="svgbox">
-    <div class="svg-lbl">
-      Διάγραμμα: <code>diagram.svg</code> — τοποθετήστε το αρχείο στον ίδιο φάκελο.
-    </div>
-    <div class="svg-wrap">
-      <iframe class="svg-emb" src="diagram.svg"
-              title="Διάγραμμα SVG"></iframe>
-    </div>
-  </div>
-
-  <!-- ── HTML με SVG (π.χ. από Python/matplotlib, Plotly, D3) ──
-       Ίδια χρήση — απλώς αλλάζετε src σε .html
-       ─────────────────────────────────────────────────────────── -->
-  <div class="svgbox">
-    <div class="svg-lbl">
-      Διαδραστικό διάγραμμα: <code>chart.html</code> — HTML αρχείο που περιέχει SVG
-      (π.χ. Plotly export, matplotlib, D3.js).
-    </div>
-    <div class="svg-wrap" style="height:520px">
-      <iframe class="svg-emb" src="chart.html"
-              title="Διαδραστικό διάγραμμα"></iframe>
-    </div>
-  </div>
-
-  <hr class="div">
-
-  <!-- ══════════════════════════════════════════════════════════════
-       ΕΝΟΤΗΤΑ 6: Πίνακας Δεδομένων
-       ══════════════════════════════════════════════════════════════ -->
-  <h2 class="h2">6. Πίνακας Δεδομένων</h2>
-
-  <h3 class="h3">6.1 Παράδειγμα Πίνακα</h3>
-
-  <!-- <div class="tblw"><p class="tbl-cap">...</p><table class="dtbl">...</table></div> -->
-  <div class="tblw">
-    <p class="tbl-cap">
-      <strong>Πίνακας 1.</strong> Σύγκριση μεθόδων ανάλυσης ως προς
-      ακρίβεια, ταχύτητα και πολυπλοκότητα υλοποίησης.
-      Εναλλαγή χρωμάτων γραμμών για ευκολότερη ανάγνωση.
-    </p>
-    <table class="dtbl">
-      <thead>
-        <tr>
-          <th>Μέθοδος</th>
-          <th>Ακρίβεια</th>
-          <th>Ταχύτητα</th>
-          <th>Πολυπλοκότητα</th>
-          <th>Σχόλια</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Α — Βηματική</strong></td>
-          <td><span class="c-green">Υψηλή</span></td>
-          <td><span class="c-yellow">Μέτρια</span></td>
-          <td>Χαμηλή</td>
-          <td>Ιδανική για μικρά δείγματα</td>
-        </tr>
-        <tr>
-          <td><strong>Β — Επαναληπτική</strong></td>
-          <td><span class="c-yellow">Μέτρια</span></td>
-          <td><span class="c-green">Υψηλή</span></td>
-          <td>Μέτρια</td>
-          <td>Κατάλληλη για πραγματικό χρόνο</td>
-        </tr>
-        <tr>
-          <td><strong>Γ — Αναλυτική</strong></td>
-          <td><span class="c-green">Πολύ Υψηλή</span></td>
-          <td><span class="c-pink">Χαμηλή</span></td>
-          <td>Υψηλή</td>
-          <td>Απαιτεί ισχυρό υπολογιστικό εξοπλισμό</td>
-        </tr>
-        <tr>
-          <td><strong>Δ — Υβριδική</strong></td>
-          <td><span class="c-teal">Υψηλή</span></td>
-          <td><span class="c-teal">Υψηλή</span></td>
-          <td>Μέτρια</td>
-          <td>Καλή ισορροπία απόδοσης-ταχύτητας</td>
-        </tr>
-        <tr>
-          <td><strong>Ε — Ευρετική</strong></td>
-          <td><span class="c-yellow">Χαμηλή</span></td>
-          <td><span class="c-green">Πολύ Υψηλή</span></td>
-          <td>Χαμηλή</td>
-          <td>Γρήγορη εκτίμηση, πρόχειρα αποτελέσματα</td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
 
 </main><!-- /main -->
 

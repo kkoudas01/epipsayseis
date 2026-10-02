@@ -130,6 +130,8 @@
 
 [Μονοκοντιλιές](research/monokontylies.html)
 
+[Διαίρεση διανυσμάτων](research/vectorDiv.html)
+
 ## Φυσική
 
 [Προσέγγιση της κινητικής ενέργειας μέσω της θερμικής](research/kineticEnergy.html)
